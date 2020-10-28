@@ -319,6 +319,10 @@ header {
     box-shadow: var(--bs);
 }
 
+.about-me__link:hover {
+    opacity: 1;
+}
+
 @media (min-width: 600px) {
     .about-me {
         display: grid;
