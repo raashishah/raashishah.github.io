@@ -188,11 +188,6 @@ header {
     opacity: 0;
 }
 
-
-
-
-
-
 .hamburger {
     display: block;
     position: relative;
@@ -208,7 +203,6 @@ header {
     transition: transform 250ms ease-in-out;
 }
 
-
 .hamburger::before,
 .hamburger::after {
     content: '';
@@ -219,6 +213,7 @@ header {
 
 .hamburger::before { top: 6px; }
 .hamburger::after { bottom: 6px; }
+
 
 
 /*  Intro section  */
@@ -279,6 +274,7 @@ header {
 .section__title--services {
     color: var(--clr-accent);
     position: relative;
+    font-family: var(--ff-secondary);
 }
 
 .section__title--services::after {
