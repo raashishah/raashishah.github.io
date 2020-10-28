@@ -77,9 +77,13 @@ h1 { font-size: var(--fs-h1) }
 h2 { font-size: var(--fs-h2) }
 h3 { font-size: var(--fs-h3) }
 
+.intro {
+    font-family: var(--ff-secondary);
+}
 
 .section__title {
     margin-bottom: .25em;
+    font-family: var(--ff-secondary);
 }
 
 .section__title--intro strong {
@@ -97,6 +101,7 @@ h3 { font-size: var(--fs-h3) }
     padding: .25em 1em;
     font-family: var(--ff-secondary);
     margin-bottom: 1em;
+    color: var(--clr-light)
 }
 
 .section__subtitle--work {
@@ -244,7 +249,7 @@ header {
     
     .intro__img {
         grid-area: img;
-        min-width: 250px;
+        min-width: 300px;
         position: relative;
         z-index: 2;
     }    
