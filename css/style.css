@@ -323,6 +323,15 @@ header {
     opacity: 1;
 }
 
+.about-me__link a { 
+    color: inherit;
+    text-decoration: none;
+}
+
+.about-me__link {
+    outline: 0 none; 
+}
+
 a:visited {
     color: inherit;
   }
