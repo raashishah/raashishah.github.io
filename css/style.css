@@ -378,10 +378,6 @@ header {
     opacity: .7;
 }
 
-.footer__link:hover {
-    text-decoration: underline;
-}
-
 .social-list {
     list-style: none;
     display: flex;
