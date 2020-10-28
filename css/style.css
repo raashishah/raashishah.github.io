@@ -362,7 +362,6 @@ header {
     text-align: center;
     padding: 2.5em 0;
     font-size: var(--fs-h3);
-
 }
 
 .footer a { 
@@ -371,7 +370,7 @@ header {
 }
 
 .footer__link {
-    font-weight: var(--fw-bold);
+    outline: 0 none; 
 }
 
 .footer__link:hover,
