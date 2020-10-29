@@ -337,6 +337,7 @@ header {
 a:link,
 a:visited {
     color: inherit;
+    text-decoration: none;
   }
 
 @media (min-width: 600px) {
