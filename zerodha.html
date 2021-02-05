@@ -30,62 +30,102 @@
                 </ul>
             </nav>
         </header>
-        
-        <!-- Introduction -->
-        <section class="intro" id="home">
-            <h1 class="section__title section__title--intro">
-                Hi, I am <strong>Raashi Shah</strong>
-            </h1>
-            <p class="section__subtitle section__subtitle--intro">Product Manager</p>
-            <img src="img/pro.jpeg" alt="my photo" class="intro__img">
-        </section>
-        
-        <section class="section__subtitle">
-            <h2 href=zerodha.html>Check out my first blog post!</h2>
-        </section>
-        <!-- My services -->
-        <section class="my-services" id="services">
-            <h2 class="section__title section__title--services">What I do</h2>
-            <div class="services">
-                <div class="service">
-                    <h3>Development</h3>
-                    <p>I started studying development in September '20 and have equipped myself with skills to build a website in HTML, CSS and some basic React. At the moment, I am following the <a href="https://roadmap.sh/backend">backend developer roadmap</a> to briefly understand server-side web application logic.</p>
-                </div> <!-- / service -->
-                
-                <div class="service">
-                    <h3>Product Management</h3>
-                    <p>I have a year's experience in managing a product, designing wireframes and communicating with the engineering team. With a degree in Product Design and Management - my interests shell into how products function and how problems are identified and solved.</p>
-                </div> <!-- / service -->
-                
-                <div class="service">
-                    <h3>Music</h3>
-                    <p>When I am not working, I am learning music theory and training my ear to make electronic music.</p>
-                </div> <!-- / service -->
-            </div> <!-- / services -->
-        
-            <div> <!-- Currently Reading-->
-                <h3 class="section__title section__title--services">Currently Reading</h3>
-                <p class="service"><a href="https://www.principles.com/the-changing-world-order">Principles - The Changing World Order by Ray Dalio</a></p>
-                <!-- <p><a href="https://www.goodreads.com/en/book/show/467754.What_They_Don_t_Teach_You_at_Harvard_Business_School">What They Don't Teach You at Harvard Business School by Mark McCormack</a></p> -->
-            </div>
-        </section>
-                
-        
-        <!-- About me -->
-        <section class="about-me" id="about">
-           <h2 class="section__title section__title--about about-me__link"><a href="https://open.spotify.com/album/5YMsYTDaUkHU97gVRhhOV1?si=bJt6esB8Sg2ZyZXHaBrVBg">Who I am</a></h2>
-           <p class="section__subtitle section__subtitle--about">Associate Product Manager based out of Bombay</p>
-           
-           <div class="about-me__body">
-               <p>I grew up here with a brief stint in the UK for my undergrad education where I lead and managed several EdTech projects, worked in an awesome EdTech startup and then moved to SpaceTech after returning home.</p>
-               <p>I like to work on products that break barriers of entry by decluttering complexities and distractions - making user experience inclusive, productive and creative. At the moment, I'm building my experience in and I most enjoy managing these products. </p>
-           </div>
-           
-           <img src="img/casual.jpeg" alt="Profile" class="about-me__img">        
-        </section>
 
-        
-        
+        <div class="section__title">
+            <h1>What if... Zerodha offered a Virtual Trading Mode?</h1>
+            <h2>Paper Trading (Virtual Trading) for Beginners on Kite</h2>
+        </div>   
+        <div>
+            <h3>Background</h3>
+            <p>Zerodha currently caters to a large number of traders - being one of the most popular choices to trade options and commodities given it’s cheap brokerage prices. To expand the user base further, Zerodha could tap into a market where trading is not a norm yet. </p>
+            <p>Trading can be very intimidating as there is money involved. Users like to take informed decisions regarding their savings and are very careful, usually not high risk takers. </p>   
+            <p>Virtual Trading is a simulated trading process in which would-be investors can 'practice' investing without committing real money. This is done by the manipulation of imaginary money and investment positions that behave in a manner similar to the real markets. When learning how to trade, users like to create spreadsheets to stimulate markets and assume their buys and sells. Although sometimes these methods can have huge drop-out rates due to their inaccessibility. Another turn that can be taken is users trading with real money with not enough experience in the market, ending up losing some of their wealth in the process. </p>   
+            <p>Introducing Virtual Trading as a switch could invite users to give a hand at trading with less risk, and with Zerodha’s user interface and experience, the process can be much more inviting for a new trader. </p>
+        </div>    
+        <div>
+            <h3>Goals</h3>
+            <ol>
+                <li>Increase user base of the trading platform</li>
+                <li>Invite more people to use the platform who don’t necessarily have the means to use the platform</li>
+                <li>Educate users on how to use the platform</li>
+                <li>Make the platform and the skill set required to use the platform more accessible</li>
+                <li>Convert users from Varsity (Zerodha’s Education App) to Kite (Zerodha’s Trading App)</li>
+            </ol>
+        </div>   
+        <div>
+            <h3>Assumptions</h3>
+            <ol>
+                <li>Users will use virtual trading before investing their savings </li>
+                <li>Users will download Kite and sign up (convert) to this feature from Zerodha’s education app - Varsity while studying about financial markets and trading</li>
+                <li>Virtual trading will help users be more confident and informed traders</li>
+                <li>In terms of time being spent developing this feature, it should mainly be the switch from the real trading environment to virtual while all other functionalities, UX UI remains the same. The data and stock prices being logged real time remain the same.</li>
+            </ol>
+        </div> 
+        <div>
+            <h3>User Types</h3>
+            <ol>
+                <li>Varsity users or other financial trading students who want to start trading and put what they are learning into practice</li>
+                <li>Users who trade already but would like to have a virtual portfolio to practice trading regardless</li>
+            </ol>
+        </div>
+        <div>
+            <h2>Use Cases</h2>
+            <p>When reviewing the requirements below, consider that users may be logging through our mobile app or our website. While implementation and UX may differ between these channels, core functionality and features should be consistent and the experience should be seamless to the end user (i.e. fully integrated as a native feature).</p>
+            <h3>Requirements</h3>
+            <p>The below requirements use he MoSCoW method of prioritisation; from greatest to least importance: <strong>M</strong>ust have, <strong>S</strong>hould have, <strong>C</strong>ould have, <strong>W</strong>on't have</p>
+            <ol type=1>
+                <li><strong>Sign up prompt on Varsity-</strong>Should have
+                    <p>User: "I'd like to know about this feature and be prompted to sign up for it while I study trading on Varsity. I would like to get hands on to this feature before I get too deep into the lessons so I can practice the theory I am studying."</p>
+                    <p>PM: "A great way to introduce users to this feature the moment they start studying the market on Varsity would give them a chance to test their skills directly in a real world environment."</p>
+                    <p>On completing any of Varsity's quizzes, users can receive a prompt with a CTA to download Zerodha and get started.</p>
+                    <img src="img/zerodha/CTA.png" alt="Varsity CTA" class="img">
+                </li>
+                <li><strong>Virtual Trading Mode-</strong>Must have
+                    <p>User: "Before signing up for a demat account, I would like to sign up for Virtual trading to test the waters without investing any of my money in it, practice my skills, and gain confidence.</p>
+                    <p>Once I see some positive returns on my investments, I will confidently apply for a complete equity, derivatives and commodity trading account on Zerodha."</p>
+                </li>
+                <li><strong>Virtual Mode Switch-</strong>Must have
+                    <p>User: "I'd like to switch seamlessly between the virtual and real trading mode if I have paid for my demat account opening on Zerodha."</p>
+                    <p>Users can switch Virtual mode on and off with a click.</p>
+                    <img src="img/zerodha/Switch.png" alt="Virtual Mode Switch" class="img">
+                </li>
+                <li><strong>Virtual Wallet (Funds)-</strong>Must have
+                    <p>User: "I need to see my account balance and download statements to see my progress for Equity, Commodity and my other forms of assets. I'd like to have a large amount to begin with."</p>
+                    <img src="img/zerodha/Funds.png" alt="Virtual Funds" class="img">
+                </li>
+                <li><strong>In-App Walkthrough-</strong>Could have
+                    <p>PM: "Historically, we have not done in-app walkthroughs as Varsity has been enough to give a detailed walkthrough of the features. Having a running guide could distract the user and confuse them further. But it is something we could consider to give to the new users. This could briefly explain the features, overlay graphics on them as a guide. It would only be visible the first time a user signs up for Zerodha."</p>
+                    <img src="img/zerodha/Walkthrough.png" alt="In-App Walkthrough" class="img">
+                </li>
+                <li><strong>Leadership and Community Board, Discussion Feeds-</strong>Won't have
+                    <p>PM: "Similar services on the market have gamified the process of trading virtually and created a community around it. But considering how trading is done at a professional level does not include gamifying the process, motivating the user or creating a community with discussion boards. Professional trading is done without any distractions, with just a simple stream of real time prices and options to place or sell an order."</p>
+                    <p>"Another reason for not having discussion boards is to avoid the spread of players in the market trying to control the market with their tips. This could deceive the new traders and distract them from learning about the company itself and talking to trusted sources in their network to give them inside knowledge about the company - ultimately making an investment with risks calculated beforehand."</p>
+                </li>
+                <p>Other than these additions to the UI of Kite, there should not be any changes in terms of the real time stock prices stream. The point of this exercise would be to give everyone a chance to experience how trading works and gain confidence.</p>
+            </ol>
+        </div>
+
+        <div>
+            <h3>Userflow</h3>
+            <p><strong>Onboarding:</strong>User signs up for Zerodha for free with a simple onboarding process requiring their name, email address and password.</p>
+            <p>Once the user wants to move to trading with their wealth they can apply for a demat account with the same email and phone number on Zerodha's website.</p>
+            <img src="img/zerodha/Signup.png" alt="Sign Up" class="img">
+            <p>This simple and squeezed sign up process can get users started at no hassle and start trading. Once they sign up, they can go on to see they are banked with a good amount of virtual money in their account as highlighted earlier in the UX and UI of our features.</p>
+        </break>
+            <p><strong>Investing:</strong>User uses this to trade fantasy stocks linked to actual market prices. Here's the step by step.</p>
+            <img src="img/zerodha/Userflow.png" alt="Userflow for buying stocks" class="img">
+            <p>The workflow works the same as Kite where the user wishlists a stock, clicks on buy, types a quantity at a desired current price and places the order. This stock later reflects in their holdings (from positions) with current portfolio valuation in a couple hours or the next trading day.</p>
+        </div>
+
+        <div>
+            <h3>Release Criteria</h3>
+            <ol>
+                <li>Functionality: All "Must-have" requirements must be met and tested</li>
+                <li>Usability: All new pages and workflows must match the visual aesthetics and design of the existing pages</li>
+                <li>Reliability/Performance: Implementation of Virtual Trading mode should not be any different to that of the real trading mode. All stock prices should be moving real time.</li>
+            </ol>
+        </div>
+
         <!-- Footer -->
         <footer class="footer">
             <div><a href="mailto:rshah14@icloud.com" class="footer__link">email me</a></div>
@@ -121,18 +161,6 @@
                     </a>
                 </li>
             </ul>
-        </footer>
-        
-        
-        <script src="js/index.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/8.2.5/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="/__/firebase/8.2.5/firebase-analytics.js"></script>
-
-    <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>     
+        </footer>    
     </body>
 </html>
