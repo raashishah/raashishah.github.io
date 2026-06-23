@@ -5,7 +5,7 @@ import { useOS } from "./OSProvider";
 
 export function PhotosStack({ onClick }: { onClick?: () => void }) {
   return (
-    <button type="button" className="desktop-stack" onClick={onClick} aria-label="Photos — open About">
+    <button type="button" className="desktop-stack" onClick={onClick} aria-label="Photos, open About">
       <div className="desktop-stack__layers">
         <Image
           src="/img/pro.jpeg"

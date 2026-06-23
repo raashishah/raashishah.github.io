@@ -25,7 +25,7 @@ export function MenuBar() {
   }, []);
 
   const trackLabel = nowPlaying.isPlaying
-    ? `♫ ${nowPlaying.title}${nowPlaying.artist ? ` — ${nowPlaying.artist}` : ""}`
+    ? `♫ ${nowPlaying.title}${nowPlaying.artist ? ` · ${nowPlaying.artist}` : ""}`
     : "♫ Not playing";
 
   return (

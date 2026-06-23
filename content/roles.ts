@@ -33,7 +33,7 @@ export const roles: Role[] = [
     company: "Kotak Neo",
     title: "Product",
     years: "2020",
-    insight: "Finance UX at scale — every tap has compliance behind it.",
+    insight: "Finance UX at scale, every tap has compliance behind it.",
     featured: false,
   },
   {

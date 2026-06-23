@@ -11,7 +11,7 @@ export const projects: Project[] = [
   {
     id: "design-pov",
     title: "Design POV",
-    insight: "Exhibition navigation that is ultra smooth and works offline — made in 12 hrs.",
+    insight: "Exhibition navigation that is ultra smooth and works offline. Made in 12 hrs.",
     href: "https://povindex.designpovindia.com",
     status: "live",
   },
