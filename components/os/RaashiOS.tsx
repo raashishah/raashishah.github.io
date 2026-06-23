@@ -14,7 +14,12 @@ function RaashiOSInner() {
     <div className={`os-root ${booting ? "os-root--booting" : ""}`}>
       <MenuBar />
       <div className="os-shell">
-        <div className="os-wallpaper" aria-hidden="true" />
+        <div className="os-wallpaper" aria-hidden="true">
+          <span className="os-wallpaper__orb os-wallpaper__orb--rose" />
+          <span className="os-wallpaper__orb os-wallpaper__orb--violet" />
+          <span className="os-wallpaper__noise" />
+          <span className="os-wallpaper__signal" />
+        </div>
         <StageStrip />
         <Desktop />
       </div>

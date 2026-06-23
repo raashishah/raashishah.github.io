@@ -26,13 +26,13 @@ export function WorkApp() {
           <button
             type="button"
             onClick={() => setExpanded(!expanded)}
-            style={{ color: "var(--accent)", fontSize: "0.875rem", fontWeight: 500 }}
+            className="role-item__toggle"
           >
             {expanded ? "▾" : "▸"} Kawa Space · Kotak Neo · Solid
           </button>
           {expanded
             ? collapsed.map((role) => (
-                <div key={role.company} style={{ marginTop: 12, paddingLeft: 12 }}>
+                <div key={role.company} className="role-item__collapsed">
                   <div className="role-item__header">
                     <span className="role-item__company">
                       {role.company} · {role.title}

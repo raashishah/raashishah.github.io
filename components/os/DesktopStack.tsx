@@ -37,22 +37,11 @@ export function ConnectStack({ onClick }: { onClick?: () => void }) {
       onClick={onClick ?? (() => setConnectOpen(true))}
       aria-label="Connect"
     >
-      <div
-        className="desktop-stack__layers"
-        style={{ display: "grid", placeItems: "center" }}
-      >
-        <div
-          className="glass"
-          style={{
-            width: 56,
-            height: 56,
-            borderRadius: 12,
-            display: "grid",
-            placeItems: "center",
-            fontSize: "1.25rem",
-          }}
-        >
-          ◉
+      <div className="desktop-stack__layers desktop-stack__layers--connect">
+        <div className="desktop-stack__connect-mark" aria-hidden="true">
+          <span />
+          <span />
+          <span />
         </div>
       </div>
       <span className="desktop-stack__label">Connect</span>

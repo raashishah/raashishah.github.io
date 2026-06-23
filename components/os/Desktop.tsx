@@ -11,6 +11,13 @@ export function Desktop() {
 
   return (
     <main className="desktop">
+      <section className="desktop-intro" aria-label="Raashi OS overview">
+        <p className="desktop-intro__eyebrow">raashi os · live desktop</p>
+        <h1 className="desktop-intro__title">strategy, shipped like software.</h1>
+        <p className="desktop-intro__body">
+          a warm little operating system for the work, taste, and odd fragments that make me useful.
+        </p>
+      </section>
       <div className="desktop__grid">
         <PhotosStack onClick={() => openApp("about")} />
         <SpotifyWidget />
