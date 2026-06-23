@@ -1,9 +1,9 @@
 # Raashi OS — wireframe (Desktop + Stage Manager)
 
 **Shape brief:** see `SHAPE-BRIEF.md`  
-**Stack:** Next.js · CSS-only shell animations · Spotify API + iFrame for playback  
-**Paradigm:** Mac-inspired desktop · Stage Manager · iOS-style mobile  
-**Scope:** One build — no phased releases. Desktop shell, all four dock apps, live Spotify widget, Connect menu, Photos stack, easter egg, and mobile variant ship together.
+**Stack:** Next.js (App Router) · CSS shell animations · Spotify API + iFrame · [Manrope](https://fonts.google.com/specimen/Manrope) on non-Apple  
+**Paradigm:** Mac-inspired desktop · Stage Manager · iOS-style mobile · Liquid Glass shell  
+**Scope:** One build — no phased releases. Full desktop shell, project apps, Work, About, live Spotify, Connect, Photos stack, easter egg, mobile.
 
 ---
 
@@ -11,14 +11,15 @@
 
 | Area | Included |
 |------|----------|
-| **Shell** | Menu bar, widget desktop, Stage Manager strip, dock (4 apps) |
+| **Shell** | Menu bar, widget desktop, Stage Manager strip, dock |
 | **Desktop icons** | Photos stack, Connect stack |
 | **Widgets** | Spotify Now Playing (live API), Fragment, Metrics |
-| **Apps** | Projects, Work, Fragments, About |
+| **Apps (dock)** | JBCN Admissions, Design POV, Expression, Work, About — plus any fragment that earns a dock icon |
+| **Fragments** | Per-item: desktop widget, dock app, or both — decided as content is added |
 | **Connect** | Menu bar dropdown + desktop stack (all social links) |
 | **Spotify** | Live now-playing API + easter egg playback via iFrame |
 | **Mobile** | iOS-style home, widgets, dock, full-screen sheets |
-| **Motion** | CSS-only shell animations + `prefers-reduced-motion` |
+| **Motion** | CSS shell animations; respect `prefers-reduced-motion` (see below) |
 
 ---
 
@@ -37,16 +38,16 @@
 │  STRIP  │                                                                      │
 │         │   DESKTOP ICONS (macOS-style stacks, not widgets grid):              │
 │  ┌───┐  │                                                                      │
-│  │ P │  │      ┌─────────┐         ┌─────────────────────┐                   │
-│  └───┘  │      │ Photos  │         │  SPOTIFY NOW PLAYING │                   │
-│  ┌───┐  │      │ ┌───┐   │         │  ┌───────────────┐  │                   │
-│  │ W │  │      │ │img│   │         │  │  album art    │  │                   │
-│  └───┘  │      │ └───┘   │         │  │  (purple tint)│  │                   │
-│  ┌───┐  │      │ stacked │         │  ├───────────────┤  │                   │
-│  │ F │  │      │ thumbs  │         │  │ Who I Am      │  │                   │
-│  └───┘  │      └─────────┘         │  │ Toro y Moi    ♫ │                   │
-│         │      pro + casual.jpeg    │  └─────────────────────┘                   │
-│         │      click → About app    │  live from /api/now-playing             │
+│  │ J │  │      ┌─────────┐         ┌─────────────────────┐                   │
+│  ├───┤  │      │ Photos  │         │  SPOTIFY NOW PLAYING │                   │
+│  │ D │  │      │ ┌───┐   │         │  ┌───────────────┐  │                   │
+│  ├───┤  │      │ │img│   │         │  │  album art    │  │                   │
+│  │ E │  │      │ └───┘   │         │  │  (purple tint)│  │                   │
+│  ├───┤  │      │ stacked │         │  ├───────────────┤  │                   │
+│  │ W │  │      │ thumbs  │         │  │ Who I Am      │  │                   │
+│  ├───┤  │      └─────────┘         │  │ Toro y Moi    ♫ │                   │
+│  │ A │  │      pro + casual.jpeg    │  └─────────────────────┘                   │
+│  └───┘  │      click → About app    │  live from /api/now-playing             │
 │         │                                                                      │
 │         │      ┌─────────┐    ┌──────────────┐                                │
 │         │      │ Connect │    │  Fragment    │    ┌──────────┐                 │
@@ -56,28 +57,18 @@
 │         │      click → connect menu   (small widgets, right side)              │
 │         │                                                                      │
 │         │         ┌─ STAGE WINDOW (active app) ─────────────────────┐         │
-│         │         │  Projects                              ─  □  ×   │         │
+│         │         │  JBCN Admissions                         ─  □  ×   │         │
 │         │         ├─────────────────────────────────────────────────┤         │
-│         │         │  JBCN Admissions                                │         │
 │         │         │  The hard part wasn't the AI.                   │         │
 │         │         │  It was making committees trust it.             │         │
 │         │         │  admissions.raashishah.com →                    │         │
-│         │         │  ─────────────────────────────────────────────  │         │
-│         │         │  Design POV                                     │         │
-│         │         │  Exhibition navigation that is ultra smooth     │         │
-│         │         │  and works offline — made in 12 hrs.            │         │
-│         │         │  povindex.designpovindia.com →                  │         │
-│         │         │  ─────────────────────────────────────────────  │         │
-│         │         │  Colourer · building                            │         │
-│         │         │  Giving control back to artists by making       │         │
-│         │         │  better tools so they can practice their craft  │         │
-│         │         │  and let agents do the manual repetitive work.  │         │
 │         │         └─────────────────────────────────────────────────┘         │
 └─────────┴──────────────────────────────────────────────────────────────────────┘
 
-┌─ DOCK (4 apps — Links removed) ──────────────────────────────────────────────┐
-│         (  Projects  ) (  Work  ) (  Fragments  ) (  About  )                  │
+┌─ DOCK ───────────────────────────────────────────────────────────────────────┐
+│   JBCN   Design POV   Expression   Work   About   + fragment apps as added    │
 └──────────────────────────────────────────────────────────────────────────────┘
+  ↑ Core five always in dock. Individual fragments can join dock or stay widgets only.
 ```
 
 ---
@@ -152,11 +143,11 @@ Legacy Giphy + Duolingo custom SVGs preserved in both.
 State A — idle
   Desktop icons + widgets visible · no stage window
 
-State B — Projects open
-  STRIP: [P●] [ ] [ ]     STAGE: Projects window
+State B — JBCN open
+  STRIP: [J●] [ ] [ ]     STAGE: JBCN Admissions window
 
 State C — user opens Work
-  STRIP: [P] [W●] [ ]     STAGE: Work window
+  STRIP: [J] [W●] [ ]     STAGE: Work window
 
 State D — close window (×)
   App removed from strip · desktop fully visible
@@ -164,26 +155,40 @@ State D — close window (×)
 
 ---
 
-## App: Projects (dock)
+## App: JBCN Admissions (dock)
 
 ```
-┌─ Projects ─────────────────────────────── ─ □ × ┐
-│                                                │
-│  JBCN Admissions                               │
+┌─ JBCN Admissions ────────────────────────── ─ □ × ┐
 │  The hard part wasn't the AI.                  │
 │  It was making committees trust it.              │
 │  → admissions.raashishah.com                   │
-│                                                │
-│  Design POV                                    │
+└────────────────────────────────────────────────┘
+```
+
+---
+
+## App: Design POV (dock)
+
+```
+┌─ Design POV ───────────────────────────── ─ □ × ┐
 │  Exhibition navigation that is ultra smooth    │
 │  and works offline — made in 12 hrs.           │
 │  → povindex.designpovindia.com                 │
-│                                                │
-│  Colourer · building                           │
+└────────────────────────────────────────────────┘
+```
+
+---
+
+## App: Expression (dock)
+
+Official product name for the Colourer codebase.
+
+```
+┌─ Expression ───────────────────────────── ─ □ × ┐
+│  · building                                    │
 │  Giving control back to artists by making      │
 │  better tools so they can practice their craft │
 │  and let agents do the manual repetitive work. │
-│                                                │
 └────────────────────────────────────────────────┘
 ```
 
@@ -207,13 +212,23 @@ No Bible for Bad People.
 
 ---
 
-## App: Fragments (dock)
+## Fragments — widget and/or app (per item)
+
+Fragments are **bits from your head** (music takes, app loves, notes). **No single rule** — each fragment gets the surface that fits when you add it:
+
+| Surface | Good for |
+|---------|----------|
+| **Desktop widget** | Glanceable one-liner, rotating tile, live status (e.g. Duolingo streak) |
+| **Dock app** | Enough content for a small window — essay, list, embed |
+| **Both** | Widget teases on desktop; tap or dock icon opens the full view |
+
+Start with widgets where it’s enough. Promote to a dock app when a fragment outgrows a card. The dock grows organically — no upfront Fragments mega-app required.
 
 ```
-┌─ Fragments ────────────────────────────── ─ □ × ┐
-│  bits from my head                             │
-│  [music] [app] [note] tiles — same as before    │
-└────────────────────────────────────────────────┘
+Example — fragment as dock app:
+┌─ [fragment title] ─────────────────────── ─ □ × ┐
+│  [music / app / note content]                    │
+└──────────────────────────────────────────────────┘
 ```
 
 ---
@@ -256,39 +271,53 @@ No Bible for Bad People.
 │ │ → About sheet       │ │
 │ └─────────────────────┘ │
 ├─────────────────────────┤
-│  ◉    ◉    ◉    ◉       │  4 dock icons (no Links)
-│ Proj Work Frag About    │
+│  ◉  ◉  ◉  ◉  ◉  …      │  core 5 + fragment apps as added
+│ JBCN POV Expr Work About│
 └─────────────────────────┘
 ```
 
 ---
 
-## Apple HIG — what's possible on the web
+## Apple HIG + Liquid Glass (web)
+
+Reference: Apple **Liquid Glass** (WWDC 2025 — iOS 26 / macOS Tahoe). HIG-inspired shell, not a pixel-perfect Apple clone.
 
 | HIG element | Web approach |
 |-------------|--------------|
-| **System font** | `font-family: -apple-system, BlinkMacSystemFont, …` → San Francisco on Apple devices |
-| **Corner radius, spacing** | Match HIG values in CSS (widgets ~20px radius, dock magnification) |
-| **Desktop stacks** | Custom CSS layered thumbnails (your screenshot reference) |
-| **Menu bar** | Custom component, HIG-inspired heights (~22px) |
-| **Actual Apple UI assets** | Cannot ship Apple's icons, wallpaper, or pixel-perfect Sonoma clone |
-| **Liquid glass / real blur** | Avoid as default (Impeccable); dock can use one subtle `backdrop-filter` if needed |
+| **Typography** | Apple: `-apple-system, BlinkMacSystemFont` → San Francisco. **Everyone else:** [Manrope](https://fonts.google.com/specimen/Manrope) via Google Fonts (`font-family: -apple-system, BlinkMacSystemFont, 'Manrope', sans-serif`) |
+| **Liquid glass** | `backdrop-filter: blur()` + semi-transparent fills on **menu bar, dock, widgets, stage window chrome**. Solid backgrounds inside app content for readability. |
+| **Corner radius, spacing** | HIG-like values (~20px widget radius, dock magnification) |
+| **Desktop stacks** | Custom CSS layered thumbnails |
+| **Menu bar** | Custom component, ~22px height, glass treatment |
+| **Apple UI assets** | Cannot ship Apple icons, wallpaper, or trademarked chrome |
 
-**Verdict:** **HIG-inspired**, not literal Apple software. Legally safe, still feels native on Mac/iPhone because of system font + spacing + interaction patterns.
+**Verdict:** Feels native on Mac/iPhone (system font + glass + spacing). On Windows/Android/Linux, Manrope gives a consistent Raashi OS voice without pretending to be San Francisco.
+
+### `prefers-reduced-motion`
+
+OS accessibility setting (“Reduce motion”). When enabled, skip dock bounce, window scale-in, widget pulse, and stagger animations. Glass and layout stay; only motion drops. Required for vestibular accessibility.
 
 ---
 
-## Next.js vs Svelte vs Vue
+## Framework — Next.js (chosen)
 
-| | Next.js ✓ | SvelteKit | Nuxt (Vue) |
-|---|-----------|-----------|------------|
-| Spotify API routes | Built-in | Built-in | Built-in |
-| CSS animations | Yes | Yes | Yes |
-| Desktop OS UI | Yes | Yes | Yes |
-| You already chose it | Yes | Rewrite | Rewrite |
-| Spotify iFrame in React | Official examples exist | Works | Works |
+**Decision:** Next.js App Router. Greenfield build; legacy site stays as static HTML until cutover.
 
-**Svelte and Vue can do everything here.** There is no technical blocker. But switching now means **rebuilding from scratch** with no gain for Raashi OS specifically. **Stay on Next.js.**
+Spotify Embed/iFrame API is plain JS — identical in React. SvelteKit and Nuxt were viable; Next wins on Cursor ecosystem, tutorials, and API routes in one repo.
+
+<details>
+<summary>Comparison reference (why Next over Svelte/Nuxt)</summary>
+
+Performance difference on this site is negligible (tens–low hundreds of ms). Bottlenecks are liquid glass blur, images, fonts, Spotify embed — not framework.
+
+| | Next.js ✓ | SvelteKit | Nuxt |
+|---|-----------|-----------|------|
+| API routes | ✅ | ✅ | ✅ |
+| Cursor / AI help | Strongest | Good | Good |
+| JS bundle | Largest | Smallest | Middle |
+| Hire / tutorials | Easiest | Harder | Medium |
+
+</details>
 
 ---
 
@@ -310,13 +339,15 @@ Spotify playback uses **Spotify's embed**, not our CSS.
 ## Open edits
 
 - [x] Design POV insight
-- [x] Colourer insight
+- [x] Expression insight (formerly Colourer)
 - [x] Photos → desktop stack
 - [x] Links → menu bar + Connect stack
 - [x] Spotify widget spec
 - [ ] Role insights (your words)
 - [ ] About bio paragraphs
 - [ ] SoundCloud URL
+- [x] Framework: Next.js (App Router)
+- [x] Fragments: per-item widget and/or app as content grows
 - [ ] Boot state: idle desktop vs auto-open About?
 
 ---
@@ -326,31 +357,47 @@ Spotify playback uses **Spotify's embed**, not our CSS.
 ```
 app/
   page.tsx
+  layout.tsx
   globals.css
   api/now-playing/route.ts
 components/
   os/
     MenuBar.tsx
-    ConnectMenu.tsx            ← social links (replaces LinksFan)
+    ConnectMenu.tsx
     Desktop.tsx
     DesktopStack.tsx           ← Photos + Connect stacks
-    SpotifyWidget.tsx          ← custom widget + iFrame API
+    SpotifyWidget.tsx
     Widget.tsx
     StageStrip.tsx
     StageWindow.tsx
-    Dock.tsx                   ← 4 icons only
+    Dock.tsx
     MobileHome.tsx
     MobileSheet.tsx
   apps/
-    ProjectsApp.tsx
+    JbcnApp.tsx
+    DesignPovApp.tsx
+    ExpressionApp.tsx
     WorkApp.tsx
-    FragmentsApp.tsx
     AboutApp.tsx
+  fragments/                   ← add per fragment (widget and/or app)
+    FragmentWidget.tsx
+    [Name]FragmentApp.tsx
 content/
+  fragments/                   ← one file per fragment; metadata: widget | app | both
 legacy/
 public/img/
 ```
 
+Load Manrope in root layout:
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
+
+```css
+font-family: -apple-system, BlinkMacSystemFont, 'Manrope', sans-serif;
+```
+
 ---
 
-*Single-release spec — Photos stack, live Spotify widget, Connect relocated, four dock apps, mobile variant.*
+*Single-release spec — Liquid Glass shell, per-project dock apps, Expression branding, Manrope fallback.*

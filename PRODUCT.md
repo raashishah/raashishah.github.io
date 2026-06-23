@@ -54,8 +54,9 @@ Emotional goal: "She's sharp, she ships, she's interesting — and her site actu
 |---------------|-----------|
 | **Menu bar** | Clock, easter egg hint, live now playing from Spotify API |
 | **Widgets** | Photos stack, Spotify Now Playing (live), Fragment, Metrics |
-| **Stage + strip** | Projects, Work, Fragments, About apps |
-| **Dock** | 4 apps: Projects, Work, Fragments, About |
+| **Stage + strip** | JBCN, Design POV, Expression, Work, About + fragment apps as added |
+| **Dock** | Core five apps above; dock grows when a fragment earns an app icon |
+| **Fragments** | Per-item: desktop widget, dock app, or both — decided when content is added |
 | **Connect** | Menu bar dropdown + desktop stack icon (legacy social SVGs) |
 | **Photos stack** | Desktop icon (pro + casual.jpeg), opens About |
 | **Spotify widget** | Custom iOS-style widget; live now-playing + easter egg playback |
@@ -65,10 +66,12 @@ Emotional goal: "She's sharp, she ships, she's interesting — and her site actu
 
 | App | Content |
 |-----|---------|
-| **Projects** | JBCN, Design POV, Colourer (no Bible for Bad People) |
+| **JBCN Admissions** | AI admissions product — insight + link |
+| **Design POV** | Exhibition offline nav — insight + link |
+| **Expression** | Artist tools (Colourer codebase) — building |
 | **Work** | Roles with one-liner insights |
-| **Fragments** | Music, app loves, notes |
 | **About** | Bio + easter egg on title |
+| **Fragments** | Each fragment: widget and/or dock app as it fits (music, app loves, notes) |
 | **Connect** | Social links via menu bar dropdown + desktop stack (not a dock app) |
 
 ## Accessibility & Inclusion
@@ -80,7 +83,7 @@ Emotional goal: "She's sharp, she ships, she's interesting — and her site actu
 
 ## Tech (agreed)
 
-- **Framework:** Next.js (App Router) from day one — avoids a later rewrite when adding Spotify now-playing, API routes, and automation
+- **Framework:** Next.js (App Router) — confirmed
 - **Motion:** CSS only (`@keyframes`, `transition`, scroll-reveal via Intersection Observer + classes). No Framer Motion, no GSAP unless explicitly added later
 - **Weight:** Static pages where possible; minimal client JS; no heavy animation libraries
 - **Content:** Markdown/JSON in `content/`; insights written custom by Raashi
@@ -103,7 +106,7 @@ Emotional goal: "She's sharp, she ships, she's interesting — and her site actu
 |---------|----------|--------|
 | JBCN Admissions | admissions.raashishah.com | Live |
 | Design POV | povindex.designpovindia.com | Live |
-| Colourer | — | Building |
+| Colourer / **Expression** | — | Building (market as Expression) |
 
 ### Roles (Then) — featured
 

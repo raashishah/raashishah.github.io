@@ -120,7 +120,7 @@ Glance at widgets to get who Raashi is in 5 seconds, then tap **Projects** in th
 |----------|---------|--------|
 | **Projects** | JBCN, Design POV, Colourer — insight + link each | `content/projects/` |
 | **Work** | Pluto, OnDevice, Aula, + collapsed others | `content/roles/` |
-| **Fragments** | Music / app / note tiles | `content/fragments/` |
+| **Fragments** | Per fragment: widget, dock app, or both | `content/fragments/` |
 | **About** | Bio, photo, easter egg on title | `content/about.md` |
 | **Links** | All legacy social icons + SoundCloud | `content/site.json` |
 
@@ -151,4 +151,4 @@ Glance at widgets to get who Raashi is in 5 seconds, then tap **Projects** in th
 
 ---
 
-**Confirm this brief** (reply "confirmed" or edit what feels off) and we update `WIREFRAME.md` as the build spec + scaffold Next.js.
+**Next:** scaffold Next.js App Router per `WIREFRAME.md`.

@@ -1,7 +1,8 @@
 ## Learned User Preferences
 
 - Prefers simple English; user is a PM transitioning to consulting.
-- Chose Next.js (App Router) over Astro to support future Spotify API routes without a rewrite.
+- Chose Next.js (App Router) — confirmed for Raashi OS scaffold.
+- Fragments are flexible: each can be a desktop widget, dock app, or both as content is added.
 - Use CSS-only animations; keep the site lightweight (no Framer Motion/GSAP in initial build).
 - Build the full site in one pass — no v1/v2 phasing.
 - Exclude Bible for Bad People from public project listings.
