@@ -1,4 +1,4 @@
-# Raashi OS
+# rashOS
 
 > A live window into how Raashi thinks, builds, and listens — not a portfolio, an operating system.
 
@@ -15,7 +15,7 @@ brand
 
 ## Product Purpose
 
-**Raashi OS** is a personal site that feels alive: proof that Raashi is a PM who builds real things, plus a running feed of what she's into right now. Not a CV dump — a scrollable set of chapters with one insight per project and role, fragments of personality, and (over time) live modules like now-playing and auto-jams.
+**rashOS** is a personal site that feels alive: proof that Raashi is a PM who builds real things, plus a running feed of what she's into right now. Not a CV dump — a scrollable set of chapters with one insight per project and role, fragments of personality, and (over time) live modules like now-playing and auto-jams.
 
 Success = someone understands who she is, what she ships, and wants to reach out within 60 seconds. Power users keep scrolling and find easter eggs.
 
@@ -36,7 +36,7 @@ Emotional goal: "She's sharp, she ships, she's interesting — and her site actu
 - Bible for Bad People on the projects list (private/planned, not public portfolio yet)
 - Modal-heavy UX, glassmorphism cards, side-stripe accent borders
 - Stating "I make music" as a service line (SoundCloud link only)
-- Calling it a "portfolio" in the UI — it's **Raashi OS**
+- Calling it a "portfolio" in the UI — it's **rashOS**
 
 ## Design Principles
 
@@ -48,7 +48,7 @@ Emotional goal: "She's sharp, she ships, she's interesting — and her site actu
 6. **Grow over time** — new fragments and live widgets plug into desktop without redesign
 7. **Mobile = iOS home** — widget grid + dock; apps open full-screen sheets
 
-## Raashi OS — shell + modules
+## rashOS — shell + modules
 
 | Shell element | Behaviour |
 |---------------|-----------|
@@ -62,7 +62,7 @@ Emotional goal: "She's sharp, she ships, she's interesting — and her site actu
 | **Spotify widget** | Custom iOS-style widget; live now-playing + easter egg playback |
 | **Mobile** | iOS-style home + sheets + live widgets |
 
-## Raashi OS — app contents (dock)
+## rashOS — app contents (dock)
 
 | App | Content |
 |-----|---------|

@@ -1,4 +1,4 @@
-# Raashi OS — wireframe (Desktop + Stage Manager)
+# rashOS — wireframe (Desktop + Stage Manager)
 
 **Shape brief:** see `SHAPE-BRIEF.md`  
 **Stack:** Next.js (App Router) · CSS shell animations · Spotify API + iFrame · [Manrope](https://fonts.google.com/specimen/Manrope) on non-Apple  
@@ -27,7 +27,7 @@
 
 ```
 ┌─ MENU BAR ───────────────────────────────────────────────────────────────────┐
-│  raashi os          Tue 10:42        ♫ Who I Am — Toro y Moi    ?  [connect]│
+│  rashOS           Tue 10:42        ♫ Who I Am — Toro y Moi    ?  [connect]│
 │                                                                      ▾ menu  │
 └──────────────────────────────────────────────────────────────────────────────┘
   connect ▾ dropdown (replaces dock Links fan):
@@ -260,7 +260,7 @@ Example — fragment as dock app:
 
 ```
 ┌─────────────────────────┐
-│ 10:42   raashi os  [≡]  │  ≡ = Connect menu
+│ 10:42   rashOS  [≡]  │  ≡ = Connect menu
 ├─────────────────────────┤
 │ ┌─────────┐ ┌─────────┐ │
 │ │ Spotify │ │Fragment │ │
@@ -291,7 +291,7 @@ Reference: Apple **Liquid Glass** (WWDC 2025 — iOS 26 / macOS Tahoe). HIG-insp
 | **Menu bar** | Custom component, ~22px height, glass treatment |
 | **Apple UI assets** | Cannot ship Apple icons, wallpaper, or trademarked chrome |
 
-**Verdict:** Feels native on Mac/iPhone (system font + glass + spacing). On Windows/Android/Linux, Manrope gives a consistent Raashi OS voice without pretending to be San Francisco.
+**Verdict:** Feels native on Mac/iPhone (system font + glass + spacing). On Windows/Android/Linux, Manrope gives a consistent rashOS voice without pretending to be San Francisco.
 
 ### `prefers-reduced-motion`
 

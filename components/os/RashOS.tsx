@@ -7,7 +7,7 @@ import { Dock } from "./Dock";
 import { MobileHome } from "./MobileHome";
 import { OSProvider, useOS } from "./OSProvider";
 
-function RaashiOSInner() {
+function RashOSInner() {
   const { booting } = useOS();
 
   return (
@@ -29,10 +29,10 @@ function RaashiOSInner() {
   );
 }
 
-export function RaashiOS() {
+export function RashOS() {
   return (
     <OSProvider>
-      <RaashiOSInner />
+      <RashOSInner />
     </OSProvider>
   );
 }

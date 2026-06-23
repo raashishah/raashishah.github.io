@@ -1,4 +1,4 @@
-# Raashi OS — Shape Brief
+# rashOS — Shape Brief
 
 **Status:** Draft — awaiting your confirmation before build.
 
@@ -6,7 +6,7 @@
 
 ## 1. Feature Summary
 
-Raashi OS is a personal website disguised as a warm-dark desktop environment. Visitors land on a **widget desktop**, use the **dock** to open apps, and **Stage Manager** keeps one app in focus while others wait in a left sidebar strip. On mobile, it becomes an **iOS-style home screen**: widgets stack, dock at bottom, apps open full-screen.
+rashOS is a personal website disguised as a warm-dark desktop environment. Visitors land on a **widget desktop**, use the **dock** to open apps, and **Stage Manager** keeps one app in focus while others wait in a left sidebar strip. On mobile, it becomes an **iOS-style home screen**: widgets stack, dock at bottom, apps open full-screen.
 
 ## 2. Primary User Action
 
@@ -38,7 +38,7 @@ Glance at widgets to get who Raashi is in 5 seconds, then tap **Projects** in th
 
 ```
 ┌─ Menu bar ─────────────────────────────────────────────────────┐
-│ raashi os          Tue 10:42          ♫ idle    ? easter egg    │
+│ rashOS            Tue 10:42          ♫ idle    ? easter egg    │
 ├────────┬─────────────────────────────────────────────────────────┤
 │ STAGE  │                    WIDGET DESKTOP                       │
 │ STRIP  │   ┌─────────┐  ┌──────────┐  ┌─────────┐               │
@@ -65,7 +65,7 @@ Glance at widgets to get who Raashi is in 5 seconds, then tap **Projects** in th
 
 ```
 ┌─────────────────────────┐
-│ 10:42        raashi os  │  status bar
+│ 10:42        rashOS  │  status bar
 ├─────────────────────────┤
 │ ┌─────┐ ┌─────┐        │
 │ │prof │ │frag │        │  widget grid (2 col)

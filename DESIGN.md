@@ -2,7 +2,7 @@
 
 ## Scene
 
-Someone opens Raashi OS on their phone between meetings, dim café light, curious but impatient. It should feel like glimpsing a friend's laptop desktop: warm charcoal wallpaper, dusty rose accents, widgets on the home screen, dock at the bottom. On desktop, Stage Manager keeps one app in focus. Not a SaaS dashboard. Not a Mac clone.
+Someone opens rashOS on their phone between meetings, dim café light, curious but impatient. It should feel like glimpsing a friend's laptop desktop: warm charcoal wallpaper, dusty rose accents, widgets on the home screen, dock at the bottom. On desktop, Stage Manager keeps one app in focus. Not a SaaS dashboard. Not a Mac clone.
 
 ## Color strategy
 

@@ -31,7 +31,7 @@ export function MenuBar() {
   return (
     <header className="menu-bar glass">
       <div className="menu-bar__left">
-        <span className="menu-bar__brand">raashi os</span>
+        <span className="menu-bar__brand">rashOS</span>
       </div>
       <div className="menu-bar__center">
         <span className="menu-bar__clock">{clock}</span>

@@ -1,5 +1,5 @@
-import { RaashiOS } from "@/components/os/RaashiOS";
+import { RashOS } from "@/components/os/RashOS";
 
 export default function Home() {
-  return <RaashiOS />;
+  return <RashOS />;
 }

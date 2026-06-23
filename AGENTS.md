@@ -1,7 +1,7 @@
 ## Learned User Preferences
 
 - Prefers simple English; user is a PM transitioning to consulting.
-- Chose Next.js (App Router) — confirmed for Raashi OS scaffold.
+- Chose Next.js (App Router) — confirmed for rashOS scaffold.
 - Fragments are flexible: each can be a desktop widget, dock app, or both as content is added.
 - Use CSS-only animations; keep the site lightweight (no Framer Motion/GSAP in initial build).
 - Build the full site in one pass — no v1/v2 phasing.
@@ -14,7 +14,7 @@
 
 ## Learned Workspace Facts
 
-- Site rebuild codenamed "Raashi OS" — Mac-inspired desktop shell (dock, stacks, Spotify widget, menu-bar Connect).
+- Site rebuild codenamed "rashOS" — Mac-inspired desktop shell (dock, stacks, Spotify widget, menu-bar Connect).
 - Core dock apps: JBCN Admissions, Design POV, Expression, Work, About — one app per major project (not a grouped Projects app).
 - Expression is the official marketing name for the Colourer codebase.
 - Connect is menu bar dropdown + desktop stack, not a dock app.

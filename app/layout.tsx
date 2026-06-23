@@ -10,7 +10,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Raashi OS",
+  title: "rashOS",
   description: "A live window into how Raashi thinks, builds, and listens.",
   icons: { icon: "/img/favicon.ico" },
 };
