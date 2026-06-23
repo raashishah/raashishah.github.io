@@ -1,0 +1,46 @@
+export function GiphyIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -25 172 172" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M32.25,16.125v37.625h10.75v-26.875h86v26.875h10.75v-37.625zM56.94141,64.5c-7.43261,0 -13.4375,6.00489 -13.4375,13.4375v16.125c0,7.43262 6.00489,13.4375 13.4375,13.4375h13.4375v-21.5h-10.75v10.75h-2.6875c-1.15479,0 -2.6875,-1.53271 -2.6875,-2.6875v-16.125c0,-1.15479 1.53271,-2.6875 2.6875,-2.6875c1.15479,0 2.6875,1.53271 2.6875,2.6875v2.6875h10.75v-2.6875c0,-7.43261 -6.00488,-13.4375 -13.4375,-13.4375zM80.625,64.5v43h10.75v-16.125h10.75v-10.75h-10.75v-5.375h16.125v-10.75zM32.25,118.25v37.625h107.5v-37.625h-10.75v26.875h-86v-26.875z"
+      />
+    </svg>
+  );
+}
+
+export function DuolingoIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -25 172 172" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M34.9375,16.125c-10.35169,0 -18.8125,8.46081 -18.8125,18.8125v50.71607c-0.02387,0.20577 -0.02387,0.41361 0,0.61938v50.78955c0,10.35169 8.46081,18.8125 18.8125,18.8125h102.125c10.35169,0 18.8125,-8.46081 18.8125,-18.8125v-51.01001v-51.11499c0,-10.35169 -8.46081,-18.8125 -18.8125,-18.8125zM51.0625,34.9375c-12.15353,0 -21.5,11.71888 -21.5,25.53125c0,13.81237 9.34647,25.53125 21.5,25.53125c12.15353,0 21.5,-11.71888 21.5,-25.53125c0,-13.81237 -9.34647,-25.53125 -21.5,-25.53125zM120.9375,34.9375c-12.15353,0 -21.5,11.71888 -21.5,25.53125c0,13.81237 9.34647,25.53125 21.5,25.53125c12.15353,0 21.5,-11.71888 21.5,-25.53125c0,-13.81237 -9.34647,-25.53125 -21.5,-25.53125z"
+      />
+    </svg>
+  );
+}
+
+export function SocialIcon({ icon }: { icon: string }) {
+  switch (icon) {
+    case "giphy":
+      return <GiphyIcon />;
+    case "duolingo":
+      return <DuolingoIcon />;
+    case "medium":
+      return <span aria-hidden="true">M</span>;
+    case "linkedin":
+      return <span aria-hidden="true">in</span>;
+    case "github":
+      return <span aria-hidden="true">GH</span>;
+    case "spotify":
+      return <span aria-hidden="true">♫</span>;
+    case "twitter":
+      return <span aria-hidden="true">𝕏</span>;
+    case "soundcloud":
+      return <span aria-hidden="true">SC</span>;
+    case "email":
+      return <span aria-hidden="true">@</span>;
+    default:
+      return <span aria-hidden="true">·</span>;
+  }
+}
