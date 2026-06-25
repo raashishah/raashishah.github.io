@@ -1,25 +1,45 @@
+import localFont from "next/font/local";
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { ColorZoneProvider } from "@/components/providers/ColorZoneProvider";
+import { CursorProvider } from "@/components/cursor/CursorProvider";
+import { TransitionProvider } from "@/components/providers/TransitionProvider";
+import { SparkleProvider } from "@/components/providers/SparkleProvider";
+import { Cursor } from "@/components/cursor/Cursor";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
+const cabinet = localFont({
+  src: [
+    { path: "../public/fonts/CabinetGrotesk-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/CabinetGrotesk-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../public/fonts/CabinetGrotesk-ExtraBold.woff2", weight: "800", style: "normal" },
+  ],
+  variable: "--font-cabinet",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "rashOS",
-  description: "A live window into how Raashi thinks, builds, and listens.",
+  title: "raashi",
+  description: "Strategy, shipped like software. PM who builds.",
   icons: { icon: "/img/favicon.ico" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${manrope.className} ${manrope.variable}`}>
-        {children}
+      <body className={`${cabinet.className} ${cabinet.variable}`}>
+        <ColorZoneProvider>
+          <CursorProvider>
+            <TransitionProvider>
+              <SparkleProvider>
+                <SmoothScroll>
+                  <Cursor />
+                  {children}
+                </SmoothScroll>
+              </SparkleProvider>
+            </TransitionProvider>
+          </CursorProvider>
+        </ColorZoneProvider>
       </body>
     </html>
   );

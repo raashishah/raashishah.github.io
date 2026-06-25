@@ -1,16 +1,11 @@
-export type AppId =
-  | "jbcn"
-  | "design-pov"
+export type ProjectSlug =
+  | "admissions"
   | "expression"
-  | "work"
-  | "about";
-
-export type DockApp = {
-  id: AppId;
-  label: string;
-  shortLabel: string;
-  color: string;
-};
+  | "design-pov"
+  | "pluto"
+  | "kawa"
+  | "aula"
+  | "kotak";
 
 export type NowPlaying = {
   isPlaying: boolean;
@@ -28,24 +23,28 @@ export type SocialLink = {
 };
 
 export type Project = {
-  id: AppId;
+  slug: ProjectSlug;
   title: string;
+  tagline: string;
   insight: string;
+  story: string[];
   href?: string;
-  status?: "live" | "building";
+  status?: "live" | "building" | "role";
+  scene: "admissions" | "expression" | "design-pov" | "pluto" | "kawa" | "aula" | "kotak";
+  type: "project" | "work";
 };
 
 export type Role = {
+  slug: ProjectSlug;
   company: string;
   title: string;
   years: string;
   insight: string;
+  story: string[];
   featured?: boolean;
 };
 
-export type Fragment = {
+export type BreathingLine = {
   id: string;
-  title: string;
-  body: string;
-  surface: "widget" | "app" | "both";
+  text: string;
 };

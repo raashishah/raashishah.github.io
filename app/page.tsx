@@ -1,5 +1,5 @@
-import { RashOS } from "@/components/os/RashOS";
+import { ScrollJourney } from "@/components/sections/ScrollJourney";
 
 export default function Home() {
-  return <RashOS />;
+  return <ScrollJourney />;
 }
