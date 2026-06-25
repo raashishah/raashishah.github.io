@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-library-33e70cc7af-98ab_4949533d7a",
+  "featureId": "feat_library_33e70cc7af",
+  "title": "No automated typecheck or test command protects this TypeScript library code in CI/release flows",
+  "category": "build-release",
+  "severity": "medium",
+  "confidence": "high",
+  "triage": "risk",
+  "evidence": [
+    {
+      "path": "package.json",
+      "startLine": 5,
+      "endLine": 10,
+      "symbol": null,
+      "quote": null
+    },
+    {
+      "path": "package.json",
+      "startLine": 22,
+      "endLine": 29,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "The feature is implemented in TypeScript, but the manifest only exposes `lint`. There is no `typecheck` or `test` script, so release automation cannot enforce that these helpers still compile or behave correctly after edits. For code that depends on environment variables and external API payloads, that raises the chance of shipping runtime-only failures.",
+  "reproduction": null,
+  "recommendation": "Add at least a `typecheck` script (for example `tsc --noEmit`) and a test script wired into CI, then cover the library helpers with focused unit tests.",
+  "whyTestsDoNotAlreadyCoverThis": "There are no linked tests for this feature, and `package.json` does not define a `test` command, so nothing in the provided build surface would catch regressions automatically.",
+  "suggestedRegressionTest": "Add a CI step that runs `npm run typecheck` and unit tests covering `lib/spotify.ts` and `lib/metadata.ts` helper contracts.",
+  "minimumFixScope": "package.json",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-library-33e70cc7af_98abd322b6",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T190124-0d488e",
+  "createdAt": "2026-06-25T19:02:22.055Z",
+  "updatedAt": "2026-06-25T19:02:22.055Z"
+}

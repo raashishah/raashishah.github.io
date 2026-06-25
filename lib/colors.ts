@@ -17,17 +17,6 @@ export const basePalette = {
   sparkle: "oklch(78% 0.12 85)",
 } as const;
 
-// next/og does not support oklch() in its CSS parser, so the share-image
-// palette stays visually aligned with the site while using sRGB-safe values.
-export const ogBasePalette = {
-  bg: "rgb(247, 244, 238)",
-  bgSection: "rgb(239, 235, 229)",
-  text: "rgb(39, 31, 27)",
-  textMuted: "rgb(99, 89, 79)",
-  accent: "rgb(110, 86, 223)",
-  sparkle: "rgb(238, 191, 103)",
-} as const;
-
 export const projectPalettes: Record<string, ProjectPalette> = {
   admissions: {
     id: "admissions",

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "runId": "20260625T190124-0d488e",
+  "command": "review",
+  "args": [
+    "review",
+    "--limit",
+    "3",
+    "--plain"
+  ],
+  "rootPath": "/Users/raash/Documents/My Pursuits/Code/Personal Website/raashishah.com",
+  "headSha": "3b1506a29ed81e0f9a7cf633dc39f0148c67a57a",
+  "startedAt": "2026-06-25T19:01:27.908Z",
+  "finishedAt": "2026-06-25T19:02:22.232Z",
+  "status": "completed",
+  "claimedFeatureIds": [
+    "feat_config_0c1c23856a",
+    "feat_config_7528cb5b98",
+    "feat_library_33e70cc7af"
+  ],
+  "findingIds": [
+    "fnd_sig-feat-config-7528cb5b98-67f3c_430707b4fb",
+    "fnd_sig-feat-library-33e70cc7af-3188_396b2bac53",
+    "fnd_sig-feat-library-33e70cc7af-98ab_4949533d7a"
+  ],
+  "patchAttemptIds": [],
+  "errors": []
+}

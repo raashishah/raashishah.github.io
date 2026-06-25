@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-library-33e70cc7af-3188_396b2bac53",
+  "featureId": "feat_library_33e70cc7af",
+  "title": "Spotify helpers let network and JSON parsing failures escape to callers",
+  "category": "bug",
+  "severity": "medium",
+  "confidence": "high",
+  "triage": "confirmed-bug",
+  "evidence": [
+    {
+      "path": "lib/spotify.ts",
+      "startLine": 18,
+      "endLine": 34,
+      "symbol": null,
+      "quote": null
+    },
+    {
+      "path": "lib/spotify.ts",
+      "startLine": 37,
+      "endLine": 57,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "Both exported async helpers call external Spotify endpoints and then parse JSON without any error handling. If `fetch` rejects, the request times out, or Spotify returns malformed JSON, these functions throw instead of degrading to `null`/`idleNowPlaying`. In a Next.js server render or route handler, that can turn a transient upstream outage into a failed page/API response.",
+  "reproduction": null,
+  "recommendation": "Wrap the external calls and JSON parsing in `try/catch`, treat token acquisition failure as `null`, and return `idleNowPlaying` for now-playing lookup failures. If you need observability, log the failure separately without changing the return contract.",
+  "whyTestsDoNotAlreadyCoverThis": "No tests are included for `lib/spotify.ts`, and the project has no test script in `package.json`, so network-failure behavior is currently unverified.",
+  "suggestedRegressionTest": "Add unit tests that mock `fetch` to reject and to return invalid JSON, asserting `getSpotifyAccessToken()` returns `null` and `fetchNowPlaying()` returns `idleNowPlaying` instead of throwing.",
+  "minimumFixScope": "lib/spotify.ts",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-library-33e70cc7af_318865e6cc",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T190124-0d488e",
+  "createdAt": "2026-06-25T19:02:22.051Z",
+  "updatedAt": "2026-06-25T19:02:22.051Z"
+}

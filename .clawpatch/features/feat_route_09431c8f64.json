@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "featureId": "feat_route_09431c8f64",
+  "title": "Route /api/jam",
+  "summary": "Web route implemented by app/api/jam/route.ts.",
+  "kind": "route",
+  "source": "next-app-route",
+  "confidence": "high",
+  "entrypoints": [
+    {
+      "path": "app/api/jam/route.ts",
+      "symbol": null,
+      "route": "/api/jam",
+      "command": null
+    }
+  ],
+  "ownedFiles": [
+    {
+      "path": "app/api/jam/route.ts",
+      "reason": "entrypoint"
+    }
+  ],
+  "contextFiles": [
+    {
+      "path": "package.json",
+      "reason": "package manifest"
+    },
+    {
+      "path": "README.md",
+      "reason": "package context"
+    },
+    {
+      "path": "AGENTS.md",
+      "reason": "package context"
+    },
+    {
+      "path": "tsconfig.json",
+      "reason": "package context"
+    },
+    {
+      "path": "next.config.ts",
+      "reason": "project context"
+    }
+  ],
+  "tests": [],
+  "tags": [
+    "next",
+    "web",
+    "project:raashi-os",
+    "project-root:."
+  ],
+  "trustBoundaries": [
+    "user-input",
+    "network",
+    "serialization"
+  ],
+  "status": "pending",
+  "lock": null,
+  "findingIds": [],
+  "patchAttemptIds": [],
+  "analysisHistory": [],
+  "createdAt": "2026-06-25T19:01:09.090Z",
+  "updatedAt": "2026-06-25T19:01:09.090Z"
+}

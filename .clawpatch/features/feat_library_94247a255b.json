@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "featureId": "feat_library_94247a255b",
+  "title": "Node source app",
+  "summary": "Node/TypeScript source group app with 8 files.",
+  "kind": "library",
+  "source": "node-source-group",
+  "confidence": "medium",
+  "entrypoints": [
+    {
+      "path": "package.json",
+      "symbol": "app",
+      "route": null,
+      "command": null
+    }
+  ],
+  "ownedFiles": [
+    {
+      "path": "app/api/jam/route.ts",
+      "reason": "source group app"
+    },
+    {
+      "path": "app/api/now-playing/route.ts",
+      "reason": "source group app"
+    },
+    {
+      "path": "app/api/spotify/callback/route.ts",
+      "reason": "source group app"
+    },
+    {
+      "path": "app/layout.tsx",
+      "reason": "source group app"
+    },
+    {
+      "path": "app/opengraph-image.tsx",
+      "reason": "source group app"
+    },
+    {
+      "path": "app/page.tsx",
+      "reason": "source group app"
+    },
+    {
+      "path": "app/project/[slug]/opengraph-image.tsx",
+      "reason": "source group app"
+    },
+    {
+      "path": "app/project/[slug]/page.tsx",
+      "reason": "source group app"
+    }
+  ],
+  "contextFiles": [
+    {
+      "path": "package.json",
+      "reason": "package manifest"
+    }
+  ],
+  "tests": [],
+  "tags": [
+    "node",
+    "typescript",
+    "source-group",
+    "project:raashi-os",
+    "project-root:."
+  ],
+  "trustBoundaries": [],
+  "status": "pending",
+  "lock": null,
+  "findingIds": [],
+  "patchAttemptIds": [],
+  "analysisHistory": [],
+  "createdAt": "2026-06-25T19:01:09.090Z",
+  "updatedAt": "2026-06-25T19:01:09.090Z"
+}

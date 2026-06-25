@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "featureId": "feat_library_33e70cc7af",
+  "title": "Node source lib",
+  "summary": "Node/TypeScript source group lib with 4 files.",
+  "kind": "library",
+  "source": "node-source-group",
+  "confidence": "medium",
+  "entrypoints": [
+    {
+      "path": "package.json",
+      "symbol": "lib",
+      "route": null,
+      "command": null
+    }
+  ],
+  "ownedFiles": [
+    {
+      "path": "lib/animations.ts",
+      "reason": "source group lib"
+    },
+    {
+      "path": "lib/colors.ts",
+      "reason": "source group lib"
+    },
+    {
+      "path": "lib/metadata.ts",
+      "reason": "source group lib"
+    },
+    {
+      "path": "lib/spotify.ts",
+      "reason": "source group lib"
+    }
+  ],
+  "contextFiles": [
+    {
+      "path": "package.json",
+      "reason": "package manifest"
+    }
+  ],
+  "tests": [],
+  "tags": [
+    "node",
+    "typescript",
+    "source-group",
+    "project:raashi-os",
+    "project-root:."
+  ],
+  "trustBoundaries": [],
+  "status": "needs-fix",
+  "lock": null,
+  "findingIds": [
+    "fnd_sig-feat-library-33e70cc7af-3188_396b2bac53",
+    "fnd_sig-feat-library-33e70cc7af-98ab_4949533d7a"
+  ],
+  "patchAttemptIds": [],
+  "analysisHistory": [
+    {
+      "runId": "20260625T190124-0d488e",
+      "kind": "review",
+      "summary": "2 finding(s); prompt=12844 bytes; approxTokens=3211; includedFiles=5; omittedFiles=0",
+      "provider": "codex",
+      "model": null,
+      "reasoningEffort": null,
+      "createdAt": "2026-06-25T19:02:22.129Z"
+    }
+  ],
+  "createdAt": "2026-06-25T19:01:09.090Z",
+  "updatedAt": "2026-06-25T19:02:22.129Z"
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "featureId": "feat_route_77474ae1e4",
+  "title": "Route /api/spotify/callback",
+  "summary": "Web route implemented by app/api/spotify/callback/route.ts.",
+  "kind": "route",
+  "source": "next-app-route",
+  "confidence": "high",
+  "entrypoints": [
+    {
+      "path": "app/api/spotify/callback/route.ts",
+      "symbol": null,
+      "route": "/api/spotify/callback",
+      "command": null
+    }
+  ],
+  "ownedFiles": [
+    {
+      "path": "app/api/spotify/callback/route.ts",
+      "reason": "entrypoint"
+    }
+  ],
+  "contextFiles": [
+    {
+      "path": "package.json",
+      "reason": "package manifest"
+    },
+    {
+      "path": "README.md",
+      "reason": "package context"
+    },
+    {
+      "path": "AGENTS.md",
+      "reason": "package context"
+    },
+    {
+      "path": "tsconfig.json",
+      "reason": "package context"
+    },
+    {
+      "path": "next.config.ts",
+      "reason": "project context"
+    }
+  ],
+  "tests": [],
+  "tags": [
+    "next",
+    "web",
+    "project:raashi-os",
+    "project-root:."
+  ],
+  "trustBoundaries": [
+    "user-input",
+    "network",
+    "serialization"
+  ],
+  "status": "pending",
+  "lock": null,
+  "findingIds": [],
+  "patchAttemptIds": [],
+  "analysisHistory": [],
+  "createdAt": "2026-06-25T19:01:09.090Z",
+  "updatedAt": "2026-06-25T19:01:09.090Z"
+}

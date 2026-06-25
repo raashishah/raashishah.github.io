@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-config-7528cb5b98-67f3c_430707b4fb",
+  "featureId": "feat_config_7528cb5b98",
+  "title": "package.json exposes no test or standalone typecheck entrypoint for a TypeScript Next.js app",
+  "category": "test-gap",
+  "severity": "medium",
+  "confidence": "high",
+  "triage": "test-gap",
+  "evidence": [
+    {
+      "path": "package.json",
+      "startLine": 5,
+      "endLine": 10,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "The only verification script declared is `lint`. In this TypeScript/Next.js project, there is no `test` script and no standalone `typecheck` script, so CI or release automation driven from `package.json` cannot explicitly run behavioral tests or a dedicated type-check step. That makes regressions easier to ship and forces tooling to rely on framework-specific side effects of other commands instead of a stable contract.",
+  "reproduction": null,
+  "recommendation": "Add explicit verification scripts in `package.json`, for example a `typecheck` script using `tsc --noEmit` and a `test` script once the project test runner is chosen. Wire release/CI flows to run those scripts alongside lint.",
+  "whyTestsDoNotAlreadyCoverThis": "No linked tests were provided, and the `scripts` block does not define a `test` command or any standalone typecheck command.",
+  "suggestedRegressionTest": "Add CI coverage that runs `npm run lint`, `npm run typecheck`, and `npm test` on every change, failing the build if any command is missing or exits non-zero.",
+  "minimumFixScope": "package.json",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-config-7528cb5b98_67f3c82275",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T190124-0d488e",
+  "createdAt": "2026-06-25T19:02:13.772Z",
+  "updatedAt": "2026-06-25T19:02:13.772Z"
+}
