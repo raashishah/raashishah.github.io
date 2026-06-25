@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { getProjectBySlug, projectSlugs } from "@/content/projects";
 import { getProjectPalette } from "@/lib/colors";
 import { ProjectSceneCanvas } from "@/components/scenes/ProjectSceneRouter";
+import { absoluteUrl, siteConfig } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -11,6 +13,50 @@ type Props = {
 
 export function generateStaticParams() {
   return projectSlugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    return {};
+  }
+
+  const title = `${project.title}`;
+  const description = project.insight;
+  const canonicalPath = `/project/${project.slug}`;
+  const imagePath = `/project/${project.slug}/opengraph-image`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: canonicalPath,
+    },
+    openGraph: {
+      type: "article",
+      url: canonicalPath,
+      siteName: siteConfig.name,
+      title: `${title} | ${siteConfig.name}`,
+      description,
+      images: [
+        {
+          url: absoluteUrl(imagePath),
+          width: 1200,
+          height: 630,
+          alt: `${project.title} share image`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: siteConfig.twitterHandle,
+      title: `${title} | ${siteConfig.name}`,
+      description,
+      images: [absoluteUrl(imagePath)],
+    },
+  };
 }
 
 export default async function ProjectPage({ params }: Props) {
