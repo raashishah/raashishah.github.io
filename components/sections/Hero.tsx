@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { TextReveal } from "@/components/effects/TextReveal";
+import { SceneCanvas } from "@/components/scenes/SceneCanvas";
 
 const HeroScene = dynamic(() => import("@/components/scenes/HeroScene").then((m) => m.HeroScene), {
   ssr: false,
@@ -17,9 +18,9 @@ export function Hero({ ready }: HeroProps) {
   return (
     <section className="hero" data-section="hero">
       <div className="hero__scene">
-        <Suspense fallback={<div className="hero-scene-fallback" />}>
-          {ready && <HeroScene />}
-        </Suspense>
+        <SceneCanvas className="hero-scene-canvas" camera={{ position: [0, 0, 5], fov: 45 }}>
+          <Suspense fallback={null}>{ready && <HeroScene />}</Suspense>
+        </SceneCanvas>
       </div>
       <div className="hero__content">
         <p className="hero__eyebrow">rashOS</p>

@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const nextConfig: NextConfig = {
   outputFileTracingRoot: __dirname,
   eslint: {
-    dirs: ["app", "components", "content"],
+    dirs: ["app", "components", "content", "lib"],
   },
   images: {
     formats: ["image/avif", "image/webp"],

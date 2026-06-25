@@ -17,8 +17,11 @@ export async function GET() {
     const trackId = nowPlaying.trackUri.replace("spotify:track:", "");
     const url = `https://open.spotify.com/track/${trackId}`;
 
-    return NextResponse.json({ available: true, url });
+    return NextResponse.json({ available: true, url, kind: "track_share" });
   } catch {
-    return NextResponse.json({ available: false, url: null });
+    return NextResponse.json(
+      { available: false, url: null, error: "spotify_unavailable" },
+      { status: 503 },
+    );
   }
 }

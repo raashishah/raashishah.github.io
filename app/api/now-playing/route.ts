@@ -9,6 +9,9 @@ export async function GET() {
     const payload = await fetchNowPlaying(accessToken);
     return NextResponse.json(payload);
   } catch {
-    return NextResponse.json(idleNowPlaying);
+    return NextResponse.json(
+      { ...idleNowPlaying, error: "spotify_unavailable" },
+      { status: 503 },
+    );
   }
 }
