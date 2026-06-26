@@ -23,7 +23,7 @@ export function ScrollJourney() {
         <Hero ready={ready} />
         {projects.map((project, i) => (
           <div key={project.slug}>
-            <ProjectSection project={project} index={i} />
+            <ProjectSection project={project} index={i} ready={ready} />
             {i < projects.length - 1 && i % 2 === 0 && <BreathingMoment index={Math.floor(i / 2)} />}
           </div>
         ))}

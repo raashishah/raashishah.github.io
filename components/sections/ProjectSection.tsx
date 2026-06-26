@@ -15,14 +15,43 @@ import { FlipLink } from "@/components/effects/FlipLink";
 type ProjectSectionProps = {
   project: Project;
   index: number;
+  ready: boolean;
 };
 
-export function ProjectSection({ project, index }: ProjectSectionProps) {
+export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
+  const [sceneEnabled, setSceneEnabled] = useState(false);
   const { setActiveZone } = useColorZone();
   const { setCursorState, resetCursor } = useCursorState();
   const palette = getProjectPalette(project.slug);
+
+  useEffect(() => {
+    if (!ready) {
+      setSceneEnabled(false);
+      return;
+    }
+
+    const section = sectionRef.current;
+    if (!section) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setSceneEnabled(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setSceneEnabled(entry.isIntersecting);
+      },
+      {
+        rootMargin: "125% 0px",
+        threshold: 0,
+      },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [ready]);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -84,7 +113,7 @@ export function ProjectSection({ project, index }: ProjectSectionProps) {
       onMouseLeave={resetCursor}
     >
       <div className="project-section__inner">
-        <ProjectSceneCanvas project={project} progress={progress} />
+        <ProjectSceneCanvas project={project} progress={progress} enabled={sceneEnabled} />
         <div className="project-section__copy">
           <p className="project-section__type">{project.type === "project" ? "project" : "work"}</p>
           <TextReveal as="h2" className="project-section__title" mode="words">

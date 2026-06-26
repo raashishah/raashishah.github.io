@@ -18,7 +18,7 @@ export function Hero({ ready }: HeroProps) {
   return (
     <section className="hero" data-section="hero">
       <div className="hero__scene">
-        <SceneCanvas className="hero-scene-canvas" camera={{ position: [0, 0, 5], fov: 45 }}>
+        <SceneCanvas className="hero-scene-canvas" camera={{ position: [0, 0, 5], fov: 45 }} enabled={ready}>
           <Suspense fallback={null}>{ready && <HeroScene />}</Suspense>
         </SceneCanvas>
       </div>

@@ -1,3 +1,9 @@
-export function SceneFallback() {
-  return <div className="scene-fallback" aria-hidden="true" />;
+"use client";
+
+type SceneFallbackProps = {
+  className?: string;
+};
+
+export function SceneFallback({ className = "" }: SceneFallbackProps) {
+  return <div className={`scene-fallback ${className}`.trim()} aria-hidden="true" />;
 }

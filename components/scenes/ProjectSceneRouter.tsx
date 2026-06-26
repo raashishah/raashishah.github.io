@@ -4,7 +4,8 @@ import { Suspense } from "react";
 import type { CSSProperties } from "react";
 import type { Project } from "@/content/types";
 import { getProjectPalette } from "@/lib/colors";
-import { SceneCanvas, SceneFallback } from "@/components/scenes/SceneCanvas";
+import { SceneCanvas } from "@/components/scenes/SceneCanvas";
+import { SceneFallback } from "@/components/scenes/SceneFallback";
 import { AdmissionsScene } from "@/components/scenes/AdmissionsScene";
 import { ExpressionScene } from "@/components/scenes/ExpressionScene";
 import { DesignPovScene } from "@/components/scenes/DesignPovScene";
@@ -43,9 +44,11 @@ export function ProjectScene({ slug, progress }: ProjectSceneProps) {
 export function ProjectSceneCanvas({
   project,
   progress,
+  enabled = true,
 }: {
   project: Project;
   progress: number;
+  enabled?: boolean;
 }) {
   const palette = getProjectPalette(project.slug);
 
@@ -62,7 +65,7 @@ export function ProjectSceneCanvas({
           : undefined
       }
     >
-      <SceneCanvas className="project-scene-canvas">
+      <SceneCanvas className="project-scene-canvas" enabled={enabled}>
         <ProjectScene slug={project.slug} progress={progress} />
       </SceneCanvas>
     </div>
