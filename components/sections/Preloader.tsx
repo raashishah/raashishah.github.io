@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { prefersReducedMotion } from "@/lib/animations";
 
@@ -8,37 +8,42 @@ type PreloaderProps = {
   onComplete: () => void;
 };
 
-const BRANCH_PATHS = [
-  "M160 205 C158 178 156 148 158 118 C160 95 166 75 176 56",
-  "M160 156 C146 140 132 126 116 104 C105 88 99 74 96 54",
-  "M166 146 C184 132 199 116 212 94 C221 80 227 64 229 44",
-  "M148 186 C132 174 118 160 108 142 C101 128 98 114 99 96",
-  "M178 178 C196 164 212 152 224 134 C233 121 238 107 240 88",
-  "M171 121 C180 112 190 102 196 88 C202 76 204 65 203 52",
-  "M145 129 C136 121 127 110 122 96 C117 83 116 71 118 58",
-] as const;
-
-const BRANCH_ORIGINS = [
-  [160, 205],
-  [160, 156],
-  [166, 146],
-  [148, 186],
-  [178, 178],
-  [171, 121],
-  [145, 129],
-] as const;
-
-const POLYP_POINTS = [
-  [176, 56],
-  [96, 54],
-  [229, 44],
-  [99, 96],
-  [240, 88],
-  [203, 52],
-  [118, 58],
-  [116, 104],
-  [212, 94],
-  [224, 134],
+const CORAL_TENDRILS = [
+  {
+    d: "M160 215 C148 178 142 142 148 108 C154 74 168 44 188 22 C198 12 210 6 222 2",
+    origin: [160, 215] as const,
+    strokeWidth: 15,
+    gradientId: "coral-flow-a",
+    sway: 4.5,
+  },
+  {
+    d: "M158 198 C128 172 104 138 94 98 C86 68 90 38 104 16",
+    origin: [158, 198] as const,
+    strokeWidth: 12,
+    gradientId: "coral-flow-b",
+    sway: -5,
+  },
+  {
+    d: "M164 190 C188 168 208 142 220 112 C228 88 230 62 224 36",
+    origin: [164, 190] as const,
+    strokeWidth: 13,
+    gradientId: "coral-flow-c",
+    sway: 4,
+  },
+  {
+    d: "M152 186 C118 162 96 128 88 92 C82 64 88 38 102 18",
+    origin: [152, 186] as const,
+    strokeWidth: 10,
+    gradientId: "coral-flow-b",
+    sway: -3.5,
+  },
+  {
+    d: "M170 176 C196 158 214 132 226 102 C234 78 236 54 228 30",
+    origin: [170, 176] as const,
+    strokeWidth: 11,
+    gradientId: "coral-flow-a",
+    sway: 3.5,
+  },
 ] as const;
 
 export function Preloader({ onComplete }: PreloaderProps) {
@@ -47,9 +52,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLParagraphElement>(null);
   const reefRef = useRef<HTMLDivElement>(null);
-  const branchRefs = useRef<SVGPathElement[]>([]);
-  const polypRefs = useRef<SVGCircleElement[]>([]);
-  const moteRefs = useRef<HTMLSpanElement[]>([]);
+  const tendrilRefs = useRef<SVGPathElement[]>([]);
+  const gradientRefs = useRef<SVGLinearGradientElement[]>([]);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -76,25 +80,13 @@ export function Preloader({ onComplete }: PreloaderProps) {
         },
       });
 
-      branchRefs.current.forEach((branch) => {
-        const length = branch.getTotalLength();
-        gsap.set(branch, {
+      tendrilRefs.current.forEach((tendril) => {
+        const length = tendril.getTotalLength();
+        gsap.set(tendril, {
           strokeDasharray: length,
           strokeDashoffset: length,
           opacity: 1,
         });
-      });
-
-      gsap.set(polypRefs.current, {
-        scale: 0,
-        transformOrigin: "center center",
-        opacity: 0,
-      });
-
-      gsap.set(moteRefs.current, {
-        y: 18,
-        x: 0,
-        opacity: 0,
       });
 
       tl.fromTo(
@@ -111,8 +103,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
           ".preloader__glow",
           {
             opacity: 0,
-            scale: 0.92,
-            duration: 0.9,
+            scale: 0.88,
+            duration: 1,
             ease: "power2.out",
           },
           0,
@@ -129,28 +121,17 @@ export function Preloader({ onComplete }: PreloaderProps) {
           0.15,
         )
         .to(
-          branchRefs.current,
+          tendrilRefs.current,
           {
             strokeDashoffset: 0,
-            duration: 1.15,
+            duration: 1.35,
             stagger: {
-              each: 0.07,
+              each: 0.09,
               from: "center",
             },
-            ease: "power1.inOut",
+            ease: "power2.inOut",
           },
           0.18,
-        )
-        .to(
-          polypRefs.current,
-          {
-            scale: 1,
-            opacity: 0.85,
-            duration: 0.35,
-            stagger: 0.025,
-            ease: "power2.out",
-          },
-          0.72,
         )
         .to(
           ".preloader__tide",
@@ -168,7 +149,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
             duration: 0.6,
             ease: "power2.inOut",
           },
-          0.9,
+          0.95,
         )
         .to(
           ".preloader__content",
@@ -178,7 +159,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
             duration: 0.42,
             ease: "power3.in",
           },
-          1.45,
+          1.5,
         )
         .to(
           ".preloader__backdrop",
@@ -188,28 +169,48 @@ export function Preloader({ onComplete }: PreloaderProps) {
             ease: "power4.inOut",
             pointerEvents: "none",
           },
-          1.52,
+          1.57,
         );
 
-      branchRefs.current.forEach((branch, index) => {
-        const sway = index % 2 === 0 ? 3.5 : -3.5;
-        const [ox, oy] = BRANCH_ORIGINS[index] ?? [160, 205];
+      tendrilRefs.current.forEach((tendril, index) => {
+        const { sway } = CORAL_TENDRILS[index] ?? { sway: 3 };
+        const [ox, oy] = CORAL_TENDRILS[index]?.origin ?? [160, 215];
 
-        gsap.to(branch, {
+        gsap.to(tendril, {
           rotation: sway,
-          duration: 2.4 + index * 0.18,
+          duration: 2.8 + index * 0.2,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
           transformOrigin: `${ox}px ${oy}px`,
-          delay: 0.55 + index * 0.06,
+          delay: 0.6 + index * 0.08,
+        });
+
+        gsap.to(tendril, {
+          attr: { "stroke-width": CORAL_TENDRILS[index]!.strokeWidth + 2.5 },
+          duration: 2.2 + index * 0.15,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 0.75 + index * 0.1,
+        });
+      });
+
+      gradientRefs.current.forEach((gradient, index) => {
+        gsap.to(gradient, {
+          attr: { x1: 80 + index * 12, y1: 40, x2: 280 - index * 8, y2: 200 },
+          duration: 3.5 + index * 0.4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: index * 0.2,
         });
       });
 
       if (reefRef.current) {
         gsap.to(reefRef.current, {
-          y: -6,
-          duration: 3.2,
+          y: -8,
+          duration: 3.4,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
@@ -217,42 +218,24 @@ export function Preloader({ onComplete }: PreloaderProps) {
         });
 
         gsap.to(reefRef.current, {
-          rotation: 1.2,
-          duration: 4.5,
+          rotation: 1.5,
+          duration: 5,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
           delay: 0.8,
         });
+
+        gsap.to(reefRef.current, {
+          scale: 1.04,
+          duration: 2.8,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 1.1,
+          transformOrigin: "50% 85%",
+        });
       }
-
-      polypRefs.current.forEach((polyp, index) => {
-        gsap.to(polyp, {
-          scale: 1.35,
-          opacity: 0.55,
-          duration: 1.6 + (index % 3) * 0.2,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 0.9 + index * 0.08,
-          transformOrigin: "center center",
-        });
-      });
-
-      moteRefs.current.forEach((mote, index) => {
-        const drift = index % 2 === 0 ? 14 : -14;
-
-        gsap.to(mote, {
-          y: -32 - (index % 4) * 8,
-          x: drift,
-          opacity: 0.5,
-          duration: 2.8 + index * 0.15,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 0.45 + index * 0.12,
-        });
-      });
     }, rootRef);
 
     return () => {
@@ -279,45 +262,80 @@ export function Preloader({ onComplete }: PreloaderProps) {
               viewBox="0 0 320 220"
               role="presentation"
             >
-              {BRANCH_PATHS.map((path, index) => (
+              <defs>
+                <linearGradient
+                  id="coral-flow-a"
+                  ref={(node) => {
+                    if (node) gradientRefs.current[0] = node;
+                  }}
+                  gradientUnits="userSpaceOnUse"
+                  x1="120"
+                  y1="220"
+                  x2="240"
+                  y2="20"
+                >
+                  <stop offset="0%" stopColor="oklch(58% 0.2 22)" />
+                  <stop offset="45%" stopColor="oklch(68% 0.24 28)" />
+                  <stop offset="100%" stopColor="oklch(78% 0.18 38)" />
+                </linearGradient>
+                <linearGradient
+                  id="coral-flow-b"
+                  ref={(node) => {
+                    if (node) gradientRefs.current[1] = node;
+                  }}
+                  gradientUnits="userSpaceOnUse"
+                  x1="60"
+                  y1="180"
+                  x2="200"
+                  y2="10"
+                >
+                  <stop offset="0%" stopColor="oklch(52% 0.18 20)" />
+                  <stop offset="50%" stopColor="oklch(64% 0.22 26)" />
+                  <stop offset="100%" stopColor="oklch(74% 0.16 34)" />
+                </linearGradient>
+                <linearGradient
+                  id="coral-flow-c"
+                  ref={(node) => {
+                    if (node) gradientRefs.current[2] = node;
+                  }}
+                  gradientUnits="userSpaceOnUse"
+                  x1="180"
+                  y1="200"
+                  x2="300"
+                  y2="30"
+                >
+                  <stop offset="0%" stopColor="oklch(55% 0.19 24)" />
+                  <stop offset="55%" stopColor="oklch(70% 0.23 30)" />
+                  <stop offset="100%" stopColor="oklch(80% 0.14 40)" />
+                </linearGradient>
+                <filter
+                  id="coral-soft-glow"
+                  x="-30%"
+                  y="-30%"
+                  width="160%"
+                  height="160%"
+                >
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              {CORAL_TENDRILS.map((tendril, index) => (
                 <path
-                  key={path}
+                  key={tendril.d}
                   ref={(node) => {
-                    if (node) branchRefs.current[index] = node;
+                    if (node) tendrilRefs.current[index] = node;
                   }}
-                  className="preloader__branch"
-                  d={path}
-                />
-              ))}
-              {POLYP_POINTS.map(([cx, cy], index) => (
-                <circle
-                  key={`${cx}-${cy}`}
-                  ref={(node) => {
-                    if (node) polypRefs.current[index] = node;
-                  }}
-                  className="preloader__polyp"
-                  cx={cx}
-                  cy={cy}
-                  r={index % 3 === 0 ? 4 : 2.5}
+                  className="preloader__coral"
+                  d={tendril.d}
+                  stroke={`url(#${tendril.gradientId})`}
+                  strokeWidth={tendril.strokeWidth}
+                  filter="url(#coral-soft-glow)"
                 />
               ))}
             </svg>
-            <div className="preloader__motes">
-              {Array.from({ length: 8 }).map((_, index) => (
-                <span
-                  key={index}
-                  ref={(node) => {
-                    if (node) moteRefs.current[index] = node;
-                  }}
-                  className="preloader__mote"
-                  style={
-                    {
-                      "--mote-left": `${12 + index * 11}%`,
-                    } as CSSProperties
-                  }
-                />
-              ))}
-            </div>
           </div>
         </div>
         <div className="preloader__tide-wrap">

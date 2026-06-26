@@ -16,7 +16,8 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     registerGsapPlugins();
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    if (reduced || coarsePointer) return;
 
     const lenis = new Lenis({
       duration: 1.1,
@@ -26,13 +27,15 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    let frameId = 0;
     const raf = (time: number) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      frameId = requestAnimationFrame(raf);
     };
-    requestAnimationFrame(raf);
+    frameId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(frameId);
       lenis.destroy();
     };
   }, []);

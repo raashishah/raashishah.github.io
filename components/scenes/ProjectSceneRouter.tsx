@@ -5,7 +5,6 @@ import type { CSSProperties } from "react";
 import type { Project } from "@/content/types";
 import { getProjectPalette } from "@/lib/colors";
 import { SceneCanvas } from "@/components/scenes/SceneCanvas";
-import { SceneFallback } from "@/components/scenes/SceneFallback";
 import { AdmissionsScene } from "@/components/scenes/AdmissionsScene";
 import { ExpressionScene } from "@/components/scenes/ExpressionScene";
 import { DesignPovScene } from "@/components/scenes/DesignPovScene";
@@ -32,10 +31,10 @@ type ProjectSceneProps = {
 
 export function ProjectScene({ slug, progress }: ProjectSceneProps) {
   const SceneComponent = sceneMap[slug];
-  if (!SceneComponent) return <SceneFallback />;
+  if (!SceneComponent) return null;
 
   return (
-    <Suspense fallback={<SceneFallback />}>
+    <Suspense fallback={null}>
       <SceneComponent progress={progress} />
     </Suspense>
   );

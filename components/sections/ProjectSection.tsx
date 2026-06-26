@@ -22,9 +22,21 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
   const [sceneEnabled, setSceneEnabled] = useState(false);
+  const [isCompactViewport, setIsCompactViewport] = useState(false);
   const { setActiveZone } = useColorZone();
   const { setCursorState, resetCursor } = useCursorState();
   const palette = getProjectPalette(project.slug);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const media = window.matchMedia("(max-width: 900px), (pointer: coarse)");
+    const update = () => setIsCompactViewport(media.matches);
+    update();
+
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (!ready) {
@@ -61,9 +73,9 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: "+=120%",
-      pin: true,
-      scrub: 0.8,
+      end: isCompactViewport ? "+=90%" : "+=120%",
+      pin: !isCompactViewport,
+      scrub: isCompactViewport ? 0.45 : 0.8,
       onUpdate: (self) => {
         setProgress(self.progress);
       },
@@ -83,7 +95,7 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
           trigger: section,
           start: "top 60%",
           end: "top 20%",
-          scrub: true,
+          scrub: isCompactViewport ? 0.3 : true,
         },
       },
     );
@@ -91,7 +103,7 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
     return () => {
       trigger.kill();
     };
-  }, [project.slug, palette, setActiveZone]);
+  }, [isCompactViewport, project.slug, palette, setActiveZone]);
 
   const zoneStyle = palette
     ? ({
