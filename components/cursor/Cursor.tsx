@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { subscribeAnimationTicker } from "@/lib/animation-ticker";
 import { shouldSkipMotionChrome } from "@/lib/e2e";
 import { palette } from "@/lib/palette";
+import { useMounted } from "@/lib/useMounted";
 import { useCursorState } from "@/components/cursor/CursorProvider";
 
 type Stroke = {
@@ -18,6 +19,7 @@ type Stroke = {
 const STROKE_LIFE = 400;
 
 export function Cursor() {
+  const mounted = useMounted();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const strokesRef = useRef<Stroke[]>([]);
   const pos = useRef({ x: 0, y: 0 });
@@ -154,6 +156,7 @@ export function Cursor() {
     labelEl.style.opacity = label && state === "project" ? "1" : "0";
   }, [label, state]);
 
+  if (!mounted) return null;
   if (typeof window !== "undefined" && (window.matchMedia("(pointer: coarse)").matches || shouldSkipMotionChrome())) {
     return null;
   }

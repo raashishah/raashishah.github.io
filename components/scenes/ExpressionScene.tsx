@@ -19,13 +19,25 @@ type CharacterPose = {
   armR: Limb;
   legL: Limb;
   legR: Limb;
-  /** Rose fill zones behind the ink lines */
   fills: { cx: number; cy: number; rx: number; ry: number }[];
 };
 
-/** Eight keyframes — stick-figure character performing a cartwheel left to right. */
+const DEFAULT_POSE: CharacterPose = {
+  head: { x: 40, y: 16 },
+  headR: 9,
+  torso: { a: { x: 40, y: 26 }, b: { x: 40, y: 58 } },
+  armL: { a: { x: 40, y: 32 }, b: { x: 22, y: 18 } },
+  armR: { a: { x: 40, y: 32 }, b: { x: 58, y: 18 } },
+  legL: { a: { x: 40, y: 58 }, b: { x: 30, y: 92 } },
+  legR: { a: { x: 40, y: 58 }, b: { x: 50, y: 92 } },
+  fills: [
+    { cx: 40, cy: 42, rx: 12, ry: 18 },
+    { cx: 40, cy: 16, rx: 9, ry: 9 },
+  ],
+};
+
+/** Eight cartwheel keyframes — line-art character, scroll-scrubbed. */
 const CARTWHEEL_POSES: CharacterPose[] = [
-  // 0 — standing, arms raised
   {
     head: { x: 40, y: 16 },
     headR: 9,
@@ -39,7 +51,6 @@ const CARTWHEEL_POSES: CharacterPose[] = [
       { cx: 40, cy: 16, rx: 9, ry: 9 },
     ],
   },
-  // 1 — lunge, hands reaching down
   {
     head: { x: 48, y: 30 },
     headR: 9,
@@ -53,7 +64,6 @@ const CARTWHEEL_POSES: CharacterPose[] = [
       { cx: 48, cy: 30, rx: 9, ry: 9 },
     ],
   },
-  // 2 — hands on ground, legs lifting
   {
     head: { x: 58, y: 52 },
     headR: 9,
@@ -68,7 +78,6 @@ const CARTWHEEL_POSES: CharacterPose[] = [
       { cx: 34, cy: 38, rx: 10, ry: 18 },
     ],
   },
-  // 3 — upside down, legs split
   {
     head: { x: 62, y: 68 },
     headR: 9,
@@ -83,7 +92,6 @@ const CARTWHEEL_POSES: CharacterPose[] = [
       { cx: 32, cy: 40, rx: 12, ry: 20 },
     ],
   },
-  // 4 — horizontal mid-roll
   {
     head: { x: 18, y: 48 },
     headR: 9,
@@ -98,7 +106,6 @@ const CARTWHEEL_POSES: CharacterPose[] = [
       { cx: 66, cy: 46, rx: 10, ry: 14 },
     ],
   },
-  // 5 — upside down, other side
   {
     head: { x: 18, y: 68 },
     headR: 9,
@@ -113,7 +120,6 @@ const CARTWHEEL_POSES: CharacterPose[] = [
       { cx: 52, cy: 40, rx: 12, ry: 20 },
     ],
   },
-  // 6 — feet coming down
   {
     head: { x: 32, y: 52 },
     headR: 9,
@@ -127,7 +133,6 @@ const CARTWHEEL_POSES: CharacterPose[] = [
       { cx: 32, cy: 52, rx: 9, ry: 9 },
     ],
   },
-  // 7 — landing, arms out for balance
   {
     head: { x: 40, y: 20 },
     headR: 9,
@@ -143,6 +148,11 @@ const CARTWHEEL_POSES: CharacterPose[] = [
   },
 ];
 
+function getPose(index: number): CharacterPose {
+  const safe = Math.max(0, Math.min(CARTWHEEL_POSES.length - 1, index));
+  return CARTWHEEL_POSES[safe] ?? DEFAULT_POSE;
+}
+
 function lerpPoint(a: Point, b: Point, t: number): Point {
   return { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) };
 }
@@ -152,10 +162,13 @@ function lerpLimb(a: Limb, b: Limb, t: number): Limb {
 }
 
 function lerpPose(a: CharacterPose, b: CharacterPose, t: number): CharacterPose {
-  const fillCount = Math.max(a.fills.length, b.fills.length);
+  const from = a ?? DEFAULT_POSE;
+  const to = b ?? from;
+  const fillCount = Math.max(from.fills.length, to.fills.length, 1);
+
   const fills = Array.from({ length: fillCount }, (_, i) => {
-    const fa = a.fills[i] ?? a.fills[a.fills.length - 1]!;
-    const fb = b.fills[i] ?? b.fills[b.fills.length - 1]!;
+    const fa = from.fills[i] ?? from.fills[from.fills.length - 1] ?? DEFAULT_POSE.fills[0]!;
+    const fb = to.fills[i] ?? to.fills[to.fills.length - 1] ?? fa;
     return {
       cx: lerp(fa.cx, fb.cx, t),
       cy: lerp(fa.cy, fb.cy, t),
@@ -165,13 +178,13 @@ function lerpPose(a: CharacterPose, b: CharacterPose, t: number): CharacterPose 
   });
 
   return {
-    head: lerpPoint(a.head, b.head, t),
-    headR: lerp(a.headR, b.headR, t),
-    torso: lerpLimb(a.torso, b.torso, t),
-    armL: lerpLimb(a.armL, b.armL, t),
-    armR: lerpLimb(a.armR, b.armR, t),
-    legL: lerpLimb(a.legL, b.legL, t),
-    legR: lerpLimb(a.legR, b.legR, t),
+    head: lerpPoint(from.head, to.head, t),
+    headR: lerp(from.headR, to.headR, t),
+    torso: lerpLimb(from.torso, to.torso, t),
+    armL: lerpLimb(from.armL, to.armL, t),
+    armR: lerpLimb(from.armR, to.armR, t),
+    legL: lerpLimb(from.legL, to.legL, t),
+    legR: lerpLimb(from.legR, to.legR, t),
     fills,
   };
 }
@@ -180,17 +193,21 @@ function CharacterFigure({
   pose,
   fillProgress,
   strokeWidth = 2.5,
+  scale = 1,
 }: {
   pose: CharacterPose;
   fillProgress: number;
   strokeWidth?: number;
+  scale?: number;
 }) {
+  const p = pose ?? DEFAULT_POSE;
   const ink = palette.ink;
   const rose = palette.rose;
+  const sw = strokeWidth / scale;
 
   return (
-    <g>
-      {pose.fills.map((zone, i) => (
+    <g transform={`scale(${scale})`}>
+      {p.fills.map((zone, i) => (
         <ellipse
           key={i}
           cx={zone.cx}
@@ -201,89 +218,73 @@ function CharacterFigure({
           opacity={0.88}
         />
       ))}
-      <circle cx={pose.head.x} cy={pose.head.y} r={pose.headR} fill="none" stroke={ink} strokeWidth={strokeWidth} />
-      <line
-        x1={pose.torso.a.x}
-        y1={pose.torso.a.y}
-        x2={pose.torso.b.x}
-        y2={pose.torso.b.y}
-        stroke={ink}
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-      />
-      <line x1={pose.armL.a.x} y1={pose.armL.a.y} x2={pose.armL.b.x} y2={pose.armL.b.y} stroke={ink} strokeWidth={strokeWidth} strokeLinecap="round" />
-      <line x1={pose.armR.a.x} y1={pose.armR.a.y} x2={pose.armR.b.x} y2={pose.armR.b.y} stroke={ink} strokeWidth={strokeWidth} strokeLinecap="round" />
-      <line x1={pose.legL.a.x} y1={pose.legL.a.y} x2={pose.legL.b.x} y2={pose.legL.b.y} stroke={ink} strokeWidth={strokeWidth} strokeLinecap="round" />
-      <line x1={pose.legR.a.x} y1={pose.legR.a.y} x2={pose.legR.b.x} y2={pose.legR.b.y} stroke={ink} strokeWidth={strokeWidth} strokeLinecap="round" />
-      {/* Simple face — reads as character, not abstract shape */}
-      <circle cx={pose.head.x - 3} cy={pose.head.y - 1} r={1.2} fill={ink} />
-      <circle cx={pose.head.x + 3} cy={pose.head.y - 1} r={1.2} fill={ink} />
+      <circle cx={p.head.x} cy={p.head.y} r={p.headR} fill="none" stroke={ink} strokeWidth={sw} />
+      <line x1={p.torso.a.x} y1={p.torso.a.y} x2={p.torso.b.x} y2={p.torso.b.y} stroke={ink} strokeWidth={sw} strokeLinecap="round" />
+      <line x1={p.armL.a.x} y1={p.armL.a.y} x2={p.armL.b.x} y2={p.armL.b.y} stroke={ink} strokeWidth={sw} strokeLinecap="round" />
+      <line x1={p.armR.a.x} y1={p.armR.a.y} x2={p.armR.b.x} y2={p.armR.b.y} stroke={ink} strokeWidth={sw} strokeLinecap="round" />
+      <line x1={p.legL.a.x} y1={p.legL.a.y} x2={p.legL.b.x} y2={p.legL.b.y} stroke={ink} strokeWidth={sw} strokeLinecap="round" />
+      <line x1={p.legR.a.x} y1={p.legR.a.y} x2={p.legR.b.x} y2={p.legR.b.y} stroke={ink} strokeWidth={sw} strokeLinecap="round" />
+      <circle cx={p.head.x - 3} cy={p.head.y - 1} r={1.2} fill={ink} />
+      <circle cx={p.head.x + 3} cy={p.head.y - 1} r={1.2} fill={ink} />
     </g>
   );
 }
 
-const FRAME_W = 88;
-const FRAME_COUNT = 5;
+const FRAME_COUNT = 7;
+const CELL_W = 56;
 
 export function ExpressionScene({ progress }: ExpressionSceneProps) {
+  const safeProgress = Number.isFinite(progress) ? Math.min(1, Math.max(0, progress)) : 0;
   const poseCount = CARTWHEEL_POSES.length;
-  const { index, local } = progressSegment(progress, poseCount - 1);
-  const currentPose = lerpPose(CARTWHEEL_POSES[index]!, CARTWHEEL_POSES[Math.min(index + 1, poseCount - 1)]!, local);
-
-  const travelX = lerp(8, FRAME_W * (FRAME_COUNT - 1) - 8, progress);
-  const fillT = lerp(0, 1, Math.min(1, progress * 1.25));
+  const { index, local } = progressSegment(safeProgress, poseCount - 1);
+  const currentPose = lerpPose(getPose(index), getPose(index + 1), local);
+  const fillT = lerp(0, 1, Math.min(1, safeProgress * 1.25));
+  const activeFrame = Math.round(safeProgress * (FRAME_COUNT - 1));
 
   return (
     <Scene2D className="scene-expression">
-      <svg viewBox="0 0 440 200" className="scene-expression__svg" role="img" aria-label="Character cartwheel colouring animation">
-        <rect width="440" height="200" fill={palette.base} />
+      <svg
+        viewBox="0 0 400 220"
+        className="scene-expression__svg"
+        role="img"
+        aria-label="Character cartwheeling through colouring frames"
+      >
+        <rect width="400" height="220" fill={palette.base} />
+        <text x="16" y="24" fill={palette.greyBlue} fontSize="10" letterSpacing="0.06em">
+          EXPRESSION · line art → flat colour
+        </text>
 
-        {/* Filmstrip frames */}
         {Array.from({ length: FRAME_COUNT }).map((_, frame) => {
-          const framePoseIdx = Math.min(poseCount - 1, index + frame - 2);
-          const framePose = CARTWHEEL_POSES[framePoseIdx]!;
-          const isCenter = frame === 2;
-          const x = frame * FRAME_W + 12;
-          const opacity = isCenter ? 1 : 0.3;
+          const isActive = frame === activeFrame;
+          const framePose = isActive ? currentPose : getPose(Math.round((frame / (FRAME_COUNT - 1)) * (poseCount - 1)));
+          const x = 16 + frame * (CELL_W + 4);
+          const frameFill = isActive ? fillT : lerp(0, 0.45, frame / FRAME_COUNT);
 
           return (
-            <g key={frame} transform={`translate(${x}, 16)`} opacity={opacity}>
+            <g key={frame} transform={`translate(${x}, 36)`}>
               <rect
                 x="0"
                 y="0"
-                width={FRAME_W - 8}
-                height="168"
+                width={CELL_W}
+                height="160"
                 fill={palette.base}
-                stroke={palette.ink}
-                strokeWidth={isCenter ? 2 : 1}
+                stroke={isActive ? palette.rose : palette.ink}
+                strokeWidth={isActive ? 2 : 1}
               />
-              <g transform="translate(4, 28)">
-                <CharacterFigure pose={framePose} fillProgress={isCenter ? fillT : fillT * 0.6} strokeWidth={isCenter ? 2.5 : 2} />
+              <g transform={`translate(${CELL_W / 2 - 40}, 20)`}>
+                <CharacterFigure
+                  pose={framePose}
+                  fillProgress={frameFill}
+                  strokeWidth={isActive ? 3 : 2}
+                  scale={isActive ? 1.15 : 0.95}
+                />
               </g>
-              <text x={(FRAME_W - 8) / 2} y="162" fill={palette.greyBlue} fontSize="8" textAnchor="middle">
-                {String(framePoseIdx + 1).padStart(2, "0")}
+              <text x={CELL_W / 2} y="152" fill={palette.greyBlue} fontSize="8" textAnchor="middle">
+                {String(frame + 1).padStart(2, "0")}
               </text>
             </g>
           );
         })}
-
-        {/* Hero character — interpolated pose, travels across strip */}
-        <g transform={`translate(${travelX}, 16)`} opacity={0.95}>
-          <rect
-            x="0"
-            y="0"
-            width={FRAME_W - 8}
-            height="168"
-            fill="none"
-            stroke={palette.rose}
-            strokeWidth={1.5}
-            strokeDasharray="4 4"
-            opacity={0.5}
-          />
-          <g transform="translate(4, 28)">
-            <CharacterFigure pose={currentPose} fillProgress={fillT} strokeWidth={3} />
-          </g>
-        </g>
       </svg>
     </Scene2D>
   );

@@ -16,14 +16,14 @@
 ## Learned Workspace Facts
 
 - Site codename **rashOS**; black coral SVG preloader (`components/sections/Preloader.tsx`) → scroll-journey (Hero → 7 pinned project sections → work timeline → connect footer).
-- Core stack: Next.js App Router + GSAP (ScrollTrigger, Flip) + Three.js (@react-three/fiber, lazy-mounted via `SceneCanvas` with WebGL fallback) + Lenis + Vitest (`npm test`).
-- Project content in `content/projects.ts` (7 entries: admissions, expression, design-pov, pluto, kawa, aula, kotak); detail pages at `app/project/[slug]/` (out of scope for current palette overhaul); palettes in `lib/colors.ts`; scenes in `components/scenes/`. Expression scene: cartwheel character with ink/white/rose fills. Kawa scene: rainfall chatbot asking about place names (e.g. Shoreditch), not coordinates.
+- Core stack: Next.js App Router + GSAP (ScrollTrigger, Flip) + Three.js (@react-three/fiber, lazy-mounted via `SceneCanvas` with WebGL fallback) + Lenis + Vitest (`npm test`) + Playwright e2e (`?e2e=1` skips preloader/Lenis/cursor).
+- Project content in `content/projects.ts` (7 entries: admissions, expression, design-pov, pluto, kawa, aula, kotak); detail pages at `app/project/[slug]/` (out of scope for current palette overhaul); unified palette in `lib/palette.ts` (`ColorZoneProvider` removed); `ProjectSceneRouter` — six 2D `Scene2D` scenes, Pluto R3F only; scenes in `components/scenes/`. Expression: animated line-art character doing a cartwheel (not abstract shapes), ink/white/rose fills. Admissions: ApplicantTable-style UI from admissions-landing with scroll-driven rubric weights. Kawa: rainfall chatbot asking about place names (e.g. Shoreditch), not coordinates.
 - Expression is the official marketing name for the Colourer codebase; old OS components removed (`components/os/`, `components/apps/`).
 - Git remote is github.com/raashishah/raashishah.github.io; workspace path is the raashishah.com repo.
 - Production deploys on Vercel (project `raashishah`, linked to GitHub); push to `main` triggers deploy.
 - Root domain DNS is on Squarespace (`@` A → `76.76.21.21` only; `www` CNAME → `cname.vercel-dns.com`); remove stale Firebase A records if apex serves the old site; subdomains like admissions can stay on Firebase.
 - GitHub Pages (raashishah.github.io) may lag Vercel; legacy static site preserved under `legacy/`.
-- Planning docs PRODUCT.md and DESIGN.md may lag behind implementation; design ideation in `docs/ideation/`.
+- `DESIGN.md` is design source of truth for rashOS; PRODUCT.md may lag; ideation in `docs/ideation/`.
 - Rebuild content sourced from Second Brain wiki (/Users/raash/Documents/Second Brain).
 - Spotify env vars: SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN, SPOTIFY_REDIRECT_URI.
 - Open Graph / share metadata in `lib/metadata.ts` with dynamic `opengraph-image.tsx` routes.

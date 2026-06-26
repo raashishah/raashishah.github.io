@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { isE2EMode, shouldSkipMotionChrome } from "@/lib/e2e";
 import { registerGsapPlugins } from "@/lib/animations";
 import { palette } from "@/lib/palette";
+import { useMounted } from "@/lib/useMounted";
 
 type PreloaderProps = {
   onComplete: () => void;
@@ -50,6 +51,7 @@ const CORAL_TENDRILS = [
 ] as const;
 
 export function Preloader({ onComplete }: PreloaderProps) {
+  const mounted = useMounted();
   const [done, setDone] = useState(false);
   const onCompleteRef = useRef(onComplete);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -235,7 +237,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
     };
   }, []);
 
-  if (done || shouldSkipMotionChrome() || isE2EMode()) return null;
+  if (!mounted || done) return null;
 
   return (
     <div ref={rootRef} className="preloader" aria-hidden="true">

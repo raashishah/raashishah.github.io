@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { projects } from "@/content/projects";
+import { isE2EMode } from "@/lib/e2e";
 import { Hero } from "@/components/sections/Hero";
 import { Preloader } from "@/components/sections/Preloader";
 import { ProjectSection } from "@/components/sections/ProjectSection";
@@ -13,6 +14,10 @@ import { GrainOverlay } from "@/components/effects/GrainOverlay";
 
 export function ScrollJourney() {
   const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (isE2EMode()) setReady(true);
+  }, []);
 
   return (
     <>

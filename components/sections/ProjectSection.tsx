@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Project } from "@/content/types";
 import { registerGsapPlugins } from "@/lib/animations";
+import { isE2EMode } from "@/lib/e2e";
 import { useCursorState } from "@/components/cursor/CursorProvider";
 import { ProjectSceneCanvas } from "@/components/scenes/ProjectSceneRouter";
 import { TextReveal } from "@/components/effects/TextReveal";
@@ -22,7 +23,12 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
   const [sceneEnabled, setSceneEnabled] = useState(false);
   const [isCompactViewport, setIsCompactViewport] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [isE2E, setIsE2E] = useState(false);
   const { setCursorState, resetCursor } = useCursorState();
+
+  useEffect(() => {
+    setIsE2E(isE2EMode());
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -122,7 +128,7 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
         <ProjectSceneCanvas
           project={project}
           progress={progress}
-          enabled={sceneEnabled}
+          enabled={sceneEnabled || isE2E}
           active={isActive}
         />
         <div className="project-section__copy">
