@@ -1,58 +1,69 @@
 "use client";
 
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import { palette } from "@/lib/palette";
+import { lerp } from "@/lib/scene-progress";
+import { Scene2D } from "@/components/scenes/Scene2D";
 
 type AulaSceneProps = {
   progress: number;
 };
 
-function Node({ position, progress, delay }: { position: [number, number, number]; progress: number; delay: number }) {
-  const ref = useRef<THREE.Mesh>(null);
-  const scale = Math.min(1, Math.max(0, (progress - delay) * 2));
+const STUDENTS = [
+  { x: 24, y: 100 },
+  { x: 100, y: 100 },
+  { x: 176, y: 100 },
+  { x: 252, y: 100 },
+  { x: 328, y: 100 },
+];
 
-  useFrame(({ clock }) => {
-    if (!ref.current) return;
-    ref.current.scale.setScalar(scale * (1 + Math.sin(clock.elapsedTime + delay * 10) * 0.05));
-  });
-
-  return (
-    <mesh ref={ref} position={position}>
-      <sphereGeometry args={[0.15, 16, 16]} />
-      <meshStandardMaterial color={delay > 0.3 ? "#7bdcb5" : "#9b59b6"} />
-    </mesh>
-  );
-}
+const CHAT = [
+  "Can you share slide 4?",
+  "Mic check 🎤",
+  "This is actually helpful",
+];
 
 export function AulaScene({ progress }: AulaSceneProps) {
-  const positions: [number, number, number][] = [
-    [-1.5, 0.5, 0],
-    [0, 0.8, 0],
-    [1.5, 0.3, 0],
-    [-0.8, -0.6, 0],
-    [0.9, -0.5, 0],
-    [0, 0, 0],
-  ];
+  const live = progress > 0.2;
 
   return (
-    <>
-      <ambientLight intensity={0.6} />
-      {positions.map((pos, i) => (
-        <Node key={i} position={pos} progress={progress} delay={i * 0.08} />
-      ))}
-      {progress > 0.3 &&
-        positions.slice(0, -1).map((pos, i) => (
-          <line key={`line-${i}`}>
-            <bufferGeometry>
-              <bufferAttribute
-                attach="attributes-position"
-                args={[new Float32Array([...pos, ...positions[i + 1]]), 3]}
-              />
-            </bufferGeometry>
-            <lineBasicMaterial color="#7bdcb5" transparent opacity={0.4} />
-          </line>
-        ))}
-    </>
+    <Scene2D className="scene-aula">
+      <svg viewBox="0 0 400 260" className="scene-aula__svg" role="img" aria-label="Online classroom">
+        <rect width="400" height="260" fill={palette.navy} fillOpacity="0.04" />
+        <rect x="8" y="8" width="384" height="244" fill={palette.base} stroke={palette.ink} strokeWidth="2" />
+        {/* Professor screen */}
+        <rect x="120" y="20" width="160" height="90" fill={palette.ink} fillOpacity={lerp(0, 0.9, Math.min(1, progress * 2))} />
+        <text x="200" y="72" fill={palette.base} fontSize="10" textAnchor="middle" opacity={live ? 1 : 0}>
+          LIVE LECTURE
+        </text>
+        {/* Student tiles */}
+        {STUDENTS.map((s, i) => {
+          const inRoom = progress > 0.15 + i * 0.1;
+          return (
+            <g key={i} opacity={inRoom ? 1 : 0}>
+              <rect x={s.x} y={s.y} width="64" height="48" fill={palette.base} stroke={palette.ink} strokeWidth="1.5" />
+              <circle cx={s.x + 32} cy={s.y + 20} r="10" fill={palette.rose} fillOpacity="0.5" />
+              <rect x={s.x + 20} y={s.y + 34} width="24" height="4" fill={palette.greyBlue} />
+            </g>
+          );
+        })}
+        {/* Chat bubbles */}
+        {CHAT.map((msg, i) => {
+          const show = progress > 0.4 + i * 0.15;
+          const y = 168 + i * 28;
+          return (
+            <g key={msg} opacity={show ? 1 : 0}>
+              <rect x="20" y={y} width={msg.length * 6 + 20} height="22" fill={palette.rose} fillOpacity="0.2" rx="4" />
+              <text x="30" y={y + 15} fill={palette.ink} fontSize="9">
+                {msg}
+              </text>
+            </g>
+          );
+        })}
+        {/* Hand raise */}
+        <text x="360" y="50" fontSize="18" opacity={progress > 0.6 ? 1 : 0}>
+          ✋
+        </text>
+      </svg>
+    </Scene2D>
   );
 }

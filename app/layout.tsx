@@ -2,7 +2,6 @@ import localFont from "next/font/local";
 import type { Metadata } from "next";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { ColorZoneProvider } from "@/components/providers/ColorZoneProvider";
 import { CursorProvider } from "@/components/cursor/CursorProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
 import { SparkleProvider } from "@/components/providers/SparkleProvider";
@@ -66,18 +65,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${cabinet.className} ${cabinet.variable}`}>
-        <ColorZoneProvider>
-          <CursorProvider>
-            <TransitionProvider>
-              <SparkleProvider>
-                <SmoothScroll>
-                  <Cursor />
-                  {children}
-                </SmoothScroll>
-              </SparkleProvider>
-            </TransitionProvider>
-          </CursorProvider>
-        </ColorZoneProvider>
+        <CursorProvider>
+          <TransitionProvider>
+            <SparkleProvider>
+              <SmoothScroll>
+                <Cursor />
+                {children}
+              </SmoothScroll>
+            </SparkleProvider>
+          </TransitionProvider>
+        </CursorProvider>
       </body>
     </html>
   );

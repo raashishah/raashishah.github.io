@@ -1,9 +1,7 @@
 "use client";
 
-import { Suspense } from "react";
-import type { CSSProperties } from "react";
-import type { Project } from "@/content/types";
-import { getProjectPalette } from "@/lib/colors";
+import { Suspense, type ComponentType } from "react";
+import type { Project, ProjectSlug } from "@/content/types";
 import { SceneCanvas } from "@/components/scenes/SceneCanvas";
 import { AdmissionsScene } from "@/components/scenes/AdmissionsScene";
 import { ExpressionScene } from "@/components/scenes/ExpressionScene";
@@ -12,17 +10,18 @@ import { PlutoScene } from "@/components/scenes/PlutoScene";
 import { KawaScene } from "@/components/scenes/KawaScene";
 import { AulaScene } from "@/components/scenes/AulaScene";
 import { KotakScene } from "@/components/scenes/KotakScene";
-import type { ProjectSlug } from "@/content/types";
 
-const sceneMap = {
-  admissions: AdmissionsScene,
-  expression: ExpressionScene,
-  "design-pov": DesignPovScene,
-  pluto: PlutoScene,
-  kawa: KawaScene,
-  aula: AulaScene,
-  kotak: KotakScene,
-} as const;
+type SceneRenderer = "2d" | "3d";
+
+const sceneConfig: Record<ProjectSlug, { type: SceneRenderer; Component: ComponentType<{ progress: number }> }> = {
+  admissions: { type: "2d", Component: AdmissionsScene },
+  expression: { type: "2d", Component: ExpressionScene },
+  "design-pov": { type: "2d", Component: DesignPovScene },
+  pluto: { type: "3d", Component: PlutoScene },
+  kawa: { type: "2d", Component: KawaScene },
+  aula: { type: "2d", Component: AulaScene },
+  kotak: { type: "2d", Component: KotakScene },
+};
 
 type ProjectSceneProps = {
   slug: ProjectSlug;
@@ -30,12 +29,13 @@ type ProjectSceneProps = {
 };
 
 export function ProjectScene({ slug, progress }: ProjectSceneProps) {
-  const SceneComponent = sceneMap[slug];
-  if (!SceneComponent) return null;
+  const config = sceneConfig[slug];
+  if (!config) return null;
 
+  const { Component } = config;
   return (
     <Suspense fallback={null}>
-      <SceneComponent progress={progress} />
+      <Component progress={progress} />
     </Suspense>
   );
 }
@@ -44,29 +44,33 @@ export function ProjectSceneCanvas({
   project,
   progress,
   enabled = true,
+  active = true,
 }: {
   project: Project;
   progress: number;
   enabled?: boolean;
+  active?: boolean;
 }) {
-  const palette = getProjectPalette(project.slug);
+  const config = sceneConfig[project.slug];
+  if (!config) return null;
+
+  if (config.type === "3d") {
+    return (
+      <div className="project-scene-wrap" data-flip-id={`scene-${project.slug}`}>
+        <SceneCanvas className="project-scene-canvas" enabled={enabled && active}>
+          <ProjectScene slug={project.slug} progress={progress} />
+        </SceneCanvas>
+      </div>
+    );
+  }
 
   return (
     <div
-      className="project-scene-wrap"
+      className="project-scene-wrap project-scene-wrap--2d"
       data-flip-id={`scene-${project.slug}`}
-      style={
-        palette
-          ? ({
-              "--zone-bg": palette.bg,
-              "--zone-accent": palette.accent,
-            } as CSSProperties)
-          : undefined
-      }
+      data-scene-active={active ? "true" : "false"}
     >
-      <SceneCanvas className="project-scene-canvas" enabled={enabled}>
-        <ProjectScene slug={project.slug} progress={progress} />
-      </SceneCanvas>
+      {enabled ? <ProjectScene slug={project.slug} progress={progress} /> : <div className="project-scene-fallback" />}
     </div>
   );
 }

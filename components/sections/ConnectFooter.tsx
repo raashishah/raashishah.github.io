@@ -90,6 +90,7 @@ function SocialLink({ href, label }: { href: string; label: string }) {
         target={href.startsWith("mailto:") ? undefined : "_blank"}
         rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
         className="connect-footer__link"
+        data-magnetic
         data-sparkle-burst
         onMouseEnter={() => setCursorState("link", label)}
         onMouseLeave={resetCursor}
@@ -106,28 +107,39 @@ function LoopScroll() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const footer = document.querySelector("[data-section='footer']");
-    const hero = document.querySelector("[data-section='hero']");
-    if (!footer || !hero) return;
+    if (!footer) return;
 
     let looping = false;
-
-    Observer.create({
+    const observer = Observer.create({
       target: window,
       type: "wheel,touch",
       onDown: () => {
-        const atBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 50;
-        if (atBottom && !looping) {
+        const footerRect = footer.getBoundingClientRect();
+        const atBottom =
+          Math.ceil(window.innerHeight + window.scrollY) >=
+          document.documentElement.scrollHeight - 4;
+        const footerFullyVisible =
+          footerRect.top <= window.innerHeight && footerRect.bottom <= window.innerHeight + 24;
+
+        if (atBottom && footerFullyVisible && !looping) {
           looping = true;
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          window.__RAASH_LENIS__?.scrollTo(0, {
+            immediate: true,
+            force: true,
+            lock: true,
+          });
+          if (!window.__RAASH_LENIS__) {
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          }
           setTimeout(() => {
             looping = false;
-          }, 1200);
+          }, 700);
         }
       },
       tolerance: 50,
     });
 
-    return () => Observer.getAll().forEach((o) => o.kill());
+    return () => observer.kill();
   }, []);
 
   return null;

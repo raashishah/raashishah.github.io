@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Project } from "@/content/types";
-import { getProjectPalette } from "@/lib/colors";
 import { registerGsapPlugins } from "@/lib/animations";
-import { useColorZone } from "@/components/providers/ColorZoneProvider";
 import { useCursorState } from "@/components/cursor/CursorProvider";
 import { ProjectSceneCanvas } from "@/components/scenes/ProjectSceneRouter";
 import { TextReveal } from "@/components/effects/TextReveal";
@@ -23,9 +21,8 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
   const [progress, setProgress] = useState(0);
   const [sceneEnabled, setSceneEnabled] = useState(false);
   const [isCompactViewport, setIsCompactViewport] = useState(false);
-  const { setActiveZone } = useColorZone();
+  const [isActive, setIsActive] = useState(false);
   const { setCursorState, resetCursor } = useCursorState();
-  const palette = getProjectPalette(project.slug);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -68,7 +65,7 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
   useEffect(() => {
     registerGsapPlugins();
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || !ready) return;
 
     const trigger = ScrollTrigger.create({
       trigger: section,
@@ -79,15 +76,21 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
       onUpdate: (self) => {
         setProgress(self.progress);
       },
-      onEnter: () => palette && setActiveZone(project.slug, palette),
-      onEnterBack: () => palette && setActiveZone(project.slug, palette),
-      onLeave: () => setActiveZone(null),
-      onLeaveBack: () => setActiveZone(null),
+      onEnter: () => {
+        setIsActive(true);
+        document.querySelector(".journey")?.setAttribute("data-active-section", project.slug);
+      },
+      onEnterBack: () => {
+        setIsActive(true);
+        document.querySelector(".journey")?.setAttribute("data-active-section", project.slug);
+      },
+      onLeave: () => setIsActive(false),
+      onLeaveBack: () => setIsActive(false),
     });
 
     gsap.fromTo(
       section.querySelector(".project-section__copy"),
-      { opacity: 0, y: 40 },
+      { opacity: 0, y: 60 },
       {
         opacity: 1,
         y: 0,
@@ -103,16 +106,7 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
     return () => {
       trigger.kill();
     };
-  }, [isCompactViewport, project.slug, palette, setActiveZone]);
-
-  const zoneStyle = palette
-    ? ({
-        "--zone-bg": palette.bg,
-        "--zone-text": palette.text,
-        "--zone-muted": palette.textMuted,
-        "--zone-accent": palette.accent,
-      } as CSSProperties)
-    : undefined;
+  }, [isCompactViewport, project.slug, ready]);
 
   return (
     <section
@@ -120,18 +114,25 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
       className="project-section"
       data-section={project.slug}
       data-index={index}
-      style={zoneStyle}
-      onMouseEnter={() => setCursorState("project", "dive in")}
+      data-active={isActive ? "true" : "false"}
+      onMouseEnter={() => setCursorState("project", project.title)}
       onMouseLeave={resetCursor}
     >
       <div className="project-section__inner">
-        <ProjectSceneCanvas project={project} progress={progress} enabled={sceneEnabled} />
+        <ProjectSceneCanvas
+          project={project}
+          progress={progress}
+          enabled={sceneEnabled}
+          active={isActive}
+        />
         <div className="project-section__copy">
           <p className="project-section__type">{project.type === "project" ? "project" : "work"}</p>
-          <TextReveal as="h2" className="project-section__title" mode="words">
+          <TextReveal as="h2" className="project-section__title" mode="chars">
             {project.title}
           </TextReveal>
-          <p className="project-section__insight">{project.insight}</p>
+          <TextReveal as="p" className="project-section__insight" mode="scrub-words">
+            {project.insight}
+          </TextReveal>
           <FlipLink href={`/project/${project.slug}`} flipId={`scene-${project.slug}`} className="project-section__cta">
             {project.href ? "see the site" : "read the story"}
             <span aria-hidden="true">→</span>

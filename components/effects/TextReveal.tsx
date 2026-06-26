@@ -8,7 +8,7 @@ type TextRevealProps = {
   children: string;
   as?: "h1" | "h2" | "p" | "span";
   className?: string;
-  mode?: "chars" | "words" | "lines";
+  mode?: "chars" | "words" | "lines" | "scrub-words";
   trigger?: boolean;
 };
 
@@ -24,7 +24,40 @@ export function TextReveal({
   useEffect(() => {
     registerGsapPlugins();
     const el = ref.current;
-    if (!el || prefersReducedMotion()) return;
+    if (!el || prefersReducedMotion()) {
+      if (el) el.textContent = children;
+      return;
+    }
+
+    if (mode === "scrub-words") {
+      const words = children.split(" ");
+      el.innerHTML = words
+        .map(
+          (word) =>
+            `<span class="text-reveal__scrub-word" style="display:inline-block;margin-right:0.28em">${word}</span>`,
+        )
+        .join("");
+
+      const wordEls = el.querySelectorAll(".text-reveal__scrub-word");
+      gsap.set(wordEls, { opacity: 0.15 });
+
+      const anim = gsap.to(wordEls, {
+        opacity: 1,
+        stagger: 0.08,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          end: "top 35%",
+          scrub: 0.6,
+        },
+      });
+
+      return () => {
+        anim.scrollTrigger?.kill();
+        anim.kill();
+      };
+    }
 
     const parts =
       mode === "chars"
@@ -42,14 +75,13 @@ export function TextReveal({
       .join(mode === "chars" ? "" : " ");
 
     const inners = el.querySelectorAll(".text-reveal__inner");
-
-    gsap.set(inners, { y: "110%", opacity: 0 });
+    gsap.set(inners, { y: mode === "chars" ? 60 : "110%", opacity: 0 });
 
     const anim = gsap.to(inners, {
       y: "0%",
       opacity: 1,
-      duration: 0.7,
-      stagger: mode === "chars" ? 0.02 : 0.06,
+      duration: mode === "chars" ? 0.5 : 0.7,
+      stagger: mode === "chars" ? 0.015 : 0.06,
       ease: "power4.out",
       scrollTrigger: trigger
         ? {

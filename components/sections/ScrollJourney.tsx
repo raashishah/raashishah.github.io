@@ -19,7 +19,7 @@ export function ScrollJourney() {
       <Preloader onComplete={() => setReady(true)} />
       <ScrollProgress />
       <GrainOverlay />
-      <main className="journey">
+      <main className="journey" data-active-section="">
         <Hero ready={ready} />
         {projects.map((project, i) => (
           <div key={project.slug}>

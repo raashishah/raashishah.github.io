@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { prefersReducedMotion } from "@/lib/animations";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { isE2EMode, shouldSkipMotionChrome } from "@/lib/e2e";
+import { registerGsapPlugins } from "@/lib/animations";
+import { palette } from "@/lib/palette";
 
 type PreloaderProps = {
   onComplete: () => void;
@@ -52,7 +55,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLParagraphElement>(null);
   const reefRef = useRef<HTMLDivElement>(null);
-  const tendrilRefs = useRef<SVGPathElement[]>([]);
+  const inkRefs = useRef<SVGPathElement[]>([]);
+  const bleedRefs = useRef<SVGPathElement[]>([]);
   const gradientRefs = useRef<SVGLinearGradientElement[]>([]);
 
   useEffect(() => {
@@ -62,7 +66,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
   useEffect(() => {
     let isActive = true;
 
-    if (prefersReducedMotion()) {
+    if (shouldSkipMotionChrome() || isE2EMode()) {
       if (isActive) {
         onCompleteRef.current();
         setDone(true);
@@ -77,10 +81,12 @@ export function Preloader({ onComplete }: PreloaderProps) {
           if (!isActive) return;
           setDone(true);
           onCompleteRef.current();
+          registerGsapPlugins();
+          ScrollTrigger.refresh();
         },
       });
 
-      tendrilRefs.current.forEach((tendril) => {
+      inkRefs.current.forEach((tendril) => {
         const length = tendril.getTotalLength();
         gsap.set(tendril, {
           strokeDasharray: length,
@@ -88,91 +94,76 @@ export function Preloader({ onComplete }: PreloaderProps) {
           opacity: 1,
         });
       });
+      bleedRefs.current.forEach((bleed, i) => {
+        const ink = inkRefs.current[i];
+        const length = ink?.getTotalLength() ?? 0;
+        gsap.set(bleed, { strokeDasharray: length, strokeDashoffset: length, opacity: 0 });
+      });
 
       tl.fromTo(
         ".preloader__backdrop",
-        {
-          clipPath: "inset(0% 0% 0% 0% round 0px)",
-        },
-        {
-          clipPath: "inset(0% 0% 0% 0% round 0px)",
-          duration: 0.1,
-        },
+        { clipPath: "inset(0% 0% 0% 0% round 0px)" },
+        { clipPath: "inset(0% 0% 0% 0% round 0px)", duration: 0.1 },
       )
         .from(
           ".preloader__glow",
-          {
-            opacity: 0,
-            scale: 0.88,
-            duration: 1,
-            ease: "power2.out",
-          },
+          { opacity: 0, scale: 0.88, duration: 1.2, ease: "power2.out" },
           0,
         )
         .from(
           nameRef.current?.querySelectorAll("span") ?? [],
-          {
-            yPercent: 110,
-            rotate: 2,
-            opacity: 0,
-            stagger: 0.045,
-            duration: 0.7,
-          },
-          0.15,
-        )
-        .to(
-          tendrilRefs.current,
-          {
-            strokeDashoffset: 0,
-            duration: 1.35,
-            stagger: {
-              each: 0.09,
-              from: "center",
-            },
-            ease: "power2.inOut",
-          },
-          0.18,
-        )
-        .to(
-          ".preloader__tide",
-          {
-            scaleX: 1,
-            duration: 1.25,
-            ease: "power2.inOut",
-          },
+          { yPercent: 110, rotate: 2, opacity: 0, stagger: 0.05, duration: 0.8 },
           0.2,
         )
         .to(
-          ".preloader__reef",
+          inkRefs.current,
           {
-            yPercent: -8,
-            duration: 0.6,
+            strokeDashoffset: 0,
+            duration: 1.65,
+            stagger: { each: 0.1, from: "center" },
             ease: "power2.inOut",
           },
-          0.95,
+          0.22,
         )
         .to(
-          ".preloader__content",
+          bleedRefs.current,
           {
-            yPercent: -12,
-            opacity: 0,
-            duration: 0.42,
-            ease: "power3.in",
+            strokeDashoffset: 0,
+            opacity: 0.85,
+            duration: 1.65,
+            stagger: { each: 0.1, from: "center" },
+            ease: "power2.inOut",
           },
-          1.5,
+          0.22,
+        )
+        .to(
+          ".preloader__tide",
+          { scaleX: 1, duration: 1.5, ease: "power2.inOut" },
+          0.25,
+        )
+        .to(
+          ".preloader__reef",
+          { yPercent: -8, duration: 0.75, ease: "power2.inOut" },
+          1.15,
+        )
+        .to({}, { duration: 1.75 })
+        .to(
+          ".preloader__content",
+          { yPercent: -12, opacity: 0, duration: 0.55, ease: "power3.in" },
+          2.9,
         )
         .to(
           ".preloader__backdrop",
           {
             yPercent: -100,
-            duration: 0.65,
+            duration: 0.85,
             ease: "power4.inOut",
             pointerEvents: "none",
           },
-          1.57,
+          2.95,
         );
 
-      tendrilRefs.current.forEach((tendril, index) => {
+      inkRefs.current.forEach((tendril, index) => {
         const { sway } = CORAL_TENDRILS[index] ?? { sway: 3 };
         const [ox, oy] = CORAL_TENDRILS[index]?.origin ?? [160, 215];
 
@@ -244,7 +235,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
     };
   }, []);
 
-  if (done) return null;
+  if (done || shouldSkipMotionChrome() || isE2EMode()) return null;
 
   return (
     <div ref={rootRef} className="preloader" aria-hidden="true">
@@ -257,11 +248,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
             ))}
           </p>
           <div ref={reefRef} className="preloader__reef" aria-hidden="true">
-            <svg
-              className="preloader__reef-svg"
-              viewBox="0 0 320 220"
-              role="presentation"
-            >
+            <svg className="preloader__reef-svg" viewBox="0 0 320 220" role="presentation">
               <defs>
                 <linearGradient
                   id="coral-flow-a"
@@ -274,9 +261,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
                   x2="240"
                   y2="20"
                 >
-                  <stop offset="0%" stopColor="oklch(58% 0.2 22)" />
-                  <stop offset="45%" stopColor="oklch(68% 0.24 28)" />
-                  <stop offset="100%" stopColor="oklch(78% 0.18 38)" />
+                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.35" />
+                  <stop offset="55%" stopColor={palette.rose} stopOpacity="0.28" />
+                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.05" />
                 </linearGradient>
                 <linearGradient
                   id="coral-flow-b"
@@ -289,9 +276,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
                   x2="200"
                   y2="10"
                 >
-                  <stop offset="0%" stopColor="oklch(52% 0.18 20)" />
-                  <stop offset="50%" stopColor="oklch(64% 0.22 26)" />
-                  <stop offset="100%" stopColor="oklch(74% 0.16 34)" />
+                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.32" />
+                  <stop offset="50%" stopColor={palette.rose} stopOpacity="0.22" />
+                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.04" />
                 </linearGradient>
                 <linearGradient
                   id="coral-flow-c"
@@ -304,35 +291,35 @@ export function Preloader({ onComplete }: PreloaderProps) {
                   x2="300"
                   y2="30"
                 >
-                  <stop offset="0%" stopColor="oklch(55% 0.19 24)" />
-                  <stop offset="55%" stopColor="oklch(70% 0.23 30)" />
-                  <stop offset="100%" stopColor="oklch(80% 0.14 40)" />
+                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.3" />
+                  <stop offset="55%" stopColor={palette.rose} stopOpacity="0.2" />
+                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.03" />
                 </linearGradient>
-                <filter
-                  id="coral-soft-glow"
-                  x="-30%"
-                  y="-30%"
-                  width="160%"
-                  height="160%"
-                >
-                  <feGaussianBlur stdDeviation="4" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
               </defs>
               {CORAL_TENDRILS.map((tendril, index) => (
                 <path
                   key={tendril.d}
                   ref={(node) => {
-                    if (node) tendrilRefs.current[index] = node;
+                    if (node) inkRefs.current[index] = node;
                   }}
                   className="preloader__coral"
                   d={tendril.d}
-                  stroke={`url(#${tendril.gradientId})`}
+                  fill="none"
+                  stroke={palette.ink}
                   strokeWidth={tendril.strokeWidth}
-                  filter="url(#coral-soft-glow)"
+                />
+              ))}
+              {CORAL_TENDRILS.map((tendril, index) => (
+                <path
+                  key={`${tendril.d}-bleed`}
+                  ref={(node) => {
+                    if (node) bleedRefs.current[index] = node;
+                  }}
+                  className="preloader__coral preloader__coral--bleed"
+                  d={tendril.d}
+                  fill="none"
+                  stroke={`url(#${tendril.gradientId})`}
+                  strokeWidth={tendril.strokeWidth + 4}
                 />
               ))}
             </svg>
