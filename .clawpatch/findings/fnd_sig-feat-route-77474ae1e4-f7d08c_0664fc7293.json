@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-route-77474ae1e4-f7d08c_0664fc7293",
+  "featureId": "feat_route_77474ae1e4",
+  "title": "OAuth callback does not validate a `state` parameter before exchanging the authorization code",
+  "category": "security",
+  "severity": "high",
+  "confidence": "high",
+  "triage": "confirmed-bug",
+  "evidence": [
+    {
+      "path": "app/api/spotify/callback/route.ts",
+      "startLine": 4,
+      "endLine": 14,
+      "symbol": null,
+      "quote": null
+    },
+    {
+      "path": "app/api/spotify/callback/route.ts",
+      "startLine": 25,
+      "endLine": 35,
+      "symbol": null,
+      "quote": null
+    },
+    {
+      "path": "AGENTS.md",
+      "startLine": 12,
+      "endLine": 12,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "The route accepts any incoming `code` query parameter and immediately exchanges it for tokens, but it never checks a caller-bound `state` value. In an OAuth redirect handler, that omission allows CSRF/account-mixup flows where a victim can be driven through this callback with an attacker-controlled authorization result, causing the app to capture the wrong Spotify account's refresh token.",
+  "reproduction": "Start an OAuth flow against Spotify using a different Spotify account, then send the resulting `/api/spotify/callback?code=...` URL to a user who is supposed to connect their own account. This handler will exchange the attacker-generated code because it has no state correlation.",
+  "recommendation": "Generate a per-flow `state` token when starting Spotify auth, store it server-side or in a signed cookie, require the callback to include the same value, and reject mismatches before calling Spotify. If this route is used in production, prefer PKCE as well.",
+  "whyTestsDoNotAlreadyCoverThis": "No callback tests were included, and the implementation has no assertions around expected `state` handling.",
+  "suggestedRegressionTest": "Add a route test that calls `GET /api/spotify/callback` with a valid-looking `code` but missing or mismatched `state` and asserts that the route returns 400 without issuing the token exchange fetch.",
+  "minimumFixScope": "app/api/spotify/callback/route.ts",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-route-77474ae1e4_f7d08c7f05",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T193800-cd00b1",
+  "createdAt": "2026-06-25T19:39:38.487Z",
+  "updatedAt": "2026-06-25T19:39:38.487Z"
+}

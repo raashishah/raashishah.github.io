@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-route-22c5f1b460-faef49_041f5d578f",
+  "featureId": "feat_route_22c5f1b460",
+  "title": "No route-level tests cover success and fallback behavior",
+  "category": "test-gap",
+  "severity": "low",
+  "confidence": "high",
+  "triage": "test-gap",
+  "evidence": [
+    {
+      "path": "app/api/now-playing/route.ts",
+      "startLine": 4,
+      "endLine": 14,
+      "symbol": "GET",
+      "quote": null
+    },
+    {
+      "path": "package.json",
+      "startLine": 5,
+      "endLine": 11,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "This feature has branching behavior for missing tokens, successful Spotify payloads, and thrown errors, but no included tests exercise any of those paths despite Vitest being available in the project. Regressions here would directly affect the public `/api/now-playing` contract and are easy to miss because the route intentionally swallows errors.",
+  "reproduction": null,
+  "recommendation": "Add focused Vitest coverage for the route handler with mocked Spotify helpers so each branch's status code and JSON body are asserted.",
+  "whyTestsDoNotAlreadyCoverThis": "The feature metadata lists no tests, and no route test files are included in the review set.",
+  "suggestedRegressionTest": "Create a Vitest suite for `app/api/now-playing/route.ts` covering token absent, token present with active payload, and helper failure paths.",
+  "minimumFixScope": "app/api/now-playing/route.ts",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-route-22c5f1b460_faef492515",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T193800-cd00b1",
+  "createdAt": "2026-06-25T19:39:01.438Z",
+  "updatedAt": "2026-06-25T19:39:01.438Z"
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-route-09431c8f64-aae34b_6c38ee4f55",
+  "featureId": "feat_route_09431c8f64",
+  "title": "`/api/jam` never returns a joinable Jam link, only a normal track share URL",
+  "category": "api-contract",
+  "severity": "medium",
+  "confidence": "high",
+  "triage": "contract-mismatch",
+  "evidence": [
+    {
+      "path": "app/api/jam/route.ts",
+      "startLine": 16,
+      "endLine": 20,
+      "symbol": "GET",
+      "quote": null
+    },
+    {
+      "path": "AGENTS.md",
+      "startLine": 12,
+      "endLine": 12,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "The documented product intent is a \"listen with me\" jam link, but this handler always converts the current track URI into `https://open.spotify.com/track/...`. That URL opens the track page; it does not join a Spotify Jam session. Any caller treating this endpoint as a Jam-link provider will get the wrong behavior even when music is currently playing.",
+  "reproduction": null,
+  "recommendation": "Either implement a real Jam/session URL flow, or change the endpoint name/response contract so callers do not assume it returns a joinable Jam link.",
+  "whyTestsDoNotAlreadyCoverThis": "No tests are included for this route, so nothing asserts that the returned URL matches the advertised Jam behavior.",
+  "suggestedRegressionTest": "Add a route test that mocks a playing track and asserts the response contract: either a real Jam URL shape if that is the intended feature, or a renamed/share-url field if the endpoint is only a fallback track link.",
+  "minimumFixScope": "app/api/jam/route.ts",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-route-09431c8f64_aae34baf22",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T193800-cd00b1",
+  "createdAt": "2026-06-25T19:39:04.177Z",
+  "updatedAt": "2026-06-25T19:39:04.177Z"
+}

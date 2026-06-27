@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-route-09431c8f64-30b2cd_bb4353d93d",
+  "featureId": "feat_route_09431c8f64",
+  "title": "Backend failures are reported as `available: false`, making outages indistinguishable from 'nothing is playing'",
+  "category": "bug",
+  "severity": "medium",
+  "confidence": "high",
+  "triage": "confirmed-bug",
+  "evidence": [
+    {
+      "path": "app/api/jam/route.ts",
+      "startLine": 5,
+      "endLine": 8,
+      "symbol": "GET",
+      "quote": null
+    },
+    {
+      "path": "app/api/jam/route.ts",
+      "startLine": 11,
+      "endLine": 13,
+      "symbol": "GET",
+      "quote": null
+    },
+    {
+      "path": "app/api/jam/route.ts",
+      "startLine": 21,
+      "endLine": 22,
+      "symbol": "GET",
+      "quote": null
+    }
+  ],
+  "reasoning": "The handler returns the exact same 200 JSON payload for three materially different cases: no access token, no active track, and exceptions thrown while talking to Spotify. Token expiry, network failures, or upstream API changes will therefore look identical to an idle player, which hides incidents from both the frontend and operators and can cause the UI to incorrectly suppress the feature.",
+  "reproduction": null,
+  "recommendation": "Return an explicit error state for exceptions or upstream failures, ideally with a non-200 status such as 502/503, while keeping the idle-state payload only for the legitimate 'nothing playing' path. Logging the caught error would also improve diagnosis.",
+  "whyTestsDoNotAlreadyCoverThis": "No tests are included, so there is no coverage asserting different responses for idle state versus Spotify failure paths.",
+  "suggestedRegressionTest": "Mock `fetchNowPlaying` to throw and assert that the route returns a distinct error response/status from the successful 'not playing' response.",
+  "minimumFixScope": "app/api/jam/route.ts",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-route-09431c8f64_30b2cd2bb7",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T193800-cd00b1",
+  "createdAt": "2026-06-25T19:39:04.178Z",
+  "updatedAt": "2026-06-25T19:39:04.178Z"
+}

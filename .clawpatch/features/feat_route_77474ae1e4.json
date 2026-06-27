@@ -54,11 +54,25 @@
     "network",
     "serialization"
   ],
-  "status": "pending",
+  "status": "needs-fix",
   "lock": null,
-  "findingIds": [],
+  "findingIds": [
+    "fnd_sig-feat-route-77474ae1e4-f7d08c_0664fc7293",
+    "fnd_sig-feat-route-77474ae1e4-be61f0_ca1547d210",
+    "fnd_sig-feat-route-77474ae1e4-8d09b3_5fb2c5c638"
+  ],
   "patchAttemptIds": [],
-  "analysisHistory": [],
+  "analysisHistory": [
+    {
+      "runId": "20260625T193800-cd00b1",
+      "kind": "review",
+      "summary": "3 finding(s); prompt=13678 bytes; approxTokens=3415; includedFiles=6; omittedFiles=0",
+      "provider": "codex",
+      "model": null,
+      "reasoningEffort": null,
+      "createdAt": "2026-06-25T19:39:38.492Z"
+    }
+  ],
   "createdAt": "2026-06-25T19:01:09.090Z",
-  "updatedAt": "2026-06-25T19:01:09.090Z"
+  "updatedAt": "2026-06-25T19:39:38.492Z"
 }

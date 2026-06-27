@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { subscribeAnimationTicker } from "@/lib/animation-ticker";
 import { shouldSkipMotionChrome } from "@/lib/e2e";
 import { palette } from "@/lib/palette";

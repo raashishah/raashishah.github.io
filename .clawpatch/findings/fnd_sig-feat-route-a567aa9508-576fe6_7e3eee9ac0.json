@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-route-a567aa9508-576fe6_7e3eee9ac0",
+  "featureId": "feat_route_a567aa9508",
+  "title": "Root route has no regression test coverage",
+  "category": "test-gap",
+  "severity": "medium",
+  "confidence": "high",
+  "triage": "test-gap",
+  "evidence": [
+    {
+      "path": "app/page.tsx",
+      "startLine": 1,
+      "endLine": 5,
+      "symbol": null,
+      "quote": null
+    },
+    {
+      "path": "package.json",
+      "startLine": 5,
+      "endLine": 12,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "The `/` route is implemented as a thin wrapper around `ScrollJourney`, but no tests are included for this feature. Given this route is the homepage and depends on a nontrivial imported section component, regressions such as import breakage, render-time exceptions, or accidental route replacement would not be caught before release.",
+  "reproduction": null,
+  "recommendation": "Add a homepage smoke test that renders `app/page.tsx` and asserts the route mounts without throwing, plus at least one user-visible contract assertion for the homepage shell.",
+  "whyTestsDoNotAlreadyCoverThis": "No linked tests were provided for this feature despite the project defining a test runner in `package.json`.",
+  "suggestedRegressionTest": "Create a Vitest test for `app/page.tsx` that mocks `@/components/sections/ScrollJourney`, renders `Home()`, and asserts the mocked section is present.",
+  "minimumFixScope": "Add one route-level test file covering `app/page.tsx`.",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-route-a567aa9508_576fe6b9ec",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T193800-cd00b1",
+  "createdAt": "2026-06-25T19:39:20.138Z",
+  "updatedAt": "2026-06-25T19:39:20.138Z"
+}

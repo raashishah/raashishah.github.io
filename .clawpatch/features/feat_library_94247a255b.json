@@ -63,11 +63,25 @@
     "project-root:."
   ],
   "trustBoundaries": [],
-  "status": "pending",
+  "status": "needs-fix",
   "lock": null,
-  "findingIds": [],
+  "findingIds": [
+    "fnd_sig-feat-library-94247a255b-c122_c9664d52d1",
+    "fnd_sig-feat-library-94247a255b-d8e4_07a1ac53e2",
+    "fnd_sig-feat-library-94247a255b-78c6_c4853ee180"
+  ],
   "patchAttemptIds": [],
-  "analysisHistory": [],
+  "analysisHistory": [
+    {
+      "runId": "20260625T193800-cd00b1",
+      "kind": "review",
+      "summary": "3 finding(s); prompt=21380 bytes; approxTokens=5344; includedFiles=9; omittedFiles=0",
+      "provider": "codex",
+      "model": null,
+      "reasoningEffort": null,
+      "createdAt": "2026-06-25T19:38:42.282Z"
+    }
+  ],
   "createdAt": "2026-06-25T19:01:09.090Z",
-  "updatedAt": "2026-06-25T19:01:09.090Z"
+  "updatedAt": "2026-06-25T19:38:42.282Z"
 }

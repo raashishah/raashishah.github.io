@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-library-94247a255b-c122_c9664d52d1",
+  "featureId": "feat_library_94247a255b",
+  "title": "Spotify OAuth callback is not bound to a caller session and exposes the exchanged refresh token in the response",
+  "category": "security",
+  "severity": "high",
+  "confidence": "high",
+  "triage": "confirmed-bug",
+  "evidence": [
+    {
+      "path": "app/api/spotify/callback/route.ts",
+      "startLine": 4,
+      "endLine": 13,
+      "symbol": "GET",
+      "quote": null
+    },
+    {
+      "path": "app/api/spotify/callback/route.ts",
+      "startLine": 25,
+      "endLine": 47,
+      "symbol": "GET",
+      "quote": null
+    }
+  ],
+  "reasoning": "The callback accepts any `code` query parameter, performs the token exchange immediately, and returns the resulting `refresh_token` in the HTTP response without validating an OAuth `state` value or checking that the request is tied to the initiator of the flow. That makes the endpoint vulnerable to OAuth CSRF/account-mixup and turns a one-time authorization code into a bearer-secret disclosure endpoint for whoever can hit the callback URL with that code first.",
+  "reproduction": null,
+  "recommendation": "Generate and store a cryptographically random `state` value before starting the Spotify authorization flow, require the callback to validate it, and avoid returning the refresh token in the browser response. Persist the token server-side or show only a success page after securely storing it.",
+  "whyTestsDoNotAlreadyCoverThis": "No tests are included for the callback route, so there is nothing asserting `state` validation or preventing refresh-token disclosure behavior.",
+  "suggestedRegressionTest": "Add a route test that rejects callbacks with a missing or mismatched `state`, and another that verifies successful callbacks do not include `refresh_token` in the JSON body returned to the browser.",
+  "minimumFixScope": "app/api/spotify/callback/route.ts",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-library-94247a255b_c12295d6ad",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T193800-cd00b1",
+  "createdAt": "2026-06-25T19:38:42.271Z",
+  "updatedAt": "2026-06-25T19:38:42.271Z"
+}

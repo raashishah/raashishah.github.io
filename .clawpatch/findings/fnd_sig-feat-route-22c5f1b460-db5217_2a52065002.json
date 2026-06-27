@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "findingId": "fnd_sig-feat-route-22c5f1b460-db5217_2a52065002",
+  "featureId": "feat_route_22c5f1b460",
+  "title": "Route collapses Spotify failures into a successful idle response",
+  "category": "api-contract",
+  "severity": "medium",
+  "confidence": "high",
+  "triage": "contract-mismatch",
+  "evidence": [
+    {
+      "path": "app/api/now-playing/route.ts",
+      "startLine": 5,
+      "endLine": 12,
+      "symbol": "GET",
+      "quote": null
+    },
+    {
+      "path": "AGENTS.md",
+      "startLine": 12,
+      "endLine": 12,
+      "symbol": null,
+      "quote": null
+    }
+  ],
+  "reasoning": "The handler returns the same 200 JSON body for three materially different states: no configured access token, a real idle playback state, and any exception while talking to Spotify. That makes downstream consumers of the now-playing widget unable to distinguish 'nothing is playing' from 'the integration is broken or Spotify is unavailable', so outages will silently present as valid idle data.",
+  "reproduction": null,
+  "recommendation": "Preserve the idle payload only for the intentional 'no token / not playing' cases, and return a non-2xx status or an explicit error field when token retrieval or Spotify fetch fails unexpectedly.",
+  "whyTestsDoNotAlreadyCoverThis": "No tests are included for this route, so there is nothing asserting how transport or auth failures should be represented.",
+  "suggestedRegressionTest": "Add route tests that mock `getSpotifyAccessToken` and `fetchNowPlaying` to verify: 200 idle for missing token, 200 payload for active playback, and a non-2xx or explicit error response when Spotify calls throw.",
+  "minimumFixScope": "app/api/now-playing/route.ts",
+  "status": "open",
+  "history": [],
+  "signature": "sig_feat-route-22c5f1b460_db52172f28",
+  "linkedPatchAttemptIds": [],
+  "createdByRunId": "20260625T193800-cd00b1",
+  "createdAt": "2026-06-25T19:39:01.438Z",
+  "updatedAt": "2026-06-25T19:39:01.438Z"
+}
