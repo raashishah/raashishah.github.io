@@ -5,7 +5,7 @@
 - Exclude Bible for Bad People from public listings; preserve legacy social links and custom icons (Giphy, Duolingo SVGs).
 - Prefers agent execute deployment, setup, QA (`/gstack-qa`), and design review (`/gstack-design-review`) itself — not ask user to manually test or follow step-by-step instructions.
 - Dropped the Mac OS shell — scroll-driven journey with Lusion-style cascade (pinned sections, scrub-driven 3D, minimal chrome); GSAP, Three.js, and Lenis approved.
-- Design direction: soft brutalism ("Quiet Stage, Loud Work"); nothing small or cute; fast meaningful animations; minimal black-line loaders/chrome; direct confident tone — rejects consultant-y copy and self-praise ("work speaks"); awwwards refs landonorris.com, igloo.inc, op.al, lusion.co, Fiddle Digital canvas grid, Duten texture-hover, Petra Garmon brushstroke. Preloader: black coral SVG with transparent old rose bleed into base white; slower soak before clip-path wipe exit.
+- Design direction: soft brutalism ("Quiet Stage, Loud Work"); nothing small or cute; can't look too soft anywhere; fast meaningful animations; minimal black-line loaders/chrome; direct confident tone — rejects consultant-y copy and self-praise ("work speaks"); awwwards refs landonorris.com, igloo.inc, op.al, lusion.co, Fiddle Digital canvas grid, Duten texture-hover, Petra Garmon brushstroke. Preloader: black coral SVG filling full viewport with transparent old rose bleed into base white; slower soak before clip-path wipe exit.
 - Unified palette only: `#f5ede8`, `#111010`, `#c08081`, `#8fa0b4`, `#1a2038` — no per-project color zones, no off-palette brand colors; web-based graphics per project, not stock images.
 - Projects without an external site get `/project/[slug]` story pages with smooth transitions; preserve user's copy tone — don't rewrite stories heavily.
 - Typography: Cabinet Grotesk (self-hosted) for everything, not Manrope.
@@ -16,8 +16,8 @@
 ## Learned Workspace Facts
 
 - Site codename **rashOS**; black coral SVG preloader (`components/sections/Preloader.tsx`) → scroll-journey (Hero → 7 pinned project sections → work timeline → connect footer).
-- Core stack: Next.js App Router + GSAP (ScrollTrigger, Flip) + Three.js (@react-three/fiber, lazy-mounted via `SceneCanvas` with WebGL fallback) + Lenis + Vitest (`npm test`) + Playwright e2e (`?e2e=1` skips preloader/Lenis/cursor).
-- Project content in `content/projects.ts` (7 entries: admissions, expression, design-pov, pluto, kawa, aula, kotak); detail pages at `app/project/[slug]/` (out of scope for current palette overhaul); unified palette in `lib/palette.ts` (`ColorZoneProvider` removed); `ProjectSceneRouter` — six 2D `Scene2D` scenes, Pluto R3F only; scenes in `components/scenes/`. Expression: animated line-art character doing a cartwheel (not abstract shapes), ink/white/rose fills. Admissions: ApplicantTable-style UI from admissions-landing with scroll-driven rubric weights. Kawa: rainfall chatbot asking about place names (e.g. Shoreditch), not coordinates.
+- Core stack: Next.js App Router + GSAP (ScrollTrigger, Flip) + Lenis + Vitest (`npm test`) + Playwright e2e (`?e2e=1` skips preloader/Lenis/cursor); all seven project scroll scenes are 2D `Scene2D` (no R3F).
+- Project content in `content/projects.ts` (7 entries: admissions, expression, design-pov, pluto, kawa, aula, kotak); detail pages at `app/project/[slug]/` (out of scope for current palette overhaul); unified palette in `lib/palette.ts` (`ColorZoneProvider` removed); `ProjectSceneRouter` — all seven 2D `Scene2D` scenes in `components/scenes/`; Pluto: scroll-driven SVG tiles snap chaos into product grid. Expression: animated line-art character doing a cartwheel (not abstract shapes), ink/white/rose fills. Admissions: ApplicantTable-style UI from admissions-landing with scroll-driven rubric weights. Kawa: rainfall chatbot asking about place names (e.g. Shoreditch), not coordinates.
 - Expression is the official marketing name for the Colourer codebase; old OS components removed (`components/os/`, `components/apps/`).
 - Git remote github.com/raashishah/raashishah.github.io (workspace: raashishah.com repo); GitHub Pages may lag Vercel; legacy under `legacy/`.
 - Production deploys on Vercel (project `raashishah`, linked to GitHub); push to `main` triggers deploy.
@@ -26,4 +26,4 @@
 - `DESIGN.md` is design source of truth for rashOS; PRODUCT.md may lag; ideation in `docs/ideation/`.
 - Rebuild content sourced from Second Brain wiki (/Users/raash/Documents/Second Brain).
 - Spotify env vars: SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN, SPOTIFY_REDIRECT_URI.
-- Open Graph / share metadata in `lib/metadata.ts` with dynamic `opengraph-image.tsx` routes.
+- Site title/description in `lib/metadata.ts` match hero positioning ("apps and ai tools designer and engineer"); dynamic `opengraph-image.tsx` routes.

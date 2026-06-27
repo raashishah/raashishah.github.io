@@ -202,7 +202,6 @@ function CharacterFigure({
 }) {
   const p = pose ?? DEFAULT_POSE;
   const ink = palette.ink;
-  const rose = palette.rose;
   const sw = strokeWidth / scale;
 
   return (
