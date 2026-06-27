@@ -17,7 +17,7 @@ const sceneConfig: Record<ProjectSlug, { type: SceneRenderer; Component: Compone
   admissions: { type: "2d", Component: AdmissionsScene },
   expression: { type: "2d", Component: ExpressionScene },
   "design-pov": { type: "2d", Component: DesignPovScene },
-  pluto: { type: "3d", Component: PlutoScene },
+  pluto: { type: "2d", Component: PlutoScene },
   kawa: { type: "2d", Component: KawaScene },
   aula: { type: "2d", Component: AulaScene },
   kotak: { type: "2d", Component: KotakScene },

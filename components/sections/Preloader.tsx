@@ -18,35 +18,56 @@ const CORAL_TENDRILS = [
     origin: [160, 215] as const,
     strokeWidth: 15,
     gradientId: "coral-flow-a",
-    sway: 4.5,
+    sway: 5.5,
+    offsetX: 0,
   },
   {
     d: "M158 198 C128 172 104 138 94 98 C86 68 90 38 104 16",
     origin: [158, 198] as const,
     strokeWidth: 12,
     gradientId: "coral-flow-b",
-    sway: -5,
+    sway: -6,
+    offsetX: 0,
   },
   {
     d: "M164 190 C188 168 208 142 220 112 C228 88 230 62 224 36",
     origin: [164, 190] as const,
     strokeWidth: 13,
     gradientId: "coral-flow-c",
-    sway: 4,
+    sway: 5,
+    offsetX: 0,
   },
   {
     d: "M152 186 C118 162 96 128 88 92 C82 64 88 38 102 18",
     origin: [152, 186] as const,
     strokeWidth: 10,
     gradientId: "coral-flow-b",
-    sway: -3.5,
+    sway: -4.5,
+    offsetX: 0,
   },
   {
     d: "M170 176 C196 158 214 132 226 102 C234 78 236 54 228 30",
     origin: [170, 176] as const,
     strokeWidth: 11,
     gradientId: "coral-flow-a",
-    sway: 3.5,
+    sway: 4.5,
+    offsetX: 0,
+  },
+  {
+    d: "M160 215 C148 178 142 142 148 108 C154 74 168 44 188 22 C198 12 210 6 222 2",
+    origin: [160, 215] as const,
+    strokeWidth: 14,
+    gradientId: "coral-flow-c",
+    sway: -5,
+    offsetX: 320,
+  },
+  {
+    d: "M158 198 C128 172 104 138 94 98 C86 68 90 38 104 16",
+    origin: [158, 198] as const,
+    strokeWidth: 11,
+    gradientId: "coral-flow-b",
+    sway: 6,
+    offsetX: 640,
   },
 ] as const;
 
@@ -57,6 +78,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLParagraphElement>(null);
   const reefRef = useRef<HTMLDivElement>(null);
+  const waveRef = useRef<SVGGElement>(null);
   const inkRefs = useRef<SVGPathElement[]>([]);
   const bleedRefs = useRef<SVGPathElement[]>([]);
   const gradientRefs = useRef<SVGLinearGradientElement[]>([]);
@@ -148,7 +170,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
           { yPercent: -8, duration: 0.75, ease: "power2.inOut" },
           1.15,
         )
-        .to({}, { duration: 1.75 })
+        .to({}, { duration: 2.1 })
         .to(
           ".preloader__content",
           { yPercent: -12, opacity: 0, duration: 0.55, ease: "power3.in" },
@@ -166,26 +188,28 @@ export function Preloader({ onComplete }: PreloaderProps) {
         );
 
       inkRefs.current.forEach((tendril, index) => {
-        const { sway } = CORAL_TENDRILS[index] ?? { sway: 3 };
-        const [ox, oy] = CORAL_TENDRILS[index]?.origin ?? [160, 215];
+        const tendrilSpec = CORAL_TENDRILS[index] ?? CORAL_TENDRILS[0]!;
+        const { sway, offsetX } = tendrilSpec;
+        const [ox, oy] = tendrilSpec.origin;
+        const originX = ox + offsetX;
 
         gsap.to(tendril, {
           rotation: sway,
-          duration: 2.8 + index * 0.2,
+          duration: 2.4 + index * 0.15,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
-          transformOrigin: `${ox}px ${oy}px`,
-          delay: 0.6 + index * 0.08,
+          transformOrigin: `${originX}px ${oy}px`,
+          delay: 0.6 + index * 0.06,
         });
 
         gsap.to(tendril, {
-          attr: { "stroke-width": CORAL_TENDRILS[index]!.strokeWidth + 2.5 },
-          duration: 2.2 + index * 0.15,
+          attr: { "stroke-width": tendrilSpec.strokeWidth + 3 },
+          duration: 1.9 + index * 0.12,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
-          delay: 0.75 + index * 0.1,
+          delay: 0.75 + index * 0.08,
         });
       });
 
@@ -202,31 +226,21 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
       if (reefRef.current) {
         gsap.to(reefRef.current, {
-          y: -8,
-          duration: 3.4,
+          y: -6,
+          duration: 2.8,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
           delay: 0.5,
         });
+      }
 
-        gsap.to(reefRef.current, {
-          rotation: 1.5,
-          duration: 5,
+      if (waveRef.current) {
+        gsap.to(waveRef.current, {
+          x: -180,
+          duration: 3.2,
           repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 0.8,
-        });
-
-        gsap.to(reefRef.current, {
-          scale: 1.04,
-          duration: 2.8,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 1.1,
-          transformOrigin: "50% 85%",
+          ease: "none",
         });
       }
     }, rootRef);
@@ -252,7 +266,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
           <div ref={reefRef} className="preloader__reef" aria-hidden="true">
             <svg
               className="preloader__reef-svg"
-              viewBox="0 0 320 220"
+              viewBox="0 0 960 220"
               preserveAspectRatio="xMidYMax slice"
               role="presentation"
             >
@@ -304,35 +318,56 @@ export function Preloader({ onComplete }: PreloaderProps) {
                 </linearGradient>
               </defs>
               {CORAL_TENDRILS.map((tendril, index) => (
-                <path
-                  key={tendril.d}
-                  ref={(node) => {
-                    if (node) inkRefs.current[index] = node;
-                  }}
-                  className="preloader__coral"
-                  d={tendril.d}
-                  fill="none"
-                  stroke={palette.ink}
-                  strokeWidth={tendril.strokeWidth}
-                />
+                <g key={tendril.d + String(tendril.offsetX)} transform={`translate(${tendril.offsetX} 0)`}>
+                  <path
+                    ref={(node) => {
+                      if (node) inkRefs.current[index] = node;
+                    }}
+                    className="preloader__coral"
+                    d={tendril.d}
+                    fill="none"
+                    stroke={palette.ink}
+                    strokeWidth={tendril.strokeWidth}
+                  />
+                </g>
               ))}
               {CORAL_TENDRILS.map((tendril, index) => (
-                <path
-                  key={`${tendril.d}-bleed`}
-                  ref={(node) => {
-                    if (node) bleedRefs.current[index] = node;
-                  }}
-                  className="preloader__coral preloader__coral--bleed"
-                  d={tendril.d}
-                  fill="none"
-                  stroke={`url(#${tendril.gradientId})`}
-                  strokeWidth={tendril.strokeWidth + 4}
-                />
+                <g key={`${tendril.d}-bleed-${tendril.offsetX}`} transform={`translate(${tendril.offsetX} 0)`}>
+                  <path
+                    ref={(node) => {
+                      if (node) bleedRefs.current[index] = node;
+                    }}
+                    className="preloader__coral preloader__coral--bleed"
+                    d={tendril.d}
+                    fill="none"
+                    stroke={`url(#${tendril.gradientId})`}
+                    strokeWidth={tendril.strokeWidth + 5}
+                  />
+                </g>
               ))}
             </svg>
           </div>
         </div>
         <div className="preloader__tide-wrap">
+          <svg className="preloader__wave" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true">
+            <g ref={waveRef}>
+              <path
+                d="M0 28 C120 12 240 44 360 28 S600 12 720 28 960 44 1080 28 1200 12 1320 28 1440 28"
+                fill="none"
+                stroke={palette.rose}
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <path
+                d="M0 38 C120 22 240 54 360 38 S600 22 720 38 960 54 1080 38 1200 22 1320 38 1440 38"
+                fill="none"
+                stroke={palette.ink}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                opacity="0.35"
+              />
+            </g>
+          </svg>
           <div className="preloader__tide" />
         </div>
       </div>
