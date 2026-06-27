@@ -209,13 +209,25 @@ function CharacterFigure({
     <g transform={`scale(${scale})`}>
       {p.fills.map((zone, i) => (
         <ellipse
-          key={i}
+          key={`base-${i}`}
+          cx={zone.cx}
+          cy={zone.cy}
+          rx={zone.rx}
+          ry={zone.ry}
+          fill={palette.base}
+          stroke={palette.ink}
+          strokeWidth={sw * 0.35}
+        />
+      ))}
+      {p.fills.map((zone, i) => (
+        <ellipse
+          key={`rose-${i}`}
           cx={zone.cx}
           cy={zone.cy}
           rx={zone.rx * fillProgress}
           ry={zone.ry * fillProgress}
-          fill={rose}
-          opacity={0.88}
+          fill={palette.rose}
+          opacity={0.92}
         />
       ))}
       <circle cx={p.head.x} cy={p.head.y} r={p.headR} fill="none" stroke={ink} strokeWidth={sw} />

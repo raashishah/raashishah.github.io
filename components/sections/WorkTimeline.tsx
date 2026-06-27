@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "@/content/projects";
 import { registerGsapPlugins } from "@/lib/animations";
-import { palette } from "@/lib/palette";
 import { TextReveal } from "@/components/effects/TextReveal";
 
 export function WorkTimeline() {
@@ -87,7 +86,6 @@ export function WorkTimeline() {
         <ul className="work-timeline__list">
           {workProjects.map((role, i) => (
             <li key={role.slug} className="work-timeline__item" data-sparkle-burst>
-              <div className="work-timeline__accent" style={{ background: palette.rose }} />
               <div>
                 <p className="work-timeline__company">{role.title}</p>
                 <p className="work-timeline__meta">{role.tagline}</p>

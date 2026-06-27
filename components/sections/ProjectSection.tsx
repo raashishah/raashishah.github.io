@@ -133,7 +133,7 @@ export function ProjectSection({ project, index, ready }: ProjectSectionProps) {
         />
         <div className="project-section__copy">
           <p className="project-section__type">{project.type === "project" ? "project" : "work"}</p>
-          <TextReveal as="h2" className="project-section__title" mode="chars">
+          <TextReveal as="h2" className="project-section__title" mode="words">
             {project.title}
           </TextReveal>
           <TextReveal as="p" className="project-section__insight" mode="scrub-words">

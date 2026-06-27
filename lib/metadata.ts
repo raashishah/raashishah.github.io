@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "rashOS",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://raashishah.com",
-  title: "strategy, shipped like software.",
-  description: "PM who builds. Direct, a little funny, work speaks louder than the bio.",
+  title: "apps and ai tools designer and engineer",
+  description: "Originally a product manager. Now I design and build apps and AI tools end to end.",
   creator: "Raashi Shah",
   twitterHandle: "@_RaashiShah",
 } as const;

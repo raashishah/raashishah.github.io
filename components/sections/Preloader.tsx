@@ -131,7 +131,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
           bleedRefs.current,
           {
             strokeDashoffset: 0,
-            opacity: 0.85,
+            opacity: 1,
             duration: 1.65,
             stagger: { each: 0.1, from: "center" },
             ease: "power2.inOut",
@@ -250,7 +250,12 @@ export function Preloader({ onComplete }: PreloaderProps) {
             ))}
           </p>
           <div ref={reefRef} className="preloader__reef" aria-hidden="true">
-            <svg className="preloader__reef-svg" viewBox="0 0 320 220" role="presentation">
+            <svg
+              className="preloader__reef-svg"
+              viewBox="0 0 320 220"
+              preserveAspectRatio="xMidYMax slice"
+              role="presentation"
+            >
               <defs>
                 <linearGradient
                   id="coral-flow-a"
@@ -263,9 +268,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
                   x2="240"
                   y2="20"
                 >
-                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.35" />
-                  <stop offset="55%" stopColor={palette.rose} stopOpacity="0.28" />
-                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.05" />
+                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.62" />
+                  <stop offset="55%" stopColor={palette.rose} stopOpacity="0.48" />
+                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.12" />
                 </linearGradient>
                 <linearGradient
                   id="coral-flow-b"
@@ -278,9 +283,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
                   x2="200"
                   y2="10"
                 >
-                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.32" />
-                  <stop offset="50%" stopColor={palette.rose} stopOpacity="0.22" />
-                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.04" />
+                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.58" />
+                  <stop offset="50%" stopColor={palette.rose} stopOpacity="0.42" />
+                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.1" />
                 </linearGradient>
                 <linearGradient
                   id="coral-flow-c"
@@ -293,9 +298,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
                   x2="300"
                   y2="30"
                 >
-                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.3" />
-                  <stop offset="55%" stopColor={palette.rose} stopOpacity="0.2" />
-                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.03" />
+                  <stop offset="0%" stopColor={palette.rose} stopOpacity="0.55" />
+                  <stop offset="55%" stopColor={palette.rose} stopOpacity="0.38" />
+                  <stop offset="100%" stopColor={palette.base} stopOpacity="0.08" />
                 </linearGradient>
               </defs>
               {CORAL_TENDRILS.map((tendril, index) => (
