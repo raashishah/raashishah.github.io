@@ -1,31 +1,30 @@
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { CursorProvider } from "@/components/cursor/CursorProvider";
-import { TransitionProvider } from "@/components/providers/TransitionProvider";
-import { SparkleProvider } from "@/components/providers/SparkleProvider";
-import { Cursor } from "@/components/cursor/Cursor";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/metadata";
 
-const cabinet = localFont({
-  src: [
-    { path: "../public/fonts/CabinetGrotesk-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/CabinetGrotesk-Bold.woff2", weight: "700", style: "normal" },
-    { path: "../public/fonts/CabinetGrotesk-ExtraBold.woff2", weight: "800", style: "normal" },
-  ],
-  variable: "--font-cabinet",
+const interMedium = Inter({
+  subsets: ["latin"],
+  weight: "500",
+  variable: "--font-inter-medium",
+  display: "swap",
+});
+
+const interRegular = Inter({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-inter-regular",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: `${siteConfig.name} | ${siteConfig.title}`,
-    template: `%s | ${siteConfig.name}`,
+    default: siteConfig.creator,
+    template: `%s | ${siteConfig.creator}`,
   },
   description: siteConfig.description,
-  applicationName: siteConfig.name,
+  applicationName: siteConfig.creator,
   authors: [{ name: siteConfig.creator, url: getSiteUrl().toString() }],
   creator: siteConfig.creator,
   alternates: {
@@ -34,8 +33,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: siteConfig.name,
-    title: `${siteConfig.name} | ${siteConfig.title}`,
+    siteName: siteConfig.creator,
+    title: siteConfig.creator,
     description: siteConfig.description,
     locale: "en_US",
     images: [
@@ -43,14 +42,14 @@ export const metadata: Metadata = {
         url: absoluteUrl("/opengraph-image"),
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} share image`,
+        alt: `${siteConfig.creator} share image`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     creator: siteConfig.twitterHandle,
-    title: `${siteConfig.name} | ${siteConfig.title}`,
+    title: siteConfig.creator,
     description: siteConfig.description,
     images: [absoluteUrl("/opengraph-image")],
   },
@@ -64,17 +63,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${cabinet.className} ${cabinet.variable}`}>
-        <CursorProvider>
-          <TransitionProvider>
-            <SparkleProvider>
-              <SmoothScroll>
-                <Cursor />
-                {children}
-              </SmoothScroll>
-            </SparkleProvider>
-          </TransitionProvider>
-        </CursorProvider>
+      <body className={`${interMedium.className} ${interMedium.variable} ${interRegular.variable}`}>
+        {children}
       </body>
     </html>
   );

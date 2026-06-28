@@ -1,5 +1,5 @@
-import { ScrollJourney } from "@/components/sections/ScrollJourney";
+import { SimpleHome } from "@/components/SimpleHome";
 
 export default function Home() {
-  return <ScrollJourney />;
+  return <SimpleHome />;
 }
