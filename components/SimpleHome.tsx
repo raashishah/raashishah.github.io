@@ -15,7 +15,8 @@ const projects = [
     title: "School Admissions Assessment Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
-      "Schools get thousands of applications every year but only have a percentage of that as available seats. Today these applications are assessed largely with humans. I made enterprise grade agents that fit right into the pipeline and use decision making context to rank leads.",
+      "Schools get thousands of applications every year, but only a fraction of those become available seats. Today these applications are assessed largely by humans.",
+      "Enterprise-grade agents that fit right into the pipeline and use decision-making context to qualify students.",
       "The project gave agents tools for making sense of data and grading it consistently, used RAG for data lookups, and telemetry to measure agent performance and cost — all tied together with Google's ADK. A task that would spread across weeks and multiple humans was standardised with agentic AI.",
     ],
   },
@@ -24,16 +25,16 @@ const projects = [
     paragraphs: [
       "Expression automates colouring for frames hand drawn by the artist, in a style called frame by frame animation.",
       "It's a repetitive step that artists dread but can't skip - no tools today offer to do this at scale. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
-      "This problem remains unsolved worldwide. So far I've solved parsing PNG line art (universal input) 1:1, as the artist intended",
+      "This problem remains unsolved worldwide. So far I've solved parsing PNG line art (universal input) 1:1, as the artist intended.",
     ],
   },
   {
     title: "Offline Expo Navigation",
     href: "https://povindex.designpovindia.com/home",
     paragraphs: [
-      "Exhibition navigation web app", 
+      "Exhibition navigation web app.",
       "Works offline regardless of footfall.",
-      "Made in 12 hours",
+      "Made in 12 hours.",
     ],
   },
 ] satisfies ReadonlyArray<{
@@ -47,9 +48,9 @@ const workExperience = [
     title: "OnDevice",
     paragraphs: [
       "2025",
-      "Got back into building AI",
-      "Collaborated on a health app for diabetic patients that uses on-device inference",
-      "Executed an early GTM plan by distributing Applied AI content on Twitter/X and YouTube, securing 4k+ pre-launch views",
+      "Got back into building AI.",
+      "Collaborated on a health app for diabetic patients that uses on-device inference.",
+      "Executed an early GTM plan by distributing Applied AI content on Twitter/X and YouTube, securing 4k+ pre-launch views.",
     ],
   },
   {
@@ -65,21 +66,21 @@ const workExperience = [
     title: "Kotak Securities",
     paragraphs: [
       "2021",
-      "Short product role stint",
+      "Short product role stint.",
     ],
   },
   {
     title: "Kawa Space",
     paragraphs: [
       "2020",
-      "Geospatial data using machine learning in agriculture, rainfall, population density",
-      "Created a chatbot using Dialog Flow for non-technical users to get inferences just by chatting"
+      "Geospatial data using machine learning in agriculture, rainfall, population density.",
+      "Created a chatbot using Dialogflow for non-technical users to get inferences just by chatting.",
     ],
   },
   {
     title: "Aula Education",
     paragraphs: [
-      "2018-2019",
+      "2018–2019",
       "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US.",
       "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data.",
       "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows.",
