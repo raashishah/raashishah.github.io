@@ -73,7 +73,8 @@ const projects = [
     href: "https://admissions.raashishah.com",
     paragraphs: [
       "Academic instituitions process thousands of applications every year with a workflow spread across months and multiple humans",
-      "Standardised this enterprise-grade agents made with Google's ADK. Fits right into the pipeline and use decision-making context to qualify students",
+      "Standardised this enterprise-grade agents made with Google's ADK. ", 
+      "Fits right into the pipeline and uses decision-making context to qualify students",
       "Gave agents tools for making sense of data and grading it consistently",
       "Created a RAG for data lookups",
       "Telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
@@ -81,9 +82,9 @@ const projects = [
     ],
   },
   {
-    title: "Expression - Animation tool",
+    title: "Expression - Animation Tool",
     paragraphs: [
-      "Expression automates colouring for frames hand drawn by the artist, in a style called frame by frame animation.",
+      "Expression automates colouring for frames hand drawn by an animator, in a style called frame by frame animation.",
       "It's a repetitive step that artists dread but can't skip. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
       "This problem remains unsolved worldwide",
       "Parsing PNG line art (universal input) 1:1, as the artist intended - first one to ever solve this step in the pipeline - it can work with any software that the artist uses",
@@ -94,7 +95,7 @@ const projects = [
     title: "Offline Expo Navigation",
     href: "https://povindex.designpovindia.com/home",
     paragraphs: [
-      "Web app for exhibition navigation",
+      "Web app for an architecture exhibition navigation",
       "Worked offline regardless of footfall",
       "Made most of this within 12 hours",
     ],
