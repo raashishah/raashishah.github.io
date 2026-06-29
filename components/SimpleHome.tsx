@@ -28,10 +28,11 @@ const projects = [
     ],
   },
   {
-    title: "Offline Exhibition Navigation Web App",
+    title: "Offline Expo Navigation",
     href: "https://povindex.designpovindia.com/home",
     paragraphs: [
-      "Exhibition navigation works offline regardless of footfall.",
+      "Exhibition navigation web app", 
+      "Works offline regardless of footfall.",
       "Made in 12 hours",
     ],
   },
@@ -46,10 +47,9 @@ const workExperience = [
     title: "OnDevice",
     paragraphs: [
       "2025",
-      "Set product direction for an ethical health app by leading 30 interviews and 10 surveys, defining a privacy-by-default UX.",
-      "Drove design strategy to focus user attention on core actions, reducing cognitive load and accelerating task completion rates by 42%.",
-      "Defined agentic on-device inference flows to enable 200+ personalised user actions.",
-      "Executed an early GTM plan by distributing Applied AI content on Twitter/X and YouTube, securing 4k+ pre-launch views and validating demand for privacy-preserving personalisation.",
+      "Got back into building AI",
+      "Collaborated on a health app for diabetic patients that uses on-device inference",
+      "Executed an early GTM plan by distributing Applied AI content on Twitter/X and YouTube, securing 4k+ pre-launch views",
     ],
   },
   {
@@ -216,22 +216,16 @@ export function SimpleHome() {
 
           <section className="home__projects" aria-label="Work and experience">
             <div className="home__project-groups">
-              <section className="home__project-group" aria-label="Projects">
-                <h2 className="home__section-label">Projects</h2>
-                <ul className="home__project-list">
-                  {projects.map((project) => (
-                    <ProjectListItem key={project.title} item={project} />
-                  ))}
-                </ul>
-              </section>
-              <section className="home__project-group" aria-label="Experience">
-                <h2 className="home__section-label">Experience</h2>
-                <ul className="home__project-list">
-                  {workExperience.map((role) => (
-                    <ProjectListItem key={role.title} item={role} />
-                  ))}
-                </ul>
-              </section>
+              <ul className="home__project-list" aria-label="Projects">
+                {projects.map((project) => (
+                  <ProjectListItem key={project.title} item={project} />
+                ))}
+              </ul>
+              <ul className="home__project-list" aria-label="Experience">
+                {workExperience.map((role) => (
+                  <ProjectListItem key={role.title} item={role} />
+                ))}
+              </ul>
             </div>
           </section>
         </div>
