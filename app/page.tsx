@@ -1,5 +1,1 @@
-import { SimpleHome } from "@/components/SimpleHome";
-
-export default function Home() {
-  return <SimpleHome />;
-}
+export { SimpleHome as default } from "@/components/SimpleHome";

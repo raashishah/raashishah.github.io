@@ -15,6 +15,7 @@ const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
   variable: "--font-satoshi",
   display: "swap",
+  weight: "300 900",
 });
 
 export const metadata: Metadata = {

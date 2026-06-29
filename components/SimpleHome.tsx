@@ -2,10 +2,8 @@ import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { socialLinks } from "@/content/site";
 import { siteConfig } from "@/lib/metadata";
 
-const headerLinks = ["email", "calendly"].flatMap((id) => {
-  const link = socialLinks.find((item) => item.id === id);
-  return link ? [link] : [];
-});
+const emailLink = socialLinks.find((item) => item.id === "email");
+const calendlyLink = socialLinks.find((item) => item.id === "calendly");
 const footerLinks = socialLinks.filter(
   (link) => link.id !== "email" && link.id !== "calendly",
 );
@@ -23,6 +21,12 @@ type BodyParagraph =
       intro: string;
       items: readonly GroupedItem[];
     };
+
+type HomeEntry = {
+  title: string;
+  paragraphs: readonly BodyParagraph[];
+  href?: string;
+};
 
 function renderGroupedItem(item: GroupedItem, itemIndex: number) {
   if (typeof item === "string") {
@@ -48,13 +52,7 @@ function renderGroupedItem(item: GroupedItem, itemIndex: number) {
   );
 }
 
-function BodyParagraphBlock({
-  paragraph,
-  index,
-}: {
-  paragraph: BodyParagraph;
-  index: number;
-}) {
+function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
   if (typeof paragraph === "string") {
     return <p>{paragraph}</p>;
   }
@@ -100,11 +98,7 @@ const projects = [
       "Made most of this within 12 hours",
     ],
   },
-] satisfies ReadonlyArray<{
-  title: string;
-  paragraphs: readonly BodyParagraph[];
-  href?: string;
-}>;
+] satisfies ReadonlyArray<HomeEntry>;
 
 const workExperience = [
   {
@@ -163,11 +157,7 @@ const workExperience = [
       "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data",
     ],
   },
-] satisfies ReadonlyArray<{
-  title: string;
-  paragraphs: readonly BodyParagraph[];
-  href?: string;
-}>;
+] satisfies ReadonlyArray<HomeEntry>;
 
 function ExternalLinkIcon() {
   return (
@@ -225,20 +215,12 @@ function SocialAnchor({
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noopener noreferrer"}
     >
-      <span className="home__link-label">{label}</span>
+      {label}
     </a>
   );
 }
 
-function ProjectListItem({
-  item,
-}: {
-  item: {
-    title: string;
-    paragraphs: readonly BodyParagraph[];
-    href?: string;
-  };
-}) {
+function ProjectListItem({ item }: { item: HomeEntry }) {
   return (
     <li className="home__project-item">
       <AnimatedDetails
@@ -252,7 +234,7 @@ function ProjectListItem({
       >
         <div className="home__project-body">
           {item.paragraphs.map((paragraph, index) => (
-            <BodyParagraphBlock key={index} paragraph={paragraph} index={index} />
+            <BodyParagraphBlock key={index} paragraph={paragraph} />
           ))}
           {item.href ? (
             <ProjectLink href={item.href} title={item.title} />
@@ -272,16 +254,21 @@ export function SimpleHome() {
       <main id="main-content" className="home">
         <header className="home__header">
           <h1 className="home__name">Raashi Shah</h1>
-          <nav className="home__header-nav" aria-label="Contact">
-            {headerLinks.map((link) => (
+          {emailLink && calendlyLink ? (
+            <nav className="home__header-contact" aria-label="Contact">
               <SocialAnchor
-                key={link.id}
-                href={link.href}
-                label={link.label}
-                className="home__link"
+                href={emailLink.href}
+                label={emailLink.label}
+                className="home__link home__link--header"
               />
-            ))}
-          </nav>
+              <span className="home__header-contact-or"> or </span>
+              <SocialAnchor
+                href={calendlyLink.href}
+                label="meet me"
+                className="home__link home__link--header"
+              />
+            </nav>
+          ) : null}
         </header>
 
         <div className="home__content">

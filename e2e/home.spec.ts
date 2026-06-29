@@ -4,8 +4,10 @@ import { siteConfig } from "../lib/metadata";
 test("homepage shows intro and project list", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Raashi Shah" })).toBeVisible();
-  await expect(page.getByText(siteConfig.introRole)).toBeVisible();
-  await expect(page.getByText(siteConfig.introTagline)).toBeVisible();
+  await expect(page.locator(".home__line--role")).toHaveText(siteConfig.introRole);
+  await expect(page.locator(".home__line--tagline")).toHaveText(
+    siteConfig.introTagline,
+  );
   await expect(page.getByText("Admission Evaluation Agent")).toBeVisible();
   await expect(page.getByRole("link", { name: "email" })).toBeVisible();
 });
@@ -17,7 +19,9 @@ test("project details expand with body copy", async ({ page }) => {
     .filter({ hasText: "Expression" })
     .click();
   await expect(
-    page.getByText("Expression automates colouring for frames hand drawn by the artist"),
+    page.getByText(
+      "Expression automates colouring for frames hand drawn by an animator",
+    ),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "View Expression" })).toHaveCount(0);
 });
