@@ -45,7 +45,7 @@ const workExperience = [
   {
     title: "OnDevice",
     paragraphs: [
-      "Head of Product, Sept 2024–June 2025. Mumbai and Dubai (Hybrid).",
+      "2025",
       "Set product direction for an ethical health app by leading 30 interviews and 10 surveys, defining a privacy-by-default UX.",
       "Drove design strategy to focus user attention on core actions, reducing cognitive load and accelerating task completion rates by 42%.",
       "Defined agentic on-device inference flows to enable 200+ personalised user actions.",
@@ -55,7 +55,7 @@ const workExperience = [
   {
     title: "Pluto",
     paragraphs: [
-      "Head of Product & Tech, Oct 2021–Sept 2024. Mumbai and Dubai (Hybrid).",
+      "2021–2024",
       "Transformed a creative studio into a tech-led team by reorganising and hiring talent, introducing agile sprints and product-first thinking.",
       "Launched a 3-stage product suite: Magic Batch — MVP for digital asset sales; Pluto — drove 27% sales growth YoY by introducing cross-platform payments and 82% retention through A/B-tested incentives; Create — enabled 500+ users to generate 5k+ digital assets in 10 days, partly via integrated vision model workflows.",
       "Drove end-to-end product delivery by collaborating cross-functionally with 20+ engineers, designers, artists, marketers, a PM, and executives.",
@@ -64,23 +64,22 @@ const workExperience = [
   {
     title: "Kotak Securities",
     paragraphs: [
-      "Product Manager, Neo Trading App, March 2021–Oct 2021. Remote.",
-      "Joined as the founding PM in a new business unit.",
-      "Defined requirements with competitive research and coordinating tech and marketing.",
+      "2021",
+      "Short product role stint",
     ],
   },
   {
     title: "Kawa Space",
     paragraphs: [
-      "Product Associate, Nov 2019–Dec 2020. Mumbai.",
-      "Delivered 6 ML use cases by recruiting a cross-functional team of 5 engineers and data scientists and co-writing specs and scoping work.",
-      "Unlocked a new non-technical user segment by designing an NLP-powered interface for querying geospatial datasets, shifting product access beyond analyst users.",
+      "2020",
+      "Geospatial data using machine learning in agriculture, rainfall, population density",
+      "Created a chatbot using Dialog Flow for non-technical users to get inferences just by chatting"
     ],
   },
   {
     title: "Aula Education",
     paragraphs: [
-      "Engagement Associate, Dec 2018–Nov 2019. Birmingham, UK (Hybrid).",
+      "2018-2019",
       "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US.",
       "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data.",
       "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows.",
