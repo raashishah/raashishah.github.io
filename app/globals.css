@@ -11,6 +11,8 @@
   --surface: #ffffff;
   --separator: color-mix(in srgb, var(--ink) 12%, transparent);
   --focus-ring: color-mix(in srgb, var(--ink) 42%, transparent);
+  --accent: #c08081;
+  --accent-focus-ring: color-mix(in srgb, var(--accent) 40%, transparent);
 
   --text: var(--ink);
   --text-body: var(--ink-secondary);
@@ -219,10 +221,7 @@ body {
 
 .home__link {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
+  text-decoration: none;
   font-family: var(--font-medium);
   font-size: var(--text-body);
   font-weight: 500;
@@ -235,27 +234,7 @@ body {
   margin-inline: calc(var(--space-1) * -1);
   border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
-  transition:
-    text-decoration-color var(--duration-short) var(--ease-out),
-    opacity var(--duration-press) var(--ease-out);
-}
-
-.home__link:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-}
-
-@media (hover: hover) {
-  .home__link:hover {
-    text-decoration-color: currentColor;
-  }
-}
-
-@media (hover: none) {
-  .home__link:active {
-    text-decoration-color: currentColor;
-    opacity: 0.55;
-  }
+  transition: color var(--duration-short) var(--ease-out);
 }
 
 .home__link--footer {
@@ -263,19 +242,6 @@ body {
   font-family: var(--font-regular);
   font-weight: 400;
   font-size: var(--text-subhead);
-}
-
-@media (hover: hover) {
-  .home__link--footer:hover {
-    color: var(--text-body);
-  }
-}
-
-@media (hover: none) {
-  .home__link--footer:active {
-    color: var(--text-body);
-    opacity: 0.55;
-  }
 }
 
 .home__project-list {
@@ -315,20 +281,15 @@ body {
   margin-inline: calc(var(--space-1) * -1);
   border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
-  transition: opacity var(--duration-press) var(--ease-out);
+  transition: color var(--duration-short) var(--ease-out);
 }
 
 .home__details-summary::-webkit-details-marker {
   display: none;
 }
 
-.home__details-summary:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.home__details-summary:active {
-  opacity: 0.55;
+.home__details[open]:not(.home__details--closing) .home__details-summary {
+  color: var(--accent);
 }
 
 .home__project-title {
@@ -446,21 +407,10 @@ body {
   font-size: var(--text-subhead);
   font-weight: 500;
   line-height: 1.2;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
+  text-decoration: none;
   border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
-  transition:
-    color var(--duration-short) var(--ease-out),
-    text-decoration-color var(--duration-short) var(--ease-out),
-    opacity var(--duration-press) var(--ease-out);
-}
-
-.home__project-link:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
+  transition: color var(--duration-short) var(--ease-out);
 }
 
 .home__project-link-icon {
@@ -468,18 +418,35 @@ body {
   opacity: 0.72;
 }
 
+.home__link:focus-visible,
+.home__project-link:focus-visible,
+.home__details-summary:focus-visible {
+  outline: 2px solid var(--accent-focus-ring);
+  outline-offset: 2px;
+  color: var(--accent);
+}
+
 @media (hover: hover) {
-  .home__project-link:hover {
-    color: var(--text);
-    text-decoration-color: currentColor;
+  .home__link:hover,
+  .home__project-link:hover,
+  .home__details-summary:hover {
+    color: var(--accent);
+  }
+
+  .home__project-link:hover .home__project-link-icon {
+    opacity: 1;
   }
 }
 
 @media (hover: none) {
-  .home__project-link:active {
-    color: var(--text);
-    text-decoration-color: currentColor;
-    opacity: 0.55;
+  .home__link:active,
+  .home__project-link:active,
+  .home__details-summary:active {
+    color: var(--accent);
+  }
+
+  .home__project-link:active .home__project-link-icon {
+    opacity: 1;
   }
 }
 
