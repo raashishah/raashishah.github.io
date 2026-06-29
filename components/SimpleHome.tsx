@@ -1,3 +1,4 @@
+import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { socialLinks } from "@/content/site";
 import { siteConfig } from "@/lib/metadata";
 
@@ -16,7 +17,6 @@ const projects = [
     paragraphs: [
       "Schools get thousands of applications every year but only a percentage of available seats. Today these applications are assessed largely with humans. I made enterprise grade agents that fit right into the pipeline and use decision making context to rank leads.",
       "The project gave agents tools for making sense of data and grading it consistently, used RAG for data lookups, and telemetry to measure agent performance and cost — all tied together with Google's ADK. A task that would spread across weeks and multiple humans was standardised with agentic AI.",
-      "My first project as an end-to-end application developer. After seven years as a product manager in technical roles, I wanted to make something challenging — only then would it be fun.",
     ],
   },
   {
@@ -164,22 +164,24 @@ function ProjectListItem({
 }) {
   return (
     <li className="home__project-item">
-      <details className="home__details">
-        <summary className="home__details-summary">
-          <span className="home__project-title">{item.title}</span>
-          <span className="home__disclosure" aria-hidden="true" />
-        </summary>
-        <div className="home__project-body-shell">
-          <div className="home__project-body">
-            {item.href ? (
-              <ProjectLink href={item.href} title={item.title} />
-            ) : null}
-            {item.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
+      <AnimatedDetails
+        className="home__details"
+        summary={
+          <>
+            <span className="home__project-title">{item.title}</span>
+            <span className="home__disclosure" aria-hidden="true" />
+          </>
+        }
+      >
+        <div className="home__project-body">
+          {item.href ? (
+            <ProjectLink href={item.href} title={item.title} />
+          ) : null}
+          {item.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
-      </details>
+      </AnimatedDetails>
     </li>
   );
 }
@@ -236,7 +238,7 @@ export function SimpleHome() {
                 key={link.id}
                 href={link.href}
                 label={link.label}
-                className="home__link"
+                className="home__link home__link--footer"
               />
             ))}
           </nav>

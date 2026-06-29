@@ -73,9 +73,9 @@ Root `html` font-size is 112.5% for slightly larger readable type. Canonical int
 
 | Role | Token | Value | Use |
 |------|-------|-------|-----|
-| Primary text | `ink` | `#1d1d1f` | Name, tagline, UI labels |
-| Body text | `ink-secondary` | `#515154` | Dropdown paragraphs |
-| Muted | `ink-tertiary` | `#86868b` | Role line, project links |
+| Primary text | `ink` | `#1d1d1f` | Name, tagline, header links, project titles |
+| Muted | `ink-tertiary` | `#86868b` | Footer social links |
+| Body text | `ink-secondary` | `#515154` | Role line, dropdown paragraphs |
 | Background | `surface` | `#ffffff` | Page and OG background |
 | Brand accent | `brand-rose` | `#c08081` | Favicon only (legacy rose coral) |
 | Separator | `separator` | 12% ink mix | Header rule |
@@ -110,7 +110,7 @@ Two groups: 3 projects, then 5 work-experience items, separated by `--space-6`. 
 Work-experience titles are company name only (e.g. "OnDevice", not "Cofounder at OnDevice").
 
 ### Footer
-Remaining social links from `content/site.ts`; preserve legacy icons (Giphy, Duolingo SVGs).
+Remaining social links from `content/site.ts` use `home__link--footer` (muted tertiary, regular weight). Header Email/Twitter stay primary ink. Legacy Giphy/Duolingo SVG icons are planned but not yet wired in the footer UI.
 
 ### Motion sidecar (not in YAML)
 - `--ease-standard`: cubic-bezier(0.25, 0.1, 0.25, 1)
