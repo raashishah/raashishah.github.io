@@ -5,9 +5,13 @@ import { siteConfig } from "@/lib/metadata";
 
 const emailLink = socialLinks.find((item) => item.id === "email");
 const calendlyLink = socialLinks.find((item) => item.id === "calendly");
-const footerLinks = socialLinks.filter(
-  (link) => link.id !== "email" && link.id !== "calendly",
-);
+const footerLinks = [
+  ...socialLinks.filter((link) => link.id === "linkedin"),
+  ...socialLinks.filter(
+    (link) =>
+      link.id !== "email" && link.id !== "calendly" && link.id !== "linkedin",
+  ),
+];
 
 type RichLink = { text: string; href: string };
 type RichMedium = { text: string; medium: true };
