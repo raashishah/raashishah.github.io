@@ -22,7 +22,7 @@ export function absoluteUrl(path = "/") {
 
 /** OG / social preview palette — mirrors `globals.css` ink tokens. */
 export const shareImageBasePalette = {
-  bg: "#ffffff",
+  bg: "#f5ede8",
   text: "#1d1d1f",
   muted: "#86868b",
 } as const;
