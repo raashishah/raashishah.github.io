@@ -497,9 +497,9 @@ body {
 }
 
 .home__inline-link {
-  color: var(--accent);
+  color: var(--text-muted);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--text-muted) 55%, transparent);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
   border-radius: 2px;
@@ -517,16 +517,14 @@ body {
 
 @media (hover: hover) {
   .home__inline-link:hover {
-    color: color-mix(in srgb, var(--accent) 70%, var(--ink));
+    color: var(--accent);
     text-decoration-color: currentColor;
   }
 }
 
-@media (hover: none) {
-  .home__inline-link:active {
-    color: color-mix(in srgb, var(--accent) 70%, var(--ink));
-    text-decoration-color: currentColor;
-  }
+.home__inline-link:active {
+  color: var(--accent);
+  text-decoration-color: currentColor;
 }
 
 .home__project-body p {
@@ -545,7 +543,7 @@ body {
   border-inline-start: 2px solid color-mix(in srgb, var(--accent) 40%, var(--separator));
   font-family: var(--font-regular);
   font-size: var(--text-body);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   line-height: 1.55;
   color: var(--text-body);

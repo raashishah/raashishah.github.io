@@ -34,7 +34,7 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
     .click();
 
   const projectLink = page.getByRole("link", {
-    name: "Standardised this with enterprise-grade agents made with Google's ADK and,",
+    name: "enterprise-grade agents",
   });
   await expect(projectLink).toBeVisible();
   await expect(projectLink).toHaveAttribute(

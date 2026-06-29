@@ -9,7 +9,9 @@ const footerLinks = socialLinks.filter(
   (link) => link.id !== "email" && link.id !== "calendly",
 );
 
-type RichSegment = string | { text: string; href: string };
+type RichLink = { text: string; href: string };
+type RichItalic = { text: string; italic: true };
+type RichSegment = string | RichLink | RichItalic;
 type RichText = readonly RichSegment[];
 type RichLine = string | RichText;
 
@@ -82,17 +84,21 @@ function InlineText({ content }: { content: RichLine }) {
           return <Fragment key={index}>{segment}</Fragment>;
         }
 
-        return (
-          <a
-            key={index}
-            href={segment.href}
-            className="home__inline-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {segment.text}
-          </a>
-        );
+        if ("href" in segment) {
+          return (
+            <a
+              key={index}
+              href={segment.href}
+              className="home__inline-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {segment.text}
+            </a>
+          );
+        }
+
+        return <em key={index}>{segment.text}</em>;
       })}
     </>
   );
@@ -173,10 +179,12 @@ const projects = [
     paragraphs: [
       "Academic instituitions process thousands of applications every year",
       [
+        "I standardised this workflow with ",
         {
-          text: "Standardised this with enterprise-grade agents made with Google's ADK and,",
+          text: "enterprise-grade agents",
           href: "https://admissions.raashishah.com",
         },
+        " made with Google's ADK",
       ],
       {
         bullets: [
@@ -194,7 +202,11 @@ const projects = [
       "It's a repetitive step that artists dread but can't skip. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
       "This problem remains unsolved worldwide",
       {
-        text: "While working on this - I've parsed line drawing in a PNG file (universal input) 1:1, as the artist intended. It works with any software the artist uses.",
+        text: [
+          "Side quest - First to parse line art in PNG files ",
+          { text: "1:1", italic: true },
+          ", as the artist intended. It works with any software the artist uses.",
+        ],
         pullquote: true,
       },
       "My goal is for artists to retain full control while giving them better tools",
@@ -204,10 +216,12 @@ const projects = [
     title: "Offline Expo Navigation",
     paragraphs: [
       [
+        "Web app for an architecture exhibition, ",
         {
-          text: "Web app for an architecture exhibition navigation",
+          text: "Design POV",
           href: "https://povindex.designpovindia.com/home",
         },
+        ",",
       ],
       "Worked offline regardless of footfall",
       "Made most of this within 12 hours",
@@ -239,7 +253,10 @@ const workExperience = [
       {
         intro: "Launched 3 digital asset products:",
         items: [
-          "Magic Batch - MVP",
+          [
+            { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
+            " - MVP",
+          ],
           {
             label: [{ text: "Pluto", href: "https://opensea.io/collection/plutomisfits" }],
             points: [
@@ -256,7 +273,7 @@ const workExperience = [
           },
           [
             { text: "Create Layer", href: "https://x.com/createlayer/status/1805623167538340046/video/1" },
-            " - 500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
+            "500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
           ],
         ],
       },
