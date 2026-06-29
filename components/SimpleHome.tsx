@@ -1,4 +1,4 @@
-const expandableProjects = [
+const projects = [
   {
     title: "School Admissions Assessment Agent",
     paragraphs: [
@@ -22,13 +22,37 @@ const expandableProjects = [
       "Easy problems don't excite me, so I made this interesting by making it work offline at the exhibition floor.",
     ],
   },
-] as const;
-
-const listedProjects = [
-  "Pluto",
-  "Kotak Securities",
-  "Kawa Space",
-  "Aula Education",
+  {
+    title: "Pluto",
+    paragraphs: [
+      "Head of Product, 2021–2024. I transformed a non-technical art studio into a tech and product-led company.",
+      "Worked with engineers, designers, artists, and marketers. Turned a crypto wallet into a product people actually used daily.",
+      "The hard part wasn't the tech. It was making a creative studio think in products.",
+    ],
+  },
+  {
+    title: "Kotak Securities",
+    paragraphs: [
+      "Product, 2020. A brief stint in a corporate environment on the Kotak Securities neo app.",
+      "Finance UX at scale — every tap has compliance behind it.",
+    ],
+  },
+  {
+    title: "Kawa Space",
+    paragraphs: [
+      "Product, 2019. I made ML models using geospatial data.",
+      "To make it accessible to non-technical users, we used Dialogflow so you could talk to it directly and ask for any inferences you needed.",
+      "First taste of hardware-adjacent product work.",
+    ],
+  },
+  {
+    title: "Aula Education",
+    paragraphs: [
+      "Engagement Associate, 2018–2019. Worked on an LMS with a Facebook-like community.",
+      "I wasn't in a product role, but in client relationships I identified gaps in the engineering pipeline and made it faster. Improved efficiency of solving bugs.",
+      "Learned that adoption beats features in EdTech.",
+    ],
+  },
 ] as const;
 
 export function SimpleHome() {
@@ -44,7 +68,7 @@ export function SimpleHome() {
 
       <section className="home__projects" aria-label="Projects">
         <ul className="home__project-list">
-          {expandableProjects.map((project) => (
+          {projects.map((project) => (
             <li key={project.title} className="home__project-item">
               <details className="home__details">
                 <summary className="home__project-title">{project.title}</summary>
@@ -54,11 +78,6 @@ export function SimpleHome() {
                   ))}
                 </div>
               </details>
-            </li>
-          ))}
-          {listedProjects.map((title) => (
-            <li key={title} className="home__project-item home__project-item--plain">
-              <span className="home__project-title">{title}</span>
             </li>
           ))}
         </ul>
