@@ -218,9 +218,8 @@ const projects = [
     title: "Expression - Animation Tool",
     paragraphs: [
       "Auto-colouring frames hand drawn by an animator, in a style called frame-by-frame animation",
+      "This problem remains unsolved worldwide. My goal is for artists to retain full control while giving them better tools",
       "Frames are coloured one by one, for 1 min, 25 fps shots that's 1,500 frames",
-      "This problem remains unsolved worldwide",
-      "My goal is for artists to retain full control while giving them better tools",
       {
         text: [
           "Side quest: first ever to parse line art in PNG files ",
