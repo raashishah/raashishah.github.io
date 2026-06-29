@@ -1,3 +1,13 @@
+import { socialLinks } from "@/content/site";
+
+const headerLinks = ["email", "twitter"].flatMap((id) => {
+  const link = socialLinks.find((item) => item.id === id);
+  return link ? [link] : [];
+});
+const footerLinks = socialLinks.filter(
+  (link) => link.id !== "email" && link.id !== "twitter",
+);
+
 const projects = [
   {
     title: "School Admissions Assessment Agent",
@@ -55,33 +65,86 @@ const projects = [
   },
 ] as const;
 
+function SocialAnchor({
+  href,
+  label,
+  className,
+}: {
+  href: string;
+  label: string;
+  className?: string;
+}) {
+  const isMailto = href.startsWith("mailto:");
+
+  return (
+    <a
+      href={href}
+      className={className}
+      target={isMailto ? undefined : "_blank"}
+      rel={isMailto ? undefined : "noopener noreferrer"}
+    >
+      {label}
+    </a>
+  );
+}
+
 export function SimpleHome() {
   return (
     <main className="home">
-      <section className="home__intro" aria-label="About">
+      <header className="home__header">
         <h1 className="home__name">Raashi Shah</h1>
-        <p className="home__line">Originally a Technical Product Manager</p>
-        <p className="home__line">
-          Now designing and developing apps and AI agents
-        </p>
-      </section>
-
-      <section className="home__projects" aria-label="Projects">
-        <ul className="home__project-list">
-          {projects.map((project) => (
-            <li key={project.title} className="home__project-item">
-              <details className="home__details">
-                <summary className="home__project-title">{project.title}</summary>
-                <div className="home__project-body">
-                  {project.paragraphs.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-              </details>
-            </li>
+        <nav className="home__header-nav" aria-label="Contact">
+          {headerLinks.map((link) => (
+            <SocialAnchor
+              key={link.id}
+              href={link.href}
+              label={link.label}
+              className="home__link"
+            />
           ))}
-        </ul>
-      </section>
+        </nav>
+      </header>
+
+      <div className="home__content">
+        <section className="home__intro" aria-label="About">
+          <p className="home__line">Originally a Technical Product Manager</p>
+          <p className="home__line">
+            Now designing and developing apps and AI agents
+          </p>
+        </section>
+
+        <section className="home__projects" aria-label="Projects">
+          <ul className="home__project-list">
+            {projects.map((project) => (
+              <li key={project.title} className="home__project-item">
+                <details className="home__details">
+                  <summary className="home__project-title">
+                    {project.title}
+                  </summary>
+                  <div className="home__project-body">
+                    {project.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </details>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <footer className="home__footer">
+        <nav className="home__footer-nav" aria-label="Social links">
+          {footerLinks.map((link) => (
+            <SocialAnchor
+              key={link.id}
+              href={link.href}
+              label={link.label}
+              className="home__link"
+            />
+          ))}
+        </nav>
+      </footer>
     </main>
   );
 }
