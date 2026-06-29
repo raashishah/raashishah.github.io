@@ -5,9 +5,18 @@ type OgImageProps = {
   domain: string;
   bg: string;
   text: string;
+  muted: string;
 };
 
-export function OgImage({ name, role, tagline, domain, bg, text }: OgImageProps) {
+export function OgImage({
+  name,
+  role,
+  tagline,
+  domain,
+  bg,
+  text,
+  muted,
+}: OgImageProps) {
   return (
     <div
       style={{
@@ -19,16 +28,47 @@ export function OgImage({ name, role, tagline, domain, bg, text }: OgImageProps)
         background: bg,
         color: text,
         padding: "72px 80px",
-        fontFamily: "Inter",
-        fontWeight: 500,
-        fontSize: 32,
-        lineHeight: 1.45,
+        fontFamily: "Satoshi",
+        fontWeight: 400,
+        fontSize: 30,
+        lineHeight: 1.47,
       }}
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        <div style={{ display: "flex" }}>{name}</div>
-        <div style={{ display: "flex" }}>{role}</div>
-        <div style={{ display: "flex" }}>{tagline}</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 48,
+            fontWeight: 500,
+            lineHeight: 1.2,
+            letterSpacing: "-0.022em",
+          }}
+        >
+          {name}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 30,
+            fontWeight: 400,
+            lineHeight: 1.47,
+            color: muted,
+          }}
+        >
+          {role}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 36,
+            fontWeight: 500,
+            lineHeight: 1.35,
+            letterSpacing: "-0.015em",
+            marginTop: 4,
+          }}
+        >
+          {tagline}
+        </div>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
@@ -45,7 +85,9 @@ export function OgImage({ name, role, tagline, domain, bg, text }: OgImageProps)
           style={{
             display: "flex",
             justifyContent: "flex-end",
-            fontSize: 28,
+            fontSize: 26,
+            fontWeight: 400,
+            color: muted,
           }}
         >
           {domain}

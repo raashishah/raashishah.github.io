@@ -20,7 +20,9 @@ export function absoluteUrl(path = "/") {
   return new URL(path, getSiteUrl()).toString();
 }
 
+/** OG / social preview palette — mirrors `globals.css` ink tokens. */
 export const shareImageBasePalette = {
   bg: "#ffffff",
   text: "#1d1d1f",
+  muted: "#86868b",
 } as const;

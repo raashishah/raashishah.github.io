@@ -1,16 +1,13 @@
-const INTER_REGULAR_URL =
-  "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf";
-const INTER_MEDIUM_URL =
-  "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZg.ttf";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-export async function getOgInterFonts() {
-  const [regular, medium] = await Promise.all([
-    fetch(INTER_REGULAR_URL).then((response) => response.arrayBuffer()),
-    fetch(INTER_MEDIUM_URL).then((response) => response.arrayBuffer()),
-  ]);
+const SATOSHI_PATH = join(process.cwd(), "app/fonts/Satoshi-Variable.ttf");
+
+export async function getOgSatoshiFonts() {
+  const data = await readFile(SATOSHI_PATH);
 
   return [
-    { name: "Inter", data: regular, style: "normal" as const, weight: 400 as const },
-    { name: "Inter", data: medium, style: "normal" as const, weight: 500 as const },
+    { name: "Satoshi", data, style: "normal" as const, weight: 400 as const },
+    { name: "Satoshi", data, style: "normal" as const, weight: 500 as const },
   ];
 }
