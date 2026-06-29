@@ -25,12 +25,21 @@ type GroupedParagraph = {
   items: readonly GroupedItem[];
 };
 
-type MediumParagraph = {
+type PullquoteParagraph = {
   text: RichLine;
-  medium: true;
+  pullquote: true;
 };
 
-type BodyParagraph = string | RichLine | MediumParagraph | GroupedParagraph;
+type BulletListParagraph = {
+  bullets: readonly RichLine[];
+};
+
+type BodyParagraph =
+  | string
+  | RichLine
+  | PullquoteParagraph
+  | BulletListParagraph
+  | GroupedParagraph;
 
 function isGroupedParagraph(
   paragraph: BodyParagraph,
@@ -38,10 +47,16 @@ function isGroupedParagraph(
   return typeof paragraph === "object" && "intro" in paragraph && "items" in paragraph;
 }
 
-function isMediumParagraph(
+function isPullquoteParagraph(
   paragraph: BodyParagraph,
-): paragraph is MediumParagraph {
-  return typeof paragraph === "object" && "medium" in paragraph && "text" in paragraph;
+): paragraph is PullquoteParagraph {
+  return typeof paragraph === "object" && "pullquote" in paragraph && "text" in paragraph;
+}
+
+function isBulletListParagraph(
+  paragraph: BodyParagraph,
+): paragraph is BulletListParagraph {
+  return typeof paragraph === "object" && "bullets" in paragraph;
 }
 
 function isNestedGroupedItem(
@@ -53,7 +68,6 @@ function isNestedGroupedItem(
 type HomeEntry = {
   title: string;
   paragraphs: readonly BodyParagraph[];
-  href?: string;
 };
 
 function InlineText({ content }: { content: RichLine }) {
@@ -115,11 +129,23 @@ function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
     return <p>{paragraph}</p>;
   }
 
-  if (isMediumParagraph(paragraph)) {
+  if (isPullquoteParagraph(paragraph)) {
     return (
-      <p className="home__project-body--medium">
+      <blockquote className="home__project-body-pullquote">
         <InlineText content={paragraph.text} />
-      </p>
+      </blockquote>
+    );
+  }
+
+  if (isBulletListParagraph(paragraph)) {
+    return (
+      <ul className="home__project-body-list">
+        {paragraph.bullets.map((bullet, index) => (
+          <li key={index}>
+            <InlineText content={bullet} />
+          </li>
+        ))}
+      </ul>
     );
   }
 
@@ -144,13 +170,21 @@ function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
 const projects = [
   {
     title: "Admissions Evaluation Agent",
-    href: "https://admissions.raashishah.com",
     paragraphs: [
       "Academic instituitions process thousands of applications every year",
-      "Standardised this with enterprise-grade agents made with Google's ADK and,", 
-      "- Created tools to work with bad data and rank it consistently",
-      "- Used telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
-      "- Also processed past data for insights",
+      [
+        {
+          text: "Standardised this with enterprise-grade agents made with Google's ADK and,",
+          href: "https://admissions.raashishah.com",
+        },
+      ],
+      {
+        bullets: [
+          "Created tools to work with bad data and rank it consistently",
+          "Used telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
+          "Also processed past data for insights",
+        ],
+      },
     ],
   },
   {
@@ -161,16 +195,20 @@ const projects = [
       "This problem remains unsolved worldwide",
       {
         text: "While working on this - I've parsed line drawing in a PNG file (universal input) 1:1, as the artist intended. It works with any software the artist uses.",
-        medium: true,
+        pullquote: true,
       },
       "My goal is for artists to retain full control while giving them better tools",
     ],
   },
   {
     title: "Offline Expo Navigation",
-    href: "https://povindex.designpovindia.com/home",
     paragraphs: [
-      "Web app for an architecture exhibition navigation",
+      [
+        {
+          text: "Web app for an architecture exhibition navigation",
+          href: "https://povindex.designpovindia.com/home",
+        },
+      ],
       "Worked offline regardless of footfall",
       "Made most of this within 12 hours",
     ],
@@ -180,7 +218,6 @@ const projects = [
 const workExperience = [
   {
     title: "OnDevice",
-    href: "https://x.com/useondevice",
     paragraphs: [
       "2025",
       "Got back into building in AI",
@@ -196,10 +233,9 @@ const workExperience = [
   },
   {
     title: "Pluto",
-    href: "https://hub.xyz/pluto",
     paragraphs: [
       "2021-2024",
-      "Collaborated cross-functionaly with artists and transformed a creative studio into a product and tech-led team",
+      "Collaborated cross-functionally with artists and transformed a creative studio into a product and tech-led team",
       {
         intro: "Launched 3 digital asset products:",
         items: [
@@ -208,12 +244,12 @@ const workExperience = [
             label: [{ text: "Pluto", href: "https://opensea.io/collection/plutomisfits" }],
             points: [
               [
-                "First ever project to ",
+                "First ever project in the ecosystem to ",
                 {
-                  text: "introducing cross-platform payments",
+                  text: "introduce cross-platform payments,",
                   href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
                 },
-                " driving 37% sales growth YoY",
+                "driving 37% sales growth YoY",
               ],
               "Increased retention by 82% through A/B-tested incentives",
             ],
@@ -244,16 +280,20 @@ const workExperience = [
   {
     title: "Kawa Space",
     paragraphs: [
-      "2020",
+      [{ text: "2020", href: "https://www.linkedin.com/company/kawaspace/" }],
       "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
       "Created a chatbot using Dialogflow for non-technical users to query data in NLP just by chatting - This was pre-GPT3",
     ],
   },
   {
     title: "Aula Education",
-    href: "https://www.linkedin.com/company/aulaeducation/",
     paragraphs: [
-      "2018-2019 in the UK",
+      [
+        {
+          text: "2018-2019 in the UK",
+          href: "https://www.linkedin.com/company/aulaeducation/",
+        },
+      ],
       "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
       "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US",
       "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data",
@@ -261,92 +301,14 @@ const workExperience = [
   },
 ] satisfies ReadonlyArray<HomeEntry>;
 
-function ExternalLinkIcon() {
-  return (
-    <svg
-      className="home__project-link-icon"
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3.25 3.25H8.75M8.75 3.25V8.75M8.75 3.25L3.25 8.75"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ProjectLink({
-  href,
-  title,
-}: {
-  href: string;
-  title: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="home__project-link"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`View ${title} (opens in new tab)`}
-    >
-      <span>View project</span>
-      <ExternalLinkIcon />
-    </a>
-  );
-}
-
-function SummaryTitle({ item }: { item: HomeEntry }) {
-  if (!item.href) {
-    return <span className="home__project-title">{item.title}</span>;
-  }
-
-  return (
-    <>
-      <span className="home__project-title home__project-title--closed">
-        {item.title}
-      </span>
-      <a
-        href={item.href}
-        className="home__project-link home__project-link--summary"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Visit ${item.title} (opens in new tab)`}
-      >
-        <span>{item.title}</span>
-        <ExternalLinkIcon />
-      </a>
-    </>
-  );
-}
-
-function ProjectListItem({
-  item,
-  variant,
-}: {
-  item: HomeEntry;
-  variant: "project" | "experience";
-}) {
-  const showFooterLink = variant === "project" && item.href;
-
+function ProjectListItem({ item }: { item: HomeEntry }) {
   return (
     <li className="home__project-item">
       <AnimatedDetails
         className="home__details"
         summary={
           <>
-            {variant === "experience" ? (
-              <SummaryTitle item={item} />
-            ) : (
-              <span className="home__project-title">{item.title}</span>
-            )}
+            <span className="home__project-title">{item.title}</span>
             <span className="home__disclosure" aria-hidden="true" />
           </>
         }
@@ -355,9 +317,6 @@ function ProjectListItem({
           {item.paragraphs.map((paragraph, index) => (
             <BodyParagraphBlock key={index} paragraph={paragraph} />
           ))}
-          {showFooterLink ? (
-            <ProjectLink href={item.href!} title={item.title} />
-          ) : null}
         </div>
       </AnimatedDetails>
     </li>
@@ -427,20 +386,12 @@ export function SimpleHome() {
             <div className="home__project-groups">
               <ul className="home__project-list" aria-label="Projects">
                 {projects.map((project) => (
-                  <ProjectListItem
-                    key={project.title}
-                    item={project}
-                    variant="project"
-                  />
+                  <ProjectListItem key={project.title} item={project} />
                 ))}
               </ul>
               <ul className="home__project-list" aria-label="Experience">
                 {workExperience.map((role) => (
-                  <ProjectListItem
-                    key={role.title}
-                    item={role}
-                    variant="experience"
-                  />
+                  <ProjectListItem key={role.title} item={role} />
                 ))}
               </ul>
             </div>

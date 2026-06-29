@@ -26,7 +26,7 @@ test("project details expand with body copy", async ({ page }) => {
   await expect(page.getByRole("link", { name: "View Expression" })).toHaveCount(0);
 });
 
-test("linked projects show view project link when expanded", async ({ page }) => {
+test("linked projects show inline body link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
@@ -34,10 +34,16 @@ test("linked projects show view project link when expanded", async ({ page }) =>
     .click();
 
   const projectLink = page.getByRole("link", {
-    name: "View Admission Evaluation Agent (opens in new tab)",
+    name: "Standardised this with enterprise-grade agents made with Google's ADK and,",
   });
   await expect(projectLink).toBeVisible();
-  await expect(projectLink).toHaveAttribute("href", "https://admissions.raashishah.com");
+  await expect(projectLink).toHaveAttribute(
+    "href",
+    "https://admissions.raashishah.com",
+  );
+  await expect(
+    page.getByRole("link", { name: /View Admission Evaluation Agent/ }),
+  ).toHaveCount(0);
 });
 
 test("skip link targets main content", async ({ page }) => {
