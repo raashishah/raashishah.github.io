@@ -32,7 +32,6 @@ type HomeEntry = {
   title: string;
   paragraphs: readonly BodyParagraph[];
   href?: string;
-  linkLabel?: string;
 };
 
 function InlineText({ content }: { content: RichLine }) {
@@ -119,9 +118,8 @@ const projects = [
     paragraphs: [
       "Academic instituitions process thousands of applications every year",
       "Standardised this with enterprise-grade agents made with Google's ADK", 
-      "Created tools to work with bad data and grade consistently",
-      "Created a RAG for data lookups",
-      "Telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
+      "Created tools to work with bad data and rank it consistently",
+      "Used telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
       "Also processes past data for insights",
     ],
   },
@@ -150,7 +148,6 @@ const workExperience = [
   {
     title: "OnDevice",
     href: "https://x.com/useondevice",
-    linkLabel: "Visit OnDevice",
     paragraphs: [
       "2025",
       "Got back into building in AI",
@@ -167,23 +164,15 @@ const workExperience = [
   {
     title: "Pluto",
     href: "https://hub.xyz/pluto",
-    linkLabel: "Visit Pluto",
     paragraphs: [
       "2021-2024",
       "Collaborated cross-functionaly with artists and transformed a creative studio into a product and tech-led team",
       {
         intro: "Launched 3 digital asset products:",
         items: [
-          [
-            "1. ",
-            { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
-            " - MVP",
-          ],
+          "Magic Batch - MVP",
           {
-            label: [
-              "2. ",
-              { text: "Pluto", href: "https://opensea.io/collection/plutomisfits" },
-            ],
+            label: [{ text: "Pluto", href: "https://opensea.io/collection/plutomisfits" }],
             points: [
               [
                 "First ever project to ",
@@ -197,11 +186,7 @@ const workExperience = [
             ],
           },
           [
-            "3. ",
-            {
-              text: "Create Layer",
-              href: "https://x.com/createlayer/status/1805623167538340046/video/1",
-            },
+            { text: "Create Layer", href: "https://x.com/createlayer/status/1805623167538340046/video/1" },
             " - 500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
           ],
         ],
@@ -210,8 +195,6 @@ const workExperience = [
   },
   {
     title: "Kotak Securities",
-    href: "https://www.kotaksecurities.com/platform/kotak-neo/",
-    linkLabel: "Visit Kotak Neo",
     paragraphs: [
       "2021",
       [
@@ -227,8 +210,6 @@ const workExperience = [
   },
   {
     title: "Kawa Space",
-    href: "https://www.linkedin.com/company/kawaspace/",
-    linkLabel: "Visit Kawa Space",
     paragraphs: [
       "2020",
       "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
@@ -238,7 +219,6 @@ const workExperience = [
   {
     title: "Aula Education",
     href: "https://www.linkedin.com/company/aulaeducation/",
-    linkLabel: "Visit Aula Education",
     paragraphs: [
       "2018-2019 in the UK",
       "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
@@ -272,11 +252,9 @@ function ExternalLinkIcon() {
 function ProjectLink({
   href,
   title,
-  label = "View project",
 }: {
   href: string;
   title: string;
-  label?: string;
 }) {
   return (
     <a
@@ -284,15 +262,72 @@ function ProjectLink({
       className="home__project-link"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={
-        label === "View project"
-          ? `View ${title} (opens in new tab)`
-          : `${label} for ${title} (opens in new tab)`
-      }
+      aria-label={`View ${title} (opens in new tab)`}
     >
-      <span>{label}</span>
+      <span>View project</span>
       <ExternalLinkIcon />
     </a>
+  );
+}
+
+function SummaryTitle({ item }: { item: HomeEntry }) {
+  if (!item.href) {
+    return <span className="home__project-title">{item.title}</span>;
+  }
+
+  return (
+    <>
+      <span className="home__project-title home__project-title--closed">
+        {item.title}
+      </span>
+      <a
+        href={item.href}
+        className="home__project-link home__project-link--summary"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Visit ${item.title} (opens in new tab)`}
+      >
+        <span>{item.title}</span>
+        <ExternalLinkIcon />
+      </a>
+    </>
+  );
+}
+
+function ProjectListItem({
+  item,
+  variant,
+}: {
+  item: HomeEntry;
+  variant: "project" | "experience";
+}) {
+  const showFooterLink = variant === "project" && item.href;
+
+  return (
+    <li className="home__project-item">
+      <AnimatedDetails
+        className="home__details"
+        summary={
+          <>
+            {variant === "experience" ? (
+              <SummaryTitle item={item} />
+            ) : (
+              <span className="home__project-title">{item.title}</span>
+            )}
+            <span className="home__disclosure" aria-hidden="true" />
+          </>
+        }
+      >
+        <div className="home__project-body">
+          {item.paragraphs.map((paragraph, index) => (
+            <BodyParagraphBlock key={index} paragraph={paragraph} />
+          ))}
+          {showFooterLink ? (
+            <ProjectLink href={item.href!} title={item.title} />
+          ) : null}
+        </div>
+      </AnimatedDetails>
+    </li>
   );
 }
 
@@ -318,35 +353,6 @@ function SocialAnchor({
     >
       {label}
     </a>
-  );
-}
-
-function ProjectListItem({ item }: { item: HomeEntry }) {
-  return (
-    <li className="home__project-item">
-      <AnimatedDetails
-        className="home__details"
-        summary={
-          <>
-            <span className="home__project-title">{item.title}</span>
-            <span className="home__disclosure" aria-hidden="true" />
-          </>
-        }
-      >
-        <div className="home__project-body">
-          {item.paragraphs.map((paragraph, index) => (
-            <BodyParagraphBlock key={index} paragraph={paragraph} />
-          ))}
-          {item.href ? (
-            <ProjectLink
-              href={item.href}
-              title={item.title}
-              label={item.linkLabel}
-            />
-          ) : null}
-        </div>
-      </AnimatedDetails>
-    </li>
   );
 }
 
@@ -388,19 +394,27 @@ export function SimpleHome() {
             <div className="home__project-groups">
               <ul className="home__project-list" aria-label="Projects">
                 {projects.map((project) => (
-                  <ProjectListItem key={project.title} item={project} />
+                  <ProjectListItem
+                    key={project.title}
+                    item={project}
+                    variant="project"
+                  />
                 ))}
               </ul>
               <ul className="home__project-list" aria-label="Experience">
                 {workExperience.map((role) => (
-                  <ProjectListItem key={role.title} item={role} />
+                  <ProjectListItem
+                    key={role.title}
+                    item={role}
+                    variant="experience"
+                  />
                 ))}
               </ul>
             </div>
           </section>
         </div>
 
-        <footer>
+        <footer className="home__footer">
           <nav className="home__footer-nav" aria-label="Social links">
             {footerLinks.map((link) => (
               <SocialAnchor

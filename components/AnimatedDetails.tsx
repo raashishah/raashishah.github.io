@@ -32,6 +32,10 @@ export function AnimatedDetails({
     const shell = shellRef.current;
     if (!details || !shell) return;
 
+    if ((event.target as HTMLElement).closest("a")) {
+      return;
+    }
+
     if (!details.open) {
       resetShellStyles(shell);
       return;
