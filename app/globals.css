@@ -2,6 +2,7 @@
   --font-medium: var(--font-satoshi), -apple-system, BlinkMacSystemFont, sans-serif;
   --font-regular: var(--font-satoshi), -apple-system, BlinkMacSystemFont, sans-serif;
   --text: #111010;
+  --text-body: #444444;
   --bg: #ffffff;
   --home-pad-inline: clamp(20px, 4vw, 64px);
   --home-pad-block: clamp(24px, 4vh, 48px);
@@ -191,9 +192,9 @@ body {
   margin: 0;
   font-family: var(--font-regular);
   font-weight: 400;
-  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-size: clamp(1rem, 1.2vw, 1.0625rem);
   line-height: 1.55;
-  color: color-mix(in srgb, var(--text) 78%, transparent);
+  color: var(--text-body);
 }
 
 .home__footer {
