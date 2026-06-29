@@ -530,6 +530,10 @@ body {
   color: var(--accent);
 }
 
+.home__inline-medium {
+  font-weight: 500;
+}
+
 .home__project-body p {
   margin: 0;
   font-family: var(--font-regular);

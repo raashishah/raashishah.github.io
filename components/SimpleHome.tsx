@@ -10,8 +10,8 @@ const footerLinks = socialLinks.filter(
 );
 
 type RichLink = { text: string; href: string };
-type RichBold = { text: string; bold: true };
-type RichSegment = string | RichLink | RichBold;
+type RichMedium = { text: string; medium: true };
+type RichSegment = string | RichLink | RichMedium;
 type RichText = readonly RichSegment[];
 type RichLine = string | RichText;
 
@@ -92,7 +92,11 @@ function InlineText({ content }: { content: RichLine }) {
           );
         }
 
-        return <strong key={index}>{segment.text}</strong>;
+        return (
+          <span key={index} className="home__inline-medium">
+            {segment.text}
+          </span>
+        );
       })}
     </>
   );
@@ -216,7 +220,7 @@ const projects = [
       {
         text: [
           "Side quest: first ever to parse line art in PNG files ",
-          { text: "1:1", bold: true },
+          { text: "1:1", medium: true },
           ", as the artist intended, it works with any software the artist uses",
         ],
         pullquote: true,
@@ -250,6 +254,7 @@ const workExperience = [
     title: "OnDevice",
     paragraphs: [
       "2025",
+      "Collaborated and designed a health app for diabetic patients that uses on-device inference",
       [
         "Executed an early GTM plan by distributing Applied AI content on ",
         { text: "Twitter", href: "https://x.com/useondevice" },
@@ -258,7 +263,7 @@ const workExperience = [
         ", got 4k+ pre-launch views",
       ],
       {
-        text: "Got back into building AI, collaborated on a health app for diabetic patients that uses on-device inference",
+        text: "Got back into building AI",
         pullquote: true,
       },
     ],
@@ -309,7 +314,7 @@ const workExperience = [
     paragraphs: [
       "2021",
       [
-        "Founding hire on ",
+        "Short stint, founding hire on ",
         {
           text: "Kotak Neo",
           href: "https://www.kotaksecurities.com/platform/kotak-neo/",
