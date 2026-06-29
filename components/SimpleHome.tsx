@@ -140,44 +140,86 @@ const projects = [
 const workExperience = [
   {
     title: "OnDevice",
+    href: "https://x.com/useondevice",
+    linkLabel: "Visit OnDevice",
     paragraphs: [
       "2025",
       "Got back into building in AI",
       "Collaborated on a health app for diabetic patients that uses on-device inference.",
-      "Executed an early GTM plan by distributing Applied AI content on Twitter and YouTube, got 4k+ pre-launch views.",
+      [
+        "Executed an early GTM plan by distributing Applied AI content on ",
+        { text: "Twitter", href: "https://x.com/useondevice" },
+        " and ",
+        { text: "YouTube", href: "https://www.youtube.com/@raashi_shah" },
+        ", got 4k+ pre-launch views.",
+      ],
     ],
   },
   {
     title: "Pluto",
+    href: "https://hub.xyz/pluto",
+    linkLabel: "Visit Pluto",
     paragraphs: [
       "2021-2024",
       "Collaborated cross-functionaly with artists and transformed a creative studio into a product and tech-led team",
       {
         intro: "Launched 3 digital asset products:",
         items: [
-          "1. Magic Batch - MVP",
+          [
+            "1. ",
+            { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
+            " - MVP",
+          ],
           {
-            label: "2. Pluto",
+            label: [
+              "2. ",
+              { text: "Pluto", href: "https://opensea.io/collection/plutomisfits" },
+            ],
             points: [
-              "First ever project to introducing cross-platform payments driving 37% sales growth YoY",
+              [
+                "First ever project to ",
+                {
+                  text: "introducing cross-platform payments",
+                  href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
+                },
+                " driving 37% sales growth YoY",
+              ],
               "Increased retention by 82% through A/B-tested incentives",
             ],
           },
-          "3. Create Layer - 500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
+          [
+            "3. ",
+            {
+              text: "Create Layer",
+              href: "https://x.com/createlayer/status/1805623167538340046/video/1",
+            },
+            " - 500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
+          ],
         ],
       },
     ],
   },
   {
     title: "Kotak Securities",
+    href: "https://www.kotaksecurities.com/platform/kotak-neo/",
+    linkLabel: "Visit Kotak Neo",
     paragraphs: [
       "2021",
-      "Founding hire on Kotak Neo's product team (their consumer trading app)",
+      [
+        "Founding hire on ",
+        {
+          text: "Kotak Neo",
+          href: "https://www.kotaksecurities.com/platform/kotak-neo/",
+        },
+        "'s product team (their consumer trading app)",
+      ],
       "Short stint",
     ],
   },
   {
     title: "Kawa Space",
+    href: "https://www.linkedin.com/company/kawaspace/",
+    linkLabel: "Visit Kawa Space",
     paragraphs: [
       "2020",
       "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
@@ -186,6 +228,8 @@ const workExperience = [
   },
   {
     title: "Aula Education",
+    href: "https://www.linkedin.com/company/aulaeducation/",
+    linkLabel: "Visit Aula Education",
     paragraphs: [
       "2018-2019 in the UK",
       "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
@@ -216,16 +260,24 @@ function ExternalLinkIcon() {
   );
 }
 
-function ProjectLink({ href, title }: { href: string; title: string }) {
+function ProjectLink({
+  href,
+  title,
+  label = "View project",
+}: {
+  href: string;
+  title: string;
+  label?: string;
+}) {
   return (
     <a
       href={href}
       className="home__project-link"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`View ${title} (opens in new tab)`}
+      aria-label={`${label} for ${title} (opens in new tab)`}
     >
-      <span>View project</span>
+      <span>{label}</span>
       <ExternalLinkIcon />
     </a>
   );
@@ -273,7 +325,11 @@ function ProjectListItem({ item }: { item: HomeEntry }) {
             <BodyParagraphBlock key={index} paragraph={paragraph} />
           ))}
           {item.href ? (
-            <ProjectLink href={item.href} title={item.title} />
+            <ProjectLink
+              href={item.href}
+              title={item.title}
+              label={item.linkLabel}
+            />
           ) : null}
         </div>
       </AnimatedDetails>
