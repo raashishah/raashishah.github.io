@@ -72,11 +72,11 @@ const projects = [
     title: "Admission Evaluation Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
-      "Schools get thousands of applications every year, but only a fraction of those become available seats. Today these applications are assessed largely by humans.",
+      "Academic instituitions get thousands of applications every year, but only a fraction of those become available seats. Today these applications are assessed largely by humans.",
       "Enterprise-grade agents that fit right into the pipeline and use decision-making context to qualify students.",
       "Gave agents tools for making sense of data and grading it consistently.",
       "Used RAG for data lookups.",
-      "Telemetry to measure agent performance and cost.",
+      "Telemetry to measure agent performance and cost - brough cost down to 15 cents per student",
       "Tied together with Google's ADK.",
       "A task that would spread across weeks and multiple humans was standardised with agentic AI.",
     ],
@@ -93,9 +93,9 @@ const projects = [
     title: "Offline Expo Navigation",
     href: "https://povindex.designpovindia.com/home",
     paragraphs: [
-      "Exhibition navigation web app.",
-      "Works offline regardless of footfall.",
-      "Made in 12 hours.",
+      "Web app for exhibition navigation",
+      "Worked offline regardless of footfall",
+      "Made most of this within 12 hours",
     ],
   },
 ] satisfies ReadonlyArray<{
