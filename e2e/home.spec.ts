@@ -3,6 +3,30 @@ import { test, expect } from "@playwright/test";
 test("homepage shows intro and project list", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Raashi Shah" })).toBeVisible();
+  await expect(page.getByText("Originally a Technical Product Manager")).toBeVisible();
+  await expect(
+    page.getByText("Now designing and developing apps and AI agents"),
+  ).toBeVisible();
   await expect(page.getByText("School Admissions Assessment Agent")).toBeVisible();
   await expect(page.getByRole("link", { name: "Email" })).toBeVisible();
+});
+
+test("project details expand with body copy", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Expression" })
+    .click();
+  await expect(
+    page.getByText("Expression automates colouring for frames hand drawn by the artist"),
+  ).toBeVisible();
+});
+
+test("skip link targets main content", async ({ page }) => {
+  await page.goto("/");
+  await page.keyboard.press("Tab");
+  const skipLink = page.getByRole("link", { name: "Skip to content" });
+  await expect(skipLink).toBeFocused();
+  await skipLink.click();
+  await expect(page.locator("#main-content")).toBeVisible();
 });

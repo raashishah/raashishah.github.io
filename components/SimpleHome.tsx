@@ -76,11 +76,13 @@ function SocialAnchor({
   className?: string;
 }) {
   const isMailto = href.startsWith("mailto:");
+  const accessibleLabel = isMailto ? label : `${label} (opens in new tab)`;
 
   return (
     <a
       href={href}
       className={className}
+      aria-label={accessibleLabel}
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noopener noreferrer"}
     >
@@ -91,59 +93,69 @@ function SocialAnchor({
 
 export function SimpleHome() {
   return (
-    <main className="home">
-      <header className="home__header">
-        <h1 className="home__name">Raashi Shah</h1>
-        <nav className="home__header-nav" aria-label="Contact">
-          {headerLinks.map((link) => (
-            <SocialAnchor
-              key={link.id}
-              href={link.href}
-              label={link.label}
-              className="home__link"
-            />
-          ))}
-        </nav>
-      </header>
-
-      <div className="home__content">
-        <section className="home__intro" aria-label="About">
-          <p className="home__line">{siteConfig.introRole}</p>
-          <p className="home__line">{siteConfig.introTagline}</p>
-        </section>
-
-        <section className="home__projects" aria-label="Projects">
-          <ul className="home__project-list">
-            {projects.map((project) => (
-              <li key={project.title} className="home__project-item">
-                <details className="home__details">
-                  <summary className="home__project-title">
-                    {project.title}
-                  </summary>
-                  <div className="home__project-body">
-                    {project.paragraphs.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-                  </div>
-                </details>
-              </li>
+    <>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <main id="main-content" className="home">
+        <header className="home__header">
+          <h1 className="home__name">Raashi Shah</h1>
+          <nav className="home__header-nav" aria-label="Contact">
+            {headerLinks.map((link) => (
+              <SocialAnchor
+                key={link.id}
+                href={link.href}
+                label={link.label}
+                className="home__link"
+              />
             ))}
-          </ul>
-        </section>
-      </div>
+          </nav>
+        </header>
 
-      <footer className="home__footer">
-        <nav className="home__footer-nav" aria-label="Social links">
-          {footerLinks.map((link) => (
-            <SocialAnchor
-              key={link.id}
-              href={link.href}
-              label={link.label}
-              className="home__link"
-            />
-          ))}
-        </nav>
-      </footer>
-    </main>
+        <div className="home__content">
+          <section className="home__intro" aria-label="About">
+            <p className="home__line home__line--role">{siteConfig.introRole}</p>
+            <p className="home__line home__line--tagline">
+              {siteConfig.introTagline}
+            </p>
+          </section>
+
+          <section className="home__projects" aria-label="Work and experience">
+            <ul className="home__project-list">
+              {projects.map((project) => (
+                <li key={project.title} className="home__project-item">
+                  <details className="home__details">
+                    <summary className="home__details-summary">
+                      <span className="home__project-title">{project.title}</span>
+                      <span className="home__disclosure" aria-hidden="true" />
+                    </summary>
+                    <div className="home__project-body-shell">
+                      <div className="home__project-body">
+                        {project.paragraphs.map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        <footer>
+          <nav className="home__footer-nav" aria-label="Social links">
+            {footerLinks.map((link) => (
+              <SocialAnchor
+                key={link.id}
+                href={link.href}
+                label={link.label}
+                className="home__link"
+              />
+            ))}
+          </nav>
+        </footer>
+      </main>
+    </>
   );
 }

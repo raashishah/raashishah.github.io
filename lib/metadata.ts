@@ -2,10 +2,10 @@ export const siteConfig = {
   name: "Raashi Shah",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://raashishah.com",
   title: "apps and ai tools designer and engineer",
-  introRole: "Technical Product Manager",
-  introTagline: "Designing and developing apps and AI agents end-to-end",
+  introRole: "Originally a Technical Product Manager",
+  introTagline: "Now designing and developing apps and AI agents",
   description:
-    "Technical Product Manager. Designing and developing apps and AI agents end-to-end.",
+    "Originally a Technical Product Manager. Now designing and developing apps and AI agents.",
   creator: "Raashi Shah",
   twitterHandle: "@rash_driving",
 } as const;
@@ -20,5 +20,5 @@ export function absoluteUrl(path = "/") {
 
 export const shareImageBasePalette = {
   bg: "#ffffff",
-  text: "#111010",
+  text: "#1d1d1f",
 } as const;
