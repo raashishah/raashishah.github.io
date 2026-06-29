@@ -20,7 +20,7 @@ export function OgImage({ name, tagline, domain, bg, text }: OgImageProps) {
         padding: "72px 80px",
         fontFamily: "Inter",
         fontWeight: 500,
-        fontSize: 30,
+        fontSize: 32,
         lineHeight: 1.45,
       }}
     >
@@ -43,7 +43,7 @@ export function OgImage({ name, tagline, domain, bg, text }: OgImageProps) {
           style={{
             display: "flex",
             justifyContent: "flex-end",
-            fontSize: 26,
+            fontSize: 28,
           }}
         >
           {domain}
