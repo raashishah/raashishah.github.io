@@ -181,7 +181,7 @@ const projects = [
       {
         bullets: [
           "Created tools to work with bad data and rank it consistently",
-          "Used telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
+          "Used telemetry to measure and bring cost down to 15 cents per student",
           "Also processed past data for insights",
         ],
       },
