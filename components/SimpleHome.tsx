@@ -36,34 +36,47 @@ const projects = [
     ],
   },
   {
+    title: "OnDevice",
+    paragraphs: [
+      "Head of Product, Sept 2024–June 2025. Mumbai and Dubai (Hybrid).",
+      "Set product direction for an ethical health app by leading 30 interviews and 10 surveys, defining a privacy-by-default UX.",
+      "Drove design strategy to focus user attention on core actions, reducing cognitive load and accelerating task completion rates by 42%.",
+      "Defined agentic on-device inference flows to enable 200+ personalised user actions.",
+      "Executed an early GTM plan by distributing Applied AI content on Twitter/X and YouTube, securing 4k+ pre-launch views and validating demand for privacy-preserving personalisation.",
+    ],
+  },
+  {
     title: "Pluto",
     paragraphs: [
-      "Head of Product, 2021–2024. I transformed a non-technical art studio into a tech and product-led company.",
-      "Worked with engineers, designers, artists, and marketers. Turned a crypto wallet into a product people actually used daily.",
-      "The hard part wasn't the tech. It was making a creative studio think in products.",
+      "Head of Product & Tech, Oct 2021–Sept 2024. Mumbai and Dubai (Hybrid).",
+      "Transformed a creative studio into a tech-led team by reorganising and hiring talent, introducing agile sprints and product-first thinking.",
+      "Launched a 3-stage product suite: Magic Batch — MVP for digital asset sales; Pluto — drove 27% sales growth YoY by introducing cross-platform payments and 82% retention through A/B-tested incentives; Create — enabled 500+ users to generate 5k+ digital assets in 10 days, partly via integrated vision model workflows.",
+      "Drove end-to-end product delivery by collaborating cross-functionally with 20+ engineers, designers, artists, marketers, a PM, and executives.",
     ],
   },
   {
     title: "Kotak Securities",
     paragraphs: [
-      "Product, 2020. A brief stint in a corporate environment on the Kotak Securities neo app.",
-      "Finance UX at scale — every tap has compliance behind it.",
+      "Product Manager, Neo Trading App, March 2021–Oct 2021. Remote.",
+      "Joined as the founding PM in a new business unit.",
+      "Defined requirements with competitive research and coordinating tech and marketing.",
     ],
   },
   {
     title: "Kawa Space",
     paragraphs: [
-      "Product, 2019. I made ML models using geospatial data.",
-      "To make it accessible to non-technical users, we used Dialogflow so you could talk to it directly and ask for any inferences you needed.",
-      "First taste of hardware-adjacent product work.",
+      "Product Associate, Nov 2019–Dec 2020. Mumbai.",
+      "Delivered 6 ML use cases by recruiting a cross-functional team of 5 engineers and data scientists and co-writing specs and scoping work.",
+      "Unlocked a new non-technical user segment by designing an NLP-powered interface for querying geospatial datasets, shifting product access beyond analyst users.",
     ],
   },
   {
     title: "Aula Education",
     paragraphs: [
-      "Engagement Associate, 2018–2019. Worked on an LMS with a Facebook-like community.",
-      "I wasn't in a product role, but in client relationships I identified gaps in the engineering pipeline and made it faster. Improved efficiency of solving bugs.",
-      "Learned that adoption beats features in EdTech.",
+      "Engagement Associate, Dec 2018–Nov 2019. Birmingham, UK (Hybrid).",
+      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US.",
+      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data.",
+      "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows.",
     ],
   },
 ] satisfies ReadonlyArray<{
