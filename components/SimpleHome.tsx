@@ -225,7 +225,7 @@ function SocialAnchor({
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noopener noreferrer"}
     >
-      {label}
+      <span className="home__link-label">{label}</span>
     </a>
   );
 }

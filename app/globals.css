@@ -162,6 +162,7 @@ body {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: var(--space-3) var(--space-4);
+  overflow: visible;
 }
 
 .home__content {
@@ -230,11 +231,16 @@ body {
   align-items: center;
   min-height: var(--home-touch-min);
   padding-block: var(--space-2);
-  padding-inline: var(--space-1);
-  margin-inline: calc(var(--space-1) * -1);
+  padding-inline: var(--space-2);
+  /* Satoshi's side bearings can paint outside the layout box */
+  padding-inline-start: calc(var(--space-2) + 0.125rem);
   border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
   transition: color var(--duration-short) var(--ease-out);
+}
+
+.home__header-nav .home__link {
+  margin-inline: 0;
 }
 
 .home__link--footer {
