@@ -30,7 +30,8 @@
   --home-pad-inline: clamp(var(--space-5), 4vw, var(--space-8));
   --home-pad-block: clamp(var(--space-5), 3dvh, var(--space-6));
   --home-touch-min: 2.75rem;
-  --home-measure-narrow: 32ch;
+  --home-max-width: 68rem;
+  --home-measure-narrow: 34ch;
   --home-measure-body: 50ch;
 
   /* Motion — Apple HIG: 0.35s default, ease-in-out; ease-out enter, ease-in exit */
@@ -70,8 +71,8 @@ body {
   overflow-x: clip;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-medium);
-  font-weight: 500;
+  font-family: var(--font-regular);
+  font-weight: 400;
   line-height: 1.47;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -129,6 +130,9 @@ body {
 }
 
 .home {
+  width: 100%;
+  max-width: var(--home-max-width);
+  margin-inline: auto;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -168,20 +172,21 @@ body {
 
 @media (min-width: 40rem) {
   .home__content {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(var(--space-6), 6vw, 5.5rem);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(var(--space-7), 7vw, var(--space-8));
   }
 }
 
 .home__intro {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
   max-width: var(--home-measure-narrow);
 }
 
 .home__name {
   margin: 0;
+  font-family: var(--font-medium);
   font-size: var(--text-title);
   font-weight: 500;
   line-height: 1.2;
@@ -196,18 +201,20 @@ body {
 }
 
 .home__line--role {
+  font-family: var(--font-regular);
   font-size: var(--text-subhead);
-  font-weight: 500;
-  color: var(--text-body);
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 .home__line--tagline {
-  font-size: var(--text-lead);
+  font-family: var(--font-medium);
+  font-size: var(--text-headline);
   font-weight: 500;
   line-height: 1.35;
-  letter-spacing: -0.018em;
+  letter-spacing: -0.015em;
   color: var(--text);
-  margin-top: var(--space-2);
+  margin-top: var(--space-1);
 }
 
 .home__link {
@@ -216,6 +223,7 @@ body {
   text-decoration-color: transparent;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
+  font-family: var(--font-medium);
   font-size: var(--text-body);
   font-weight: 500;
   line-height: 1.2;
@@ -276,13 +284,31 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
 }
 
 .home__project-groups {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-7);
+}
+
+.home__project-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.home__section-label {
+  margin: 0;
+  padding-inline: var(--space-1);
+  font-family: var(--font-medium);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .home__project-item {
@@ -326,6 +352,7 @@ body {
 .home__project-title {
   flex: 1;
   min-width: 0;
+  font-family: var(--font-medium);
   font-size: var(--text-headline);
   font-weight: 500;
   line-height: 1.3;
@@ -338,7 +365,7 @@ body {
   flex-shrink: 0;
   width: 0.72em;
   height: 0.72em;
-  opacity: 0.38;
+  opacity: 0.52;
 }
 
 .home__disclosure::before,
@@ -417,7 +444,7 @@ body {
   padding-inline-start: var(--space-1);
   display: flex;
   flex-direction: column;
-  gap: 0.85em;
+  gap: var(--space-3);
   max-width: var(--home-measure-body);
   opacity: 0;
   transition: opacity var(--duration-short) var(--ease-in);
@@ -431,7 +458,9 @@ body {
   min-height: var(--home-touch-min);
   padding-block: var(--space-1);
   margin-block: calc(var(--space-1) * -1);
+  margin-top: var(--space-1);
   color: var(--text-muted);
+  font-family: var(--font-medium);
   font-size: var(--text-subhead);
   font-weight: 500;
   line-height: 1.2;
@@ -497,6 +526,9 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2) var(--space-4);
+  padding-top: var(--space-5);
+  margin-top: auto;
+  border-top: 1px solid var(--separator);
 }
 
 @media (max-width: 40rem) {
@@ -513,19 +545,10 @@ body {
   }
 
   .home__line--tagline {
-    font-size: clamp(1.125rem, 4.6vw, 1.25rem);
+    font-size: clamp(1.0625rem, 4.2vw, 1.1875rem);
   }
 
   .home__project-title {
     font-size: clamp(1.0625rem, 4.4vw, 1.1875rem);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
   }
 }

@@ -39,11 +39,6 @@ export function AnimatedDetails({
 
     event.preventDefault();
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      details.open = false;
-      return;
-    }
-
     const startHeight = shell.getBoundingClientRect().height;
     details.classList.add("home__details--closing");
     shell.style.display = "block";

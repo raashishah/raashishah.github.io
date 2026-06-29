@@ -174,12 +174,12 @@ function ProjectListItem({
         }
       >
         <div className="home__project-body">
-          {item.href ? (
-            <ProjectLink href={item.href} title={item.title} />
-          ) : null}
           {item.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
+          {item.href ? (
+            <ProjectLink href={item.href} title={item.title} />
+          ) : null}
         </div>
       </AnimatedDetails>
     </li>
@@ -217,16 +217,22 @@ export function SimpleHome() {
 
           <section className="home__projects" aria-label="Work and experience">
             <div className="home__project-groups">
-              <ul className="home__project-list">
-                {projects.map((project) => (
-                  <ProjectListItem key={project.title} item={project} />
-                ))}
-              </ul>
-              <ul className="home__project-list">
-                {workExperience.map((role) => (
-                  <ProjectListItem key={role.title} item={role} />
-                ))}
-              </ul>
+              <section className="home__project-group" aria-label="Projects">
+                <h2 className="home__section-label">Projects</h2>
+                <ul className="home__project-list">
+                  {projects.map((project) => (
+                    <ProjectListItem key={project.title} item={project} />
+                  ))}
+                </ul>
+              </section>
+              <section className="home__project-group" aria-label="Experience">
+                <h2 className="home__section-label">Experience</h2>
+                <ul className="home__project-list">
+                  {workExperience.map((role) => (
+                    <ProjectListItem key={role.title} item={role} />
+                  ))}
+                </ul>
+              </section>
             </div>
           </section>
         </div>
