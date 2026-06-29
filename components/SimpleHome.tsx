@@ -17,7 +17,7 @@ const projects = [
     paragraphs: [
       "Schools get thousands of applications every year, but only a fraction of those become available seats. Today these applications are assessed largely by humans.",
       "Enterprise-grade agents that fit right into the pipeline and use decision-making context to qualify students.",
-      "The project gave agents tools for making sense of data and grading it consistently, used RAG for data lookups, and telemetry to measure agent performance and cost — all tied together with Google's ADK. A task that would spread across weeks and multiple humans was standardised with agentic AI.",
+      "The project gave agents tools for making sense of data and grading it consistently, used RAG for data lookups, and telemetry to measure agent performance and cost, all tied together with Google's ADK. A task that would spread across weeks and multiple humans was standardised with agentic AI.",
     ],
   },
   {
@@ -50,15 +50,15 @@ const workExperience = [
       "2025",
       "Got back into building AI.",
       "Collaborated on a health app for diabetic patients that uses on-device inference.",
-      "Executed an early GTM plan by distributing Applied AI content on Twitter/X and YouTube, securing 4k+ pre-launch views.",
+      "Executed an early GTM plan by distributing Applied AI content on Twitter and YouTube, securing 4k+ pre-launch views.",
     ],
   },
   {
     title: "Pluto",
     paragraphs: [
-      "2021–2024",
+      "2021-2024",
       "Transformed a creative studio into a tech-led team by reorganising and hiring talent, introducing agile sprints and product-first thinking.",
-      "Launched a 3-stage product suite: Magic Batch — MVP for digital asset sales; Pluto — drove 27% sales growth YoY by introducing cross-platform payments and 82% retention through A/B-tested incentives; Create — enabled 500+ users to generate 5k+ digital assets in 10 days, partly via integrated vision model workflows.",
+      "Launched a 3-stage product suite: Magic Batch: MVP for digital asset sales; Pluto: drove 27% sales growth YoY by introducing cross-platform payments and 82% retention through A/B-tested incentives; Create: enabled 500+ users to generate 5k+ digital assets in 10 days, partly via integrated vision model workflows.",
       "Drove end-to-end product delivery by collaborating cross-functionally with 20+ engineers, designers, artists, marketers, a PM, and executives.",
     ],
   },
@@ -80,7 +80,7 @@ const workExperience = [
   {
     title: "Aula Education",
     paragraphs: [
-      "2018–2019",
+      "2018-2019",
       "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US.",
       "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data.",
       "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows.",
