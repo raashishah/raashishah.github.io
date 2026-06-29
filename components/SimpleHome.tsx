@@ -109,7 +109,7 @@ const workExperience = [
     title: "OnDevice",
     paragraphs: [
       "2025",
-      "Got back into building AI.",
+      "Got back into building in AI",
       "Collaborated on a health app for diabetic patients that uses on-device inference.",
       "Executed an early GTM plan by distributing Applied AI content on Twitter and YouTube, got 4k+ pre-launch views.",
     ],
