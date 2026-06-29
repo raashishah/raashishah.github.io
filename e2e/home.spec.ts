@@ -7,7 +7,7 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.getByText(siteConfig.introRole)).toBeVisible();
   await expect(page.getByText(siteConfig.introTagline)).toBeVisible();
   await expect(page.getByText("Admission Evaluation Agent")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Email" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "email" })).toBeVisible();
 });
 
 test("project details expand with body copy", async ({ page }) => {

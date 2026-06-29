@@ -2,12 +2,12 @@ import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { socialLinks } from "@/content/site";
 import { siteConfig } from "@/lib/metadata";
 
-const headerLinks = ["email", "twitter"].flatMap((id) => {
+const headerLinks = ["email", "calendly"].flatMap((id) => {
   const link = socialLinks.find((item) => item.id === id);
   return link ? [link] : [];
 });
 const footerLinks = socialLinks.filter(
-  (link) => link.id !== "email" && link.id !== "twitter",
+  (link) => link.id !== "email" && link.id !== "calendly",
 );
 
 type GroupedItem =
@@ -78,7 +78,7 @@ const projects = [
       "Did a RAG for data lookups",
       "Telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
       "Tied together with Google's ADK",
-    ],
+      Can also process past data    ],
   },
   {
     title: "Expression - Animation tool",
