@@ -241,11 +241,11 @@ const projects = [
         },
       ],
       {
-        text: "Worked offline regardless of footfall",
+        text: "Works offline regardless of footfall",
         pullquote: true,
       },
       {
-        text: "Made most of this within 12 hours",
+        text: "Made 99% of this in 12 hours",
         pullquote: true,
       },
     ],
@@ -259,14 +259,14 @@ const workExperience = [
       "2025",
       "Collaborated and designed a health app for diabetic patients that uses on-device inference",
       [
-        "Executed an early GTM plan by distributing Applied AI content on ",
+        "Distributed Applied AI content on ",
         { text: "Twitter", href: "https://x.com/useondevice" },
         " and ",
         { text: "YouTube", href: "https://www.youtube.com/@raashi_shah" },
-        ", got 4k+ pre-launch views",
+        ", got 4k+ pre-launch views as an early-GTM",
       ],
       {
-        text: "Got back into building AI",
+        text: "Got back into building in AI",
         pullquote: true,
       },
     ],
@@ -319,10 +319,10 @@ const workExperience = [
       [
         "Short stint, founding hire on ",
         {
-          text: "Kotak Neo",
+          text: "Kotak Neo's",
           href: "https://www.kotaksecurities.com/platform/kotak-neo/",
         },
-        "'s product team - consumer trading app",
+        "product team - consumer trading app",
       ],
     ],
   },

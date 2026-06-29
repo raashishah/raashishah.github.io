@@ -414,13 +414,31 @@ body {
 .home__project-body-shell {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows var(--duration-short) var(--ease-in);
 }
 
 .home__details[open]:not(.home__details--closing) .home__project-body-shell {
   grid-template-rows: 1fr;
-  transition-duration: var(--duration-standard);
-  transition-timing-function: var(--ease-out);
+}
+
+/* JS height animation — uniform open/close regardless of content length */
+.home__details--animating .home__project-body-shell {
+  display: block;
+  grid-template-rows: none;
+  transition: none;
+}
+
+.home__details--measuring .home__project-body-shell {
+  position: absolute;
+  visibility: hidden;
+  width: 100%;
+  height: auto;
+  grid-template-rows: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.home__details--measuring .home__project-body {
+  opacity: 0;
 }
 
 /* Close animation: keep [open] until height transition ends (see AnimatedDetails.tsx) */
@@ -520,7 +538,7 @@ body {
   opacity: 1;
   transition-duration: var(--duration-standard);
   transition-timing-function: var(--ease-out);
-  transition-delay: 40ms;
+  transition-delay: 0ms;
 }
 
 .home__details:not([open]) .home__project-body {

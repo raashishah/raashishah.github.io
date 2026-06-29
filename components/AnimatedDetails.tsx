@@ -2,8 +2,11 @@
 
 import { useRef, type ReactNode } from "react";
 
-const CLOSE_MS = 350;
+const OPEN_MS = 350;
+const CLOSE_MS = 250;
+const OPEN_EASING = "cubic-bezier(0, 0, 0.2, 1)";
 const CLOSE_EASING = "cubic-bezier(0.4, 0, 1, 1)";
+const FALLBACK_BUFFER_MS = 50;
 
 type AnimatedDetailsProps = {
   className?: string;
@@ -18,6 +21,7 @@ export function AnimatedDetails({
 }: AnimatedDetailsProps) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
+  const animationCleanupRef = useRef<(() => void) | null>(null);
 
   const resetShellStyles = (shell: HTMLDivElement) => {
     shell.style.display = "";
@@ -25,6 +29,84 @@ export function AnimatedDetails({
     shell.style.height = "";
     shell.style.overflow = "";
     shell.style.transition = "";
+    shell.style.visibility = "";
+    shell.style.position = "";
+    shell.style.width = "";
+  };
+
+  const cancelAnimation = () => {
+    animationCleanupRef.current?.();
+    animationCleanupRef.current = null;
+  };
+
+  const measureOpenHeight = (details: HTMLDetailsElement, shell: HTMLDivElement) => {
+    details.classList.add("home__details--measuring");
+    const targetHeight = shell.scrollHeight;
+    details.classList.remove("home__details--measuring");
+    return targetHeight;
+  };
+
+  const animateShellHeight = ({
+    details,
+    shell,
+    fromHeight,
+    toHeight,
+    durationMs,
+    easing,
+    onComplete,
+  }: {
+    details: HTMLDetailsElement;
+    shell: HTMLDivElement;
+    fromHeight: number;
+    toHeight: number;
+    durationMs: number;
+    easing: string;
+    onComplete: () => void;
+  }) => {
+    cancelAnimation();
+
+    details.classList.add("home__details--animating");
+    shell.style.display = "block";
+    shell.style.gridTemplateRows = "none";
+    shell.style.overflow = "hidden";
+    shell.style.height = `${fromHeight}px`;
+    shell.style.transition = `height ${durationMs}ms ${easing}`;
+
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      details.classList.remove("home__details--animating");
+      shell.removeEventListener("transitionend", onTransitionEnd);
+      window.clearTimeout(fallbackTimer);
+      animationCleanupRef.current = null;
+      onComplete();
+    };
+
+    const onTransitionEnd = (transitionEvent: TransitionEvent) => {
+      if (
+        transitionEvent.target !== shell ||
+        transitionEvent.propertyName !== "height"
+      ) {
+        return;
+      }
+      finish();
+    };
+
+    shell.addEventListener("transitionend", onTransitionEnd);
+    const fallbackTimer = window.setTimeout(finish, durationMs + FALLBACK_BUFFER_MS);
+
+    animationCleanupRef.current = () => {
+      finished = true;
+      shell.removeEventListener("transitionend", onTransitionEnd);
+      window.clearTimeout(fallbackTimer);
+      details.classList.remove("home__details--animating");
+      animationCleanupRef.current = null;
+    };
+
+    requestAnimationFrame(() => {
+      shell.style.height = `${toHeight}px`;
+    });
   };
 
   const handleSummaryClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,48 +118,43 @@ export function AnimatedDetails({
       return;
     }
 
-    if (!details.open) {
-      resetShellStyles(shell);
+    event.preventDefault();
+    cancelAnimation();
+
+    if (details.open) {
+      details.classList.add("home__details--closing");
+      const startHeight = shell.getBoundingClientRect().height;
+
+      animateShellHeight({
+        details,
+        shell,
+        fromHeight: startHeight,
+        toHeight: 0,
+        durationMs: CLOSE_MS,
+        easing: CLOSE_EASING,
+        onComplete: () => {
+          details.open = false;
+          details.classList.remove("home__details--closing");
+          resetShellStyles(shell);
+        },
+      });
       return;
     }
 
-    event.preventDefault();
+    details.open = true;
+    const targetHeight = measureOpenHeight(details, shell);
 
-    const startHeight = shell.getBoundingClientRect().height;
-    details.classList.add("home__details--closing");
-    shell.style.display = "block";
-    shell.style.gridTemplateRows = "none";
-    shell.style.height = `${startHeight}px`;
-    shell.style.overflow = "hidden";
-    shell.style.transition = `height ${CLOSE_MS}ms ${CLOSE_EASING}`;
-
-    requestAnimationFrame(() => {
-      shell.style.height = "0px";
+    animateShellHeight({
+      details,
+      shell,
+      fromHeight: 0,
+      toHeight: targetHeight,
+      durationMs: OPEN_MS,
+      easing: OPEN_EASING,
+      onComplete: () => {
+        resetShellStyles(shell);
+      },
     });
-
-    let finished = false;
-    const finishClose = () => {
-      if (finished) return;
-      finished = true;
-      details.open = false;
-      details.classList.remove("home__details--closing");
-      resetShellStyles(shell);
-      shell.removeEventListener("transitionend", onTransitionEnd);
-      window.clearTimeout(fallbackTimer);
-    };
-
-    const onTransitionEnd = (transitionEvent: TransitionEvent) => {
-      if (
-        transitionEvent.target !== shell ||
-        transitionEvent.propertyName !== "height"
-      ) {
-        return;
-      }
-      finishClose();
-    };
-
-    shell.addEventListener("transitionend", onTransitionEnd);
-    const fallbackTimer = window.setTimeout(finishClose, CLOSE_MS + 50);
   };
 
   return (
