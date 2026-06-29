@@ -217,6 +217,7 @@ body {
   color: inherit;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  transition: color var(--duration-short) var(--ease-out);
 }
 
 .home__name-link:focus-visible {
@@ -381,9 +382,13 @@ body {
   transform: translateX(-50%);
 }
 
+.home__details[open]:not(.home__details--closing) .home__disclosure::before {
+  transform: translateY(-50%) rotate(45deg);
+  transition-timing-function: var(--ease-standard);
+}
+
 .home__details[open]:not(.home__details--closing) .home__disclosure::after {
-  transform: translateX(-50%) scaleY(0);
-  opacity: 0;
+  transform: translateX(-50%) rotate(45deg);
   transition-timing-function: var(--ease-standard);
 }
 
@@ -416,9 +421,14 @@ body {
   transition-delay: 0ms;
 }
 
+.home__details.home__details--closing .home__disclosure::before {
+  transform: translateY(-50%) rotate(0deg);
+  transition-duration: var(--duration-standard);
+  transition-timing-function: var(--ease-in);
+}
+
 .home__details.home__details--closing .home__disclosure::after {
-  transform: translateX(-50%) scaleY(1);
-  opacity: 1;
+  transform: translateX(-50%) rotate(0deg);
   transition-duration: var(--duration-standard);
   transition-timing-function: var(--ease-in);
 }
@@ -471,7 +481,8 @@ body {
 @media (hover: hover) {
   .home__link:hover,
   .home__project-link:hover,
-  .home__details-summary:hover {
+  .home__details-summary:hover,
+  .home__name-link:hover {
     color: var(--accent);
   }
 
@@ -487,7 +498,8 @@ body {
 @media (hover: none) {
   .home__link:active,
   .home__project-link:active,
-  .home__details-summary:active {
+  .home__details-summary:active,
+  .home__name-link:active {
     color: var(--accent);
   }
 

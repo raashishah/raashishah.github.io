@@ -321,7 +321,6 @@ const workExperience = [
         },
         "'s product team - consumer trading app",
       ],
-      "Short stint",
     ],
   },
   {
@@ -330,7 +329,7 @@ const workExperience = [
       [{ text: "2020", href: "https://www.linkedin.com/company/kawaspace/" }],
       "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
       {
-        text: "Created a chatbot using Dialogflow for non-technical users to query data in natural language just by chatting, this was pre-GPT-3",
+        text: "Created a chatbot using Dialogflow for users to query data in natural language just by asking, this was pre-GPT-3",
         pullquote: true,
       },
     ],
