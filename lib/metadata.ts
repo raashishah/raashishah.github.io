@@ -16,11 +16,9 @@ export function absoluteUrl(path = "/") {
 }
 
 export const shareImageBasePalette = {
-  bg: "#f6f3ed",
-  panel: "#efebe4",
-  text: "#2c2620",
+  bg: "#ffffff",
+  text: "#111010",
   muted: "#6f675f",
-  accent: "#6f63d9",
 } as const;
 
 export const shareImageProjectPalettes = {
