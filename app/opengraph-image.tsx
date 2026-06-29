@@ -18,7 +18,8 @@ export default async function OpenGraphImage() {
     (
       <OgImage
         name={siteConfig.creator}
-        tagline="designing and developing apps and AI agents"
+        role={siteConfig.introRole}
+        tagline={siteConfig.introTagline}
         domain={getSiteUrl().hostname}
         bg={shareImageBasePalette.bg}
         text={shareImageBasePalette.text}

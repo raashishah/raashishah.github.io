@@ -1,12 +1,13 @@
 type OgImageProps = {
   name: string;
+  role: string;
   tagline: string;
   domain: string;
   bg: string;
   text: string;
 };
 
-export function OgImage({ name, tagline, domain, bg, text }: OgImageProps) {
+export function OgImage({ name, role, tagline, domain, bg, text }: OgImageProps) {
   return (
     <div
       style={{
@@ -26,6 +27,7 @@ export function OgImage({ name, tagline, domain, bg, text }: OgImageProps) {
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <div style={{ display: "flex" }}>{name}</div>
+        <div style={{ display: "flex" }}>{role}</div>
         <div style={{ display: "flex" }}>{tagline}</div>
       </div>
 

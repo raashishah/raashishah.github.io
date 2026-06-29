@@ -1,4 +1,5 @@
 import { socialLinks } from "@/content/site";
+import { siteConfig } from "@/lib/metadata";
 
 const headerLinks = ["email", "twitter"].flatMap((id) => {
   const link = socialLinks.find((item) => item.id === id);
@@ -107,10 +108,8 @@ export function SimpleHome() {
 
       <div className="home__content">
         <section className="home__intro" aria-label="About">
-          <p className="home__line">Originally a Technical Product Manager</p>
-          <p className="home__line">
-            Now designing and developing apps and AI agents
-          </p>
+          <p className="home__line">{siteConfig.introRole}</p>
+          <p className="home__line">{siteConfig.introTagline}</p>
         </section>
 
         <section className="home__projects" aria-label="Projects">
