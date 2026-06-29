@@ -174,7 +174,7 @@ export function buildLlmsTxt(): string {
     "",
     "## Contact",
     "",
-    `- [Email](mailto:raashishah.work@gmail.com): Primary contact for consulting and collaborations.`,
+    `- [email me](mailto:raashishah.work@gmail.com): Primary contact for consulting and collaborations.`,
     `- [Twitter / X](https://x.com/rash_driving): Public updates and applied AI content.`,
     `- [Homepage](${absoluteUrl("/")}): Portfolio with expandable project and work history.`,
   ];

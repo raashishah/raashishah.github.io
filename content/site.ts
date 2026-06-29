@@ -51,13 +51,13 @@ export const socialLinks: SocialLink[] = [
   },
   {
     id: "email",
-    label: "email",
+    label: "email me",
     href: "mailto:raashishah.work@gmail.com",
     icon: "email",
   },
   {
     id: "calendly",
-    label: "or meet me",
+    label: "let's meet",
     href: "https://calendly.com/raashishah-work/new-meeting",
     icon: "calendly",
   },

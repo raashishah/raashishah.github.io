@@ -264,7 +264,7 @@ export function SimpleHome() {
               <span className="home__header-contact-or"> or </span>
               <SocialAnchor
                 href={calendlyLink.href}
-                label="meet me"
+                label={calendlyLink.label}
                 className="home__link home__link--header"
               />
             </nav>

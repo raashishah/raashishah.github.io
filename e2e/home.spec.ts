@@ -9,7 +9,7 @@ test("homepage shows intro and project list", async ({ page }) => {
     siteConfig.introTagline,
   );
   await expect(page.getByText("Admission Evaluation Agent")).toBeVisible();
-  await expect(page.getByRole("link", { name: "email" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "email me" })).toBeVisible();
 });
 
 test("project details expand with body copy", async ({ page }) => {
