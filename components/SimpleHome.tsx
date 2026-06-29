@@ -74,11 +74,11 @@ const workExperience = [
       {
         label: "Pluto",
         points: [
-          "Drove 27% sales growth YoY by introducing cross-platform payments - this was the first digital asset project to enable this",
-          "82% retention through A/B-tested incentives",
+          "First digital asset project to introducing cross-platform payments driving 37% sales growth YoY",
+          "Increased retention by 82% through A/B-tested incentives",
         ],
       },
-      "Create Layer - enabled 500+ users to generate 5k+ digital assets within 10 days, including some made with image-gen models.",
+      "Create Layer - enabled 500+ users to generate 5k+ digital assets within 10 days, including some made with image-gen models",
       "Owned end-to-end product delivery",
       "Collaborated cross-functionally with 20+ engineers, designers, artists, marketers, a PM, and execs",
     ],
@@ -94,7 +94,7 @@ const workExperience = [
     title: "Kawa Space",
     paragraphs: [
       "2020",
-      "Geospatial data analysis using machine learning in agriculture, rainfall, population density.",
+      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density.",
       "Created a chatbot using Dialogflow for non-technical users to get inferences just by chatting.",
     ],
   },
