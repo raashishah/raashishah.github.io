@@ -415,7 +415,6 @@ body {
   overflow: hidden;
   min-height: 0;
   margin-top: var(--space-2);
-  padding-inline-start: var(--space-1);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -550,6 +549,11 @@ body {
   text-wrap: pretty;
 }
 
+.home__project-body-pullquote + .home__project-body-pullquote {
+  margin-block-start: calc(var(--space-3) * -1);
+  padding-block-start: var(--space-3);
+}
+
 .home__project-body-list {
   list-style: none;
   margin: 0;
@@ -636,10 +640,6 @@ body {
   .home__details-summary {
     padding-inline: 0;
     margin-inline: 0;
-  }
-
-  .home__project-body {
-    padding-inline-start: 0;
   }
 
   .home__header-contact {

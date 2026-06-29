@@ -199,17 +199,17 @@ const projects = [
     title: "Expression - Animation Tool",
     paragraphs: [
       "Auto-colouring frames hand drawn by an animator, in a style called frame by frame animation.",
-      "It's a repetitive step that artists dread but can't skip. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
+      "Frames are coloured one by one. For 1min 25fps shots that's 1,500 frames.",
       "This problem remains unsolved worldwide",
+      "My goal is for artists to retain full control while giving them better tools",
       {
         text: [
-          "Side quest - First to parse line art in PNG files ",
+          "Side quest - First ever to parse line art in PNG files ",
           { text: "1:1", italic: true },
           ", as the artist intended. It works with any software the artist uses.",
         ],
         pullquote: true,
       },
-      "My goal is for artists to retain full control while giving them better tools",
     ],
   },
   {
@@ -223,8 +223,14 @@ const projects = [
         },
         ",",
       ],
-      "Worked offline regardless of footfall",
-      "Made most of this within 12 hours",
+      {
+        text: "Worked offline regardless of footfall",
+        pullquote: true,
+      },
+      {
+        text: "Made most of this within 12 hours",
+        pullquote: true,
+      },
     ],
   },
 ] satisfies ReadonlyArray<HomeEntry>;
@@ -259,23 +265,24 @@ const workExperience = [
           ],
           {
             label: [{ text: "Pluto", href: "https://opensea.io/collection/plutomisfits" }],
-            points: [
-              [
-                "First ever project in the ecosystem to ",
-                {
-                  text: "introduce cross-platform payments,",
-                  href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
-                },
-                "driving 37% sales growth YoY",
-              ],
-              "Increased retention by 82% through A/B-tested incentives",
-            ],
+            points: ["Increased retention by 82% through A/B-tested incentives"],
           },
           [
             { text: "Create Layer", href: "https://x.com/createlayer/status/1805623167538340046/video/1" },
             "500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
           ],
         ],
+      },
+      {
+        text: [
+          "First ever project in the ecosystem to ",
+          {
+            text: "introduce cross-platform payments,",
+            href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
+          },
+          "driving 37% sales growth YoY",
+        ],
+        pullquote: true,
       },
     ],
   },
@@ -299,7 +306,10 @@ const workExperience = [
     paragraphs: [
       [{ text: "2020", href: "https://www.linkedin.com/company/kawaspace/" }],
       "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
-      "Created a chatbot using Dialogflow for non-technical users to query data in NLP just by chatting - This was pre-GPT3",
+      {
+        text: "Created a chatbot using Dialogflow for non-technical users to query data in natural language just by chatting - This was pre-GPT3",
+        pullquote: true,
+      },
     ],
   },
   {
@@ -311,9 +321,12 @@ const workExperience = [
           href: "https://www.linkedin.com/company/aulaeducation/",
         },
       ],
-      "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
       "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US",
       "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data",
+      {
+        text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
+        pullquote: true,
+      },
     ],
   },
 ] satisfies ReadonlyArray<HomeEntry>;
