@@ -61,7 +61,7 @@ const workExperience = [
       "2025",
       "Got back into building AI.",
       "Collaborated on a health app for diabetic patients that uses on-device inference.",
-      "Executed an early GTM plan by distributing Applied AI content on Twitter and YouTube, securing 4k+ pre-launch views.",
+      "Executed an early GTM plan by distributing Applied AI content on Twitter and YouTube, got 4k+ pre-launch views.",
     ],
   },
   {
