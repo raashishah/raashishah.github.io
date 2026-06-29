@@ -497,33 +497,25 @@ body {
 
 .home__inline-link {
   color: var(--text-muted);
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--text-muted) 55%, transparent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
+  text-decoration: none;
   border-radius: 2px;
-  transition:
-    color var(--duration-short) var(--ease-out),
-    text-decoration-color var(--duration-short) var(--ease-out);
+  transition: color var(--duration-short) var(--ease-out);
 }
 
 .home__inline-link:focus-visible {
   outline: 2px solid var(--accent-focus-ring);
   outline-offset: 2px;
   color: var(--accent);
-  text-decoration-color: var(--accent);
 }
 
 @media (hover: hover) {
   .home__inline-link:hover {
     color: var(--accent);
-    text-decoration-color: currentColor;
   }
 }
 
 .home__inline-link:active {
   color: var(--accent);
-  text-decoration-color: currentColor;
 }
 
 .home__project-body p {
