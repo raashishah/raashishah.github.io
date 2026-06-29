@@ -72,13 +72,12 @@ const projects = [
     title: "Admission Evaluation Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
-      "Academic instituitions get thousands of applications every year, but only a fraction of those become available seats. Today these applications are assessed largely by humans.",
-      "Enterprise-grade agents that fit right into the pipeline and use decision-making context to qualify students.",
-      "Gave agents tools for making sense of data and grading it consistently.",
-      "Used RAG for data lookups.",
-      "Telemetry to measure agent performance and cost - brough cost down to 15 cents per student",
-      "Tied together with Google's ADK.",
-      "A task that would spread across weeks and multiple humans was standardised with agentic AI.",
+      "Academic instituitions process thousands of applications every year with a workflow spread across weeks and multiple humans",
+      "Standardised this enterprise-grade agents that fit right into the pipeline and use decision-making context to qualify students",
+      "Gave agents tools for making sense of data and grading it consistently",
+      "Did a RAG for data lookups",
+      "Telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
+      "Tied together with Google's ADK",
     ],
   },
   {
@@ -86,7 +85,8 @@ const projects = [
     paragraphs: [
       "Expression automates colouring for frames hand drawn by the artist, in a style called frame by frame animation.",
       "It's a repetitive step that artists dread but can't skip - no tools today offer to do this at scale. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
-      "This problem remains unsolved worldwide. So far I've solved parsing PNG line art (universal input) 1:1, as the artist intended.",
+      "This problem remains unsolved worldwide.",
+      "Parsing PNG line art (universal input) 1:1, as the artist intended - first one to ever solve this step in the pipeline - it can work with any software that the artist uses"
     ],
   },
   {
