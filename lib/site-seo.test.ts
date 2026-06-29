@@ -60,7 +60,7 @@ describe("metadata helpers", () => {
       "Designing and developing apps and AI agents end-to-end",
     );
     expect(metadata.siteConfig.description).toBe(
-      "Technical Product Manager, AI Engineer. Designing and developing apps and AI agents end-to-end.",
+      "Technical Product Manager, AI Engineer, Designing and developing apps and AI agents end-to-end",
     );
   });
 });

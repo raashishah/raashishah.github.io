@@ -7,7 +7,7 @@ export const siteConfig = {
   title: "apps and ai tools designer and engineer",
   introRole,
   introTagline,
-  description: `${introRole}. ${introTagline}.`,
+  description: `${introRole}, ${introTagline}`,
   creator: "Raashi Shah",
   twitterHandle: "@rash_driving",
 } as const;

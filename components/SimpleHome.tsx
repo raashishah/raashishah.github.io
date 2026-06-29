@@ -188,20 +188,20 @@ const projects = [
   {
     title: "Admissions Evaluation Agent",
     paragraphs: [
-      "Academic institutions process thousands of applications every year.",
+      "Academic institutions process thousands of applications every year",
       [
         "I standardised this workflow with ",
         {
           text: "enterprise-grade agents",
           href: "https://admissions.raashishah.com",
         },
-        " made with Google's ADK.",
+        " made with Google's ADK",
       ],
       {
         bullets: [
-          "Created tools to work with bad data and rank it consistently.",
-          "Used telemetry to measure and bring cost down to 15 cents per student.",
-          "Also processed past data for insights.",
+          "Created tools to work with bad data and rank it consistently",
+          "Used telemetry to measure and bring cost down to 15 cents per student",
+          "Also processed past data for insights",
         ],
       },
     ],
@@ -209,15 +209,15 @@ const projects = [
   {
     title: "Expression - Animation Tool",
     paragraphs: [
-      "Auto-colouring frames hand drawn by an animator, in a style called frame-by-frame animation.",
-      "Frames are coloured one by one. For 1 min, 25 fps shots that's 1,500 frames.",
-      "This problem remains unsolved worldwide.",
-      "My goal is for artists to retain full control while giving them better tools.",
+      "Auto-colouring frames hand drawn by an animator, in a style called frame-by-frame animation",
+      "Frames are coloured one by one, for 1 min, 25 fps shots that's 1,500 frames",
+      "This problem remains unsolved worldwide",
+      "My goal is for artists to retain full control while giving them better tools",
       {
         text: [
           "Side quest: first ever to parse line art in PNG files ",
           { text: "1:1", italic: true },
-          ", as the artist intended. It works with any software the artist uses.",
+          ", as the artist intended, it works with any software the artist uses",
         ],
         pullquote: true,
       },
@@ -232,14 +232,13 @@ const projects = [
           text: "Design POV",
           href: "https://povindex.designpovindia.com/home",
         },
-        ".",
       ],
       {
-        text: "Worked offline regardless of footfall.",
+        text: "Worked offline regardless of footfall",
         pullquote: true,
       },
       {
-        text: "Made most of this within 12 hours.",
+        text: "Made most of this within 12 hours",
         pullquote: true,
       },
     ],
@@ -251,28 +250,30 @@ const workExperience = [
     title: "OnDevice",
     paragraphs: [
       "2025",
-      "Got back into building AI.",
-      "Collaborated on a health app for diabetic patients that uses on-device inference.",
       [
         "Executed an early GTM plan by distributing Applied AI content on ",
         { text: "Twitter", href: "https://x.com/useondevice" },
         " and ",
         { text: "YouTube", href: "https://www.youtube.com/@raashi_shah" },
-        ", got 4k+ pre-launch views.",
+        ", got 4k+ pre-launch views",
       ],
+      {
+        text: "Got back into building AI, collaborated on a health app for diabetic patients that uses on-device inference",
+        pullquote: true,
+      },
     ],
   },
   {
     title: "Pluto",
     paragraphs: [
       "2021-2024",
-      "Collaborated cross-functionally with artists and transformed a creative studio into a product and tech-led team.",
+      "Collaborated cross-functionally with artists and transformed a creative studio into a product and tech-led team",
       {
         intro: "Launched 3 digital asset products:",
         items: [
           [
             { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
-            " - MVP.",
+            " - MVP",
           ],
           {
             label: [{ text: "Pluto", href: "https://opensea.io/collection/plutomisfits" }],
@@ -284,11 +285,11 @@ const workExperience = [
                     text: "introduce cross-platform payments",
                     href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
                   },
-                  ", driving 37% sales growth YoY.",
+                  ", driving 37% sales growth YoY",
                 ],
                 pullquote: true,
               },
-              "Increased retention by 82% through A/B-tested incentives.",
+              "Increased retention by 82% through A/B-tested incentives",
             ],
           },
           {
@@ -296,7 +297,7 @@ const workExperience = [
               { text: "Create Layer", href: "https://x.com/createlayer/status/1805623167538340046/video/1" },
             ],
             points: [
-              "500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models.",
+              "500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
             ],
           },
         ],
@@ -313,18 +314,18 @@ const workExperience = [
           text: "Kotak Neo",
           href: "https://www.kotaksecurities.com/platform/kotak-neo/",
         },
-        "'s product team - consumer trading app.",
+        "'s product team - consumer trading app",
       ],
-      "Short stint.",
+      "Short stint",
     ],
   },
   {
     title: "Kawa Space",
     paragraphs: [
       [{ text: "2020", href: "https://www.linkedin.com/company/kawaspace/" }],
-      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density.",
+      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
       {
-        text: "Created a chatbot using Dialogflow for non-technical users to query data in natural language just by chatting. This was pre-GPT-3.",
+        text: "Created a chatbot using Dialogflow for non-technical users to query data in natural language just by chatting, this was pre-GPT-3",
         pullquote: true,
       },
     ],
@@ -338,10 +339,10 @@ const workExperience = [
           href: "https://www.linkedin.com/company/aulaeducation/",
         },
       ],
-      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US.",
-      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data.",
+      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US",
+      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data",
       {
-        text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows.",
+        text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
         pullquote: true,
       },
     ],
