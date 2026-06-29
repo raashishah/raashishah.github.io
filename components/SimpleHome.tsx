@@ -118,7 +118,7 @@ const workExperience = [
     title: "Pluto",
     paragraphs: [
       "2021-2024",
-      "Collaborated cross-functionaly and transformed a creative studio into a product and tech-led team",
+      "Collaborated cross-functionaly with artists and transformed a creative studio into a product and tech-led team",
       {
         intro: "Launched 3 digital asset products:",
         items: [
