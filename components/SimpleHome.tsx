@@ -11,18 +11,20 @@ const footerLinks = socialLinks.filter(
 
 type RichSegment = string | { text: string; href: string };
 type RichText = readonly RichSegment[];
+type RichLine = string | RichText;
 
 type GroupedItem =
-  | RichText
+  | RichLine
   | {
-      label: RichText;
-      points: readonly RichText[];
+      label: RichLine;
+      points: readonly RichLine[];
     };
 
 type BodyParagraph =
-  | RichText
+  | string
+  | RichLine
   | {
-      intro: RichText;
+      intro: RichLine;
       items: readonly GroupedItem[];
     };
 
@@ -33,7 +35,11 @@ type HomeEntry = {
   linkLabel?: string;
 };
 
-function InlineText({ content }: { content: RichText }) {
+function InlineText({ content }: { content: RichLine }) {
+  if (typeof content === "string") {
+    return <>{content}</>;
+  }
+
   return (
     <>
       {content.map((segment, index) => {
@@ -58,32 +64,36 @@ function InlineText({ content }: { content: RichText }) {
 }
 
 function renderGroupedItem(item: GroupedItem, itemIndex: number) {
-  if (!Array.isArray(item)) {
+  if (typeof item === "string" || Array.isArray(item)) {
     return (
-      <div key={itemIndex} className="home__project-body-nested">
-        <p className="home__project-body-sub">
-          <InlineText content={item.label} />
-        </p>
-        {item.points.map((point, pointIndex) => (
-          <p
-            key={pointIndex}
-            className="home__project-body-sub home__project-body-sub--nested"
-          >
-            <InlineText content={point} />
-          </p>
-        ))}
-      </div>
+      <p key={itemIndex} className="home__project-body-sub">
+        <InlineText content={item} />
+      </p>
     );
   }
 
   return (
-    <p key={itemIndex} className="home__project-body-sub">
-      <InlineText content={item} />
-    </p>
+    <div key={itemIndex} className="home__project-body-nested">
+      <p className="home__project-body-sub">
+        <InlineText content={item.label} />
+      </p>
+      {item.points.map((point, pointIndex) => (
+        <p
+          key={pointIndex}
+          className="home__project-body-sub home__project-body-sub--nested"
+        >
+          <InlineText content={point} />
+        </p>
+      ))}
+    </div>
   );
 }
 
 function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
+  if (typeof paragraph === "string") {
+    return <p>{paragraph}</p>;
+  }
+
   if (Array.isArray(paragraph)) {
     return (
       <p>
@@ -107,10 +117,9 @@ const projects = [
     title: "Admission Evaluation Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
-      "Academic instituitions process thousands of applications every year with a workflow spread across months and multiple humans",
-      "Standardised this enterprise-grade agents made with Google's ADK. ", 
-      "Fits right into the pipeline and uses decision-making context to qualify students",
-      "Gave agents tools for making sense of data and grading it consistently",
+      "Academic instituitions process thousands of applications every year",
+      "Standardised this with enterprise-grade agents made with Google's ADK", 
+      "Created tools to work with bad data and grade consistently",
       "Created a RAG for data lookups",
       "Telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
       "Also processes past data for insights",
@@ -275,7 +284,11 @@ function ProjectLink({
       className="home__project-link"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${label} for ${title} (opens in new tab)`}
+      aria-label={
+        label === "View project"
+          ? `View ${title} (opens in new tab)`
+          : `${label} for ${title} (opens in new tab)`
+      }
     >
       <span>{label}</span>
       <ExternalLinkIcon />
