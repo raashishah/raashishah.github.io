@@ -226,6 +226,16 @@ body {
   border-radius: 2px;
 }
 
+.home__name-link:active {
+  color: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home__name-link:hover {
+    color: var(--accent);
+  }
+}
+
 .home__line {
   margin: 0;
   line-height: 1.47;
@@ -481,8 +491,7 @@ body {
 @media (hover: hover) {
   .home__link:hover,
   .home__project-link:hover,
-  .home__details-summary:hover,
-  .home__name-link:hover {
+  .home__details-summary:hover {
     color: var(--accent);
   }
 
@@ -498,8 +507,7 @@ body {
 @media (hover: none) {
   .home__link:active,
   .home__project-link:active,
-  .home__details-summary:active,
-  .home__name-link:active {
+  .home__details-summary:active {
     color: var(--accent);
   }
 
