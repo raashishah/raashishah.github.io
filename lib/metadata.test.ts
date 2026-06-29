@@ -39,8 +39,6 @@ describe("metadata helpers", () => {
 
     const metadata = await importMetadataModule();
 
-    expect(metadata.absoluteUrl("/project/expression")).toBe(
-      "https://raashishah.com/project/expression",
-    );
+    expect(metadata.absoluteUrl("/")).toBe("https://raashishah.com/");
   });
 });

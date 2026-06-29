@@ -34,7 +34,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: "twitter",
     label: "Twitter",
-    href: "https://twitter.com/_RaashiShah",
+    href: "https://x.com/rash_driving",
     icon: "twitter",
   },
   {
@@ -52,13 +52,8 @@ export const socialLinks: SocialLink[] = [
   {
     id: "email",
     label: "Email",
-    href: "mailto:rshah14@icloud.com",
+    href: "mailto:raashishah.work@gmail.com",
     icon: "email",
   },
 ];
 
-export const metrics = {
-  profiles: "4k+ profiles",
-  pwa: "12hr PWA",
-  experience: "7 yrs",
-};
