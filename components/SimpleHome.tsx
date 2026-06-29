@@ -10,8 +10,8 @@ const footerLinks = socialLinks.filter(
 );
 
 type RichLink = { text: string; href: string };
-type RichItalic = { text: string; italic: true };
-type RichSegment = string | RichLink | RichItalic;
+type RichBold = { text: string; bold: true };
+type RichSegment = string | RichLink | RichBold;
 type RichText = readonly RichSegment[];
 type RichLine = string | RichText;
 
@@ -92,7 +92,7 @@ function InlineText({ content }: { content: RichLine }) {
           );
         }
 
-        return <em key={index}>{segment.text}</em>;
+        return <strong key={index}>{segment.text}</strong>;
       })}
     </>
   );
@@ -201,7 +201,7 @@ const projects = [
         bullets: [
           "Created tools to work with bad data and rank it consistently",
           "Used telemetry to measure and bring cost down to 15 cents per student",
-          "Also processed past data for insights",
+          "Works with past data for insights",
         ],
       },
     ],
@@ -216,7 +216,7 @@ const projects = [
       {
         text: [
           "Side quest: first ever to parse line art in PNG files ",
-          { text: "1:1", italic: true },
+          { text: "1:1", bold: true },
           ", as the artist intended, it works with any software the artist uses",
         ],
         pullquote: true,
