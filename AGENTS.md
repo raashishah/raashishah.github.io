@@ -9,15 +9,15 @@
 - Favicon is legacy rose coral SVG at `public/img/favicon.svg` (#C08081); OG share image is minimal white layout with small uniform type (no decorative frames or oversized headlines).
 - Typography: self-hosted Satoshi variable font sitewide; body defaults to regular (400) weight; UI labels medium (500); intro role muted tertiary, tagline at headline scale; smaller readable clamp() sizes (not viewport-filling oversized type).
 - Homepage intro copy from `siteConfig` in `lib/metadata.ts`: `introRole` "Technical Product Manager" + `introTagline` "Designing and developing apps and AI agents end-to-end" — explicitly NOT "Originally a…" / "Now designing…"; e2e and unit tests import `siteConfig` to prevent copy drift/reverts.
-- Eight homepage dropdowns via `AnimatedDetails`: 3 projects + 5 jobs in separate labeled groups; work-ex titles are company name only; all use `+` CSS disclosure pattern; "View project" link after body copy when href exists.
+- Eight homepage dropdowns via `AnimatedDetails`: 3 projects + 5 jobs (OnDevice, Pluto, Kotak Securities, Kawa Space, Aula Education) in separate labeled Projects/Experience groups with visible gap between them; work-ex titles are company name only (e.g. "OnDevice", not "Co-Founder"); all use `+` CSS disclosure pattern; "View project" link after body copy when href exists.
 - Apple HIG-level dropdown motion: `AnimatedDetails` client wrapper + CSS tokens (350ms open / 250ms close, opacity-only body reveal, height collapse on close); user explicitly does NOT want `prefers-reduced-motion` to disable site animations.
-- Preserve user's copy tone — pull dropdown text from user's Google Doc CV or existing project content; don't rewrite stories heavily.
+- Work-ex and project dropdown body copy must be full text from Google Doc CV (`docs/Raashi Shah CV '26.md`) or existing project content — never short placeholders; preserve user's copy tone and don't rewrite stories heavily.
 
 ## Learned Workspace Facts
 
-- Homepage is `components/SimpleHome.tsx` via `app/page.tsx` — header (name + Email/Twitter from `content/site.ts`: `raashishah.work@gmail.com`, `https://x.com/rash_driving`), responsive grid (1 col <40rem, 2 col ≥40rem) with eight `AnimatedDetails` dropdowns in Projects/Experience groups, footer for remaining `socialLinks`; styles in `app/globals.css` (Apple tinted neutrals, 8pt spacing scale, 44px touch targets, safe-area insets, motion tokens); `viewport` export in `app/layout.tsx`.
+- Homepage is `components/SimpleHome.tsx` via `app/page.tsx` — header (name + Email/Twitter from `content/site.ts`: `raashishah.work@gmail.com`, `https://x.com/rash_driving`), responsive grid (1 col <40rem, 2 col ≥40rem) with `projects` and `workExperience` arrays rendered as eight `AnimatedDetails` dropdowns in labeled Projects/Experience groups (`home__project-groups` gap + `home__section-label` headings), footer for remaining `socialLinks`; styles in `app/globals.css` (Apple tinted neutrals, 8pt spacing scale, 44px touch targets, safe-area insets, motion tokens); `viewport` export in `app/layout.tsx`.
 - Core stack: Next.js App Router + Vitest (`npm test`) + Playwright e2e (`e2e/home.spec.ts`); npm package `raashishah.com`; runtime deps Next/React only (GSAP, Lenis, Three.js removed).
-- Project/job copy inlined in `SimpleHome.tsx` (sourced from CV); old pink static site, rashOS scroll-journey, `/project/[slug]` pages, and Spotify API routes removed from repo.
+- Project/job copy inlined in `SimpleHome.tsx` (sourced from `docs/Raashi Shah CV '26.md`); old pink static site, rashOS scroll-journey, `/project/[slug]` pages, and Spotify API routes removed from repo.
 - Expression is the official marketing name for the Colourer codebase.
 - Git remote github.com/raashishah/raashishah.github.io (workspace: raashishah.com repo).
 - Production deploys on Vercel (project `raashishah`, linked to GitHub); push to `main` triggers deploy.
