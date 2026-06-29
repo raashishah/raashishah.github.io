@@ -10,14 +10,25 @@ const footerLinks = socialLinks.filter(
   (link) => link.id !== "email" && link.id !== "twitter",
 );
 
+type BodyParagraph =
+  | string
+  | {
+      label: string;
+      points: readonly string[];
+    };
+
 const projects = [
   {
-    title: "School Admissions Assessment Agent",
+    title: "Admission Evaluation Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
       "Schools get thousands of applications every year, but only a fraction of those become available seats. Today these applications are assessed largely by humans.",
       "Enterprise-grade agents that fit right into the pipeline and use decision-making context to qualify students.",
-      "The project gave agents tools for making sense of data and grading it consistently, used RAG for data lookups, and telemetry to measure agent performance and cost, all tied together with Google's ADK. A task that would spread across weeks and multiple humans was standardised with agentic AI.",
+      "Gave agents tools for making sense of data and grading it consistently.",
+      "Used RAG for data lookups.",
+      "Telemetry to measure agent performance and cost.",
+      "Tied together with Google's ADK.",
+      "A task that would spread across weeks and multiple humans was standardised with agentic AI.",
     ],
   },
   {
@@ -39,7 +50,7 @@ const projects = [
   },
 ] satisfies ReadonlyArray<{
   title: string;
-  paragraphs: readonly string[];
+  paragraphs: readonly BodyParagraph[];
   href?: string;
 }>;
 
@@ -57,9 +68,19 @@ const workExperience = [
     title: "Pluto",
     paragraphs: [
       "2021-2024",
-      "Transformed a creative studio into a tech-led team by reorganising and hiring talent, introducing agile sprints and product-first thinking.",
-      "Launched a 3-stage product suite: Magic Batch: MVP for digital asset sales; Pluto: drove 27% sales growth YoY by introducing cross-platform payments and 82% retention through A/B-tested incentives; Create: enabled 500+ users to generate 5k+ digital assets in 10 days, partly via integrated vision model workflows.",
-      "Drove end-to-end product delivery by collaborating cross-functionally with 20+ engineers, designers, artists, marketers, a PM, and executives.",
+      "Transformed a creative studio into a tech-led team",
+      "Launched 3 products:",
+      "Magic Batch - MVP for digital asset sales",
+      {
+        label: "Pluto",
+        points: [
+          "Drove 27% sales growth YoY by introducing cross-platform payments - this was the first digital asset project to enable this",
+          "82% retention through A/B-tested incentives",
+        ],
+      },
+      "Create Layer - enabled 500+ users to generate 5k+ digital assets within 10 days, including some made with image-gen models.",
+      "Owned end-to-end product delivery",
+      "Collaborated cross-functionally with 20+ engineers, designers, artists, marketers, a PM, and execs",
     ],
   },
   {
@@ -73,7 +94,7 @@ const workExperience = [
     title: "Kawa Space",
     paragraphs: [
       "2020",
-      "Geospatial data using machine learning in agriculture, rainfall, population density.",
+      "Geospatial data infereusing machine learning in agriculture, rainfall, population density.",
       "Created a chatbot using Dialogflow for non-technical users to get inferences just by chatting.",
     ],
   },
@@ -88,7 +109,7 @@ const workExperience = [
   },
 ] satisfies ReadonlyArray<{
   title: string;
-  paragraphs: readonly string[];
+  paragraphs: readonly BodyParagraph[];
   href?: string;
 }>;
 
@@ -158,7 +179,7 @@ function ProjectListItem({
 }: {
   item: {
     title: string;
-    paragraphs: readonly string[];
+    paragraphs: readonly BodyParagraph[];
     href?: string;
   };
 }) {
@@ -174,9 +195,22 @@ function ProjectListItem({
         }
       >
         <div className="home__project-body">
-          {item.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          {item.paragraphs.map((paragraph, index) => {
+            if (typeof paragraph === "string") {
+              return <p key={index}>{paragraph}</p>;
+            }
+
+            return (
+              <div key={index} className="home__project-body-group">
+                <p>{paragraph.label}</p>
+                {paragraph.points.map((point, pointIndex) => (
+                  <p key={pointIndex} className="home__project-body-sub">
+                    {point}
+                  </p>
+                ))}
+              </div>
+            );
+          })}
           {item.href ? (
             <ProjectLink href={item.href} title={item.title} />
           ) : null}

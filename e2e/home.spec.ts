@@ -6,7 +6,7 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Raashi Shah" })).toBeVisible();
   await expect(page.getByText(siteConfig.introRole)).toBeVisible();
   await expect(page.getByText(siteConfig.introTagline)).toBeVisible();
-  await expect(page.getByText("School Admissions Assessment Agent")).toBeVisible();
+  await expect(page.getByText("Admission Evaluation Agent")).toBeVisible();
   await expect(page.getByRole("link", { name: "Email" })).toBeVisible();
 });
 
@@ -26,11 +26,11 @@ test("linked projects show view project link when expanded", async ({ page }) =>
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "School Admissions Assessment Agent" })
+    .filter({ hasText: "Admission Evaluation Agent" })
     .click();
 
   const projectLink = page.getByRole("link", {
-    name: "View School Admissions Assessment Agent (opens in new tab)",
+    name: "View Admission Evaluation Agent (opens in new tab)",
   });
   await expect(projectLink).toBeVisible();
   await expect(projectLink).toHaveAttribute("href", "https://admissions.raashishah.com");

@@ -504,6 +504,16 @@ body {
   text-wrap: pretty;
 }
 
+.home__project-body-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.home__project-body-sub {
+  padding-inline-start: var(--space-4);
+}
+
 .home__footer-nav {
   display: flex;
   flex-wrap: wrap;
