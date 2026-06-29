@@ -88,4 +88,16 @@ test.describe("SEO and LLM discovery", () => {
     expect(body).toContain("<loc>");
     expect(body).toContain("</urlset>");
   });
+
+  test("opengraph-image is generated with Satoshi and site copy", async ({
+    request,
+  }) => {
+    const response = await request.get("/opengraph-image");
+
+    expect(response.ok()).toBeTruthy();
+    expect(response.headers()["content-type"]).toContain("image/png");
+
+    const body = await response.body();
+    expect(body.byteLength).toBeGreaterThan(5_000);
+  });
 });

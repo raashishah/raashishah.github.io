@@ -89,7 +89,7 @@ Do not use pure `#000` or `#fff` for UI text/background. Brand rose is not a UI 
 - **Weights:** 500 (medium) for UI, headings, links; 400 (regular) for dropdown body paragraphs.
 - **Scale:** Fluid `clamp()` tokens in `globals.css` (`--text-title` through `--text-caption`).
 - **Measure:** Intro column max ~32ch; dropdown body max ~50ch.
-- **OG image:** Self-hosted Satoshi (same file as the site, embedded via `lib/og-fonts.ts`). Type hierarchy mirrors the homepage: name at title scale, muted role, medium tagline, separator rule, domain in footer corner.
+- **OG image:** Self-hosted Satoshi (`Satoshi-Regular.ttf` / `Satoshi-Medium.ttf`, derived from the site variable woff2 for the OG renderer). Type hierarchy mirrors the homepage: name at title scale, muted role, medium tagline, separator rule, domain in footer corner.
 
 ## Elevation
 
