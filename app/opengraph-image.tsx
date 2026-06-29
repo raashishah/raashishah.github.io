@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { OgImage } from "@/components/metadata/OgImage";
+import { getOgInterFonts } from "@/lib/og-fonts";
 import { getSiteUrl, shareImageBasePalette, siteConfig } from "@/lib/metadata";
 
 export const alt = `${siteConfig.creator} share image`;
@@ -11,6 +12,8 @@ export const contentType = "image/png";
 export const runtime = "nodejs";
 
 export default async function OpenGraphImage() {
+  const fonts = await getOgInterFonts();
+
   return new ImageResponse(
     (
       <OgImage
@@ -19,9 +22,11 @@ export default async function OpenGraphImage() {
         domain={getSiteUrl().hostname}
         bg={shareImageBasePalette.bg}
         text={shareImageBasePalette.text}
-        muted={shareImageBasePalette.muted}
       />
     ),
-    size,
+    {
+      ...size,
+      fonts,
+    },
   );
 }
