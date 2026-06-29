@@ -8,7 +8,7 @@
   --ink: #1d1d1f;
   --ink-secondary: #515154;
   --ink-tertiary: #86868b;
-  --surface: #faf9f7;
+  --surface: #fffef9;
   --separator: color-mix(in srgb, var(--ink) 12%, transparent);
   --focus-ring: color-mix(in srgb, var(--ink) 42%, transparent);
   --accent: #c08081;
