@@ -20,6 +20,21 @@ test("project details expand with body copy", async ({ page }) => {
   await expect(
     page.getByText("Expression automates colouring for frames hand drawn by the artist"),
   ).toBeVisible();
+  await expect(page.getByRole("link", { name: "View Expression" })).toHaveCount(0);
+});
+
+test("linked projects show view project link when expanded", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "School Admissions Assessment Agent" })
+    .click();
+
+  const projectLink = page.getByRole("link", {
+    name: "View School Admissions Assessment Agent (opens in new tab)",
+  });
+  await expect(projectLink).toBeVisible();
+  await expect(projectLink).toHaveAttribute("href", "https://admissions.raashishah.com");
 });
 
 test("skip link targets main content", async ({ page }) => {

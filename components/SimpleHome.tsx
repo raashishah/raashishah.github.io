@@ -12,6 +12,7 @@ const footerLinks = socialLinks.filter(
 const projects = [
   {
     title: "School Admissions Assessment Agent",
+    href: "https://admissions.raashishah.com",
     paragraphs: [
       "Schools get thousands of applications every year but only a percentage of available seats. Today these applications are assessed largely with humans. I made enterprise grade agents that fit right into the pipeline and use decision making context to rank leads.",
       "The project gave agents tools for making sense of data and grading it consistently, used RAG for data lookups, and telemetry to measure agent performance and cost — all tied together with Google's ADK. A task that would spread across weeks and multiple humans was standardised with agentic AI.",
@@ -28,6 +29,7 @@ const projects = [
   },
   {
     title: "Offline Exhibition Navigation Web App",
+    href: "https://povindex.designpovindia.com/home",
     paragraphs: [
       "Exhibition navigation that is ultra smooth and works offline. Made in 12 hours.",
       "Easy problems don't excite me, so I made this interesting by making it work offline at the exhibition floor.",
@@ -64,7 +66,47 @@ const projects = [
       "Learned that adoption beats features in EdTech.",
     ],
   },
-] as const;
+] satisfies ReadonlyArray<{
+  title: string;
+  paragraphs: readonly string[];
+  href?: string;
+}>;
+
+function ExternalLinkIcon() {
+  return (
+    <svg
+      className="home__project-link-icon"
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M3.25 3.25H8.75M8.75 3.25V8.75M8.75 3.25L3.25 8.75"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ProjectLink({ href, title }: { href: string; title: string }) {
+  return (
+    <a
+      href={href}
+      className="home__project-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${title} (opens in new tab)`}
+    >
+      <span>View project</span>
+      <ExternalLinkIcon />
+    </a>
+  );
+}
 
 function SocialAnchor({
   href,
@@ -131,6 +173,9 @@ export function SimpleHome() {
                     </summary>
                     <div className="home__project-body-shell">
                       <div className="home__project-body">
+                        {project.href ? (
+                          <ProjectLink href={project.href} title={project.title} />
+                        ) : null}
                         {project.paragraphs.map((paragraph) => (
                           <p key={paragraph}>{paragraph}</p>
                         ))}
