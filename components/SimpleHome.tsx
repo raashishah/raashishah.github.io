@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
-import { socialLinks } from "@/content/site";
+import { nameEasterEggHref, socialLinks } from "@/content/site";
 import { siteConfig } from "@/lib/metadata";
 
 const emailLink = socialLinks.find((item) => item.id === "email");
@@ -19,7 +19,7 @@ type GroupedItem =
   | RichLine
   | {
       label: RichLine;
-      points: readonly RichLine[];
+      points: readonly (RichLine | PullquoteParagraph)[];
     };
 
 type GroupedParagraph = {
@@ -50,7 +50,7 @@ function isGroupedParagraph(
 }
 
 function isPullquoteParagraph(
-  paragraph: BodyParagraph,
+  paragraph: BodyParagraph | PullquoteParagraph,
 ): paragraph is PullquoteParagraph {
   return typeof paragraph === "object" && "pullquote" in paragraph && "text" in paragraph;
 }
@@ -59,12 +59,6 @@ function isBulletListParagraph(
   paragraph: BodyParagraph,
 ): paragraph is BulletListParagraph {
   return typeof paragraph === "object" && "bullets" in paragraph;
-}
-
-function isNestedGroupedItem(
-  item: GroupedItem,
-): item is { label: RichLine; points: readonly RichLine[] } {
-  return typeof item === "object" && "label" in item && "points" in item;
 }
 
 type HomeEntry = {
@@ -104,8 +98,12 @@ function InlineText({ content }: { content: RichLine }) {
   );
 }
 
+function isFlatGroupedItem(item: GroupedItem): item is RichLine {
+  return typeof item === "string" || Array.isArray(item);
+}
+
 function renderGroupedItem(item: GroupedItem, itemIndex: number) {
-  if (!isNestedGroupedItem(item)) {
+  if (isFlatGroupedItem(item)) {
     return (
       <p key={itemIndex} className="home__project-body-sub">
         <InlineText content={item} />
@@ -118,14 +116,27 @@ function renderGroupedItem(item: GroupedItem, itemIndex: number) {
       <p className="home__project-body-sub">
         <InlineText content={item.label} />
       </p>
-      {item.points.map((point, pointIndex) => (
-        <p
-          key={pointIndex}
-          className="home__project-body-sub home__project-body-sub--nested"
-        >
-          <InlineText content={point} />
-        </p>
-      ))}
+      {item.points.map((point, pointIndex) => {
+        if (isPullquoteParagraph(point)) {
+          return (
+            <blockquote
+              key={pointIndex}
+              className="home__project-body-pullquote home__project-body-pullquote--nested"
+            >
+              <InlineText content={point.text} />
+            </blockquote>
+          );
+        }
+
+        return (
+          <p
+            key={pointIndex}
+            className="home__project-body-sub home__project-body-sub--nested"
+          >
+            <InlineText content={point} />
+          </p>
+        );
+      })}
     </div>
   );
 }
@@ -177,20 +188,20 @@ const projects = [
   {
     title: "Admissions Evaluation Agent",
     paragraphs: [
-      "Academic instituitions process thousands of applications every year",
+      "Academic institutions process thousands of applications every year.",
       [
         "I standardised this workflow with ",
         {
           text: "enterprise-grade agents",
           href: "https://admissions.raashishah.com",
         },
-        " made with Google's ADK",
+        " made with Google's ADK.",
       ],
       {
         bullets: [
-          "Created tools to work with bad data and rank it consistently",
-          "Used telemetry to measure and bring cost down to 15 cents per student",
-          "Also processed past data for insights",
+          "Created tools to work with bad data and rank it consistently.",
+          "Used telemetry to measure and bring cost down to 15 cents per student.",
+          "Also processed past data for insights.",
         ],
       },
     ],
@@ -198,13 +209,13 @@ const projects = [
   {
     title: "Expression - Animation Tool",
     paragraphs: [
-      "Auto-colouring frames hand drawn by an animator, in a style called frame by frame animation.",
-      "Frames are coloured one by one. For 1min 25fps shots that's 1,500 frames.",
-      "This problem remains unsolved worldwide",
-      "My goal is for artists to retain full control while giving them better tools",
+      "Auto-colouring frames hand drawn by an animator, in a style called frame-by-frame animation.",
+      "Frames are coloured one by one. For 1 min, 25 fps shots that's 1,500 frames.",
+      "This problem remains unsolved worldwide.",
+      "My goal is for artists to retain full control while giving them better tools.",
       {
         text: [
-          "Side quest - First ever to parse line art in PNG files ",
+          "Side quest: first ever to parse line art in PNG files ",
           { text: "1:1", italic: true },
           ", as the artist intended. It works with any software the artist uses.",
         ],
@@ -221,14 +232,14 @@ const projects = [
           text: "Design POV",
           href: "https://povindex.designpovindia.com/home",
         },
-        ",",
+        ".",
       ],
       {
-        text: "Worked offline regardless of footfall",
+        text: "Worked offline regardless of footfall.",
         pullquote: true,
       },
       {
-        text: "Made most of this within 12 hours",
+        text: "Made most of this within 12 hours.",
         pullquote: true,
       },
     ],
@@ -240,7 +251,7 @@ const workExperience = [
     title: "OnDevice",
     paragraphs: [
       "2025",
-      "Got back into building in AI",
+      "Got back into building AI.",
       "Collaborated on a health app for diabetic patients that uses on-device inference.",
       [
         "Executed an early GTM plan by distributing Applied AI content on ",
@@ -255,34 +266,40 @@ const workExperience = [
     title: "Pluto",
     paragraphs: [
       "2021-2024",
-      "Collaborated cross-functionally with artists and transformed a creative studio into a product and tech-led team",
+      "Collaborated cross-functionally with artists and transformed a creative studio into a product and tech-led team.",
       {
         intro: "Launched 3 digital asset products:",
         items: [
           [
             { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
-            " - MVP",
+            " - MVP.",
           ],
           {
             label: [{ text: "Pluto", href: "https://opensea.io/collection/plutomisfits" }],
-            points: ["Increased retention by 82% through A/B-tested incentives"],
+            points: [
+              {
+                text: [
+                  "First ever project in the ecosystem to ",
+                  {
+                    text: "introduce cross-platform payments",
+                    href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
+                  },
+                  ", driving 37% sales growth YoY.",
+                ],
+                pullquote: true,
+              },
+              "Increased retention by 82% through A/B-tested incentives.",
+            ],
           },
-          [
-            { text: "Create Layer", href: "https://x.com/createlayer/status/1805623167538340046/video/1" },
-            "500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
-          ],
-        ],
-      },
-      {
-        text: [
-          "First ever project in the ecosystem to ",
           {
-            text: "introduce cross-platform payments,",
-            href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
+            label: [
+              { text: "Create Layer", href: "https://x.com/createlayer/status/1805623167538340046/video/1" },
+            ],
+            points: [
+              "500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models.",
+            ],
           },
-          "driving 37% sales growth YoY",
         ],
-        pullquote: true,
       },
     ],
   },
@@ -296,18 +313,18 @@ const workExperience = [
           text: "Kotak Neo",
           href: "https://www.kotaksecurities.com/platform/kotak-neo/",
         },
-        "'s product team (their consumer trading app)",
+        "'s product team - consumer trading app.",
       ],
-      "Short stint",
+      "Short stint.",
     ],
   },
   {
     title: "Kawa Space",
     paragraphs: [
       [{ text: "2020", href: "https://www.linkedin.com/company/kawaspace/" }],
-      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
+      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density.",
       {
-        text: "Created a chatbot using Dialogflow for non-technical users to query data in natural language just by chatting - This was pre-GPT3",
+        text: "Created a chatbot using Dialogflow for non-technical users to query data in natural language just by chatting. This was pre-GPT-3.",
         pullquote: true,
       },
     ],
@@ -321,10 +338,10 @@ const workExperience = [
           href: "https://www.linkedin.com/company/aulaeducation/",
         },
       ],
-      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US",
-      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data",
+      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US.",
+      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data.",
       {
-        text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
+        text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows.",
         pullquote: true,
       },
     ],
@@ -386,7 +403,16 @@ export function SimpleHome() {
       </a>
       <main id="main-content" className="home">
         <header className="home__header">
-          <h1 className="home__name">Raashi Shah</h1>
+          <h1 className="home__name">
+            <a
+              href={nameEasterEggHref}
+              className="home__name-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Raashi Shah
+            </a>
+          </h1>
           {emailLink && calendlyLink ? (
             <nav className="home__header-contact" aria-label="Contact">
               <SocialAnchor

@@ -1,5 +1,8 @@
 import type { SocialLink } from "./types";
 
+export const nameEasterEggHref =
+  "https://open.spotify.com/track/0Si6B4gh96eFsjFMplPGtJ";
+
 export const socialLinks: SocialLink[] = [
   {
     id: "giphy",
@@ -28,7 +31,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: "spotify",
     label: "Spotify",
-    href: "https://open.spotify.com/playlist/7EkhErHErRIDI14W7E1ASF",
+    href: "https://open.spotify.com/playlist/40DrG9wUH1NO3G5IWN0YQ9",
     icon: "spotify",
   },
   {
