@@ -20,13 +20,35 @@ type GroupedItem =
       points: readonly RichLine[];
     };
 
-type BodyParagraph =
-  | string
-  | RichLine
-  | {
-      intro: RichLine;
-      items: readonly GroupedItem[];
-    };
+type GroupedParagraph = {
+  intro: RichLine;
+  items: readonly GroupedItem[];
+};
+
+type MediumParagraph = {
+  text: RichLine;
+  medium: true;
+};
+
+type BodyParagraph = string | RichLine | MediumParagraph | GroupedParagraph;
+
+function isGroupedParagraph(
+  paragraph: BodyParagraph,
+): paragraph is GroupedParagraph {
+  return typeof paragraph === "object" && "intro" in paragraph && "items" in paragraph;
+}
+
+function isMediumParagraph(
+  paragraph: BodyParagraph,
+): paragraph is MediumParagraph {
+  return typeof paragraph === "object" && "medium" in paragraph && "text" in paragraph;
+}
+
+function isNestedGroupedItem(
+  item: GroupedItem,
+): item is { label: RichLine; points: readonly RichLine[] } {
+  return typeof item === "object" && "label" in item && "points" in item;
+}
 
 type HomeEntry = {
   title: string;
@@ -63,7 +85,7 @@ function InlineText({ content }: { content: RichLine }) {
 }
 
 function renderGroupedItem(item: GroupedItem, itemIndex: number) {
-  if (typeof item === "string" || Array.isArray(item)) {
+  if (!isNestedGroupedItem(item)) {
     return (
       <p key={itemIndex} className="home__project-body-sub">
         <InlineText content={item} />
@@ -93,34 +115,42 @@ function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
     return <p>{paragraph}</p>;
   }
 
-  if (Array.isArray(paragraph)) {
+  if (isMediumParagraph(paragraph)) {
     return (
-      <p>
-        <InlineText content={paragraph} />
+      <p className="home__project-body--medium">
+        <InlineText content={paragraph.text} />
       </p>
     );
   }
 
+  if (isGroupedParagraph(paragraph)) {
+    return (
+      <div className="home__project-body-group">
+        <p>
+          <InlineText content={paragraph.intro} />
+        </p>
+        {paragraph.items.map(renderGroupedItem)}
+      </div>
+    );
+  }
+
   return (
-    <div className="home__project-body-group">
-      <p>
-        <InlineText content={paragraph.intro} />
-      </p>
-      {paragraph.items.map(renderGroupedItem)}
-    </div>
+    <p>
+      <InlineText content={paragraph} />
+    </p>
   );
 }
 
 const projects = [
   {
-    title: "Admission Evaluation Agent",
+    title: "Admissions Evaluation Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
       "Academic instituitions process thousands of applications every year",
-      "Standardised this with enterprise-grade agents made with Google's ADK", 
-      "Created tools to work with bad data and rank it consistently",
-      "Used telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
-      "Also processes past data for insights",
+      "Standardised this with enterprise-grade agents made with Google's ADK and,", 
+      "- Created tools to work with bad data and rank it consistently",
+      "- Used telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
+      "- Also processed past data for insights",
     ],
   },
   {
@@ -129,7 +159,10 @@ const projects = [
       "Auto-colouring frames hand drawn by an animator, in a style called frame by frame animation.",
       "It's a repetitive step that artists dread but can't skip. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
       "This problem remains unsolved worldwide",
-      "So far I've parsed line art in a png file (universal input) 1:1, as the artist intended - first one to ever solve this step in the pipeline - it can work with any software that the artist uses",
+      {
+        text: "While working on this - I've parsed line drawing in a PNG file (universal input) 1:1, as the artist intended. It works with any software the artist uses.",
+        medium: true,
+      },
       "My goal is for artists to retain full control while giving them better tools",
     ],
   },

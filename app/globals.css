@@ -561,6 +561,11 @@ body {
   text-wrap: pretty;
 }
 
+.home__project-body p.home__project-body--medium {
+  font-family: var(--font-medium);
+  font-weight: 500;
+}
+
 .home__project-body-group {
   display: flex;
   flex-direction: column;
