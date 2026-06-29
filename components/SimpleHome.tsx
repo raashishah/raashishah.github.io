@@ -72,13 +72,13 @@ const projects = [
     title: "Admission Evaluation Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
-      "Academic instituitions process thousands of applications every year with a workflow spread across weeks and multiple humans",
-      "Standardised this enterprise-grade agents that fit right into the pipeline and use decision-making context to qualify students",
+      "Academic instituitions process thousands of applications every year with a workflow spread across months and multiple humans",
+      "Standardised this enterprise-grade agents made with Google's ADK. Fits right into the pipeline and use decision-making context to qualify students",
       "Gave agents tools for making sense of data and grading it consistently",
-      "Did a RAG for data lookups",
+      "Created a RAG for data lookups",
       "Telemetry to measure agent performance and cost - brought cost down to 15 cents per student",
-      "Tied together with Google's ADK",
-      Can also process past data    ],
+      "Also processes past data for insights",
+    ],
   },
   {
     title: "Expression - Animation tool",
@@ -156,10 +156,10 @@ const workExperience = [
   {
     title: "Aula Education",
     paragraphs: [
-      "2018-2019",
-      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US.",
-      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data.",
-      "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows.",
+      "2018-2019 in the UK",
+      "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
+      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US",
+      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data",
     ],
   },
 ] satisfies ReadonlyArray<{
