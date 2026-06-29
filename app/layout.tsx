@@ -1,7 +1,13 @@
 import { Inter } from "next/font/google";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/metadata";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 const interMedium = Inter({
   subsets: ["latin"],
