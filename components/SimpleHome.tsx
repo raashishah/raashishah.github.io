@@ -141,7 +141,7 @@ const workExperience = [
     title: "Kotak Securities",
     paragraphs: [
       "2021",
-      "Founding hire on Kotak Neo's product team",
+      "Founding hire on Kotak Neo's product team (their consumer trading app)",
       "Short stint",
     ],
   },
