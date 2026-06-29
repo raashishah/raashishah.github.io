@@ -15,7 +15,7 @@ const projects = [
     title: "School Admissions Assessment Agent",
     href: "https://admissions.raashishah.com",
     paragraphs: [
-      "Schools get thousands of applications every year but only a percentage of available seats. Today these applications are assessed largely with humans. I made enterprise grade agents that fit right into the pipeline and use decision making context to rank leads.",
+      "Schools get thousands of applications every year but only have a percentage of that as available seats. Today these applications are assessed largely with humans. I made enterprise grade agents that fit right into the pipeline and use decision making context to rank leads.",
       "The project gave agents tools for making sense of data and grading it consistently, used RAG for data lookups, and telemetry to measure agent performance and cost — all tied together with Google's ADK. A task that would spread across weeks and multiple humans was standardised with agentic AI.",
     ],
   },
@@ -23,16 +23,16 @@ const projects = [
     title: "Expression",
     paragraphs: [
       "Expression automates colouring for frames hand drawn by the artist, in a style called frame by frame animation.",
-      "It's a repetitive step that artists dread but can't skip — no tools today offer to do this at scale. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
-      "This problem remains unsolved worldwide. So far I've solved parsing PNG line art as a universal output for the first step of the animating process, 1:1, as the artist intended.",
+      "It's a repetitive step that artists dread but can't skip - no tools today offer to do this at scale. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
+      "This problem remains unsolved worldwide. So far I've solved parsing PNG line art (universal input) 1:1, as the artist intended",
     ],
   },
   {
     title: "Offline Exhibition Navigation Web App",
     href: "https://povindex.designpovindia.com/home",
     paragraphs: [
-      "Exhibition navigation that is ultra smooth and works offline. Made in 12 hours.",
-      "Easy problems don't excite me, so I made this interesting by making it work offline at the exhibition floor.",
+      "Exhibition navigation works offline regardless of footfall.",
+      "Made in 12 hours",
     ],
   },
 ] satisfies ReadonlyArray<{
