@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/metadata";
@@ -9,17 +9,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const interMedium = Inter({
-  subsets: ["latin"],
-  weight: "500",
-  variable: "--font-inter-medium",
-  display: "swap",
-});
-
-const interRegular = Inter({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-inter-regular",
+const satoshi = localFont({
+  src: "./fonts/Satoshi-Variable.woff2",
+  variable: "--font-satoshi",
   display: "swap",
 });
 
@@ -72,7 +64,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${interMedium.className} ${interMedium.variable} ${interRegular.variable}`}>
+      <body className={`${satoshi.className} ${satoshi.variable}`}>
         {children}
       </body>
     </html>

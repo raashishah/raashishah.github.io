@@ -1,6 +1,6 @@
 :root {
-  --font-medium: var(--font-inter-medium), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-regular: var(--font-inter-regular), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-medium: var(--font-satoshi), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-regular: var(--font-satoshi), -apple-system, BlinkMacSystemFont, sans-serif;
   --text: #111010;
   --bg: #ffffff;
   --home-pad-inline: clamp(20px, 4vw, 64px);
@@ -203,16 +203,6 @@ body {
 }
 
 @media (max-width: 40rem) {
-  .home__header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .home__header-nav {
-    justify-content: flex-start;
-    width: 100%;
-  }
-
   .home__content {
     gap: clamp(28px, 5vh, 40px);
   }
