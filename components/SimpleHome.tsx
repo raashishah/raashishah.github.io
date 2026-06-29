@@ -10,12 +10,62 @@ const footerLinks = socialLinks.filter(
   (link) => link.id !== "email" && link.id !== "twitter",
 );
 
-type BodyParagraph =
+type GroupedItem =
   | string
   | {
       label: string;
       points: readonly string[];
     };
+
+type BodyParagraph =
+  | string
+  | {
+      intro: string;
+      items: readonly GroupedItem[];
+    };
+
+function renderGroupedItem(item: GroupedItem, itemIndex: number) {
+  if (typeof item === "string") {
+    return (
+      <p key={itemIndex} className="home__project-body-sub">
+        {item}
+      </p>
+    );
+  }
+
+  return (
+    <div key={itemIndex} className="home__project-body-nested">
+      <p className="home__project-body-sub">{item.label}</p>
+      {item.points.map((point, pointIndex) => (
+        <p
+          key={pointIndex}
+          className="home__project-body-sub home__project-body-sub--nested"
+        >
+          {point}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function BodyParagraphBlock({
+  paragraph,
+  index,
+}: {
+  paragraph: BodyParagraph;
+  index: number;
+}) {
+  if (typeof paragraph === "string") {
+    return <p>{paragraph}</p>;
+  }
+
+  return (
+    <div className="home__project-body-group">
+      <p>{paragraph.intro}</p>
+      {paragraph.items.map(renderGroupedItem)}
+    </div>
+  );
+}
 
 const projects = [
   {
@@ -68,34 +118,38 @@ const workExperience = [
     title: "Pluto",
     paragraphs: [
       "2021-2024",
-      "Transformed a creative studio into a tech-led team",
-      "Launched 3 products:",
-      "Magic Batch - MVP for digital asset sales",
+      "Collaborated cross-functionaly and transformed a creative studio into a product and tech-led team",
       {
-        label: "Pluto",
-        points: [
-          "First digital asset project to introducing cross-platform payments driving 37% sales growth YoY",
-          "Increased retention by 82% through A/B-tested incentives",
+        intro: "Launched 3 digital asset products:",
+        items: [
+          "1. Magic Batch - MVP",
+          {
+            label: "2. Pluto",
+            points: [
+              "First ever project to introducing cross-platform payments driving 37% sales growth YoY",
+              "Increased retention by 82% through A/B-tested incentives",
+            ],
+          },
+          "3. Create Layer - 500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
         ],
       },
-      "Create Layer - enabled 500+ users to generate 5k+ digital assets within 10 days, including some made with image-gen models",
       "Owned end-to-end product delivery",
-      "Collaborated cross-functionally with 20+ engineers, designers, artists, marketers, a PM, and execs",
     ],
   },
   {
     title: "Kotak Securities",
     paragraphs: [
       "2021",
-      "Short product role stint.",
+      "Founding hire on Kotak NEO's product team",
+      "Short stint",
     ],
   },
   {
     title: "Kawa Space",
     paragraphs: [
       "2020",
-      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density.",
-      "Created a chatbot using Dialogflow for non-technical users to get inferences just by chatting.",
+      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
+      "Created a chatbot using Dialogflow for non-technical users to query data in NLP just by chatting - This was pre-GPT3",
     ],
   },
   {
@@ -195,22 +249,9 @@ function ProjectListItem({
         }
       >
         <div className="home__project-body">
-          {item.paragraphs.map((paragraph, index) => {
-            if (typeof paragraph === "string") {
-              return <p key={index}>{paragraph}</p>;
-            }
-
-            return (
-              <div key={index} className="home__project-body-group">
-                <p>{paragraph.label}</p>
-                {paragraph.points.map((point, pointIndex) => (
-                  <p key={pointIndex} className="home__project-body-sub">
-                    {point}
-                  </p>
-                ))}
-              </div>
-            );
-          })}
+          {item.paragraphs.map((paragraph, index) => (
+            <BodyParagraphBlock key={index} paragraph={paragraph} index={index} />
+          ))}
           {item.href ? (
             <ProjectLink href={item.href} title={item.title} />
           ) : null}
