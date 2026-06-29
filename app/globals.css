@@ -268,9 +268,11 @@ body {
   font-family: var(--font-regular);
   font-weight: 400;
   font-size: var(--text-subhead);
-  min-height: 0;
-  padding: 0;
+  min-height: var(--home-touch-min);
+  padding-block: var(--space-2);
+  padding-inline: 0;
   border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .home__project-list {
@@ -587,9 +589,11 @@ body {
 
 .home__footer-nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: center;
-  gap: var(--space-2) var(--space-5);
+  width: 100%;
+  gap: var(--space-3);
 }
 
 @media (max-width: 39.99rem) {
@@ -634,11 +638,5 @@ body {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-1) var(--space-4);
-  }
-
-  .home__link--footer {
-    justify-self: start;
-    min-height: var(--home-touch-min);
-    padding-block: var(--space-2);
   }
 }
