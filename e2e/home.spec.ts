@@ -1,12 +1,11 @@
 import { test, expect } from "@playwright/test";
+import { siteConfig } from "../lib/metadata";
 
 test("homepage shows intro and project list", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Raashi Shah" })).toBeVisible();
-  await expect(page.getByText("Originally a Technical Product Manager")).toBeVisible();
-  await expect(
-    page.getByText("Now designing and developing apps and AI agents"),
-  ).toBeVisible();
+  await expect(page.getByText(siteConfig.introRole)).toBeVisible();
+  await expect(page.getByText(siteConfig.introTagline)).toBeVisible();
   await expect(page.getByText("School Admissions Assessment Agent")).toBeVisible();
   await expect(page.getByRole("link", { name: "Email" })).toBeVisible();
 });

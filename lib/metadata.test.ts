@@ -41,4 +41,16 @@ describe("metadata helpers", () => {
 
     expect(metadata.absoluteUrl("/")).toBe("https://raashishah.com/");
   });
+
+  it("keeps intro copy aligned across homepage, metadata, and OG image", async () => {
+    const metadata = await importMetadataModule();
+
+    expect(metadata.siteConfig.introRole).toBe("Technical Product Manager");
+    expect(metadata.siteConfig.introTagline).toBe(
+      "Designing and developing apps and AI agents end-to-end",
+    );
+    expect(metadata.siteConfig.description).toBe(
+      "Technical Product Manager. Designing and developing apps and AI agents end-to-end.",
+    );
+  });
 });

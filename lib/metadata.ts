@@ -2,10 +2,10 @@ export const siteConfig = {
   name: "Raashi Shah",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://raashishah.com",
   title: "apps and ai tools designer and engineer",
-  introRole: "Originally a Technical Product Manager",
-  introTagline: "Now designing and developing apps and AI agents",
+  introRole: "Technical Product Manager",
+  introTagline: "Designing and developing apps and AI agents end-to-end",
   description:
-    "Originally a Technical Product Manager. Now designing and developing apps and AI agents.",
+    "Technical Product Manager. Designing and developing apps and AI agents end-to-end.",
   creator: "Raashi Shah",
   twitterHandle: "@rash_driving",
 } as const;

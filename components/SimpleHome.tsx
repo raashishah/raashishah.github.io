@@ -35,6 +35,13 @@ const projects = [
       "Easy problems don't excite me, so I made this interesting by making it work offline at the exhibition floor.",
     ],
   },
+] satisfies ReadonlyArray<{
+  title: string;
+  paragraphs: readonly string[];
+  href?: string;
+}>;
+
+const workExperience = [
   {
     title: "OnDevice",
     paragraphs: [
@@ -146,6 +153,37 @@ function SocialAnchor({
   );
 }
 
+function ProjectListItem({
+  item,
+}: {
+  item: {
+    title: string;
+    paragraphs: readonly string[];
+    href?: string;
+  };
+}) {
+  return (
+    <li className="home__project-item">
+      <details className="home__details">
+        <summary className="home__details-summary">
+          <span className="home__project-title">{item.title}</span>
+          <span className="home__disclosure" aria-hidden="true" />
+        </summary>
+        <div className="home__project-body-shell">
+          <div className="home__project-body">
+            {item.href ? (
+              <ProjectLink href={item.href} title={item.title} />
+            ) : null}
+            {item.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </details>
+    </li>
+  );
+}
+
 export function SimpleHome() {
   return (
     <>
@@ -176,28 +214,18 @@ export function SimpleHome() {
           </section>
 
           <section className="home__projects" aria-label="Work and experience">
-            <ul className="home__project-list">
-              {projects.map((project) => (
-                <li key={project.title} className="home__project-item">
-                  <details className="home__details">
-                    <summary className="home__details-summary">
-                      <span className="home__project-title">{project.title}</span>
-                      <span className="home__disclosure" aria-hidden="true" />
-                    </summary>
-                    <div className="home__project-body-shell">
-                      <div className="home__project-body">
-                        {project.href ? (
-                          <ProjectLink href={project.href} title={project.title} />
-                        ) : null}
-                        {project.paragraphs.map((paragraph) => (
-                          <p key={paragraph}>{paragraph}</p>
-                        ))}
-                      </div>
-                    </div>
-                  </details>
-                </li>
-              ))}
-            </ul>
+            <div className="home__project-groups">
+              <ul className="home__project-list">
+                {projects.map((project) => (
+                  <ProjectListItem key={project.title} item={project} />
+                ))}
+              </ul>
+              <ul className="home__project-list">
+                {workExperience.map((role) => (
+                  <ProjectListItem key={role.title} item={role} />
+                ))}
+              </ul>
+            </div>
           </section>
         </div>
 
