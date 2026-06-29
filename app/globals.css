@@ -582,10 +582,6 @@ body {
   padding-block-start: var(--space-3);
 }
 
-.home__project-body-pullquote--nested {
-  margin-inline-start: var(--space-4);
-}
-
 .home__project-body-list {
   list-style: none;
   margin: 0;

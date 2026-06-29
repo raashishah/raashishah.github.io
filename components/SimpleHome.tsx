@@ -125,7 +125,7 @@ function renderGroupedItem(item: GroupedItem, itemIndex: number) {
           return (
             <blockquote
               key={pointIndex}
-              className="home__project-body-pullquote home__project-body-pullquote--nested"
+              className="home__project-body-pullquote"
             >
               <InlineText content={point.text} />
             </blockquote>
