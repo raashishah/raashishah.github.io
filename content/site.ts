@@ -27,7 +27,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     id: "spotify",
-    label: "Spotify playlist",
+    label: "Spotify",
     href: "https://open.spotify.com/playlist/7EkhErHErRIDI14W7E1ASF",
     icon: "spotify",
   },
