@@ -1,11 +1,13 @@
+const introRole = "Technical Product Manager, AI Engineer";
+const introTagline = "Designing and developing apps and AI agents end-to-end";
+
 export const siteConfig = {
   name: "Raashi Shah",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://raashishah.com",
   title: "apps and ai tools designer and engineer",
-  introRole: "Technical Product Manager",
-  introTagline: "Designing and developing apps and AI agents end-to-end",
-  description:
-    "Technical Product Manager. Designing and developing apps and AI agents end-to-end.",
+  introRole,
+  introTagline,
+  description: `${introRole}. ${introTagline}.`,
   creator: "Raashi Shah",
   twitterHandle: "@rash_driving",
 } as const;
