@@ -13,7 +13,7 @@
 - Eight homepage dropdowns via `AnimatedDetails`: 3 projects (Admission Evaluation Agent, Expression, Offline Exhibition Navigation Web App) + 5 jobs (OnDevice, Pluto, Kotak Securities, Kawa Space, Aula Education) as two lists with `home__project-groups` gap (no Projects/Experience section headings); work-ex titles are company name only (e.g. "OnDevice", not "Co-Founder"); all use `+` CSS disclosure pattern; "View project" link after body copy when href exists.
 - Apple HIG-level dropdown motion: `AnimatedDetails` client wrapper + CSS tokens (350ms open / 250ms close, opacity-only body reveal, height collapse on close); user explicitly does NOT want `prefers-reduced-motion` to disable site animations.
 - Work-ex and project dropdown body copy must be full text from Google Doc CV (`docs/Raashi Shah CV '26.md`) or existing project content — never short placeholders; no em dashes in homepage copy (use commas, colons, plain hyphens); preserve user's copy tone, don't rewrite stories heavily; user edits copy in `SimpleHome.tsx` directly.
-- **Never revert user's manual content edits** — only fix syntax/build errors; when committing, push their full working file changes, not just lines from the chat.
+- **Never revert user's manual content edits** — only fix syntax/build errors and spelling mistakes; when committing, push their full working file changes, not just lines from the chat.
 
 ## Learned Workspace Facts
 

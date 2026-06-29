@@ -208,9 +208,12 @@ const projects = [
       {
         bullets: [
           "Created tools to work with bad data and rank it consistently",
-          "Used telemetry to measure and bring cost down to 15 cents per student",
           "Works with past data for insights",
         ],
+      },
+      {
+        text: "Used telemetry to measure and bring cost down to 15 cents per student",
+        pullquote: true,
       },
     ],
   },
