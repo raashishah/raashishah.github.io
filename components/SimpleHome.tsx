@@ -81,12 +81,13 @@ const projects = [
     ],
   },
   {
-    title: "Expression",
+    title: "Expression - Animation tool",
     paragraphs: [
       "Expression automates colouring for frames hand drawn by the artist, in a style called frame by frame animation.",
-      "It's a repetitive step that artists dread but can't skip - no tools today offer to do this at scale. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
-      "This problem remains unsolved worldwide.",
-      "Parsing PNG line art (universal input) 1:1, as the artist intended - first one to ever solve this step in the pipeline - it can work with any software that the artist uses"
+      "It's a repetitive step that artists dread but can't skip. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
+      "This problem remains unsolved worldwide",
+      "Parsing PNG line art (universal input) 1:1, as the artist intended - first one to ever solve this step in the pipeline - it can work with any software that the artist uses",
+      "My goal is for artists to retain full control while giving them better tools",
     ],
   },
   {
@@ -140,7 +141,7 @@ const workExperience = [
     title: "Kotak Securities",
     paragraphs: [
       "2021",
-      "Founding hire on Kotak NEO's product team",
+      "Founding hire on Kotak Neo's product team",
       "Short stint",
     ],
   },
