@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { socialLinks } from "@/content/site";
 import { siteConfig } from "@/lib/metadata";
@@ -8,17 +9,20 @@ const footerLinks = socialLinks.filter(
   (link) => link.id !== "email" && link.id !== "calendly",
 );
 
+type RichSegment = string | { text: string; href: string };
+type RichText = readonly RichSegment[];
+
 type GroupedItem =
-  | string
+  | RichText
   | {
-      label: string;
-      points: readonly string[];
+      label: RichText;
+      points: readonly RichText[];
     };
 
 type BodyParagraph =
-  | string
+  | RichText
   | {
-      intro: string;
+      intro: RichText;
       items: readonly GroupedItem[];
     };
 
@@ -26,40 +30,73 @@ type HomeEntry = {
   title: string;
   paragraphs: readonly BodyParagraph[];
   href?: string;
+  linkLabel?: string;
 };
 
+function InlineText({ content }: { content: RichText }) {
+  return (
+    <>
+      {content.map((segment, index) => {
+        if (typeof segment === "string") {
+          return <Fragment key={index}>{segment}</Fragment>;
+        }
+
+        return (
+          <a
+            key={index}
+            href={segment.href}
+            className="home__inline-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {segment.text}
+          </a>
+        );
+      })}
+    </>
+  );
+}
+
 function renderGroupedItem(item: GroupedItem, itemIndex: number) {
-  if (typeof item === "string") {
+  if (!Array.isArray(item)) {
     return (
-      <p key={itemIndex} className="home__project-body-sub">
-        {item}
+      <div key={itemIndex} className="home__project-body-nested">
+        <p className="home__project-body-sub">
+          <InlineText content={item.label} />
+        </p>
+        {item.points.map((point, pointIndex) => (
+          <p
+            key={pointIndex}
+            className="home__project-body-sub home__project-body-sub--nested"
+          >
+            <InlineText content={point} />
+          </p>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <p key={itemIndex} className="home__project-body-sub">
+      <InlineText content={item} />
+    </p>
+  );
+}
+
+function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
+  if (Array.isArray(paragraph)) {
+    return (
+      <p>
+        <InlineText content={paragraph} />
       </p>
     );
   }
 
   return (
-    <div key={itemIndex} className="home__project-body-nested">
-      <p className="home__project-body-sub">{item.label}</p>
-      {item.points.map((point, pointIndex) => (
-        <p
-          key={pointIndex}
-          className="home__project-body-sub home__project-body-sub--nested"
-        >
-          {point}
-        </p>
-      ))}
-    </div>
-  );
-}
-
-function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
-  if (typeof paragraph === "string") {
-    return <p>{paragraph}</p>;
-  }
-
-  return (
     <div className="home__project-body-group">
-      <p>{paragraph.intro}</p>
+      <p>
+        <InlineText content={paragraph.intro} />
+      </p>
       {paragraph.items.map(renderGroupedItem)}
     </div>
   );
@@ -82,10 +119,10 @@ const projects = [
   {
     title: "Expression - Animation Tool",
     paragraphs: [
-      "Expression automates colouring for frames hand drawn by an animator, in a style called frame by frame animation.",
+      "Auto-colouring frames hand drawn by an animator, in a style called frame by frame animation.",
       "It's a repetitive step that artists dread but can't skip. All frames are coloured one by one. A one-minute 25fps shot has 1,500 frames.",
       "This problem remains unsolved worldwide",
-      "Parsing PNG line art (universal input) 1:1, as the artist intended - first one to ever solve this step in the pipeline - it can work with any software that the artist uses",
+      "So far I've parsed line art in a png file (universal input) 1:1, as the artist intended - first one to ever solve this step in the pipeline - it can work with any software that the artist uses",
       "My goal is for artists to retain full control while giving them better tools",
     ],
   },
@@ -129,7 +166,6 @@ const workExperience = [
           "3. Create Layer - 500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
         ],
       },
-      "Owned end-to-end product delivery",
     ],
   },
   {

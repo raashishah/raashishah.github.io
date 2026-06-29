@@ -20,7 +20,7 @@ test("project details expand with body copy", async ({ page }) => {
     .click();
   await expect(
     page.getByText(
-      "Expression automates colouring for frames hand drawn by an animator",
+      "Auto-colouring frames hand drawn by an animator",
     ),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "View Expression" })).toHaveCount(0);
