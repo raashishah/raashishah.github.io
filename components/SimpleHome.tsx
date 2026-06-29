@@ -94,7 +94,7 @@ const workExperience = [
     title: "Kawa Space",
     paragraphs: [
       "2020",
-      "Geospatial data infereusing machine learning in agriculture, rainfall, population density.",
+      "Geospatial data analysis using machine learning in agriculture, rainfall, population density.",
       "Created a chatbot using Dialogflow for non-technical users to get inferences just by chatting.",
     ],
   },
