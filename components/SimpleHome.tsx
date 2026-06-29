@@ -322,7 +322,7 @@ const workExperience = [
           text: "Kotak Neo's",
           href: "https://www.kotaksecurities.com/platform/kotak-neo/",
         },
-        "product team - consumer trading app",
+        " product team - consumer trading app",
       ],
     ],
   },
