@@ -613,7 +613,13 @@ body {
   .home__footer-nav {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
+    justify-items: stretch;
     gap: var(--space-1) var(--space-4);
+    text-align: center;
+  }
+
+  .home__link--footer {
+    justify-content: center;
+    width: 100%;
   }
 }
