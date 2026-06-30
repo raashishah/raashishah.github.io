@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
+import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { nameEasterEggHref, socialLinks } from "@/content/site";
 import { siteConfig } from "@/lib/metadata";
 
@@ -13,7 +14,7 @@ const footerLinks = [
   ),
 ];
 
-type RichLink = { text: string; href: string; medium?: true };
+type RichLink = { text: string; href: string };
 type RichMedium = { text: string; medium: true };
 type RichSegment = string | RichLink | RichMedium;
 type RichText = readonly RichSegment[];
@@ -87,11 +88,7 @@ function InlineText({ content }: { content: RichLine }) {
             <a
               key={index}
               href={segment.href}
-              className={
-                segment.medium
-                  ? "home__inline-link home__inline-medium"
-                  : "home__inline-link"
-              }
+              className="home__inline-link"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -204,20 +201,18 @@ const projects = [
         {
           text: "Admissions evaluation agent",
           href: "https://admissions.raashishah.com",
-          medium: true,
         },
         " for academic institutions",
       ],
     ],
   },
   {
-    title: "Expression - Animation Tool",
+    title: "Professional Tool for Animators",
     paragraphs: [
       [
         {
           text: "Auto-colouring for hand drawn animation",
           href: "https://github.com/raashishah/colourer",
-          medium: true,
         },
       ],
       "This problem remains unsolved worldwide",
@@ -278,13 +273,12 @@ const workExperience = [
     paragraphs: [
       [
         {
-          text: "Geospatial data analysis using machine learning",
+          text: "Geospatial data ML models",
           href: "https://www.linkedin.com/company/kawaspace/",
-          medium: true,
         },
       ],
       {
-        text: "Chatbot for users to query data, this was pre-GPT3",
+        text: "Chatbot for users to query data, this was before GPT3",
         pullquote: true,
       },
     ],
@@ -298,7 +292,6 @@ const workExperience = [
           href: "https://www.linkedin.com/company/aulaeducation/",
         },
       ],
-      "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US",
       {
         text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
         pullquote: true,
@@ -307,11 +300,18 @@ const workExperience = [
   },
 ] satisfies ReadonlyArray<HomeEntry>;
 
-function ProjectListItem({ item }: { item: HomeEntry }) {
+function ProjectListItem({
+  item,
+  accordionId,
+}: {
+  item: HomeEntry;
+  accordionId: string;
+}) {
   return (
     <li className="home__project-item">
       <AnimatedDetails
         className="home__details"
+        accordionId={accordionId}
         summary={
           <>
             <span className="home__project-title">{item.title}</span>
@@ -398,18 +398,28 @@ export function SimpleHome() {
           </section>
 
           <section className="home__projects" aria-label="Work and experience">
-            <div className="home__project-groups">
-              <ul className="home__project-list" aria-label="Projects">
-                {projects.map((project) => (
-                  <ProjectListItem key={project.title} item={project} />
-                ))}
-              </ul>
-              <ul className="home__project-list" aria-label="Experience">
-                {workExperience.map((role) => (
-                  <ProjectListItem key={role.title} item={role} />
-                ))}
-              </ul>
-            </div>
+            <DetailsAccordion>
+              <div className="home__project-groups">
+                <ul className="home__project-list" aria-label="Projects">
+                  {projects.map((project) => (
+                    <ProjectListItem
+                      key={project.title}
+                      item={project}
+                      accordionId={project.title}
+                    />
+                  ))}
+                </ul>
+                <ul className="home__project-list" aria-label="Experience">
+                  {workExperience.map((role) => (
+                    <ProjectListItem
+                      key={role.title}
+                      item={role}
+                      accordionId={role.title}
+                    />
+                  ))}
+                </ul>
+              </div>
+            </DetailsAccordion>
           </section>
         </div>
 

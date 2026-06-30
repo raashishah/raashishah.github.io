@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, type ReactNode } from "react";
+import { useDetailsAccordion } from "@/components/DetailsAccordion";
 
 const OPEN_MS = 350;
 const CLOSE_MS = 250;
@@ -12,16 +13,19 @@ type AnimatedDetailsProps = {
   className?: string;
   summary: ReactNode;
   children: ReactNode;
+  accordionId?: string;
 };
 
 export function AnimatedDetails({
   className,
   summary,
   children,
+  accordionId,
 }: AnimatedDetailsProps) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const animationCleanupRef = useRef<(() => void) | null>(null);
+  const accordion = useDetailsAccordion();
 
   const resetShellStyles = (shell: HTMLDivElement) => {
     shell.style.display = "";
@@ -109,19 +113,15 @@ export function AnimatedDetails({
     });
   };
 
-  const handleSummaryClick = (event: React.MouseEvent<HTMLElement>) => {
+  const animateClose = useCallback((): Promise<void> => {
     const details = detailsRef.current;
     const shell = shellRef.current;
-    if (!details || !shell) return;
-
-    if ((event.target as HTMLElement).closest("a")) {
-      return;
+    if (!details || !shell || !details.open) {
+      return Promise.resolve();
     }
 
-    event.preventDefault();
-    cancelAnimation();
-
-    if (details.open) {
+    return new Promise((resolve) => {
+      cancelAnimation();
       details.classList.add("home__details--closing");
       const startHeight = shell.getBoundingClientRect().height;
 
@@ -136,9 +136,41 @@ export function AnimatedDetails({
           details.open = false;
           details.classList.remove("home__details--closing");
           resetShellStyles(shell);
+          resolve();
         },
       });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!accordionId || !accordion) return;
+
+    accordion.register(accordionId, animateClose);
+    return () => accordion.unregister(accordionId);
+  }, [accordion, accordionId, animateClose]);
+
+  const handleSummaryClick = async (event: React.MouseEvent<HTMLElement>) => {
+    const details = detailsRef.current;
+    const shell = shellRef.current;
+    if (!details || !shell) return;
+
+    if ((event.target as HTMLElement).closest("a")) {
       return;
+    }
+
+    event.preventDefault();
+    cancelAnimation();
+
+    if (details.open) {
+      await animateClose();
+      if (accordionId && accordion) {
+        accordion.notifyClosed(accordionId);
+      }
+      return;
+    }
+
+    if (accordionId && accordion) {
+      await accordion.prepareOpen(accordionId);
     }
 
     details.open = true;
