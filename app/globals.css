@@ -584,8 +584,11 @@ body {
     gap: var(--space-6);
   }
 
+  .home__line--role {
+    font-size: var(--text-body);
+  }
+
   .home__line--tagline {
-    margin-top: 0;
     font-size: clamp(1.0625rem, 4.2vw, 1.1875rem);
   }
 
@@ -593,20 +596,10 @@ body {
     font-size: clamp(1.0625rem, 4.4vw, 1.1875rem);
   }
 
-  .home__project-groups,
-  .home__experience-groups {
-    gap: var(--space-5);
-  }
-
   .home__details-summary,
   .home__project-static {
     padding-inline: 0;
     margin-inline: 0;
-  }
-
-  .home__project-body-pullquote {
-    padding-inline-start: 0;
-    border-inline-start: none;
   }
 
   .home__header-contact {
@@ -620,14 +613,7 @@ body {
   .home__footer-nav {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: stretch;
+    justify-items: center;
     gap: var(--space-1) var(--space-4);
-    max-width: 18rem;
-    margin-inline: auto;
-  }
-
-  .home__link--footer {
-    justify-content: center;
-    width: 100%;
   }
 }
