@@ -1,4 +1,5 @@
 import type { PortfolioEntry } from "./types";
+import { INLINE_LINK_SEPARATOR } from "./types";
 
 export const projects = [
   {
@@ -88,9 +89,9 @@ export const workExperience = [
           text: "Pluto",
           href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
         },
-        " · ",
+        INLINE_LINK_SEPARATOR,
         { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
-        " · ",
+        INLINE_LINK_SEPARATOR,
         {
           text: "Create",
           href: "https://x.com/createlayer/status/1805623167538340046/video/1",
@@ -164,8 +165,5 @@ export const workExperience = [
     ],
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
-
-export const homepageProjects = projects;
-export const homepageWorkExperience = workExperience;
 
 export const educationLabel = "BSc in Product, Aston, UK";

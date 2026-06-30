@@ -409,36 +409,22 @@ body {
 .home__project-body-shell {
   display: grid;
   grid-template-rows: 0fr;
-}
-
-.home__details[open]:not(.home__details--closing):not(.home__details--animating)
-  .home__project-body-shell {
-  grid-template-rows: 1fr;
-}
-
-/* Close: JS pixel height collapse. Open: full height immediately, opacity reveals body. */
-.home__details--animating .home__project-body-shell {
-  display: block;
-  grid-template-rows: none;
-  overflow: hidden;
   transition: none;
 }
 
-.home__details--measuring .home__project-body-shell {
-  position: absolute;
-  visibility: hidden;
-  width: 100%;
-  height: auto;
-  grid-template-rows: none;
-  overflow: visible;
-  pointer-events: none;
+.home__details[open]:not(.home__details--closing) .home__project-body-shell {
+  grid-template-rows: 1fr;
 }
 
-.home__details--measuring .home__project-body {
-  opacity: 0;
+.home__details--opening .home__project-body-shell {
+  transition: grid-template-rows var(--duration-standard) var(--ease-out);
 }
 
-/* Close animation: keep [open] until height transition ends (see AnimatedDetails.tsx) */
+.home__details--closing .home__project-body-shell {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-short) var(--ease-in);
+}
+
 .home__details.home__details--closing .home__project-body {
   opacity: 0;
   transition-duration: var(--duration-short);
@@ -470,33 +456,11 @@ body {
   transition: opacity var(--duration-short) var(--ease-in);
 }
 
-.home__link:focus-visible,
-.home__details-summary:focus-visible {
-  outline: 2px solid var(--accent-focus-ring);
-  outline-offset: 2px;
-  color: var(--accent);
-}
-
-@media (hover: hover) {
-  .home__link:hover,
-  .home__details-summary:hover {
-    color: var(--accent);
-  }
-}
-
-@media (hover: none) {
-  .home__link:active,
-  .home__details-summary:active {
-    color: var(--accent);
-  }
-}
-
-.home__details[open]:not(.home__details--closing):not(.home__details--animating)
-  .home__project-body {
+.home__details[open]:not(.home__details--closing) .home__project-body {
   opacity: 1;
 }
 
-.home__details--animating:not(.home__details--closing) .home__project-body {
+.home__details--opening:not(.home__details--closing) .home__project-body {
   opacity: 1;
   transition-duration: var(--duration-standard);
   transition-timing-function: var(--ease-out);
@@ -524,6 +488,28 @@ body {
   vertical-align: baseline;
   position: relative;
   top: 0.06em;
+  color: var(--accent);
+}
+
+.home__link:focus-visible,
+.home__details-summary:focus-visible {
+  outline: 2px solid var(--accent-focus-ring);
+  outline-offset: 2px;
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .home__link:hover,
+  .home__details-summary:hover {
+    color: var(--accent);
+  }
+}
+
+@media (hover: none) {
+  .home__link:active,
+  .home__details-summary:active {
+    color: var(--accent);
+  }
 }
 
 .home__inline-link:focus-visible {

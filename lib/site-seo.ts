@@ -1,5 +1,6 @@
 import { projects, workExperience } from "@/content/portfolio";
-import { emailLink, socialLinks } from "@/content/site";
+import { emailLink, linksById, socialLinks } from "@/content/site";
+import type { PortfolioEntry } from "@/content/types";
 import { absoluteUrl, siteConfig } from "@/lib/metadata";
 
 export const seoConfig = {
@@ -28,15 +29,13 @@ export const llmsProfile = `Raashi Shah works at the intersection of product man
 
 Core focus areas: enterprise AI agents (admissions evaluation, RAG, telemetry), creative tooling (Expression frame-by-frame animation coloring), offline-first web apps, on-device inference, and 0-to-1 product delivery.`;
 
-function portfolioSeoName(entry: (typeof projects)[number] | (typeof workExperience)[number]) {
-  return "seoName" in entry && entry.seoName ? entry.seoName : entry.title;
+function portfolioSeoName(entry: PortfolioEntry) {
+  return entry.seoName ?? entry.title;
 }
 
-function portfolioFullHeading(
-  entry: (typeof projects)[number] | (typeof workExperience)[number],
-) {
+function portfolioFullHeading(entry: PortfolioEntry) {
   const name = portfolioSeoName(entry);
-  return "seoPeriod" in entry && entry.seoPeriod ? `${name} (${entry.seoPeriod})` : name;
+  return entry.seoPeriod ? `${name} (${entry.seoPeriod})` : name;
 }
 
 export function getStructuredDataJsonLd() {
@@ -98,7 +97,7 @@ export function getStructuredDataJsonLd() {
 export function buildLlmsTxt(): string {
   const homeUrl = absoluteUrl("/");
   const llmsFullUrl = absoluteUrl("/llms-full.txt");
-  const twitterLink = socialLinks.find((link) => link.id === "twitter")!;
+  const twitterLink = linksById.twitter;
 
   const lines = [
     `# ${siteConfig.creator}`,

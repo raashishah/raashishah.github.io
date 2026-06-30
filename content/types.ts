@@ -2,8 +2,9 @@ export type SocialLink = {
   id: string;
   label: string;
   href: string;
-  icon: "giphy" | "medium" | "linkedin" | "github" | "spotify" | "twitter" | "duolingo" | "soundcloud" | "email" | "calendly";
 };
+
+export const INLINE_LINK_SEPARATOR = " · " as const;
 
 export type RichLink = { text: string; href: string };
 export type RichSegment = string | RichLink;

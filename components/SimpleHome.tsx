@@ -4,8 +4,8 @@ import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { ExternalLinkArrow } from "@/components/ExternalLinkArrow";
 import {
   educationLabel,
-  homepageProjects,
-  homepageWorkExperience,
+  projects,
+  workExperience,
 } from "@/content/portfolio";
 import {
   calendlyLink,
@@ -13,11 +13,12 @@ import {
   footerLinks,
   nameEasterEggHref,
 } from "@/content/site";
-import type {
-  BodyParagraph,
-  PortfolioEntry,
-  PullquoteParagraph,
-  RichLine,
+import {
+  INLINE_LINK_SEPARATOR,
+  type BodyParagraph,
+  type PortfolioEntry,
+  type PullquoteParagraph,
+  type RichLine,
 } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
 
@@ -36,7 +37,7 @@ function InlineText({ content }: { content: RichLine }) {
     <>
       {content.map((segment, index) => {
         if (typeof segment === "string") {
-          if (segment === " · ") {
+          if (segment === INLINE_LINK_SEPARATOR) {
             return (
               <span key={index} className="home__inline-separator" aria-hidden="true">
                 {" · "}
@@ -183,7 +184,7 @@ export function SimpleHome() {
             <DetailsAccordion>
               <div className="home__project-groups">
                 <ul className="home__project-list" aria-label="Projects">
-                  {homepageProjects.map((project) => (
+                  {projects.map((project) => (
                     <ProjectListItem
                       key={project.id}
                       item={project}
@@ -193,7 +194,7 @@ export function SimpleHome() {
                 </ul>
                 <div className="home__experience-groups">
                   <ul className="home__project-list" aria-label="Experience">
-                    {homepageWorkExperience.map((role) => (
+                    {workExperience.map((role) => (
                       <ProjectListItem
                         key={role.id}
                         item={role}
