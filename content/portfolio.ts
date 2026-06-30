@@ -75,6 +75,34 @@ export const projects = [
 
 export const workExperience = [
   {
+    id: "pluto",
+    title: "Pluto",
+    seoPeriod: "2021–2024",
+    seoDescription:
+      "Head of Product and Tech; launched Magic Batch, Pluto, and Create Layer; drove cross-platform payments and retention growth.",
+    seoLongDetail:
+      "Collaborated with artists and transformed a creative studio into a product- and technology-led organization. Launched Magic Batch (MVP), Pluto (cross-platform payments driving 37% sales growth YoY; 82% retention lift via A/B-tested incentives), and Create Layer (500+ users, 5,000+ assets in ten days). Owned end-to-end product delivery.",
+    paragraphs: [
+      [
+        {
+          text: "Pluto",
+          href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
+        },
+        " · ",
+        { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
+        " · ",
+        {
+          text: "Create",
+          href: "https://x.com/createlayer/status/1805623167538340046/video/1",
+        },
+      ],
+      {
+        text: "Transformed a creative studio into a product led team",
+        pullquote: true,
+      },
+    ],
+  },
+  {
     id: "ondevice",
     title: "OnDevice",
     seoPeriod: "2025",
@@ -89,34 +117,6 @@ export const workExperience = [
       ],
       {
         text: "Designed a health app for diabetic patients",
-        pullquote: true,
-      },
-    ],
-  },
-  {
-    id: "pluto",
-    title: "Pluto",
-    seoPeriod: "2021–2024",
-    seoDescription:
-      "Head of Product and Tech; launched Magic Batch, Pluto, and Create Layer; drove cross-platform payments and retention growth.",
-    seoLongDetail:
-      "Collaborated with artists and transformed a creative studio into a product- and technology-led organization. Launched Magic Batch (MVP), Pluto (cross-platform payments driving 37% sales growth YoY; 82% retention lift via A/B-tested incentives), and Create Layer (500+ users, 5,000+ assets in ten days). Owned end-to-end product delivery.",
-    paragraphs: [
-      [
-        { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
-        " · ",
-        {
-          text: "Pluto",
-          href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
-        },
-        " · ",
-        {
-          text: "Create",
-          href: "https://x.com/createlayer/status/1805623167538340046/video/1",
-        },
-      ],
-      {
-        text: "Transformed a creative studio into a product led team",
         pullquote: true,
       },
     ],
