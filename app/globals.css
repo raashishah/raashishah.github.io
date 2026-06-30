@@ -313,6 +313,12 @@ body {
   gap: var(--space-7);
 }
 
+.home__experience-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
 .home__project-item {
   margin: 0;
 }
@@ -372,7 +378,7 @@ body {
   background: currentColor;
   border-radius: 1px;
   transition:
-    transform var(--duration-standard) var(--ease-standard),
+    transform var(--duration-standard) var(--ease-out),
     opacity var(--duration-short) var(--ease-out);
 }
 
@@ -394,12 +400,12 @@ body {
 
 .home__details[open]:not(.home__details--closing) .home__disclosure::before {
   transform: translateY(-50%) rotate(45deg);
-  transition-timing-function: var(--ease-standard);
+  transition-timing-function: var(--ease-out);
 }
 
 .home__details[open]:not(.home__details--closing) .home__disclosure::after {
   transform: translateX(-50%) rotate(45deg);
-  transition-timing-function: var(--ease-standard);
+  transition-timing-function: var(--ease-out);
 }
 
 .home__details:not([open]) .home__disclosure::after {
@@ -416,7 +422,8 @@ body {
   grid-template-rows: 0fr;
 }
 
-.home__details[open]:not(.home__details--closing) .home__project-body-shell {
+.home__details[open]:not(.home__details--closing):not(.home__details--animating)
+  .home__project-body-shell {
   grid-template-rows: 1fr;
 }
 
@@ -424,6 +431,8 @@ body {
 .home__details--animating .home__project-body-shell {
   display: block;
   grid-template-rows: none;
+  overflow: hidden;
+  height: 0;
   transition: none;
 }
 
@@ -451,13 +460,13 @@ body {
 
 .home__details.home__details--closing .home__disclosure::before {
   transform: translateY(-50%) rotate(0deg);
-  transition-duration: var(--duration-standard);
+  transition-duration: var(--duration-short);
   transition-timing-function: var(--ease-in);
 }
 
 .home__details.home__details--closing .home__disclosure::after {
   transform: translateX(-50%) rotate(0deg);
-  transition-duration: var(--duration-standard);
+  transition-duration: var(--duration-short);
   transition-timing-function: var(--ease-in);
 }
 
@@ -534,7 +543,12 @@ body {
   }
 }
 
-.home__details[open]:not(.home__details--closing) .home__project-body {
+.home__details[open]:not(.home__details--closing):not(.home__details--animating)
+  .home__project-body {
+  opacity: 1;
+}
+
+.home__details--animating:not(.home__details--closing) .home__project-body {
   opacity: 1;
   transition-duration: var(--duration-standard);
   transition-timing-function: var(--ease-out);

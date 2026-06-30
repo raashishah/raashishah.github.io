@@ -243,6 +243,10 @@ const workExperience = [
   {
     title: "OnDevice",
     paragraphs: [
+      {
+        text: "Designed a health app for diabetic patients",
+        pullquote: true,
+      },
       [
         "Distributed Applied AI content on ",
         { text: "Twitter", href: "https://x.com/useondevice" },
@@ -288,14 +292,23 @@ const workExperience = [
     paragraphs: [
       [
         {
-          text: "2018-2019 in the UK",
+          text: "Client relationships in the UK and the US",
           href: "https://www.linkedin.com/company/aulaeducation/",
         },
       ],
       {
-        text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
+        text: "Doubled engineering delivery speed by implementing  Product VP to implement agile workflows",
         pullquote: true,
       },
+    ],
+  },
+] satisfies ReadonlyArray<HomeEntry>;
+
+const education = [
+  {
+    title: "Undergrad in Product, Aston Uni, UK",
+    paragraphs: [
+      "BSc Product Design and Management, School of Engineering and Applied Sciences",
     ],
   },
 ] satisfies ReadonlyArray<HomeEntry>;
@@ -409,15 +422,26 @@ export function SimpleHome() {
                     />
                   ))}
                 </ul>
-                <ul className="home__project-list" aria-label="Experience">
-                  {workExperience.map((role) => (
-                    <ProjectListItem
-                      key={role.title}
-                      item={role}
-                      accordionId={role.title}
-                    />
-                  ))}
-                </ul>
+                <div className="home__experience-groups">
+                  <ul className="home__project-list" aria-label="Experience">
+                    {workExperience.map((role) => (
+                      <ProjectListItem
+                        key={role.title}
+                        item={role}
+                        accordionId={role.title}
+                      />
+                    ))}
+                  </ul>
+                  <ul className="home__project-list" aria-label="Education">
+                    {education.map((entry) => (
+                      <ProjectListItem
+                        key={entry.title}
+                        item={entry}
+                        accordionId={entry.title}
+                      />
+                    ))}
+                  </ul>
+                </div>
               </div>
             </DetailsAccordion>
           </section>

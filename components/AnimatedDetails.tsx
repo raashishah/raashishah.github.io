@@ -173,8 +173,9 @@ export function AnimatedDetails({
       await accordion.prepareOpen(accordionId);
     }
 
-    details.open = true;
     const targetHeight = measureOpenHeight(details, shell);
+    details.classList.add("home__details--animating");
+    details.open = true;
 
     animateShellHeight({
       details,
@@ -184,6 +185,7 @@ export function AnimatedDetails({
       durationMs: OPEN_MS,
       easing: OPEN_EASING,
       onComplete: () => {
+        details.classList.remove("home__details--animating");
         resetShellStyles(shell);
       },
     });
