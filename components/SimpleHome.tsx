@@ -17,6 +17,27 @@ function isPullquoteParagraph(
   return typeof paragraph === "object" && "pullquote" in paragraph;
 }
 
+function InlineBodyLink({ href, text }: { href: string; text: string }) {
+  const lastSpace = text.lastIndexOf(" ");
+  const lead = lastSpace === -1 ? null : text.slice(0, lastSpace + 1);
+  const tail = lastSpace === -1 ? text : text.slice(lastSpace + 1);
+
+  return (
+    <a
+      href={href}
+      className="home__inline-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {lead}
+      <span className="home__inline-link-end">
+        {tail}
+        <ExternalLinkArrow className="home__inline-link-icon" />
+      </span>
+    </a>
+  );
+}
+
 function InlineText({ content }: { content: RichLine }) {
   if (typeof content === "string") {
     return <>{content}</>;
@@ -38,16 +59,7 @@ function InlineText({ content }: { content: RichLine }) {
         }
 
         return (
-          <a
-            key={index}
-            href={segment.href}
-            className="home__inline-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {segment.text}
-            <ExternalLinkArrow className="home__inline-link-icon" />
-          </a>
+          <InlineBodyLink key={index} href={segment.href} text={segment.text} />
         );
       })}
     </>

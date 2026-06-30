@@ -238,6 +238,7 @@ body {
   letter-spacing: -0.015em;
   color: var(--text);
   margin-top: var(--space-1);
+  text-wrap: balance;
 }
 
 .home__link {
@@ -480,6 +481,11 @@ body {
   text-decoration: none;
   border-radius: 2px;
   transition: color var(--duration-short) var(--ease-out);
+  text-wrap: wrap;
+}
+
+.home__inline-link-end {
+  white-space: nowrap;
 }
 
 .home__inline-link-icon {
