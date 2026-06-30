@@ -71,6 +71,26 @@ type HomeEntry = {
   paragraphs: readonly BodyParagraph[];
 };
 
+function ExternalLinkArrow({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M3.5 8.5 8.5 3.5M8.5 3.5H4.5M8.5 3.5v4.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function InlineText({ content }: { content: RichLine }) {
   if (typeof content === "string") {
     return <>{content}</>;
@@ -93,6 +113,7 @@ function InlineText({ content }: { content: RichLine }) {
               rel="noopener noreferrer"
             >
               {segment.text}
+              <ExternalLinkArrow className="home__inline-link-icon" />
             </a>
           );
         }
@@ -202,8 +223,11 @@ const projects = [
           text: "Admissions evaluation agent",
           href: "https://admissions.raashishah.com",
         },
-        " for academic institutions",
       ],
+      {
+        text: "for academic institutions",
+        pullquote: true,
+      },
     ],
   },
   {
@@ -215,7 +239,10 @@ const projects = [
           href: "https://github.com/raashishah/colourer",
         },
       ],
-      "This problem remains unsolved worldwide",
+      {
+        text: "This problem remains unsolved worldwide",
+        pullquote: true,
+      },
     ],
   },
   {
@@ -243,36 +270,36 @@ const workExperience = [
   {
     title: "OnDevice",
     paragraphs: [
-      {
-        text: "Designed a health app for diabetic patients",
-        pullquote: true,
-      },
       [
         "Distributed Applied AI content on ",
         { text: "Twitter", href: "https://x.com/useondevice" },
       ],
+      {
+        text: "Designed a health app for diabetic patients",
+        pullquote: true,
+      },
     ],
   },
   {
     title: "Pluto",
     paragraphs: [
-      {
-        text: "Transformed a creative studio into a product led team",
-        pullquote: true,
-      },
+      [{ text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" }],
       [
-        { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
-        " | ",
         {
           text: "Pluto",
           href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
         },
-        " | ",
+      ],
+      [
         {
           text: "Create",
           href: "https://x.com/createlayer/status/1805623167538340046/video/1",
         },
       ],
+      {
+        text: "Transformed a creative studio into a product led team",
+        pullquote: true,
+      },
     ],
   },
   {
@@ -285,7 +312,7 @@ const workExperience = [
         },
       ],
       {
-        text: "Pre-GPT3 chatbot for users to get inference simply by asking",
+        text: "Chatbot for users to get inference simply by asking, made before GPT3",
         pullquote: true,
       },
     ],
@@ -300,14 +327,14 @@ const workExperience = [
         },
       ],
       {
-        text: "Doubled engineering delivery speed by implementing agile workflows",
+        text: "Optimised engineering workflows and doubled delivery speed",
         pullquote: true,
       },
     ],
   },
 ] satisfies ReadonlyArray<HomeEntry>;
 
-const educationLabel = "BSc Product Design and Mgmt, Aston, UK";
+const educationLabel = "BSc in Product, Aston, UK..";
 
 function ProjectListItem({
   item,
@@ -430,8 +457,8 @@ export function SimpleHome() {
                   </ul>
                   <ul className="home__project-list" aria-label="Education">
                     <li className="home__project-item">
-                      <p className="home__project-static">
-                        <span className="home__project-title">{educationLabel}</span>
+                      <p className="home__project-static home__line home__line--role">
+                        {educationLabel}
                       </p>
                     </li>
                   </ul>
