@@ -16,7 +16,7 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.locator(".home__line--tagline")).toHaveText(
     siteConfig.introTagline,
   );
-  await expect(page.getByText("Entreprise-grade Agents")).toBeVisible();
+  await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
   await expect(page.getByRole("link", { name: "email me" })).toBeVisible();
 });
 
@@ -41,7 +41,7 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Entreprise-grade Agents" })
+    .filter({ hasText: "Enterprise-Grade Agents" })
     .click();
 
   const projectLink = page.getByRole("link", {
@@ -53,7 +53,7 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
     "https://admissions.raashishah.com",
   );
   await expect(
-    page.getByRole("link", { name: /View Entreprise-grade Agents/ }),
+    page.getByRole("link", { name: /View Enterprise-Grade Agents/ }),
   ).toHaveCount(0);
 });
 
@@ -61,7 +61,7 @@ test("opening a second dropdown closes the first", async ({ page }) => {
   await page.goto("/");
   const enterpriseDetails = page
     .locator("details")
-    .filter({ hasText: "Entreprise-grade Agents" });
+    .filter({ hasText: "Enterprise-Grade Agents" });
   const onDeviceDetails = page.locator("details").filter({ hasText: "OnDevice" });
 
   await enterpriseDetails.locator("summary").click();

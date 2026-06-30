@@ -4,7 +4,7 @@ import { INLINE_LINK_SEPARATOR } from "./types";
 export const projects = [
   {
     id: "admissions-agent",
-    title: "Entreprise-grade Agents",
+    title: "Enterprise-Grade Agents",
     seoName: "Admission Evaluation Agent",
     primaryUrl: "https://admissions.raashishah.com",
     seoDescription:
@@ -48,8 +48,8 @@ export const projects = [
   },
   {
     id: "offline-expo-nav",
-    title: "Offline Expo Navigation",
-    seoName: "Offline Exhibition Navigation",
+    title: "Expo Offline Navigation",
+    seoName: "Expo Offline Navigation",
     primaryUrl: "https://povindex.designpovindia.com/home",
     seoDescription:
       "Offline-capable exhibition navigation web app built for high footfall environments.",
@@ -67,7 +67,7 @@ export const projects = [
         pullquote: true,
       },
       {
-        text: "Made 99% of this in 12 hours",
+        text: "built in 12hrs",
         pullquote: true,
       },
     ],
@@ -112,10 +112,7 @@ export const workExperience = [
     seoLongDetail:
       "Returned to hands-on AI building. Collaborated on a diabetic health app using on-device inference. Executed early go-to-market through applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
     paragraphs: [
-      [
-        "Distributed Applied AI content on ",
-        { text: "Twitter", href: "https://x.com/useondevice" },
-      ],
+      [{ text: "Twitter", href: "https://x.com/useondevice" }],
       {
         text: "Designed a health app for diabetic patients",
         pullquote: true,
