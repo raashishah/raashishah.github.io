@@ -307,7 +307,7 @@ const workExperience = [
   },
 ] satisfies ReadonlyArray<HomeEntry>;
 
-const educationLabel = "BSc Product Design and Mgmt, Aston Uni, UK";
+const educationLabel = "BSc Product Design and Mgmt, Aston, UK";
 
 function ProjectListItem({
   item,
