@@ -135,6 +135,7 @@ function SocialAnchor({
 }
 
 export function SimpleHome({
+  creatorName,
   nameEasterEggHref,
   emailLink,
   calendlyLink,
@@ -159,7 +160,7 @@ export function SimpleHome({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Raashi Shah
+              {creatorName}
             </a>
           </h1>
           <nav className="home__header-contact" aria-label="Contact">

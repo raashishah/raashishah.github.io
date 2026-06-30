@@ -1,8 +1,6 @@
-import { SimpleHomeClient } from "@/components/SimpleHomeClient";
+import { SimpleHome } from "@/components/SimpleHome";
 import { getHomeContent } from "@/lib/home-content";
 
-export const dynamic = "force-dynamic";
-
 export default function HomePage() {
-  return <SimpleHomeClient initialContent={getHomeContent()} />;
+  return <SimpleHome {...getHomeContent()} />;
 }

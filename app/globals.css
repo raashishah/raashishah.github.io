@@ -15,7 +15,7 @@
   --accent-focus-ring: color-mix(in srgb, var(--accent) 40%, transparent);
 
   --text: var(--ink);
-  --text-body: var(--ink-secondary);
+  --color-body: var(--ink-secondary);
   --text-muted: var(--ink-tertiary);
   --bg: var(--surface);
 
@@ -148,7 +148,6 @@ body {
   font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.2;
-  text-wrap: pretty;
   overflow: visible;
   /* Satoshi medium glyphs can paint outside the first character box */
   padding-inline-start: 0.4rem;
@@ -191,7 +190,6 @@ body {
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.022em;
-  text-wrap: balance;
 }
 
 .home__name-link {
@@ -478,7 +476,6 @@ body {
   text-decoration: none;
   border-radius: 2px;
   transition: color var(--duration-short) var(--ease-out);
-  text-wrap: wrap;
 }
 
 .home__inline-link-icon {
@@ -538,7 +535,7 @@ body {
   font-weight: 400;
   font-size: var(--text-body);
   line-height: 1.55;
-  color: var(--text-body);
+  color: var(--color-body);
 }
 
 .home__project-body-pullquote {
@@ -550,7 +547,7 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 1.55;
-  color: var(--text-body);
+  color: var(--color-body);
 }
 
 .home__project-body-pullquote + .home__project-body-pullquote {
@@ -602,6 +599,7 @@ body {
 
   .home__header-contact {
     padding-inline-start: 0;
+    white-space: nowrap;
   }
 
   .home__footer {

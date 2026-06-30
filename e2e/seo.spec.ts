@@ -27,7 +27,7 @@ test.describe("SEO and LLM discovery", () => {
       siteConfig.introRole,
     );
     await expect(page.locator(".home__line--tagline")).toHaveText(
-      "Designing and developing apps and AI agents end-to-end",
+      siteConfig.introTagline,
     );
   });
 
