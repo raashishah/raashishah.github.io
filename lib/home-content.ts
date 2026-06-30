@@ -9,6 +9,7 @@ import type { PortfolioEntry, SocialLink } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
 
 export type HomeContent = {
+  creatorName: string;
   nameEasterEggHref: string;
   emailLink: SocialLink;
   calendlyLink: SocialLink;
@@ -22,6 +23,7 @@ export type HomeContent = {
 
 export function getHomeContent(): HomeContent {
   return {
+    creatorName: siteConfig.name,
     nameEasterEggHref,
     emailLink,
     calendlyLink,

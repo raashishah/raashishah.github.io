@@ -44,15 +44,10 @@ describe("metadata helpers", () => {
 
   it("keeps intro copy aligned across homepage, metadata, and OG image", async () => {
     const metadata = await importMetadataModule();
+    const { siteConfig } = metadata;
 
-    expect(metadata.siteConfig.introRole).toBe(
-      "Technical Product Manager, AI Engineer",
-    );
-    expect(metadata.siteConfig.introTagline).toBe(
-      "Designing and developing apps and AI agents end-to-end",
-    );
-    expect(metadata.siteConfig.description).toBe(
-      "Technical Product Manager, AI Engineer, Designing and developing apps and AI agents end-to-end",
-    );
+    expect(siteConfig.description).toContain(siteConfig.introRole);
+    expect(siteConfig.description).toContain(siteConfig.introTagline);
+    expect(siteConfig.creator).toBe(siteConfig.name);
   });
 });

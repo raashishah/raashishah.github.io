@@ -1,9 +1,17 @@
 import { test, expect } from "@playwright/test";
 import { siteConfig } from "../lib/metadata";
+import {
+  MOBILE_WIDTHS,
+  assertHeaderContactDoesNotOrphanOr,
+  assertInlineLinkArrowOnLastLine,
+  assertNoHorizontalScroll,
+  getBodyCopyColor,
+  getFirstLineText,
+} from "./helpers/mobile-layout";
 
 test("homepage shows intro and project list", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Raashi Shah" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: siteConfig.name })).toBeVisible();
   await expect(page.locator(".home__intro .home__line--role")).toHaveText(siteConfig.introRole);
   await expect(page.locator(".home__line--tagline")).toHaveText(
     siteConfig.introTagline,
@@ -73,90 +81,80 @@ test("skip link targets main content", async ({ page }) => {
   await expect(page.locator("#main-content")).toBeVisible();
 });
 
-test("mobile inline links keep the arrow on the last line", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
+test("expanded body copy uses the secondary ink color", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
     .filter({ hasText: "Professional Tool for Animators" })
     .click();
 
-  const arrowOnLastLine = await page.evaluate(() => {
-    const link = document.querySelector(".home__details[open] .home__inline-link");
-    const icon = link?.querySelector(".home__inline-link-icon");
-    if (!link || !icon) {
-      return false;
-    }
-
-    const range = document.createRange();
-    range.selectNodeContents(link);
-    const lineTops = Array.from(range.getClientRects()).map((rect) => rect.top);
-    const lastLineTop = Math.max(...lineTops);
-
-    return Math.abs(icon.getBoundingClientRect().top - lastLineTop) < 4;
-  });
-
-  expect(arrowOnLastLine).toBe(true);
+  await expect(await getBodyCopyColor(page)).toBe("rgb(81, 81, 84)");
 });
 
-test("mobile pullquotes do not keep left indent", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
-  await page
-    .locator("summary.home__details-summary")
-    .filter({ hasText: "Professional Tool for Animators" })
-    .click();
+test.describe("mobile layout", () => {
+  for (const width of MOBILE_WIDTHS) {
+    test(`no horizontal scroll at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/");
+      await assertNoHorizontalScroll(page);
+    });
 
-  const pullquoteStyles = await page.evaluate(() => {
-    const pullquote = document.querySelector(".home__project-body-pullquote");
-    if (!pullquote) {
-      return null;
-    }
+    test(`tagline fills the line before wrapping at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/");
 
-    const styles = getComputedStyle(pullquote);
-    return {
-      paddingInlineStart: styles.paddingInlineStart,
-      borderInlineStartWidth: styles.borderInlineStartWidth,
-    };
-  });
+      const firstLine = await getFirstLineText(page, ".home__line--tagline");
+      expect(firstLine).toContain("apps");
+      expect(firstLine.endsWith("developing")).toBe(false);
+    });
 
-  expect(pullquoteStyles).toEqual({
-    paddingInlineStart: "0px",
-    borderInlineStartWidth: "0px",
-  });
-});
+    test(`inline link arrow stays on the last line at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/");
+      await page
+        .locator("summary.home__details-summary")
+        .filter({ hasText: "Professional Tool for Animators" })
+        .click();
 
-test("mobile tagline fills the line before wrapping", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+      await assertInlineLinkArrowOnLastLine(
+        page,
+        ".home__details[open] .home__inline-link",
+      );
+    });
 
-  const firstLine = await page.evaluate(() => {
-    const el = document.querySelector(".home__line--tagline");
-    if (!el) {
-      return "";
-    }
+    test(`pullquotes have no left indent at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/");
+      await page
+        .locator("summary.home__details-summary")
+        .filter({ hasText: "Professional Tool for Animators" })
+        .click();
 
-    const range = document.createRange();
-    const text = el.textContent ?? "";
-    let lineTop: number | null = null;
-    let firstLineEnd = text.length;
+      const pullquoteStyles = await page.evaluate(() => {
+        const pullquote = document.querySelector(
+          ".home__details[open] .home__project-body-pullquote",
+        );
+        if (!pullquote) {
+          return null;
+        }
 
-    for (let index = 0; index < text.length; index += 1) {
-      range.setStart(el.firstChild ?? el, index);
-      range.setEnd(el.firstChild ?? el, index + 1);
-      const top = range.getBoundingClientRect().top;
+        const styles = getComputedStyle(pullquote);
+        return {
+          paddingInlineStart: styles.paddingInlineStart,
+          borderInlineStartWidth: styles.borderInlineStartWidth,
+        };
+      });
 
-      if (lineTop !== null && Math.abs(top - lineTop) > 2) {
-        firstLineEnd = index;
-        break;
-      }
+      expect(pullquoteStyles).toEqual({
+        paddingInlineStart: "0px",
+        borderInlineStartWidth: "0px",
+      });
+    });
 
-      lineTop = top;
-    }
-
-    return text.slice(0, firstLineEnd).trim();
-  });
-
-  expect(firstLine).toContain("apps");
-  expect(firstLine.endsWith("developing")).toBe(false);
+    test(`header contact does not orphan or at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/");
+      await assertHeaderContactDoesNotOrphanOr(page);
+    });
+  }
 });
