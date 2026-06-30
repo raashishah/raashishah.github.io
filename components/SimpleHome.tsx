@@ -3,24 +3,13 @@ import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { ExternalLinkArrow } from "@/components/ExternalLinkArrow";
 import {
-  educationLabel,
-  projects,
-  workExperience,
-} from "@/content/portfolio";
-import {
-  calendlyLink,
-  emailLink,
-  footerLinks,
-  nameEasterEggHref,
-} from "@/content/site";
-import {
   INLINE_LINK_SEPARATOR,
   type BodyParagraph,
   type PortfolioEntry,
   type PullquoteParagraph,
   type RichLine,
 } from "@/content/types";
-import { siteConfig } from "@/lib/metadata";
+import type { HomeContent } from "@/lib/home-content";
 
 function isPullquoteParagraph(
   paragraph: BodyParagraph,
@@ -139,7 +128,17 @@ function SocialAnchor({
   );
 }
 
-export function SimpleHome() {
+export function SimpleHome({
+  nameEasterEggHref,
+  emailLink,
+  calendlyLink,
+  footerLinks,
+  introRole,
+  introTagline,
+  projects,
+  workExperience,
+  educationLabel,
+}: HomeContent) {
   return (
     <>
       <a href="#main-content" className="skip-link">
@@ -174,10 +173,8 @@ export function SimpleHome() {
 
         <div className="home__content">
           <section className="home__intro" aria-label="About">
-            <p className="home__line home__line--role">{siteConfig.introRole}</p>
-            <p className="home__line home__line--tagline">
-              {siteConfig.introTagline}
-            </p>
+            <p className="home__line home__line--role">{introRole}</p>
+            <p className="home__line home__line--tagline">{introTagline}</p>
           </section>
 
           <section aria-label="Work and experience">
