@@ -282,7 +282,7 @@ const workExperience = [
         },
       ],
       {
-        text: "Chatbot for users to query data, this was before GPT3",
+        text: "Pre-GPT3 chatbot for users to get inference simply by asking",
         pullquote: true,
       },
     ],
