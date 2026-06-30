@@ -297,7 +297,7 @@ const workExperience = [
         },
       ],
       {
-        text: "Doubled engineering delivery speed by implementing  Product VP to implement agile workflows",
+        text: "Doubled engineering delivery speed by implementing agile workflows",
         pullquote: true,
       },
     ],
