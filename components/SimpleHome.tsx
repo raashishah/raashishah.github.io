@@ -13,7 +13,7 @@ const footerLinks = [
   ),
 ];
 
-type RichLink = { text: string; href: string };
+type RichLink = { text: string; href: string; medium?: true };
 type RichMedium = { text: string; medium: true };
 type RichSegment = string | RichLink | RichMedium;
 type RichText = readonly RichSegment[];
@@ -87,7 +87,11 @@ function InlineText({ content }: { content: RichLine }) {
             <a
               key={index}
               href={segment.href}
-              className="home__inline-link"
+              className={
+                segment.medium
+                  ? "home__inline-link home__inline-medium"
+                  : "home__inline-link"
+              }
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -194,51 +198,27 @@ function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
 
 const projects = [
   {
-    title: "Admissions Evaluation Agent",
+    title: "Entreprise-grade Agents",
     paragraphs: [
-      "Academic institutions process thousands of applications every year",
       [
-        "I standardised this workflow with ",
+        "(",
         {
-          text: "enterprise-grade agents",
+          text: "Admissions evaluation agent",
           href: "https://admissions.raashishah.com",
+          medium: true,
         },
-        " made with Google's ADK",
+        ") for academic institutions",
       ],
-      {
-        bullets: [
-          "Created tools to work with bad data and rank it consistently",
-          "Works with past data for insights",
-        ],
-      },
-      {
-        text: "Used telemetry to measure and bring cost down to 15 cents per student",
-        pullquote: true,
-      },
     ],
   },
   {
     title: "Expression - Animation Tool",
-    paragraphs: [
-      "Auto-colouring frames hand drawn by an animator, in a style called frame-by-frame animation",
-      "This problem remains unsolved worldwide",
-      "Frames are coloured one by one, for 1 min, 25 fps shots that's 1,500 frames",
-      "My goal is for artists to retain full control while giving them better tools",
-      {
-        text: [
-          "Side quest: first ever to parse line art in PNG files ",
-          { text: "1:1", medium: true },
-          ", as the artist intended, it works with any software the artist uses",
-        ],
-        pullquote: true,
-      },
-    ],
+    paragraphs: ["This problem remains unsolved worldwide"],
   },
   {
     title: "Offline Expo Navigation",
     paragraphs: [
       [
-        "Web app for an architecture exhibition, ",
         {
           text: "Design POV",
           href: "https://povindex.designpovindia.com/home",
@@ -260,73 +240,29 @@ const workExperience = [
   {
     title: "OnDevice",
     paragraphs: [
-      "2025",
       "Collaborated and designed a health app for diabetic patients that uses on-device inference",
       [
         "Distributed Applied AI content on ",
         { text: "Twitter", href: "https://x.com/useondevice" },
-        " and ",
-        { text: "YouTube", href: "https://www.youtube.com/@raashi_shah" },
-        ", got 4k+ pre-launch views as an early-GTM",
       ],
-      {
-        text: "Got back into building in AI",
-        pullquote: true,
-      },
     ],
   },
   {
     title: "Pluto",
     paragraphs: [
-      "2021-2024",
-      "Collaborated cross-functionally with artists and transformed a creative studio into a product and tech-led team",
-      {
-        intro: "Launched 3 digital asset products:",
-        items: [
-          [
-            { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
-            " - MVP",
-          ],
-          {
-            label: [{ text: "Pluto", href: "https://opensea.io/collection/plutomisfits" }],
-            points: [
-              {
-                text: [
-                  "First ever project in the ecosystem to ",
-                  {
-                    text: "introduce cross-platform payments",
-                    href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
-                  },
-                  ", driving 37% sales growth YoY",
-                ],
-                pullquote: true,
-              },
-              "Increased retention by 82% through A/B-tested incentives",
-            ],
-          },
-          {
-            label: [
-              { text: "Create Layer", href: "https://x.com/createlayer/status/1805623167538340046/video/1" },
-            ],
-            points: [
-              "500+ users generated 5k+ digital assets within 10 days, including some made with image-gen models",
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Kotak Securities",
-    paragraphs: [
-      "2021",
+      "Transformed a creative studio into a product and tech-led team",
+      [{ text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" }],
       [
-        "Short stint, founding hire on ",
         {
-          text: "Kotak Neo's",
-          href: "https://www.kotaksecurities.com/platform/kotak-neo/",
+          text: "Pluto",
+          href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
         },
-        " product team - consumer trading app",
+      ],
+      [
+        {
+          text: "Create Layer",
+          href: "https://x.com/createlayer/status/1805623167538340046/video/1",
+        },
       ],
     ],
   },
