@@ -51,7 +51,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     id: "calendly",
-    label: "let's meet sometime",
+    label: "let's meet",
     href: "https://calendly.com/raashishah-work/new-meeting",
   },
 ];

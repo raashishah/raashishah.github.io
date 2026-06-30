@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { ExternalLinkArrow } from "@/components/ExternalLinkArrow";
+import { FooterSocialIcon } from "@/components/SocialIcons";
 import {
   INLINE_LINK_SEPARATOR,
   type BodyParagraph,
@@ -113,13 +114,16 @@ function SocialAnchor({
   href,
   label,
   className,
+  linkId,
 }: {
   href: string;
   label: string;
   className?: string;
+  linkId?: string;
 }) {
   const isMailto = href.startsWith("mailto:");
   const accessibleLabel = isMailto ? label : `${label} (opens in new tab)`;
+  const icon = linkId ? <FooterSocialIcon id={linkId} /> : null;
 
   return (
     <a
@@ -129,6 +133,7 @@ function SocialAnchor({
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noopener noreferrer"}
     >
+      {icon}
       {label}
     </a>
   );
@@ -226,6 +231,7 @@ export function SimpleHome({
                 key={link.id}
                 href={link.href}
                 label={link.label}
+                linkId={link.id}
                 className="home__link home__link--footer"
               />
             ))}

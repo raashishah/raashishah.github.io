@@ -18,6 +18,7 @@ test("homepage shows intro and project list", async ({ page }) => {
   );
   await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
   await expect(page.getByRole("link", { name: "email me" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "let's meet" })).toBeVisible();
 });
 
 test("project details expand with body copy", async ({ page }) => {
