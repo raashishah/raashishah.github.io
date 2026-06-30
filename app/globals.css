@@ -526,7 +526,7 @@ body {
 }
 
 .home__inline-separator {
-  color: var(--accent);
+  color: var(--text-muted);
 }
 
 .home__project-body p {
