@@ -73,7 +73,7 @@ test("skip link targets main content", async ({ page }) => {
   await expect(page.locator("#main-content")).toBeVisible();
 });
 
-test("mobile inline links keep the arrow on the last word line", async ({ page }) => {
+test("mobile inline links keep the arrow on the last line", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await page
@@ -81,71 +81,82 @@ test("mobile inline links keep the arrow on the last word line", async ({ page }
     .filter({ hasText: "Professional Tool for Animators" })
     .click();
 
-  const arrowSharesLastWordLine = await page.evaluate(() => {
-    const end = document.querySelector(
-      ".home__details[open] .home__inline-link-end",
-    );
-    const icon = end?.querySelector(".home__inline-link-icon");
-    if (!end || !icon) {
+  const arrowOnLastLine = await page.evaluate(() => {
+    const link = document.querySelector(".home__details[open] .home__inline-link");
+    const icon = link?.querySelector(".home__inline-link-icon");
+    if (!link || !icon) {
       return false;
     }
 
-    return (
-      Math.abs(icon.getBoundingClientRect().top - end.getBoundingClientRect().top) <
-      3
-    );
+    const range = document.createRange();
+    range.selectNodeContents(link);
+    const lineTops = Array.from(range.getClientRects()).map((rect) => rect.top);
+    const lastLineTop = Math.max(...lineTops);
+
+    return Math.abs(icon.getBoundingClientRect().top - lastLineTop) < 4;
   });
 
-  expect(arrowSharesLastWordLine).toBe(true);
+  expect(arrowOnLastLine).toBe(true);
 });
 
-test("mobile tagline does not orphan AI from agents", async ({ page }) => {
+test("mobile pullquotes do not keep left indent", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Professional Tool for Animators" })
+    .click();
+
+  const pullquoteStyles = await page.evaluate(() => {
+    const pullquote = document.querySelector(".home__project-body-pullquote");
+    if (!pullquote) {
+      return null;
+    }
+
+    const styles = getComputedStyle(pullquote);
+    return {
+      paddingInlineStart: styles.paddingInlineStart,
+      borderInlineStartWidth: styles.borderInlineStartWidth,
+    };
+  });
+
+  expect(pullquoteStyles).toEqual({
+    paddingInlineStart: "0px",
+    borderInlineStartWidth: "0px",
+  });
+});
+
+test("mobile tagline fills the line before wrapping", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
 
-  const lines = await page.evaluate(() => {
+  const firstLine = await page.evaluate(() => {
     const el = document.querySelector(".home__line--tagline");
     if (!el) {
-      return [];
+      return "";
     }
 
-    const rendered: string[] = [];
-    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-    let node: Node | null = walker.nextNode();
+    const range = document.createRange();
+    const text = el.textContent ?? "";
+    let lineTop: number | null = null;
+    let firstLineEnd = text.length;
 
-    while (node) {
-      const text = node.textContent ?? "";
-      const range = document.createRange();
-      let lineTop: number | null = null;
-      let lineStart = 0;
+    for (let index = 0; index < text.length; index += 1) {
+      range.setStart(el.firstChild ?? el, index);
+      range.setEnd(el.firstChild ?? el, index + 1);
+      const top = range.getBoundingClientRect().top;
 
-      for (let index = 0; index <= text.length; index += 1) {
-        if (index < text.length) {
-          range.setStart(node, index);
-          range.setEnd(node, index + 1);
-        }
-
-        const top = index < text.length ? range.getBoundingClientRect().top : null;
-        if (lineTop !== null && top !== null && Math.abs(top - lineTop) > 2) {
-          rendered.push(text.slice(lineStart, index).trimEnd());
-          lineStart = index;
-        }
-
-        if (top !== null) {
-          lineTop = top;
-        }
+      if (lineTop !== null && Math.abs(top - lineTop) > 2) {
+        firstLineEnd = index;
+        break;
       }
 
-      if (lineStart < text.length) {
-        rendered.push(text.slice(lineStart).trim());
-      }
-
-      node = walker.nextNode();
+      lineTop = top;
     }
 
-    return rendered.filter(Boolean);
+    return text.slice(0, firstLineEnd).trim();
   });
 
-  expect(lines.some((line) => line.endsWith(" AI"))).toBe(false);
-  expect(lines.some((line) => line.startsWith("agents"))).toBe(false);
+  expect(firstLine).toContain("apps");
+  expect(firstLine.endsWith("developing")).toBe(false);
 });

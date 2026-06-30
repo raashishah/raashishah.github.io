@@ -18,10 +18,6 @@ function isPullquoteParagraph(
 }
 
 function InlineBodyLink({ href, text }: { href: string; text: string }) {
-  const lastSpace = text.lastIndexOf(" ");
-  const lead = lastSpace === -1 ? null : text.slice(0, lastSpace + 1);
-  const tail = lastSpace === -1 ? text : text.slice(lastSpace + 1);
-
   return (
     <a
       href={href}
@@ -29,11 +25,9 @@ function InlineBodyLink({ href, text }: { href: string; text: string }) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      {lead}
-      <span className="home__inline-link-end">
-        {tail}
-        <ExternalLinkArrow className="home__inline-link-icon" />
-      </span>
+      {text}
+      {"\u00a0"}
+      <ExternalLinkArrow className="home__inline-link-icon" />
     </a>
   );
 }
