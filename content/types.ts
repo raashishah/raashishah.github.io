@@ -20,5 +20,4 @@ export type PortfolioEntry = {
   seoLongDetail?: string;
   seoPeriod?: string;
   paragraphs: readonly BodyParagraph[];
-  showOnHomepage?: boolean;
 };

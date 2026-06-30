@@ -122,16 +122,6 @@ export const workExperience = [
     ],
   },
   {
-    id: "kotak-securities",
-    title: "Kotak Securities",
-    seoPeriod: "2021",
-    seoDescription: "Founding product manager on Kotak Neo consumer trading app.",
-    seoLongDetail:
-      "Founding hire on Kotak Neo consumer trading app product team.",
-    paragraphs: [],
-    showOnHomepage: false,
-  },
-  {
     id: "kawa-space",
     title: "Kawa Space",
     seoPeriod: "2020",
@@ -176,8 +166,6 @@ export const workExperience = [
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
 
 export const homepageProjects = projects;
-export const homepageWorkExperience = workExperience.filter(
-  (entry) => entry.showOnHomepage !== false,
-);
+export const homepageWorkExperience = workExperience;
 
 export const educationLabel = "BSc in Product, Aston, UK";

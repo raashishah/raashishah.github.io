@@ -24,7 +24,7 @@ export const seoConfig = {
 export const llmsSummary =
   "Technical product manager and engineer with seven years at early-stage startups, building AI agent systems, consumer apps, and product-led teams end-to-end.";
 
-export const llmsProfile = `Raashi Shah works at the intersection of product management and hands-on engineering. She has led cross-functional teams at Pluto, Kotak Securities, Kawa Space, and Aula Education, and currently builds agentic systems and applications independently.
+export const llmsProfile = `Raashi Shah works at the intersection of product management and hands-on engineering. She has led cross-functional teams at Pluto, Kawa Space, and Aula Education, and currently builds agentic systems and applications independently.
 
 Core focus areas: enterprise AI agents (admissions evaluation, RAG, telemetry), creative tooling (Expression frame-by-frame animation coloring), offline-first web apps, on-device inference, and 0-to-1 product delivery.`;
 
@@ -36,7 +36,7 @@ function portfolioFullHeading(
   entry: (typeof projects)[number] | (typeof workExperience)[number],
 ) {
   const name = portfolioSeoName(entry);
-  return entry.seoPeriod ? `${name} (${entry.seoPeriod})` : name;
+  return "seoPeriod" in entry && entry.seoPeriod ? `${name} (${entry.seoPeriod})` : name;
 }
 
 export function getStructuredDataJsonLd() {
