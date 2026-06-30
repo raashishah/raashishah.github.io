@@ -19,6 +19,9 @@ test("project details expand with body copy", async ({ page }) => {
     .filter({ hasText: "Expression" })
     .click();
   await expect(
+    page.getByRole("link", { name: "Auto-colouring for hand drawn animation" }),
+  ).toBeVisible();
+  await expect(
     page.getByText("This problem remains unsolved worldwide"),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "View Expression" })).toHaveCount(0);

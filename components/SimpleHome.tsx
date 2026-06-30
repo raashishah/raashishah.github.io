@@ -201,19 +201,27 @@ const projects = [
     title: "Entreprise-grade Agents",
     paragraphs: [
       [
-        "(",
         {
           text: "Admissions evaluation agent",
           href: "https://admissions.raashishah.com",
           medium: true,
         },
-        ") for academic institutions",
+        " for academic institutions",
       ],
     ],
   },
   {
     title: "Expression - Animation Tool",
-    paragraphs: ["This problem remains unsolved worldwide"],
+    paragraphs: [
+      [
+        {
+          text: "Auto-colouring for hand drawn animation",
+          href: "https://github.com/raashishah/colourer",
+          medium: true,
+        },
+      ],
+      "This problem remains unsolved worldwide",
+    ],
   },
   {
     title: "Offline Expo Navigation",
@@ -240,7 +248,6 @@ const workExperience = [
   {
     title: "OnDevice",
     paragraphs: [
-      "Collaborated and designed a health app for diabetic patients that uses on-device inference",
       [
         "Distributed Applied AI content on ",
         { text: "Twitter", href: "https://x.com/useondevice" },
@@ -250,7 +257,7 @@ const workExperience = [
   {
     title: "Pluto",
     paragraphs: [
-      "Transformed a creative studio into a product and tech-led team",
+      "Transformed a creative studio into a product led team",
       [{ text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" }],
       [
         {
@@ -269,10 +276,15 @@ const workExperience = [
   {
     title: "Kawa Space",
     paragraphs: [
-      [{ text: "2020", href: "https://www.linkedin.com/company/kawaspace/" }],
-      "Geospatial data analysis using machine learning in agriculture, rainfall, and population density",
+      [
+        {
+          text: "Geospatial data analysis using machine learning",
+          href: "https://www.linkedin.com/company/kawaspace/",
+          medium: true,
+        },
+      ],
       {
-        text: "Created a chatbot using Dialogflow for users to query data in natural language just by asking, this was pre-GPT-3",
+        text: "Chatbot for users to query data, this was pre-GPT3",
         pullquote: true,
       },
     ],
@@ -287,7 +299,6 @@ const workExperience = [
         },
       ],
       "Led customer success and engagement analytics for the team's largest portfolio, expanding from 1 to 3 universities across the UK and the US",
-      "Boosted retention from 9.2% to 32% by designing a data-driven analytics toolkit that combined qualitative insights with quantitative usage data",
       {
         text: "Doubled engineering delivery speed by analysing user feedback and partnering with VP of Product to implement agile workflows",
         pullquote: true,
