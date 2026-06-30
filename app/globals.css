@@ -568,9 +568,8 @@ body {
 }
 
 .home__inline-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35em;
+  display: inline;
+  vertical-align: baseline;
   color: var(--text-muted);
   font-family: var(--font-medium);
   font-weight: 500;
@@ -580,9 +579,11 @@ body {
 }
 
 .home__inline-link-icon {
-  flex-shrink: 0;
-  width: 0.75em;
-  height: 0.75em;
+  display: inline-block;
+  vertical-align: middle;
+  width: 0.68em;
+  height: 0.68em;
+  margin-inline-start: 0.3em;
   opacity: 0.72;
   transition: opacity var(--duration-short) var(--ease-out);
 }
