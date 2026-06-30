@@ -6,7 +6,6 @@ import {
   useContext,
   useMemo,
   useRef,
-  useState,
   type ReactNode,
 } from "react";
 
@@ -27,7 +26,7 @@ export function useDetailsAccordion() {
 }
 
 export function DetailsAccordion({ children }: { children: ReactNode }) {
-  const [openId, setOpenId] = useState<string | null>(null);
+  const openIdRef = useRef<string | null>(null);
   const closersRef = useRef(new Map<string, CloseHandler>());
 
   const register = useCallback((id: string, close: CloseHandler) => {
@@ -38,18 +37,18 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
     closersRef.current.delete(id);
   }, []);
 
-  const prepareOpen = useCallback(
-    async (id: string) => {
-      if (openId && openId !== id) {
-        await closersRef.current.get(openId)?.();
-      }
-      setOpenId(id);
-    },
-    [openId],
-  );
+  const prepareOpen = useCallback(async (id: string) => {
+    const currentOpenId = openIdRef.current;
+    if (currentOpenId && currentOpenId !== id) {
+      await closersRef.current.get(currentOpenId)?.();
+    }
+    openIdRef.current = id;
+  }, []);
 
   const notifyClosed = useCallback((id: string) => {
-    setOpenId((current) => (current === id ? null : current));
+    if (openIdRef.current === id) {
+      openIdRef.current = null;
+    }
   }, []);
 
   const value = useMemo(

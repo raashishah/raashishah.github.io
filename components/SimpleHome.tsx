@@ -1,94 +1,37 @@
 import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { DetailsAccordion } from "@/components/DetailsAccordion";
-import { nameEasterEggHref, socialLinks } from "@/content/site";
+import { ExternalLinkArrow } from "@/components/ExternalLinkArrow";
+import {
+  footerLinks,
+  nameEasterEggHref,
+  socialLinks,
+} from "@/content/site";
 import { siteConfig } from "@/lib/metadata";
 
 const emailLink = socialLinks.find((item) => item.id === "email");
 const calendlyLink = socialLinks.find((item) => item.id === "calendly");
-const footerLinks = [
-  ...socialLinks.filter((link) => link.id === "linkedin"),
-  ...socialLinks.filter(
-    (link) =>
-      link.id !== "email" && link.id !== "calendly" && link.id !== "linkedin",
-  ),
-];
 
 type RichLink = { text: string; href: string };
-type RichMedium = { text: string; medium: true };
-type RichSegment = string | RichLink | RichMedium;
-type RichText = readonly RichSegment[];
-type RichLine = string | RichText;
-
-type GroupedItem =
-  | RichLine
-  | {
-      label: RichLine;
-      points: readonly (RichLine | PullquoteParagraph)[];
-    };
-
-type GroupedParagraph = {
-  intro: RichLine;
-  items: readonly GroupedItem[];
-};
+type RichSegment = string | RichLink;
+type RichLine = string | readonly RichSegment[];
 
 type PullquoteParagraph = {
   text: RichLine;
   pullquote: true;
 };
 
-type BulletListParagraph = {
-  bullets: readonly RichLine[];
-};
-
-type BodyParagraph =
-  | string
-  | RichLine
-  | PullquoteParagraph
-  | BulletListParagraph
-  | GroupedParagraph;
-
-function isGroupedParagraph(
-  paragraph: BodyParagraph,
-): paragraph is GroupedParagraph {
-  return typeof paragraph === "object" && "intro" in paragraph && "items" in paragraph;
-}
-
-function isPullquoteParagraph(
-  paragraph: BodyParagraph | PullquoteParagraph,
-): paragraph is PullquoteParagraph {
-  return typeof paragraph === "object" && "pullquote" in paragraph && "text" in paragraph;
-}
-
-function isBulletListParagraph(
-  paragraph: BodyParagraph,
-): paragraph is BulletListParagraph {
-  return typeof paragraph === "object" && "bullets" in paragraph;
-}
+type BodyParagraph = string | RichLine | PullquoteParagraph;
 
 type HomeEntry = {
   title: string;
   paragraphs: readonly BodyParagraph[];
 };
 
-function ExternalLinkArrow({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3.5 8.5 8.5 3.5M8.5 3.5H4.5M8.5 3.5v4.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+function isPullquoteParagraph(
+  paragraph: BodyParagraph,
+): paragraph is PullquoteParagraph {
+  return typeof paragraph === "object" && "pullquote" in paragraph;
 }
 
 function InlineText({ content }: { content: RichLine }) {
@@ -100,74 +43,31 @@ function InlineText({ content }: { content: RichLine }) {
     <>
       {content.map((segment, index) => {
         if (typeof segment === "string") {
+          if (segment === " · ") {
+            return (
+              <span key={index} className="home__inline-separator" aria-hidden="true">
+                {" · "}
+              </span>
+            );
+          }
+
           return <Fragment key={index}>{segment}</Fragment>;
         }
 
-        if ("href" in segment) {
-          return (
-            <a
-              key={index}
-              href={segment.href}
-              className="home__inline-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {segment.text}
-              <ExternalLinkArrow className="home__inline-link-icon" />
-            </a>
-          );
-        }
-
         return (
-          <span key={index} className="home__inline-medium">
+          <a
+            key={index}
+            href={segment.href}
+            className="home__inline-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {segment.text}
-          </span>
+            <ExternalLinkArrow className="home__inline-link-icon" />
+          </a>
         );
       })}
     </>
-  );
-}
-
-function isFlatGroupedItem(item: GroupedItem): item is RichLine {
-  return typeof item === "string" || Array.isArray(item);
-}
-
-function renderGroupedItem(item: GroupedItem, itemIndex: number) {
-  if (isFlatGroupedItem(item)) {
-    return (
-      <p key={itemIndex} className="home__project-body-sub">
-        <InlineText content={item} />
-      </p>
-    );
-  }
-
-  return (
-    <div key={itemIndex} className="home__project-body-nested">
-      <p className="home__project-body-sub">
-        <InlineText content={item.label} />
-      </p>
-      {item.points.map((point, pointIndex) => {
-        if (isPullquoteParagraph(point)) {
-          return (
-            <blockquote
-              key={pointIndex}
-              className="home__project-body-pullquote"
-            >
-              <InlineText content={point.text} />
-            </blockquote>
-          );
-        }
-
-        return (
-          <p
-            key={pointIndex}
-            className="home__project-body-sub home__project-body-sub--nested"
-          >
-            <InlineText content={point} />
-          </p>
-        );
-      })}
-    </div>
   );
 }
 
@@ -181,29 +81,6 @@ function BodyParagraphBlock({ paragraph }: { paragraph: BodyParagraph }) {
       <blockquote className="home__project-body-pullquote">
         <InlineText content={paragraph.text} />
       </blockquote>
-    );
-  }
-
-  if (isBulletListParagraph(paragraph)) {
-    return (
-      <ul className="home__project-body-list">
-        {paragraph.bullets.map((bullet, index) => (
-          <li key={index}>
-            <InlineText content={bullet} />
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
-  if (isGroupedParagraph(paragraph)) {
-    return (
-      <div className="home__project-body-group">
-        <p>
-          <InlineText content={paragraph.intro} />
-        </p>
-        {paragraph.items.map(renderGroupedItem)}
-      </div>
     );
   }
 

@@ -66,3 +66,19 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
+const footerLinkOrder = [
+  "linkedin",
+  "giphy",
+  "medium",
+  "github",
+  "spotify",
+  "twitter",
+  "duolingo",
+  "soundcloud",
+] as const;
+
+export const footerLinks = footerLinkOrder.flatMap((id) => {
+  const link = socialLinks.find((item) => item.id === id);
+  return link ? [link] : [];
+});
+

@@ -23,7 +23,7 @@ test.describe("SEO and LLM discovery", () => {
       absoluteUrl("/").replace(/\/$/, ""),
     );
 
-    await expect(page.locator(".home__line--role")).toHaveText(
+    await expect(page.locator(".home__intro .home__line--role")).toHaveText(
       siteConfig.introRole,
     );
     await expect(page.locator(".home__line--tagline")).toHaveText(

@@ -4,7 +4,7 @@ import { siteConfig } from "../lib/metadata";
 test("homepage shows intro and project list", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Raashi Shah" })).toBeVisible();
-  await expect(page.locator(".home__line--role")).toHaveText(siteConfig.introRole);
+  await expect(page.locator(".home__intro .home__line--role")).toHaveText(siteConfig.introRole);
   await expect(page.locator(".home__line--tagline")).toHaveText(
     siteConfig.introTagline,
   );
