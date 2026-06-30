@@ -72,3 +72,80 @@ test("skip link targets main content", async ({ page }) => {
   await skipLink.click();
   await expect(page.locator("#main-content")).toBeVisible();
 });
+
+test("mobile inline links keep the arrow on the last word line", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Professional Tool for Animators" })
+    .click();
+
+  const arrowSharesLastWordLine = await page.evaluate(() => {
+    const end = document.querySelector(
+      ".home__details[open] .home__inline-link-end",
+    );
+    const icon = end?.querySelector(".home__inline-link-icon");
+    if (!end || !icon) {
+      return false;
+    }
+
+    return (
+      Math.abs(icon.getBoundingClientRect().top - end.getBoundingClientRect().top) <
+      3
+    );
+  });
+
+  expect(arrowSharesLastWordLine).toBe(true);
+});
+
+test("mobile tagline does not orphan AI from agents", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+
+  const lines = await page.evaluate(() => {
+    const el = document.querySelector(".home__line--tagline");
+    if (!el) {
+      return [];
+    }
+
+    const rendered: string[] = [];
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let node: Node | null = walker.nextNode();
+
+    while (node) {
+      const text = node.textContent ?? "";
+      const range = document.createRange();
+      let lineTop: number | null = null;
+      let lineStart = 0;
+
+      for (let index = 0; index <= text.length; index += 1) {
+        if (index < text.length) {
+          range.setStart(node, index);
+          range.setEnd(node, index + 1);
+        }
+
+        const top = index < text.length ? range.getBoundingClientRect().top : null;
+        if (lineTop !== null && top !== null && Math.abs(top - lineTop) > 2) {
+          rendered.push(text.slice(lineStart, index).trimEnd());
+          lineStart = index;
+        }
+
+        if (top !== null) {
+          lineTop = top;
+        }
+      }
+
+      if (lineStart < text.length) {
+        rendered.push(text.slice(lineStart).trim());
+      }
+
+      node = walker.nextNode();
+    }
+
+    return rendered.filter(Boolean);
+  });
+
+  expect(lines.some((line) => line.endsWith(" AI"))).toBe(false);
+  expect(lines.some((line) => line.startsWith("agents"))).toBe(false);
+});
