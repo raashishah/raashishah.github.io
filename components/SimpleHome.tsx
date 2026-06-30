@@ -256,17 +256,20 @@ const workExperience = [
   {
     title: "Pluto",
     paragraphs: [
-      "Transformed a creative studio into a product led team",
-      [{ text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" }],
+      {
+        text: "Transformed a creative studio into a product led team",
+        pullquote: true,
+      },
       [
+        { text: "Magic Batch", href: "https://opensea.io/collection/magicbatch" },
+        " | ",
         {
           text: "Pluto",
           href: "https://medium.com/pluto-misfits/introducing-interoperable-nft-minting-67f3af6d0f94",
         },
-      ],
-      [
+        " | ",
         {
-          text: "Create Layer",
+          text: "Create",
           href: "https://x.com/createlayer/status/1805623167538340046/video/1",
         },
       ],
