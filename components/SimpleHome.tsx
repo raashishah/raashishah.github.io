@@ -304,14 +304,7 @@ const workExperience = [
   },
 ] satisfies ReadonlyArray<HomeEntry>;
 
-const education = [
-  {
-    title: "Undergrad in Product, Aston Uni, UK",
-    paragraphs: [
-      "BSc Product Design and Management, School of Engineering and Applied Sciences",
-    ],
-  },
-] satisfies ReadonlyArray<HomeEntry>;
+const educationLabel = "BSc Product Design and Mgmt, Aston Uni, UK";
 
 function ProjectListItem({
   item,
@@ -433,13 +426,11 @@ export function SimpleHome() {
                     ))}
                   </ul>
                   <ul className="home__project-list" aria-label="Education">
-                    {education.map((entry) => (
-                      <ProjectListItem
-                        key={entry.title}
-                        item={entry}
-                        accordionId={entry.title}
-                      />
-                    ))}
+                    <li className="home__project-item">
+                      <p className="home__project-static">
+                        <span className="home__project-title">{educationLabel}</span>
+                      </p>
+                    </li>
                   </ul>
                 </div>
               </div>

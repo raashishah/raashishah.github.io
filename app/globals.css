@@ -323,6 +323,14 @@ body {
   margin: 0;
 }
 
+.home__project-static {
+  margin: 0;
+  min-height: var(--home-touch-min);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-1);
+  margin-inline: calc(var(--space-1) * -1);
+}
+
 .home__details {
   margin: 0;
   border-radius: 4px;
