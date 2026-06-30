@@ -581,9 +581,10 @@ body {
 .home__inline-link-icon {
   display: inline-block;
   vertical-align: middle;
-  width: 0.68em;
-  height: 0.68em;
+  width: 0.8em;
+  height: 0.8em;
   margin-inline-start: 0.3em;
+  transform: translateY(-0.13em);
   opacity: 0.72;
   transition: opacity var(--duration-short) var(--ease-out);
 }
