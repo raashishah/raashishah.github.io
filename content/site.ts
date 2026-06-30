@@ -77,8 +77,10 @@ const footerLinkOrder = [
   "soundcloud",
 ] as const;
 
-export const footerLinks = footerLinkOrder.flatMap((id) => {
-  const link = socialLinks.find((item) => item.id === id);
-  return link ? [link] : [];
-});
+export const footerLinks = footerLinkOrder.map(
+  (id) => socialLinks.find((item) => item.id === id)!,
+);
+
+export const emailLink = socialLinks.find((item) => item.id === "email")!;
+export const calendlyLink = socialLinks.find((item) => item.id === "calendly")!;
 

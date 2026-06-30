@@ -37,16 +37,13 @@
   --home-measure-body: 50ch;
 
   /* Motion — Apple HIG: 0.35s default, ease-in-out; ease-out enter, ease-in exit */
-  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --duration-press: 150ms;
   --duration-short: 250ms;
   --duration-standard: 350ms;
 
   /* Type scale */
   --text-title: clamp(1.375rem, 2vw, 1.5rem);
-  --text-lead: clamp(1.125rem, 1.85vw, 1.3125rem);
   --text-headline: clamp(1.0625rem, 1.6vw, 1.1875rem);
   --text-body: clamp(1rem, 1.2vw, 1.0625rem);
   --text-subhead: clamp(0.9375rem, 1.3vw, 1rem);
@@ -155,10 +152,6 @@ body {
   overflow: visible;
   /* Satoshi medium glyphs can paint outside the first character box */
   padding-inline-start: 0.4rem;
-}
-
-.home__header-contact-or {
-  color: var(--text);
 }
 
 @media (max-width: 39.99rem) {
@@ -424,14 +417,7 @@ body {
 }
 
 /* Close: JS pixel height collapse. Open: full height immediately, opacity reveals body. */
-.home__details--animating.home__details--closing .home__project-body-shell {
-  display: block;
-  grid-template-rows: none;
-  overflow: hidden;
-  transition: none;
-}
-
-.home__details--animating:not(.home__details--closing) .home__project-body-shell {
+.home__details--animating .home__project-body-shell {
   display: block;
   grid-template-rows: none;
   overflow: hidden;
