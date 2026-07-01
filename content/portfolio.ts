@@ -131,7 +131,7 @@ export const workExperience = [
       [
         {
           text: "Geospatial data ML models",
-          href: "https://www.linkedin.com/company/kawaspace/",
+          href: "https://www.kawaspace.com",
         },
       ],
       {
