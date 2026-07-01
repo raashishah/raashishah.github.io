@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { footerSocialIconIds } from "@/lib/footer-social-icons";
 import { footerLinks } from "@/content/site";
 
 describe("content/site", () => {
@@ -10,5 +11,14 @@ describe("content/site", () => {
     const footerIds = footerLinks.map((link) => link.id);
     expect(footerIds).not.toContain("email");
     expect(footerIds).not.toContain("calendly");
+  });
+
+  it("maps every footer link to a social icon", () => {
+    const iconIds = new Set(footerSocialIconIds);
+    for (const link of footerLinks) {
+      expect(iconIds.has(link.id as (typeof footerSocialIconIds)[number])).toBe(
+        true,
+      );
+    }
   });
 });

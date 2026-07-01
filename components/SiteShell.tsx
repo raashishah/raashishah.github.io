@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SocialIcon } from "@/components/SocialIcon";
 import {
   calendlyLink,
   emailLink,
@@ -11,10 +12,12 @@ function SocialAnchor({
   href,
   label,
   className,
+  iconId,
 }: {
   href: string;
   label: string;
   className?: string;
+  iconId?: string;
 }) {
   const isMailto = href.startsWith("mailto:");
   const accessibleLabel = isMailto ? label : `${label} (opens in new tab)`;
@@ -27,7 +30,8 @@ function SocialAnchor({
       target={isMailto ? undefined : "_blank"}
       rel={isMailto ? undefined : "noopener noreferrer"}
     >
-      {label}
+      {iconId ? <SocialIcon id={iconId} className="home__footer-icon" /> : null}
+      <span className={iconId ? "home__footer-label" : undefined}>{label}</span>
     </a>
   );
 }
@@ -97,6 +101,7 @@ export function SiteShell({
                 key={link.id}
                 href={link.href}
                 label={link.label}
+                iconId={link.id}
                 className="home__link home__link--footer"
               />
             ))}
