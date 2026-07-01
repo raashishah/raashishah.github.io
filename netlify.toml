@@ -1,0 +1,11 @@
+# Netlify deploy previews (legacy integration on this repo).
+# Production deploys run on Vercel — see README.md.
+
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
