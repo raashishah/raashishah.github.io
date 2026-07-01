@@ -109,7 +109,7 @@ export function SiteShell({
           <p className="home__footer-meta">
             <span>2026</span>
             <img
-              src="/img/favicon.svg"
+              src="/img/footer-mark.svg"
               alt=""
               aria-hidden="true"
               className="home__footer-mark"
