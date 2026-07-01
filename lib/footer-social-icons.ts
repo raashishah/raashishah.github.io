@@ -9,13 +9,13 @@ export const footerSocialIconClasses = {
 
 export const footerSocialIconIds = [
   "linkedin",
-  "giphy",
-  "medium",
-  "github",
-  "spotify",
   "twitter",
-  "duolingo",
+  "github",
+  "medium",
+  "spotify",
   "soundcloud",
+  "duolingo",
+  "giphy",
 ] as const;
 
 export type FooterSocialIconId = (typeof footerSocialIconIds)[number];

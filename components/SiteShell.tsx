@@ -107,15 +107,15 @@ export function SiteShell({
             ))}
           </nav>
           <p className="home__footer-meta">
+            <span>2026</span>
             <img
               src="/img/favicon.svg"
               alt=""
               aria-hidden="true"
               className="home__footer-mark"
-              width={14}
-              height={14}
+              width={17}
+              height={17}
             />
-            <span>2026</span>
           </p>
         </footer>
       </main>

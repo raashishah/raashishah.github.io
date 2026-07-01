@@ -64,13 +64,13 @@ export { linksById };
 
 const footerLinkOrder = [
   "linkedin",
-  "giphy",
-  "medium",
-  "github",
-  "spotify",
   "twitter",
-  "duolingo",
+  "github",
+  "medium",
+  "spotify",
   "soundcloud",
+  "duolingo",
+  "giphy",
 ] as const satisfies readonly SocialLink["id"][];
 
 export const footerLinks = footerLinkOrder.map((id) => linksById[id]);
