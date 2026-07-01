@@ -19,7 +19,7 @@ export const projects = [
         },
       ],
       {
-        text: "Admission applications processes for academic institutions",
+        text: "Processes applications for academic institutions",
         pullquote: true,
       },
     ],
