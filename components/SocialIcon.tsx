@@ -16,7 +16,9 @@ export function SocialIcon({
   if (legacySvg) {
     const legacyClassName = [
       className,
+      "home__footer-icon--legacy",
       id === "giphy" ? "home__footer-icon--giphy" : null,
+      id === "medium" ? "home__footer-icon--medium" : null,
     ]
       .filter(Boolean)
       .join(" ");
