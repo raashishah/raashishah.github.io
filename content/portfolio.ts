@@ -121,21 +121,17 @@ export const workExperience = [
   },
   {
     id: "kawa-space",
-    title: "Kawa Space",
+    title: "Geospatial Machine Learning",
+    seoName: "Kawa Space",
     seoPeriod: "2020",
     seoDescription:
       "Geospatial ML products and NLP chatbot for non-technical data queries (pre-GPT era).",
     seoLongDetail:
       "Geospatial ML for agriculture, rainfall, and population density. Built a Dialogflow chatbot so non-technical users could query datasets in natural language before GPT-3 era tooling.",
     paragraphs: [
-      [
-        {
-          text: "Geospatial data ML models",
-          href: "https://www.kawaspace.com",
-        },
-      ],
+      [{ text: "Kawa Space", href: "https://www.kawaspace.com" }],
       {
-        text: "Chatbot for users to get inference just by asking [ built pre-GPT3 ]",
+        text: "Chatbot for users to get model inferences just by asking [ built pre-GPT3 ]",
         pullquote: true,
       },
     ],
