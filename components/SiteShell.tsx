@@ -3,6 +3,7 @@ import { SocialIcon } from "@/components/SocialIcon";
 import {
   calendlyLink,
   emailLink,
+  footerDiscoveryHint,
   footerLinks,
 } from "@/content/site";
 import type { FooterSocialLink, FooterSocialLinkId, SocialLink } from "@/content/types";
@@ -114,7 +115,11 @@ export function SiteShell({
               aria-hidden="true"
               className="home__footer-mark"
             />
-            <span>2026</span>
+            <span className="home__footer-meta-year">2026</span>
+            <span className="home__footer-meta-separator" aria-hidden="true">
+              ·
+            </span>
+            <span className="home__footer-meta-hint">{footerDiscoveryHint}</span>
           </p>
         </footer>
       </main>

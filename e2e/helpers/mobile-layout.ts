@@ -96,7 +96,7 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
     const home = document.querySelector(".home");
     const meta = document.querySelector(".home__footer-meta");
     const mark = document.querySelector(".home__footer-mark");
-    const year = document.querySelector(".home__footer-meta > span");
+    const year = document.querySelector(".home__footer-meta-year");
 
     if (!home || !meta || !mark || !year) {
       return null;
