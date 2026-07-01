@@ -248,6 +248,14 @@ body {
   font-size: 1.125rem;
   line-height: 1;
   text-align: center;
+  flex-shrink: 0;
+}
+
+.home__footer-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 .home__project-list {
@@ -581,14 +589,18 @@ body {
   }
 
   .home__footer-nav {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    justify-items: center;
-    gap: var(--space-2);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-1);
   }
 
   .home__footer-icon {
     display: block;
+    width: 1rem;
+    height: 1rem;
+    font-size: 1rem;
   }
 
   .home__footer-label {
@@ -605,8 +617,10 @@ body {
 
   .home__link--footer {
     justify-content: center;
-    width: 100%;
-    padding-inline: var(--space-2);
+    width: auto;
+    flex-shrink: 0;
+    min-width: var(--home-touch-min);
+    padding-inline: 0;
   }
 
   .home__project-body-pullquote {

@@ -18,7 +18,13 @@ export function SocialIcon({
     legacyFooterSocialSvgIcons[id as keyof typeof legacyFooterSocialSvgIcons];
   if (legacySvg) {
     return (
-      <svg className={className} viewBox={legacySvg.viewBox} aria-hidden>
+      <svg
+        className={className}
+        viewBox={legacySvg.viewBox}
+        aria-hidden
+        focusable="false"
+        role="img"
+      >
         <path fill="currentColor" d={legacySvg.path} />
       </svg>
     );
