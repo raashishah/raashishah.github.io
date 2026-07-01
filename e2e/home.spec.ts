@@ -127,7 +127,7 @@ test.describe("mobile layout", () => {
       );
     });
 
-    test(`pullquotes have no left indent at ${width}px`, async ({ page }) => {
+    test(`pullquotes keep left border at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 844 });
       await page.goto("/");
       await page
@@ -150,10 +150,8 @@ test.describe("mobile layout", () => {
         };
       });
 
-      expect(pullquoteStyles).toEqual({
-        paddingInlineStart: "0px",
-        borderInlineStartWidth: "0px",
-      });
+      expect(pullquoteStyles?.borderInlineStartWidth).toBe("2px");
+      expect(parseFloat(pullquoteStyles?.paddingInlineStart ?? "0")).toBeGreaterThan(0);
     });
 
     test(`header contact does not orphan or at ${width}px`, async ({ page }) => {

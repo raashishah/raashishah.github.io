@@ -302,9 +302,4 @@
     padding-inline-start: 0;
     white-space: nowrap;
   }
-
-  .home__project-body-pullquote {
-    padding-inline-start: 0;
-    border-inline-start: none;
-  }
 }
