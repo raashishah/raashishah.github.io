@@ -1,0 +1,35 @@
+import Link from "next/link";
+import { ondeviceContent } from "@/content/ondevice";
+import { siteConfig } from "@/lib/metadata";
+
+export function OnDevicePage() {
+  return (
+    <>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <main id="main-content" className="expression">
+        <nav className="expression__nav" aria-label="Site">
+          <Link href="/" className="expression__back">
+            {siteConfig.name}
+          </Link>
+        </nav>
+
+        <header className="expression__header">
+          <h1 className="expression__title">{ondeviceContent.title}</h1>
+          <p className="expression__role">{ondeviceContent.role}</p>
+          <p className="expression__tagline">{ondeviceContent.tagline}</p>
+        </header>
+
+        <article className="expression__body" aria-label="About OnDevice">
+          {ondeviceContent.sections.map((section) => (
+            <section key={section.heading} className="expression__section">
+              <h2 className="expression__section-title">{section.heading}</h2>
+              <p>{section.body}</p>
+            </section>
+          ))}
+        </article>
+      </main>
+    </>
+  );
+}

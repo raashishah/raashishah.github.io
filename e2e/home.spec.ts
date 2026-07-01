@@ -73,7 +73,7 @@ test("opening a second dropdown closes the first", async ({ page }) => {
   const enterpriseDetails = page
     .locator("details")
     .filter({ hasText: "Enterprise-Grade Agents" });
-  const onDeviceDetails = page.locator("details").filter({ hasText: "OnDevice" });
+  const onDeviceDetails = page.locator("details").filter({ hasText: "On-device AI" });
 
   await enterpriseDetails.locator("summary").click();
   await expect(enterpriseDetails).toHaveAttribute("open", "");

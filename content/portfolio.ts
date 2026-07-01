@@ -114,9 +114,9 @@ export const workExperience = [
     seoLongDetail:
       "Returned to hands-on AI building. Collaborated on a diabetic health app using on-device inference. Executed early go-to-market through applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
     paragraphs: [
-      [{ text: "Twitter", href: "https://x.com/useondevice" }],
+      [{ text: "Agentic Health App", href: "/ondevice" }],
       {
-        text: "Health app for diabetic patients",
+        text: "For type II diabetes management",
         pullquote: true,
       },
     ],
@@ -133,14 +133,14 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Kawa Space", href: "https://www.kawaspace.com" }],
       {
-        text: "Chatbot for users to get model inferences just by asking [ built pre-GPT3 ]",
+        text: "Chatbot to get model inferences [ built pre-GPT3 ]",
         pullquote: true,
       },
     ],
   },
   {
     id: "aula-education",
-    title: "Client relationships and analytics",
+    title: "Doubled Engineering Speed",
     seoName: "Aula Education",
     seoPeriod: "2018–2019, UK",
     seoDescription:
@@ -150,7 +150,7 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Aula Education, UK, US", href: "https://www.aula.education" }],
       {
-        text: "Optimised engineering workflows and doubled delivery speed",
+        text: "Analysed user feedback and optimised engineering pipelines",
         pullquote: true,
       },
     ],
