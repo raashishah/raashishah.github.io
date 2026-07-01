@@ -1,42 +1,58 @@
+import { DetailsAccordion } from "@/components/DetailsAccordion";
+import { PortfolioList } from "@/components/PortfolioList";
 import { SiteShell } from "@/components/SiteShell";
-
-export type ProjectPageSection = {
-  heading: string;
-  body: string;
-};
+import { calendlyLink } from "@/content/site";
+import type { PortfolioEntry } from "@/content/types";
 
 export type ProjectPageContent = {
-  title: string;
-  role: string;
-  tagline: string;
-  sections: readonly ProjectPageSection[];
+  introRole: string;
+  introTagline: string;
+  sections: readonly PortfolioEntry[];
   pageLabel: string;
+  idPrefix: string;
+  showBookDemo?: boolean;
 };
 
 export function ProjectPage({
-  title,
-  role,
-  tagline,
+  introRole,
+  introTagline,
   sections,
   pageLabel,
+  idPrefix,
+  showBookDemo = false,
 }: ProjectPageContent) {
   return (
     <SiteShell nameHref="/" nameAsHeading={false}>
       <div className="home__content">
         <section className="home__intro" aria-label={pageLabel}>
-          <h1 className="home__name">{title}</h1>
-          <p className="home__line home__line--role">{role}</p>
-          <p className="home__line home__line--tagline">{tagline}</p>
+          <p className="home__line home__line--role">{introRole}</p>
+          <p className="home__line home__line--tagline">{introTagline}</p>
+          {showBookDemo ? (
+            <p className="home__line home__line--cta">
+              <a
+                href={calendlyLink.href}
+                className="home__link home__link--header"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book Demo
+              </a>
+            </p>
+          ) : null}
         </section>
 
-        <article className="home__page-body" aria-label={pageLabel}>
-          {sections.map((section) => (
-            <section key={section.heading} className="home__page-section">
-              <h2 className="home__project-title">{section.heading}</h2>
-              <p>{section.body}</p>
-            </section>
-          ))}
-        </article>
+        <section aria-label={pageLabel}>
+          <DetailsAccordion>
+            <PortfolioList
+              items={sections}
+              idPrefix={idPrefix}
+              ariaLabel={pageLabel}
+            />
+          </DetailsAccordion>
+          <p className="home__line home__line--role home__updating-note">
+            still updating this page
+          </p>
+        </section>
       </div>
     </SiteShell>
   );

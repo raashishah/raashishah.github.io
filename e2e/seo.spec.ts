@@ -99,9 +99,15 @@ test.describe("SEO and LLM discovery", () => {
     const response = await page.goto("/expression", { waitUntil: "domcontentloaded" });
     expect(response?.ok()).toBeTruthy();
 
-    await expect(page.getByRole("heading", { name: "Expression", level: 1 })).toBeVisible();
     await expect(page.getByText("Agentic tools for artists")).toBeVisible();
-    await expect(page.getByRole("heading", { name: "The problem" })).toBeVisible();
+    await expect(
+      page.locator("summary.home__details-summary").filter({ hasText: "The problem" }),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Book Demo" })).toHaveAttribute(
+      "href",
+      "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
+    );
+    await expect(page.getByText("still updating this page")).toBeVisible();
     await expect(page.getByRole("link", { name: "Raashi Shah" })).toHaveAttribute("href", "/");
   });
 
