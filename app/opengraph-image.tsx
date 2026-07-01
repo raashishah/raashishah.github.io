@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 import { OgImage } from "@/components/metadata/OgImage";
 import { getOgSatoshiFonts } from "@/lib/og-fonts";
@@ -12,7 +14,11 @@ export const contentType = "image/png";
 export const runtime = "nodejs";
 
 export default async function OpenGraphImage() {
-  const fonts = await getOgSatoshiFonts();
+  const [fonts, faviconSvg] = await Promise.all([
+    getOgSatoshiFonts(),
+    readFile(path.join(process.cwd(), "public/img/favicon.svg"), "utf8"),
+  ]);
+  const faviconSrc = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(faviconSvg)}`;
 
   return new ImageResponse(
     (
@@ -21,8 +27,10 @@ export default async function OpenGraphImage() {
         role={siteConfig.introRole}
         tagline={siteConfig.introTagline}
         domain={getSiteUrl().hostname}
+        faviconSrc={faviconSrc}
         bg={shareImageBasePalette.bg}
         text={shareImageBasePalette.text}
+        secondary={shareImageBasePalette.secondary}
         muted={shareImageBasePalette.muted}
       />
     ),

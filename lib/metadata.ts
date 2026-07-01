@@ -23,5 +23,6 @@ export function absoluteUrl(path = "/") {
 export const shareImageBasePalette = {
   bg: "#faf9f6",
   text: "#1d1d1f",
+  secondary: "#515154",
   muted: "#86868b",
 } as const;

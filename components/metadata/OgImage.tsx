@@ -3,8 +3,10 @@ type OgImageProps = {
   role: string;
   tagline: string;
   domain: string;
+  faviconSrc: string;
   bg: string;
   text: string;
+  secondary: string;
   muted: string;
 };
 
@@ -13,8 +15,10 @@ export function OgImage({
   role,
   tagline,
   domain,
+  faviconSrc,
   bg,
   text,
+  secondary,
   muted,
 }: OgImageProps) {
   return (
@@ -34,7 +38,14 @@ export function OgImage({
         lineHeight: 1.47,
       }}
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+          maxWidth: 640,
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -52,7 +63,7 @@ export function OgImage({
             fontSize: 30,
             fontWeight: 400,
             lineHeight: 1.47,
-            color: muted,
+            color: secondary,
           }}
         >
           {role}
@@ -65,6 +76,7 @@ export function OgImage({
             lineHeight: 1.35,
             letterSpacing: "-0.015em",
             marginTop: 4,
+            maxWidth: "32ch",
           }}
         >
           {tagline}
@@ -84,13 +96,21 @@ export function OgImage({
         <div
           style={{
             display: "flex",
-            justifyContent: "flex-end",
-            fontSize: 26,
-            fontWeight: 400,
-            color: muted,
+            alignItems: "center",
+            gap: 12,
           }}
         >
-          {domain}
+          <img src={faviconSrc} width={22} height={22} alt="" />
+          <div
+            style={{
+              display: "flex",
+              fontSize: 26,
+              fontWeight: 400,
+              color: muted,
+            }}
+          >
+            {domain}
+          </div>
         </div>
       </div>
     </div>
