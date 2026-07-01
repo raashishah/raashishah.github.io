@@ -5,10 +5,11 @@ colors:
   ink: "#1d1d1f"
   ink-secondary: "#515154"
   ink-tertiary: "#86868b"
-  surface: "#ffffff"
-  brand-rose: "#c08081"
-  separator: "#1d1d1f1f"
-  focus-ring: "#1d1d1f6b"
+  surface: "#faf9f6"
+  accent: "#c08081"
+  separator: "12% ink mix"
+  focus-ring: "42% ink mix"
+  accent-focus-ring: "40% accent mix"
 typography:
   title:
     fontFamily: "Satoshi, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
@@ -65,31 +66,45 @@ components:
 
 ## Overview
 
-Light, top-aligned personal homepage. White surface, Apple-tinted neutrals, Satoshi type, no cards or hero chrome. Layout: horizontal header (name left, Email + Twitter right), two-column body on wide screens (intro left, expandable lists right), footer socials. Motion is restrained and HIG-aligned: 350ms standard UI, ease-out on enter, ease-in on exit.
+Light, top-aligned personal homepage. Near-white eggshell surface (`#faf9f6`), Apple-tinted neutrals, Satoshi type, no cards or hero chrome. Layout: horizontal header (name left, contact nav right), two-column body on wide screens (intro left, expandable lists right), footer socials. Motion is restrained and HIG-aligned: 350ms standard UI, ease-out on enter, ease-in on exit.
 
-Root `html` font-size is 112.5% for slightly larger readable type. Canonical intro strings live in `lib/metadata.ts` (`siteConfig`) and must match homepage, metadata, and OG image.
+Root `html` font-size is 112.5% for slightly larger readable type. Canonical intro strings live in `lib/metadata.ts` (`siteConfig`) and must match homepage, metadata, and OG image. System dark mode follows `prefers-color-scheme` via semantic token overrides in `globals.css`.
 
-## Colors
+## Colors (light)
 
 | Role | Token | Value | Use |
 |------|-------|-------|-----|
-| Primary text | `ink` | `#1d1d1f` | Name, tagline, header links, project titles |
-| Muted | `ink-tertiary` | `#86868b` | Footer social links |
-| Body text | `ink-secondary` | `#515154` | Role line, dropdown paragraphs |
-| Background | `surface` | `#ffffff` | Page and OG background |
-| Brand accent | `brand-rose` | `#c08081` | Favicon only (legacy rose coral) |
-| Separator | `separator` | 12% ink mix | Header rule |
-| Focus | `focus-ring` | 42% ink mix | Keyboard focus outlines |
+| Primary text | `ink` | `#1d1d1f` | Name, tagline, project titles |
+| Body text | `ink-secondary` | `#515154` | Dropdown paragraphs, page body copy |
+| Muted | `ink-tertiary` | `#86868b` | Role line, footer social links, inline link default |
+| Background | `surface` | `#faf9f6` | Page background (eggshell) |
+| Accent | `accent` | `#c08081` | Hover/focus, open accordion titles, inline ↗ icons, pullquote borders |
+| Separator | `separator` | 12% ink mix | Header and footer rules |
+| Focus | `accent-focus-ring` | 40% accent mix | Keyboard focus outlines on interactive elements |
 
-Do not use pure `#000` or `#fff` for UI text/background. Brand rose is not a UI accent on the current homepage; keep it to favicon/legacy identity.
+Do not use pure `#000` or `#fff` for UI text/background. `--focus-ring` (42% ink mix) exists but interactive focus uses `--accent-focus-ring`.
+
+## Colors (dark)
+
+Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: light dark` so form controls and scrollbars follow the OS. OG image stays light.
+
+| Role | Token | Value | Use |
+|------|-------|-------|-----|
+| Primary text | `ink` | `#f5f5f7` | Name, tagline, project titles |
+| Body text | `ink-secondary` | `#aeaeb2` | Dropdown paragraphs, page body copy |
+| Muted | `ink-tertiary` | `#8e8e93` | Role line, footer social links, inline link default |
+| Background | `surface` | `#1a1a1c` | Page background (tinted dark) |
+| Accent | `accent` | `#c08081` | Unchanged — old rose coral |
+| Separator | `separator` | 12% ink mix | Auto-adjusts via `color-mix` |
+| Focus | `accent-focus-ring` | 40% accent mix | Unchanged |
 
 ## Typography
 
 - **Family:** Self-hosted Satoshi variable (`app/fonts/Satoshi-Variable.woff2`), fallback to system UI stack.
 - **Weights:** 500 (medium) for UI, headings, links; 400 (regular) for dropdown body paragraphs.
 - **Scale:** Fluid `clamp()` tokens in `globals.css` (`--text-title` through `--text-caption`).
-- **Measure:** Intro column max ~32ch; dropdown body max ~50ch.
-- **OG image:** Self-hosted Satoshi (`Satoshi-Regular.ttf` / `Satoshi-Medium.ttf`, derived from the site variable woff2 for the OG renderer). Type hierarchy mirrors the homepage: name at title scale, muted role, medium tagline, separator rule, domain in footer corner.
+- **Measure:** Intro column max `34ch` (`--home-measure-narrow`); dropdown body max `50ch` (`--home-measure-body`).
+- **OG image:** Static Figma PNG at `app/opengraph-image.png` (light layout; not scheme-aware).
 
 ## Elevation
 
@@ -98,28 +113,27 @@ No shadows on the homepage. Depth comes from typography hierarchy and spacing, n
 ## Components
 
 ### Header
-Flex row, baseline-aligned, bottom border separator. Name uses `title` scale. Nav links use underline-on-hover (transparent to currentColor, 250ms ease-out).
+Flex row, baseline-aligned, bottom border separator. Name uses `title` scale with old rose on hover/focus (Spotify easter egg link). Contact nav: `email me` / `or` / `let's meet sometime` (Calendly) — no underlines; old rose on hover/focus/active. Twitter is footer-only.
 
 ### Project / job lists
-Two groups: 3 projects, then 5 work-experience items, separated by `--space-6`. Each row is a native `<details>` with:
-- Summary row: title + CSS plus icon (44px min height)
-- Expand: grid `0fr → 1fr` height (350ms ease-out), body opacity fade (no vertical slide)
-- Collapse: faster 250ms ease-in; no transition delay on close
-- Optional "View project" link with external-tab icon for linked projects
-
-Work-experience titles are company name only (e.g. "OnDevice", not "Cofounder at OnDevice").
+Two groups separated by `--space-7` (48px): 3 projects (`home__project-groups`), then 4 jobs (`home__experience-groups`). No section headings. Static education line below jobs (`BSc in Product, from Aston, UK`). Each row is a native `<details>` with:
+- Summary row: role-focused title + CSS plus icon (44px min height)
+- Expand: grid `0fr → 1fr` height (350ms ease-out), body opacity fade
+- Collapse: 250ms ease-in; no transition delay on close
+- Inline body links with `ExternalLinkArrow` ↗ (old rose icon, grey default text); grouped multi-link rows use `·` separators
+- Company/product names in body links via `seoName` (e.g. Pluto, OnDevice, Kawa Space, Aula Education)
 
 ### Footer
-Remaining social links from `content/site.ts` use `home__link--footer` (muted tertiary, regular weight). Header Email/Twitter stay primary ink. Legacy Giphy/Duolingo SVG icons are planned but not yet wired in the footer UI.
+Social links from `content/site.ts` (LinkedIn first). Desktop: text labels only (`home__link--footer`, muted tertiary). Mobile: 8-column icon grid with visually hidden labels; FA brands + legacy Giphy/Medium SVGs via `SocialIcon.tsx`. Meta row: `2026` + coral favicon mark.
 
-### Motion sidecar (not in YAML)
-- `--ease-standard`: cubic-bezier(0.25, 0.1, 0.25, 1)
+### Subpages (`/expression`, `/ondevice`)
+Minimal `ProjectPage` layout inside `SiteShell` — same tokens and typography, not homepage clones.
+
+### Motion tokens (in `globals.css`)
 - `--ease-out`: cubic-bezier(0, 0, 0.2, 1)
 - `--ease-in`: cubic-bezier(0.4, 0, 1, 1)
-- `--duration-press`: 150ms
 - `--duration-short`: 250ms
 - `--duration-standard`: 350ms
-- `prefers-reduced-motion`: all transitions → 0.01ms
 
 ## Do's and Don'ts
 
@@ -128,6 +142,7 @@ Remaining social links from `content/site.ts` use `home__link--footer` (muted te
 - Keep 44px minimum touch targets and safe-area padding
 - Import intro copy from `siteConfig`; add tests if copy changes
 - Match Apple HIG motion: purposeful, asymmetric enter/exit, no bounce
+- Use semantic tokens so dark mode inherits automatically
 
 **Don't**
 - Add scroll journeys, preloaders, Lenis, custom cursors, or decorative frames
@@ -135,3 +150,4 @@ Remaining social links from `content/site.ts` use `home__link--footer` (muted te
 - Animate layout with bounce/elastic curves or gratuitous `translateY` slides
 - Rewrite CV/project stories heavily or expose excluded projects
 - Drift OG/metadata copy away from on-page intro text
+- Add a manual light/dark toggle (system preference only)

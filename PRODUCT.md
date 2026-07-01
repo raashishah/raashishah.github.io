@@ -14,7 +14,7 @@ raashishah.com is a personal brand surface that helps Raashi get hired or booked
 
 The current homepage is deliberately basic: a quick, shippable version. The register stays **brand** because design is still the product, even when restrained. Future pages or redesigns can be more ambitious; this file sets the strategic floor, not a ceiling on craft.
 
-Success looks like: visitors understand the role and tagline in seconds, explore relevant work if curious, and contact via Email or Twitter without friction.
+Success looks like: visitors understand the role and tagline in seconds, explore relevant work if curious, and contact via `email me` or `let's meet sometime` (Calendly) in the header without friction. Twitter and other socials live in the footer.
 
 ## Brand Personality
 
@@ -41,8 +41,7 @@ Voice is plain and specific. No hype, no jargon stacks, no performance of being 
 
 ## Accessibility & Inclusion
 
-- Target WCAG 2.1 AA practices: visible `:focus-visible` rings, skip link, semantic landmarks, meaningful link labels (including external-tab cues).
-- Minimum 44px touch targets; safe-area insets for notched devices.
-- Honor `prefers-reduced-motion`: collapse transition durations to near-instant.
+- Target WCAG 2.1 AA practices: visible `:focus-visible` rings, semantic landmarks, meaningful link labels (including external-tab cues), 44px minimum touch targets, safe-area insets for notched devices.
 - Readable contrast on tinted neutrals; body copy in secondary ink, not pure gray-on-gray.
+- System dark mode via `prefers-color-scheme` and semantic CSS tokens (no manual toggle).
 - OG image and metadata must stay aligned with on-page intro copy (`siteConfig` single source).

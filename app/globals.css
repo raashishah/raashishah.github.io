@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
 
   --font-medium: var(--font-satoshi), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-regular: var(--font-satoshi), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -48,6 +48,16 @@
   --text-body: clamp(1rem, 1.2vw, 1.0625rem);
   --text-subhead: clamp(0.9375rem, 1.3vw, 1rem);
   --text-caption: clamp(0.875rem, 1.1vw, 0.9375rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink: #f5f5f7;
+    --ink-secondary: #aeaeb2;
+    --ink-tertiary: #8e8e93;
+    --surface: #1a1a1c;
+  }
 }
 
 *,
