@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: siteConfig.creator,
-    title: seoConfig.title,
+    title: seoConfig.ogTitle,
     description: seoConfig.description,
     locale: "en_US",
     images: [
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: siteConfig.twitterHandle,
-    title: seoConfig.title,
+    title: seoConfig.ogTitle,
     description: seoConfig.description,
     images: [absoluteUrl("/opengraph-image.png")],
   },
