@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { siteConfig } from "../lib/metadata";
 import {
   MOBILE_WIDTHS,
+  assertFooterMetaWithinHomePadding,
   assertHeaderContactDoesNotOrphanOr,
   assertInlineLinkArrowOnLastLine,
   assertNoHorizontalScroll,
@@ -158,5 +159,27 @@ test.describe("mobile layout", () => {
       await page.goto("/");
       await assertHeaderContactDoesNotOrphanOr(page);
     });
+
+    test(`footer meta stays inside home padding at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/");
+      await assertFooterMetaWithinHomePadding(page);
+    });
   }
+});
+
+test.describe("footer layout", () => {
+  test("footer meta aligns to the content edge on desktop", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/");
+    await assertFooterMetaWithinHomePadding(page);
+  });
+
+  test("footer meta aligns to the content edge at the tablet breakpoint", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 640, height: 800 });
+    await page.goto("/");
+    await assertFooterMetaWithinHomePadding(page);
+  });
 });

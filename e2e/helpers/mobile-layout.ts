@@ -79,6 +79,51 @@ export async function assertHeaderContactDoesNotOrphanOr(page: Page) {
   expect(lineCount).toBe(1);
 }
 
+export async function assertFooterMetaWithinHomePadding(page: Page) {
+  const alignment = await page.evaluate(() => {
+    const home = document.querySelector(".home");
+    const meta = document.querySelector(".home__footer-meta");
+    const mark = document.querySelector(".home__footer-mark");
+    const year = document.querySelector(".home__footer-meta > span");
+
+    if (!home || !meta || !mark || !year) {
+      return null;
+    }
+
+    const homeRect = home.getBoundingClientRect();
+    const metaRect = meta.getBoundingClientRect();
+    const markRect = mark.getBoundingClientRect();
+    const yearRect = year.getBoundingClientRect();
+    const homeStyles = getComputedStyle(home);
+    const padLeft = Number.parseFloat(homeStyles.paddingLeft);
+    const padRight = Number.parseFloat(homeStyles.paddingRight);
+    const contentLeft = homeRect.left + padLeft;
+    const contentRight = homeRect.right - padRight;
+
+    return {
+      contentLeft: Math.round(contentLeft),
+      contentRight: Math.round(contentRight),
+      metaLeft: Math.round(metaRect.left),
+      metaRight: Math.round(metaRect.right),
+      markLeft: Math.round(markRect.left),
+      yearRight: Math.round(yearRect.right),
+      markBeforeYear: markRect.left <= yearRect.left,
+    };
+  });
+
+  expect(alignment).not.toBeNull();
+  if (!alignment) {
+    return;
+  }
+
+  expect(alignment.markBeforeYear).toBe(true);
+  expect(alignment.markLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
+  expect(alignment.yearRight).toBeLessThanOrEqual(alignment.contentRight + 1);
+  expect(alignment.metaRight).toBeLessThanOrEqual(alignment.contentRight + 1);
+  expect(alignment.metaRight).toBe(alignment.yearRight);
+  expect(alignment.yearRight).toBeGreaterThanOrEqual(alignment.contentRight - 2);
+}
+
 export async function getBodyCopyColor(page: Page) {
   return page.evaluate(() => {
     const paragraph = document.querySelector(
