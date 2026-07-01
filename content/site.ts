@@ -1,9 +1,9 @@
-import type { SocialLink } from "./types";
+import type { FooterSocialLink, FooterSocialLinkId, SocialLink, SocialLinkId } from "./types";
 
 export const nameEasterEggHref =
   "https://open.spotify.com/track/0Si6B4gh96eFsjFMplPGtJ";
 
-export const socialLinks: SocialLink[] = [
+export const socialLinks = [
   {
     id: "giphy",
     label: "Giphy",
@@ -54,15 +54,15 @@ export const socialLinks: SocialLink[] = [
     label: "let's meet sometime",
     href: "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
   },
-];
+] as const satisfies readonly SocialLink[];
 
 const linksById = Object.fromEntries(
   socialLinks.map((link) => [link.id, link]),
-) as Record<SocialLink["id"], SocialLink>;
+) as Record<SocialLinkId, SocialLink>;
 
 export { linksById };
 
-const footerLinkOrder = [
+export const footerLinkOrder = [
   "linkedin",
   "twitter",
   "github",
@@ -71,9 +71,11 @@ const footerLinkOrder = [
   "soundcloud",
   "duolingo",
   "giphy",
-] as const satisfies readonly SocialLink["id"][];
+] as const satisfies readonly FooterSocialLinkId[];
 
-export const footerLinks = footerLinkOrder.map((id) => linksById[id]);
+export const footerLinks = footerLinkOrder.map(
+  (id) => linksById[id],
+) as readonly FooterSocialLink[];
 
 export const emailLink = linksById.email;
 export const calendlyLink = linksById.calendly;

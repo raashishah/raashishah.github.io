@@ -5,7 +5,7 @@ import {
   emailLink,
   footerLinks,
 } from "@/content/site";
-import type { SocialLink } from "@/content/types";
+import type { FooterSocialLink, FooterSocialLinkId, SocialLink } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
 
 function SocialAnchor({
@@ -17,7 +17,7 @@ function SocialAnchor({
   href: string;
   label: string;
   className?: string;
-  iconId?: string;
+  iconId?: FooterSocialLinkId;
 }) {
   const isMailto = href.startsWith("mailto:");
   const accessibleLabel = isMailto ? label : `${label} (opens in new tab)`;
@@ -43,7 +43,7 @@ type SiteShellProps = {
   nameAsHeading?: boolean;
   emailLink?: SocialLink;
   calendlyLink?: SocialLink;
-  footerLinks?: readonly SocialLink[];
+  footerLinks?: readonly FooterSocialLink[];
 };
 
 export function SiteShell({
@@ -59,6 +59,7 @@ export function SiteShell({
     <a
       href={nameHref}
       className="home__name-link"
+      aria-label={`${siteConfig.name} (opens in new tab)`}
       target="_blank"
       rel="noopener noreferrer"
     >

@@ -15,6 +15,8 @@ type AnimatedDetailsProps = {
   accordionId?: string;
 };
 
+type TransitionMode = "open" | "close";
+
 function watchTransition(
   element: HTMLElement,
   propertyName: string,
@@ -71,55 +73,43 @@ export function AnimatedDetails({
     details.classList.remove("home__details--opening", "home__details--closing");
   };
 
-  const animateClose = useCallback((): Promise<void> => {
-    const details = detailsRef.current;
-    const shell = shellRef.current;
-    if (!details || !shell || !details.open) {
-      return Promise.resolve();
-    }
-
-    return new Promise((resolve) => {
-      cancelAnimation();
-      details.classList.remove("home__details--opening");
-      details.classList.add("home__details--closing");
-
-      const cleanup = watchTransition(
-        shell,
-        "grid-template-rows",
-        ACCORDION_CLOSE_MS,
-        () => {
-          details.open = false;
-          clearMotionClasses(details);
-          cleanupRef.current = null;
-          resolve();
-        },
-      );
-
-      cleanupRef.current = cleanup;
-    });
-  }, []);
-
-  const animateOpen = useCallback((): Promise<void> => {
+  const runTransition = useCallback((mode: TransitionMode): Promise<void> => {
     const details = detailsRef.current;
     const shell = shellRef.current;
     if (!details || !shell) {
       return Promise.resolve();
     }
 
+    if (mode === "close" && !details.open) {
+      return Promise.resolve();
+    }
+
+    const durationMs = mode === "open" ? ACCORDION_OPEN_MS : ACCORDION_CLOSE_MS;
+
     return new Promise((resolve) => {
       cancelAnimation();
-      clearMotionClasses(details);
-      details.classList.add("home__details--opening");
-      details.open = true;
 
-      void shell.offsetHeight;
+      if (mode === "open") {
+        clearMotionClasses(details);
+        details.classList.add("home__details--opening");
+        details.open = true;
+        void shell.offsetHeight;
+      } else {
+        details.classList.remove("home__details--opening");
+        details.classList.add("home__details--closing");
+      }
 
       const cleanup = watchTransition(
         shell,
         "grid-template-rows",
-        ACCORDION_OPEN_MS,
+        durationMs,
         () => {
-          details.classList.remove("home__details--opening");
+          if (mode === "close") {
+            details.open = false;
+            clearMotionClasses(details);
+          } else {
+            details.classList.remove("home__details--opening");
+          }
           cleanupRef.current = null;
           resolve();
         },
@@ -132,9 +122,9 @@ export function AnimatedDetails({
   useEffect(() => {
     if (!accordionId || !accordion) return;
 
-    accordion.register(accordionId, animateClose);
+    accordion.register(accordionId, () => runTransition("close"));
     return () => accordion.unregister(accordionId);
-  }, [accordion, accordionId, animateClose]);
+  }, [accordion, accordionId, runTransition]);
 
   const handleSummaryClick = async (event: React.MouseEvent<HTMLElement>) => {
     const details = detailsRef.current;
@@ -148,7 +138,7 @@ export function AnimatedDetails({
     cancelAnimation();
 
     if (details.open) {
-      await animateClose();
+      await runTransition("close");
       if (accordionId && accordion) {
         accordion.notifyClosed(accordionId);
       }
@@ -159,7 +149,7 @@ export function AnimatedDetails({
       await accordion.prepareOpen(accordionId);
     }
 
-    await animateOpen();
+    await runTransition("open");
   };
 
   return (

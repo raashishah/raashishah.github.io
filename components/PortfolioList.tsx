@@ -39,6 +39,7 @@ function InlineBodyLink({ href, text }: { href: string; text: string }) {
       <a
         href={href}
         className="home__inline-link"
+        aria-label={`${text} (opens in new tab)`}
         target="_blank"
         rel="noopener noreferrer"
       >

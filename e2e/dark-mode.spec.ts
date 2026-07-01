@@ -1,25 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { siteConfig } from "../lib/metadata";
-import { getBodyCopyColor } from "./helpers/mobile-layout";
-
-const LIGHT = {
-  surface: "rgb(250, 249, 246)",
-  ink: "rgb(29, 29, 31)",
-  bodyCopy: "rgb(81, 81, 84)",
-  muted: "rgb(134, 134, 139)",
-} as const;
-
-const DARK = {
-  surface: "rgb(26, 26, 28)",
-  ink: "rgb(245, 245, 247)",
-  bodyCopy: "rgb(174, 174, 178)",
-  muted: "rgb(142, 142, 147)",
-} as const;
+import { getBodyCopyColor, getSemanticColor } from "./helpers/mobile-layout";
 
 async function getPageColors(page: import("@playwright/test").Page) {
   return page.evaluate(() => {
-    const root = document.documentElement;
-    const styles = getComputedStyle(root);
     const body = document.body;
     const bodyStyles = getComputedStyle(body);
     const role = document.querySelector(".home__line--role");
@@ -39,9 +23,9 @@ test.describe("light mode (default)", () => {
     await page.goto("/");
 
     const colors = await getPageColors(page);
-    expect(colors.background).toBe(LIGHT.surface);
-    expect(colors.text).toBe(LIGHT.ink);
-    expect(colors.role).toBe(LIGHT.muted);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.role).toBe(await getSemanticColor(page, "--ink-tertiary"));
   });
 
   test("expanded body copy uses secondary ink in light mode", async ({ page }) => {
@@ -52,7 +36,8 @@ test.describe("light mode (default)", () => {
       .filter({ hasText: "Professional Tool for Animators" })
       .click();
 
-    await expect(await getBodyCopyColor(page)).toBe(LIGHT.bodyCopy);
+    const expected = await getSemanticColor(page, "--ink-secondary");
+    await expect(await getBodyCopyColor(page)).toBe(expected);
   });
 
   test("expression page uses light semantic tokens", async ({ page }) => {
@@ -60,8 +45,8 @@ test.describe("light mode (default)", () => {
     await page.goto("/expression");
 
     const colors = await getPageColors(page);
-    expect(colors.background).toBe(LIGHT.surface);
-    expect(colors.text).toBe(LIGHT.ink);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
   });
 
   test("ondevice page uses light semantic tokens", async ({ page }) => {
@@ -69,8 +54,8 @@ test.describe("light mode (default)", () => {
     await page.goto("/ondevice");
 
     const colors = await getPageColors(page);
-    expect(colors.background).toBe(LIGHT.surface);
-    expect(colors.text).toBe(LIGHT.ink);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
   });
 });
 
@@ -80,9 +65,9 @@ test.describe("dark mode (system preference)", () => {
     await page.goto("/");
 
     const colors = await getPageColors(page);
-    expect(colors.background).toBe(DARK.surface);
-    expect(colors.text).toBe(DARK.ink);
-    expect(colors.role).toBe(DARK.muted);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.role).toBe(await getSemanticColor(page, "--ink-tertiary"));
 
     await expect(page.getByRole("heading", { name: siteConfig.name })).toBeVisible();
     await expect(page.locator(".home__intro .home__line--role")).toHaveText(
@@ -98,7 +83,8 @@ test.describe("dark mode (system preference)", () => {
       .filter({ hasText: "Professional Tool for Animators" })
       .click();
 
-    await expect(await getBodyCopyColor(page)).toBe(DARK.bodyCopy);
+    const expected = await getSemanticColor(page, "--ink-secondary");
+    await expect(await getBodyCopyColor(page)).toBe(expected);
   });
 
   test("expression page uses dark semantic tokens", async ({ page }) => {
@@ -106,8 +92,8 @@ test.describe("dark mode (system preference)", () => {
     await page.goto("/expression");
 
     const colors = await getPageColors(page);
-    expect(colors.background).toBe(DARK.surface);
-    expect(colors.text).toBe(DARK.ink);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
     await expect(page.getByText("Agentic tools for artists")).toBeVisible();
     await expect(page.getByText("still updating this page")).toBeVisible();
@@ -118,8 +104,8 @@ test.describe("dark mode (system preference)", () => {
     await page.goto("/ondevice");
 
     const colors = await getPageColors(page);
-    expect(colors.background).toBe(DARK.surface);
-    expect(colors.text).toBe(DARK.ink);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
     await expect(page.getByText("Agentic health app")).toBeVisible();
     await expect(page.getByText("still updating this page")).toBeVisible();
@@ -130,13 +116,13 @@ test.describe("dark mode (system preference)", () => {
     await page.goto("/");
 
     let colors = await getPageColors(page);
-    expect(colors.background).toBe(DARK.surface);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
 
     await page.emulateMedia({ colorScheme: "light" });
     await page.reload();
 
     colors = await getPageColors(page);
-    expect(colors.background).toBe(LIGHT.surface);
-    expect(colors.text).toBe(LIGHT.ink);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
   });
 });

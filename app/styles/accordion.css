@@ -1,0 +1,169 @@
+.home__details {
+  margin: 0;
+  border-radius: 4px;
+}
+
+.home__details-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--home-touch-min);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-1);
+  margin-inline: calc(var(--space-1) * -1);
+  border-radius: 4px;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--duration-short) var(--ease-out);
+}
+
+.home__details-summary::-webkit-details-marker {
+  display: none;
+}
+
+.home__details[open]:not(.home__details--closing) .home__details-summary {
+  color: var(--accent);
+}
+
+.home__project-title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-medium);
+  font-size: var(--text-headline);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.home__disclosure {
+  position: relative;
+  flex-shrink: 0;
+  width: 0.72em;
+  height: 0.72em;
+  opacity: 0.52;
+}
+
+.home__disclosure::before,
+.home__disclosure::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  border-radius: 1px;
+  transition:
+    transform var(--duration-standard) var(--ease-out),
+    opacity var(--duration-short) var(--ease-out);
+}
+
+.home__disclosure::before {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+
+.home__disclosure::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1.5px;
+  transform: translateX(-50%);
+}
+
+.home__details[open]:not(.home__details--closing) .home__disclosure::before {
+  transform: translateY(-50%) rotate(45deg);
+  transition-timing-function: var(--ease-out);
+}
+
+.home__details[open]:not(.home__details--closing) .home__disclosure::after {
+  transform: translateX(-50%) rotate(45deg);
+  transition-timing-function: var(--ease-out);
+}
+
+.home__details:not([open]) .home__disclosure::after {
+  transition-duration: var(--duration-short);
+  transition-timing-function: var(--ease-in);
+}
+
+.home__details[open] {
+  scroll-margin-top: var(--home-pad-block);
+}
+
+.home__project-body-shell {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: none;
+}
+
+.home__details[open]:not(.home__details--closing) .home__project-body-shell {
+  grid-template-rows: 1fr;
+}
+
+.home__details--opening .home__project-body-shell {
+  transition: grid-template-rows var(--duration-standard) var(--ease-out);
+}
+
+.home__details--closing .home__project-body-shell {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-short) var(--ease-in);
+}
+
+.home__details.home__details--closing .home__project-body {
+  opacity: 0;
+  transition-duration: var(--duration-short);
+  transition-timing-function: var(--ease-in);
+  transition-delay: 0ms;
+}
+
+.home__details.home__details--closing .home__disclosure::before {
+  transform: translateY(-50%) rotate(0deg);
+  transition-duration: var(--duration-short);
+  transition-timing-function: var(--ease-in);
+}
+
+.home__details.home__details--closing .home__disclosure::after {
+  transform: translateX(-50%) rotate(0deg);
+  transition-duration: var(--duration-short);
+  transition-timing-function: var(--ease-in);
+}
+
+.home__project-body {
+  overflow: hidden;
+  min-height: 0;
+  margin-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--home-measure-body);
+  opacity: 0;
+  transition: opacity var(--duration-short) var(--ease-in);
+}
+
+.home__details[open]:not(.home__details--closing) .home__project-body {
+  opacity: 1;
+}
+
+.home__details--opening:not(.home__details--closing) .home__project-body {
+  opacity: 1;
+  transition-duration: var(--duration-standard);
+  transition-timing-function: var(--ease-out);
+  transition-delay: 0ms;
+}
+
+.home__details:not([open]) .home__project-body {
+  transition-delay: 0ms;
+}
+
+@media (max-width: 39.99rem) {
+  .home__project-title {
+    font-size: clamp(1.0625rem, 4.4vw, 1.1875rem);
+  }
+
+  .home__details-summary,
+  .home__project-static {
+    padding-inline: 0;
+    margin-inline: 0;
+  }
+}

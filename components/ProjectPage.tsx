@@ -1,6 +1,6 @@
 import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { PortfolioList } from "@/components/PortfolioList";
-import { SiteShell } from "@/components/SiteShell";
+import { PortfolioShell } from "@/components/PortfolioShell";
 import { calendlyLink } from "@/content/site";
 import type { PortfolioEntry } from "@/content/types";
 
@@ -22,8 +22,10 @@ export function ProjectPage({
   showBookDemo = false,
 }: ProjectPageContent) {
   return (
-    <SiteShell nameHref="/" nameAsHeading={false}>
-      <div className="home__content">
+    <PortfolioShell
+      nameHref="/"
+      nameAsHeading={false}
+      intro={
         <section className="home__intro" aria-label={pageLabel}>
           <p className="home__line home__line--role">{introRole}</p>
           <p className="home__line home__line--tagline">{introTagline}</p>
@@ -31,16 +33,18 @@ export function ProjectPage({
             <p className="home__line home__line--cta">
               <a
                 href={calendlyLink.href}
-                className="home__link home__link--header"
+                className="home__link home__link--header home__link--cta"
+                aria-label="Book now (opens in new tab)"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Book Demo
+                Book now
               </a>
             </p>
           ) : null}
         </section>
-
+      }
+      work={
         <section aria-label={pageLabel}>
           <DetailsAccordion>
             <PortfolioList
@@ -53,7 +57,7 @@ export function ProjectPage({
             still updating this page
           </p>
         </section>
-      </div>
-    </SiteShell>
+      }
+    />
   );
 }

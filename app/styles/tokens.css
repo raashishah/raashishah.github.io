@@ -1,0 +1,92 @@
+:root {
+  color-scheme: light dark;
+
+  --font-medium: var(--font-satoshi), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-regular: var(--font-satoshi), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Apple-style tinted neutrals (not pure black / white) */
+  --ink: #1d1d1f;
+  --ink-secondary: #515154;
+  --ink-tertiary: #86868b;
+  --surface: #faf9f6;
+  --separator: color-mix(in srgb, var(--ink) 12%, transparent);
+  --focus-ring: color-mix(in srgb, var(--ink) 42%, transparent);
+  --accent: #c08081;
+  --accent-focus-ring: color-mix(in srgb, var(--accent) 40%, transparent);
+
+  --text: var(--ink);
+  --color-body: var(--ink-secondary);
+  --text-muted: var(--ink-tertiary);
+  --bg: var(--surface);
+
+  /* 8pt spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --home-pad-inline: clamp(var(--space-5), 4vw, var(--space-8));
+  --home-pad-block: clamp(var(--space-5), 3dvh, var(--space-6));
+  --home-touch-min: 2.75rem;
+  --home-max-width: 68rem;
+  --home-measure-narrow: 34ch;
+  --home-measure-body: 50ch;
+
+  /* Motion — Apple HIG: 0.35s default, ease-in-out; ease-out enter, ease-in exit */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --duration-short: 250ms;
+  --duration-standard: 350ms;
+
+  /* Type scale */
+  --text-title: clamp(1.375rem, 2vw, 1.5rem);
+  --text-headline: clamp(1.0625rem, 1.6vw, 1.1875rem);
+  --text-body: clamp(1rem, 1.2vw, 1.0625rem);
+  --text-subhead: clamp(0.9375rem, 1.3vw, 1rem);
+  --text-caption: clamp(0.875rem, 1.1vw, 0.9375rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink: #f5f5f7;
+    --ink-secondary: #aeaeb2;
+    --ink-tertiary: #8e8e93;
+    --surface: #1a1a1c;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 112.5%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-regular);
+  font-weight: 400;
+  line-height: 1.47;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+}

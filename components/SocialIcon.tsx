@@ -1,6 +1,6 @@
 import { legacyFooterSocialSvgIcons } from "@/lib/legacy-social-icons";
 import {
-  footerSocialIconClasses,
+  footerIconDescriptors,
   type FooterSocialIconId,
 } from "@/lib/footer-social-icons";
 
@@ -8,17 +8,17 @@ export function SocialIcon({
   id,
   className,
 }: {
-  id: string;
+  id: FooterSocialIconId;
   className?: string;
 }) {
-  const legacySvg =
-    legacyFooterSocialSvgIcons[id as keyof typeof legacyFooterSocialSvgIcons];
-  if (legacySvg) {
+  const descriptor = footerIconDescriptors[id];
+
+  if (descriptor.kind === "svg") {
+    const legacySvg = legacyFooterSocialSvgIcons[descriptor.legacyKey];
     const legacyClassName = [
       className,
       "home__footer-icon--legacy",
-      id === "giphy" ? "home__footer-icon--giphy" : null,
-      id === "medium" ? "home__footer-icon--medium" : null,
+      descriptor.scaleClass,
     ]
       .filter(Boolean)
       .join(" ");
@@ -36,11 +36,7 @@ export function SocialIcon({
     );
   }
 
-  const iconClass =
-    footerSocialIconClasses[id as Exclude<FooterSocialIconId, "giphy" | "medium">];
-  if (!iconClass) {
-    return null;
-  }
-
-  return <i className={`${iconClass} ${className ?? ""}`.trim()} aria-hidden />;
+  return (
+    <i className={`${descriptor.iconClass} ${className ?? ""}`.trim()} aria-hidden />
+  );
 }

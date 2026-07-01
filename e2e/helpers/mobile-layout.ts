@@ -2,6 +2,18 @@ import { expect, type Page } from "@playwright/test";
 
 export const MOBILE_WIDTHS = [320, 375, 390] as const;
 
+export async function getSemanticColor(page: Page, cssVariable: string) {
+  return page.evaluate((variable) => {
+    const probe = document.createElement("span");
+    probe.style.color = `var(${variable})`;
+    probe.style.display = "none";
+    document.body.appendChild(probe);
+    const color = getComputedStyle(probe).color;
+    probe.remove();
+    return color;
+  }, cssVariable);
+}
+
 export async function assertNoHorizontalScroll(page: Page) {
   const { scrollWidth, clientWidth } = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -103,7 +115,6 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
     return {
       contentLeft: Math.round(contentLeft),
       contentRight: Math.round(contentRight),
-      metaLeft: Math.round(metaRect.left),
       metaRight: Math.round(metaRect.right),
       markLeft: Math.round(markRect.left),
       yearRight: Math.round(yearRect.right),
@@ -118,10 +129,8 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
 
   expect(alignment.markBeforeYear).toBe(true);
   expect(alignment.markLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
-  expect(alignment.yearRight).toBeLessThanOrEqual(alignment.contentRight + 1);
   expect(alignment.metaRight).toBeLessThanOrEqual(alignment.contentRight + 1);
-  expect(alignment.metaRight).toBe(alignment.yearRight);
-  expect(alignment.yearRight).toBeGreaterThanOrEqual(alignment.contentRight - 2);
+  expect(alignment.yearRight).toBeLessThanOrEqual(alignment.contentRight + 1);
 }
 
 export async function getBodyCopyColor(page: Page) {

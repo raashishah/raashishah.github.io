@@ -103,7 +103,7 @@ test.describe("SEO and LLM discovery", () => {
     await expect(
       page.locator("summary.home__details-summary").filter({ hasText: "The problem" }),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Book Demo" })).toHaveAttribute(
+    await expect(page.getByRole("link", { name: "Book now" })).toHaveAttribute(
       "href",
       "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
     );

@@ -1,8 +1,24 @@
+export type SocialLinkId =
+  | "giphy"
+  | "medium"
+  | "linkedin"
+  | "github"
+  | "spotify"
+  | "twitter"
+  | "duolingo"
+  | "soundcloud"
+  | "email"
+  | "calendly";
+
+export type FooterSocialLinkId = Exclude<SocialLinkId, "email" | "calendly">;
+
 export type SocialLink = {
-  id: string;
+  id: SocialLinkId;
   label: string;
   href: string;
 };
+
+export type FooterSocialLink = SocialLink & { id: FooterSocialLinkId };
 
 export const INLINE_LINK_SEPARATOR = " · " as const;
 

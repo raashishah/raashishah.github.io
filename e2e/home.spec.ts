@@ -8,6 +8,7 @@ import {
   assertNoHorizontalScroll,
   getBodyCopyColor,
   getFirstLineText,
+  getSemanticColor,
 } from "./helpers/mobile-layout";
 
 test("homepage shows intro and project list", async ({ page }) => {
@@ -91,7 +92,8 @@ test("expanded body copy uses the secondary ink color", async ({ page }) => {
     .filter({ hasText: "Professional Tool for Animators" })
     .click();
 
-  await expect(await getBodyCopyColor(page)).toBe("rgb(81, 81, 84)");
+  const expected = await getSemanticColor(page, "--ink-secondary");
+  await expect(await getBodyCopyColor(page)).toBe(expected);
 });
 
 test.describe("mobile layout", () => {

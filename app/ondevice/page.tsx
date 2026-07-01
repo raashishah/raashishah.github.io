@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { OnDevicePage } from "@/components/OnDevicePage";
+import { ProjectPage } from "@/components/ProjectPage";
+import { ondeviceContent } from "@/content/ondevice";
 import { workExperience } from "@/content/portfolio";
-import { absoluteUrl } from "@/lib/metadata";
+import { buildSubpageMetadata } from "@/lib/metadata";
 
 const ondeviceRole = workExperience.find((role) => role.id === "ondevice");
 
@@ -9,34 +10,12 @@ if (!ondeviceRole) {
   throw new Error("OnDevice role is missing from portfolio content");
 }
 
-export const metadata: Metadata = {
-  title: ondeviceRole.seoName,
+export const metadata: Metadata = buildSubpageMetadata({
+  canonical: "/ondevice",
+  title: ondeviceRole.seoName ?? ondeviceRole.title,
   description: ondeviceRole.seoDescription,
-  alternates: {
-    canonical: "/ondevice",
-  },
-  openGraph: {
-    type: "website",
-    url: "/ondevice",
-    title: ondeviceRole.seoName,
-    description: ondeviceRole.seoDescription,
-    images: [
-      {
-        url: absoluteUrl("/opengraph-image.png"),
-        width: 1200,
-        height: 630,
-        alt: `${ondeviceRole.seoName} — ${ondeviceRole.seoDescription}`,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: ondeviceRole.seoName,
-    description: ondeviceRole.seoDescription,
-    images: [absoluteUrl("/opengraph-image.png")],
-  },
-};
+});
 
 export default function Page() {
-  return <OnDevicePage />;
+  return <ProjectPage {...ondeviceContent} pageLabel="About OnDevice" />;
 }
