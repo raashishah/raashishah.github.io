@@ -17,17 +17,31 @@ function isPullquoteParagraph(
   return typeof paragraph === "object" && "pullquote" in paragraph;
 }
 
+function isExternalHref(href: string) {
+  return (
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("//")
+  );
+}
+
 function InlineBodyLink({ href, text }: { href: string; text: string }) {
+  const external = isExternalHref(href);
+
   return (
     <a
       href={href}
       className="home__inline-link"
-      target="_blank"
-      rel="noopener noreferrer"
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
     >
       {text}
-      {"\u00a0"}
-      <ExternalLinkArrow className="home__inline-link-icon" />
+      {external ? (
+        <>
+          {"\u00a0"}
+          <ExternalLinkArrow className="home__inline-link-icon" />
+        </>
+      ) : null}
     </a>
   );
 }

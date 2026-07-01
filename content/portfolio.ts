@@ -28,7 +28,7 @@ export const projects = [
     id: "expression",
     title: "Professional Tool for Animators",
     seoName: "Expression",
-    primaryUrl: "https://raashishah.com",
+    primaryUrl: "https://raashishah.com/expression",
     seoDescription:
       "Animation production tool that automates frame-by-frame coloring from PNG line art while preserving artist control and 1:1 parsing fidelity.",
     seoLongDetail:
@@ -37,7 +37,7 @@ export const projects = [
       [
         {
           text: "Colouring for hand drawn animation",
-          href: "https://github.com/raashishah/colourer",
+          href: "/expression",
         },
       ],
       {
