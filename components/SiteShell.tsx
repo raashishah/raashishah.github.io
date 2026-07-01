@@ -70,10 +70,7 @@ export function SiteShell({
 
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to content
-      </a>
-      <main id="main-content" className="home">
+      <main className="home">
         <header className="home__header">
           <NameTag className="home__name">{nameLink}</NameTag>
           <nav className="home__header-contact" aria-label="Contact">

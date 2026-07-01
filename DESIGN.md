@@ -93,7 +93,7 @@ Do not use pure `#000` or `#fff` for UI text/background. Brand rose is not a UI 
 
 ## Elevation
 
-No shadows on the homepage except the skip-link focus state (subtle ink-tinted shadow). Depth comes from typography hierarchy and spacing, not cards or layers. Separators are 1px rules at 12% ink opacity.
+No shadows on the homepage. Depth comes from typography hierarchy and spacing, not cards or layers. Separators are 1px rules at 12% ink opacity.
 
 ## Components
 

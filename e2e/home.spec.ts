@@ -83,15 +83,6 @@ test("opening a second dropdown closes the first", async ({ page }) => {
   await expect(onDeviceDetails).toHaveAttribute("open", "");
 });
 
-test("skip link targets main content", async ({ page }) => {
-  await page.goto("/");
-  await page.keyboard.press("Tab");
-  const skipLink = page.getByRole("link", { name: "Skip to content" });
-  await expect(skipLink).toBeFocused();
-  await skipLink.click();
-  await expect(page.locator("#main-content")).toBeVisible();
-});
-
 test("expanded body copy uses the secondary ink color", async ({ page }) => {
   await page.goto("/");
   await page
