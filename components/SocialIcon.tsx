@@ -1,7 +1,4 @@
-import {
-  legacyFooterSocialFaIcons,
-  legacyFooterSocialSvgIcons,
-} from "@/lib/legacy-social-icons";
+import { legacyFooterSocialSvgIcons } from "@/lib/legacy-social-icons";
 import {
   footerSocialIconClasses,
   type FooterSocialIconId,
@@ -27,14 +24,6 @@ export function SocialIcon({
       >
         <path fill="currentColor" d={legacySvg.path} />
       </svg>
-    );
-  }
-
-  const legacyFa =
-    legacyFooterSocialFaIcons[id as keyof typeof legacyFooterSocialFaIcons];
-  if (legacyFa) {
-    return (
-      <i className={`${legacyFa} ${className ?? ""}`.trim()} aria-hidden />
     );
   }
 
