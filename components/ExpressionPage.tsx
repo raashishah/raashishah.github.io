@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { expressionContent } from "@/content/expression";
 import { siteConfig } from "@/lib/metadata";
 
@@ -9,9 +10,9 @@ export function ExpressionPage() {
       </a>
       <main id="main-content" className="expression">
         <nav className="expression__nav" aria-label="Site">
-          <a href="/" className="expression__back">
+          <Link href="/" className="expression__back">
             {siteConfig.name}
-          </a>
+          </Link>
         </nav>
 
         <header className="expression__header">
