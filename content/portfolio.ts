@@ -77,7 +77,8 @@ export const projects = [
 export const workExperience = [
   {
     id: "pluto",
-    title: "Pluto",
+    title: "More Art and Tech",
+    seoName: "Pluto",
     seoPeriod: "2021–2024",
     seoDescription:
       "Head of Product and Tech; launched Magic Batch, Pluto, and Create Layer; drove cross-platform payments and retention growth.",
@@ -138,19 +139,15 @@ export const workExperience = [
   },
   {
     id: "aula-education",
-    title: "Aula Education",
+    title: "Client relationships and analytics",
+    seoName: "Aula Education",
     seoPeriod: "2018–2019, UK",
     seoDescription:
       "Customer success and analytics in UK higher ed; improved retention from 9.2% to 32%.",
     seoLongDetail:
       "Doubled engineering delivery speed via agile workflow changes with VP of Product. Led customer success analytics across UK and US universities. Improved retention from 9.2% to 32% with a combined qualitative and quantitative analytics toolkit.",
     paragraphs: [
-      [
-        {
-          text: "Client relationships in the UK and the US",
-          href: "https://www.linkedin.com/company/aulaeducation/",
-        },
-      ],
+      [{ text: "Aula Education, UK, US", href: "https://www.aula.education" }],
       {
         text: "Optimised engineering workflows and doubled delivery speed",
         pullquote: true,
@@ -159,4 +156,4 @@ export const workExperience = [
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
 
-export const educationLabel = "BSc in Product, Aston, UK";
+export const educationLabel = "BSc in Product, from Aston, UK";
