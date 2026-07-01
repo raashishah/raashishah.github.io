@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { footerSocialIconIds } from "@/lib/footer-social-icons";
-import { footerLinkOrder, footerLinks } from "@/content/site";
+import { footerLinkOrder, footerLinks, nameEasterEgg } from "@/content/site";
 
 describe("content/site", () => {
+  it("points the name easter egg at the Channel Tres remix", () => {
+    expect(nameEasterEgg.spotifyTrackId).toBe("0Si6B4gh96eFsjFMplPGtJ");
+    expect(nameEasterEgg.appleMusicUrl).toContain("1583616467");
+  });
   it("puts LinkedIn first in the footer", () => {
     expect(footerLinks[0]?.id).toBe("linkedin");
   });

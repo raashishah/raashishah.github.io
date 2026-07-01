@@ -4,7 +4,7 @@ import { PortfolioShell } from "@/components/PortfolioShell";
 import type { HomeContent } from "@/lib/home-content";
 
 export function SimpleHome({
-  nameEasterEggHref,
+  nameEasterEgg,
   introRole,
   introTagline,
   projects,
@@ -13,8 +13,8 @@ export function SimpleHome({
 }: HomeContent) {
   return (
     <PortfolioShell
-      nameHref={nameEasterEggHref}
-      nameExternal
+      nameHref={nameEasterEgg.spotifyUrl}
+      nameEasterEgg={nameEasterEgg}
       intro={
         <section className="home__intro" aria-label="About">
           <p className="home__line home__line--role">{introRole}</p>
