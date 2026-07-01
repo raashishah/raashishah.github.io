@@ -113,8 +113,6 @@ export function SiteShell({
               alt=""
               aria-hidden="true"
               className="home__footer-mark"
-              width={17}
-              height={17}
             />
           </p>
         </footer>

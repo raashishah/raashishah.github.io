@@ -600,9 +600,11 @@ body {
 .home__footer-mark {
   display: block;
   width: 1em;
-  height: 1em;
+  height: 0.92em;
   flex-shrink: 0;
-  transform: translateY(-0.1em);
+  object-fit: cover;
+  object-position: center 16%;
+  transform: translateY(-0.14em);
 }
 
 @media (max-width: 39.99rem) {
