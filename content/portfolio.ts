@@ -77,7 +77,7 @@ export const projects = [
 export const workExperience = [
   {
     id: "pluto",
-    title: "More Art and Tech",
+    title: "Working with Artists",
     seoName: "Pluto",
     seoPeriod: "2021–2024",
     seoDescription:
@@ -106,7 +106,8 @@ export const workExperience = [
   },
   {
     id: "ondevice",
-    title: "OnDevice",
+    title: "On-device AI",
+    seoName: "OnDevice",
     seoPeriod: "2025",
     seoDescription:
       "Co-founder and product lead for a privacy-first health app using on-device inference; early GTM via applied AI content.",
