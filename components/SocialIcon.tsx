@@ -14,9 +14,16 @@ export function SocialIcon({
   const legacySvg =
     legacyFooterSocialSvgIcons[id as keyof typeof legacyFooterSocialSvgIcons];
   if (legacySvg) {
+    const legacyClassName = [
+      className,
+      id === "giphy" ? "home__footer-icon--giphy" : null,
+    ]
+      .filter(Boolean)
+      .join(" ");
+
     return (
       <svg
-        className={className}
+        className={legacyClassName}
         viewBox={legacySvg.viewBox}
         aria-hidden
         focusable="false"
