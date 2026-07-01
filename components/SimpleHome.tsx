@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { DetailsAccordion } from "@/components/DetailsAccordion";
@@ -27,22 +28,31 @@ function isExternalHref(href: string) {
 
 function InlineBodyLink({ href, text }: { href: string; text: string }) {
   const external = isExternalHref(href);
+  const label = (
+    <>
+      {text}
+      {"\u00a0"}
+      <ExternalLinkArrow className="home__inline-link-icon" />
+    </>
+  );
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        className="home__inline-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {label}
+      </a>
+    );
+  }
 
   return (
-    <a
-      href={href}
-      className="home__inline-link"
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-    >
-      {text}
-      {external ? (
-        <>
-          {"\u00a0"}
-          <ExternalLinkArrow className="home__inline-link-icon" />
-        </>
-      ) : null}
-    </a>
+    <Link href={href} className="home__inline-link">
+      {label}
+    </Link>
   );
 }
 

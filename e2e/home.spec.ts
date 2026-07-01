@@ -33,6 +33,14 @@ test("project details expand with body copy", async ({ page }) => {
     page.getByRole("link", { name: "Colouring for hand drawn animation" }),
   ).toHaveAttribute("href", "/expression");
   await expect(
+    page
+      .getByRole("link", { name: "Colouring for hand drawn animation" })
+      .locator(".home__inline-link-icon"),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Colouring for hand drawn animation" }),
+  ).not.toHaveAttribute("target", "_blank");
+  await expect(
     page.getByText("This problem remains unsolved worldwide"),
   ).toBeVisible();
   await expect(
@@ -116,7 +124,7 @@ test.describe("mobile layout", () => {
       await page.goto("/");
       await page
         .locator("summary.home__details-summary")
-        .filter({ hasText: "Enterprise-Grade Agents" })
+        .filter({ hasText: "Professional Tool for Animators" })
         .click();
 
       await assertInlineLinkArrowOnLastLine(
