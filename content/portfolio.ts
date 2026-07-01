@@ -36,7 +36,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Auto-colouring for hand drawn animation",
+          text: "Colouring for hand drawn animation",
           href: "https://github.com/raashishah/colourer",
         },
       ],
