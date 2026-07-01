@@ -148,7 +148,5 @@
   .home__footer-meta {
     align-items: center;
     min-height: 1.25rem;
-    /* Match first icon column — nav centers icons in each grid cell */
-    padding-inline-start: calc((100% / 8 - 1.0625rem) / 2);
   }
 }
