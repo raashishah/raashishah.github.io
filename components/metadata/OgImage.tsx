@@ -48,7 +48,6 @@ export function OgImage({
       >
         <div
           style={{
-            display: "flex",
             fontSize: 48,
             fontWeight: 500,
             lineHeight: 1.2,
@@ -59,7 +58,6 @@ export function OgImage({
         </div>
         <div
           style={{
-            display: "flex",
             fontSize: 30,
             fontWeight: 400,
             lineHeight: 1.47,
@@ -70,13 +68,12 @@ export function OgImage({
         </div>
         <div
           style={{
-            display: "flex",
             fontSize: 36,
             fontWeight: 500,
             lineHeight: 1.35,
             letterSpacing: "-0.015em",
             marginTop: 4,
-            maxWidth: "32ch",
+            maxWidth: 900,
           }}
         >
           {tagline}
@@ -103,7 +100,6 @@ export function OgImage({
           <img src={faviconSrc} width={22} height={22} alt="" />
           <div
             style={{
-              display: "flex",
               fontSize: 26,
               fontWeight: 400,
               color: muted,
