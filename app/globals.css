@@ -568,6 +568,25 @@ body {
   line-height: 1;
 }
 
+@media (min-width: 40rem) {
+  .home__footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .home__footer-nav {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .home__footer-meta {
+    flex-shrink: 0;
+  }
+}
+
 .home__footer-mark {
   display: block;
   width: 1.0625rem;
