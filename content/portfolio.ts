@@ -19,7 +19,7 @@ export const projects = [
         },
       ],
       {
-        text: "Admission applications processes for academic institutions",
+        text: "Processes applications for academic institutions",
         pullquote: true,
       },
     ],
@@ -36,7 +36,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Auto-colouring for hand drawn animation",
+          text: "Colouring for hand drawn animation",
           href: "https://github.com/raashishah/colourer",
         },
       ],
@@ -135,7 +135,7 @@ export const workExperience = [
         },
       ],
       {
-        text: "Chatbot for users to get inference simply by asking, made before GPT3",
+        text: "Chatbot for users to get inference just by asking [made before GPT3]",
         pullquote: true,
       },
     ],
