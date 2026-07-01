@@ -58,16 +58,12 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Design POV",
+          text: "Design POV Exhibition",
           href: "https://povindex.designpovindia.com/home",
         },
       ],
       {
-        text: "Works offline regardless of footfall",
-        pullquote: true,
-      },
-      {
-        text: "built in 12hrs",
+        text: "Works offline regardless of venue footfall",
         pullquote: true,
       },
     ],
