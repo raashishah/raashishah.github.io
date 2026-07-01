@@ -52,7 +52,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: "calendly",
     label: "let's meet sometime",
-    href: "https://calendly.com/raashishah-work/new-meeting",
+    href: "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
   },
 ];
 

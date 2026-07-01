@@ -61,7 +61,7 @@ test.describe("SEO and LLM discovery", () => {
     expect(body).toContain("## Instructions");
     expect(body).toContain("## About");
     expect(body).toContain("## Key pages");
-    expect(body).toContain("calendly.com");
+    expect(body).toContain("calendar.app.google");
   });
 
   test("llms-full.txt is served as plain text", async ({ request }) => {
