@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: absoluteUrl("/opengraph-image"),
+        url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
         alt: `${siteConfig.creator} — ${siteConfig.introRole}`,
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     creator: siteConfig.twitterHandle,
     title: seoConfig.title,
     description: seoConfig.description,
-    images: [absoluteUrl("/opengraph-image")],
+    images: [absoluteUrl("/opengraph-image.png")],
   },
   icons: {
     icon: [{ url: "/img/favicon.svg", type: "image/svg+xml" }],

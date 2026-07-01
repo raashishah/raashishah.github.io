@@ -18,11 +18,3 @@ export function getSiteUrl() {
 export function absoluteUrl(path = "/") {
   return new URL(path, getSiteUrl()).toString();
 }
-
-/** OG / social preview palette — mirrors `globals.css` ink tokens. */
-export const shareImageBasePalette = {
-  bg: "#faf9f6",
-  text: "#1d1d1f",
-  secondary: "#515154",
-  muted: "#86868b",
-} as const;

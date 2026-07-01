@@ -100,10 +100,8 @@ test.describe("SEO and LLM discovery", () => {
     await expect(page.getByRole("link", { name: "Raashi Shah" })).toHaveAttribute("href", "/");
   });
 
-  test("opengraph-image is generated with Satoshi and site copy", async ({
-    request,
-  }) => {
-    const response = await request.get("/opengraph-image");
+  test("opengraph-image serves the Figma export", async ({ request }) => {
+    const response = await request.get("/opengraph-image.png");
 
     expect(response.ok()).toBeTruthy();
     expect(response.headers()["content-type"]).toContain("image/png");

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description: ondeviceRole.seoDescription,
     images: [
       {
-        url: absoluteUrl("/opengraph-image"),
+        url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
         alt: `${ondeviceRole.seoName} — ${ondeviceRole.seoDescription}`,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: ondeviceRole.seoName,
     description: ondeviceRole.seoDescription,
-    images: [absoluteUrl("/opengraph-image")],
+    images: [absoluteUrl("/opengraph-image.png")],
   },
 };
 
