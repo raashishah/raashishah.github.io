@@ -24,9 +24,13 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toMatch(/^> .+/m);
     expect(llmsTxt).toContain("## About");
     expect(llmsTxt).toContain("## Instructions");
+    expect(llmsTxt).toContain("## Key pages");
     expect(llmsTxt).toContain("## Projects");
     expect(llmsTxt).toContain("https://admissions.raashishah.com");
     expect(llmsTxt).toContain("/llms-full.txt");
+    expect(llmsTxt).toContain("/expression");
+    expect(llmsTxt).toContain("/ondevice");
+    expect(llmsTxt).toContain("BSc in Product");
     expect(llmsTxt).toContain("## Optional");
   });
 
@@ -62,6 +66,8 @@ describe("site SEO copy", () => {
 
     expect(llmsFullTxt).toContain("## Full project detail");
     expect(llmsFullTxt).toContain("Google ADK");
+    expect(llmsFullTxt).toContain("4,000+ student profiles");
     expect(llmsFullTxt).toContain("### Pluto (2021–2024)");
+    expect(llmsFullTxt).toContain("27% sales growth");
   });
 });

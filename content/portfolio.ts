@@ -8,9 +8,9 @@ export const projects = [
     seoName: "Admission Evaluation Agent",
     primaryUrl: "https://admissions.raashishah.com",
     seoDescription:
-      "Enterprise admissions QA agent that grades applicants against custom rubrics, with RAG lookups, performance telemetry, and sub-$0.20 cost per student using Google ADK.",
+      "Enterprise admissions QA agent grading applicants against custom rubrics; 4,000+ student profiles processed with RAG, telemetry, and Google ADK (Enterprise) at roughly fifteen cents per student.",
     seoLongDetail:
-      "Academic institutions process thousands of applications across months and multiple reviewers. This system standardizes enterprise-grade agents that fit into existing pipelines and use decision-making context to qualify students consistently. Includes RAG for data lookups, agent performance and cost telemetry (approximately fifteen cents per student), and integration with Google's Agent Development Kit (ADK).",
+      "Academic institutions process thousands of applications across months and multiple reviewers. Built an admissions QA agent used by a school to grade applicants against custom rubrics, processing 4,000+ student profiles. Standardizes enterprise-grade agents that fit into existing pipelines with RAG for data lookups, agent performance and cost telemetry (approximately fifteen cents per student), and Google ADK (Enterprise) integration.",
     paragraphs: [
       [
         {
@@ -30,9 +30,9 @@ export const projects = [
     seoName: "Expression",
     primaryUrl: "https://raashishah.com/expression",
     seoDescription:
-      "Animation production tool that automates frame-by-frame coloring from PNG line art while preserving artist control and 1:1 parsing fidelity.",
+      "Animation agent that auto-colours 1,500-frame hand-drawn sequences from PNG line art with 1:1 parsing fidelity and full artist control.",
     seoLongDetail:
-      "Expression automates coloring for hand-drawn frames in traditional frame-by-frame animation. Artists color each frame individually; a one-minute shot at 25fps is roughly 1,500 frames. Expression parses PNG line art with 1:1 fidelity as the artist intended, compatible with any drawing software, so artists retain full control while skipping repetitive work.",
+      "Building an animation agent for colouring sequences with 1,500 frames drawn manually by artists. Solved a PNG-to-Python parsing problem that preserves 1:1 fidelity with artist line art — compatible with any drawing software. Expression automates repetitive frame-by-frame coloring while artists retain full creative control.",
     paragraphs: [
       [
         {
@@ -81,9 +81,9 @@ export const workExperience = [
     seoName: "Pluto",
     seoPeriod: "2021–2024",
     seoDescription:
-      "Head of Product and Tech; launched Magic Batch, Pluto, and Create Layer; drove cross-platform payments and retention growth.",
+      "Head of Product and Tech; launched Magic Batch, Pluto, and Create Layer; 27% sales growth YoY via cross-platform payments and 82% retention lift.",
     seoLongDetail:
-      "Collaborated with artists and transformed a creative studio into a product- and technology-led organization. Launched Magic Batch (MVP), Pluto (cross-platform payments driving 37% sales growth YoY; 82% retention lift via A/B-tested incentives), and Create Layer (500+ users, 5,000+ assets in ten days). Owned end-to-end product delivery.",
+      "Collaborated with artists and transformed a creative studio into a product- and technology-led organization. Launched Magic Batch (MVP), Pluto (cross-platform payments driving 27% sales growth YoY; 82% retention lift via A/B-tested incentives), and Create Layer (500+ users, 5,000+ assets in ten days). Owned end-to-end product delivery across 20+ cross-functional contributors.",
     paragraphs: [
       [
         {
@@ -110,9 +110,9 @@ export const workExperience = [
     seoName: "OnDevice",
     seoPeriod: "2025",
     seoDescription:
-      "Co-founder and product lead for a privacy-first health app using on-device inference; early GTM via applied AI content.",
+      "Co-founder and product lead for a privacy-first type II diabetes health app with on-device inference; 42% faster task completion and 200+ personalized actions.",
     seoLongDetail:
-      "Returned to hands-on AI building. Collaborated on a diabetic health app using on-device inference. Executed early go-to-market through applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
+      "Co-founded and led product for a privacy-first type II diabetes health app using on-device inference. Led 30 interviews and 10 surveys to define privacy-by-default UX, reducing cognitive load and accelerating task completion by 42%. Defined agentic on-device flows enabling 200+ personalized user actions. Early GTM via applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
     paragraphs: [
       [{ text: "Agentic Health App", href: "/ondevice" }],
       {
@@ -127,9 +127,9 @@ export const workExperience = [
     seoName: "Kawa Space",
     seoPeriod: "2020",
     seoDescription:
-      "Geospatial ML products and NLP chatbot for non-technical data queries (pre-GPT era).",
+      "Six geospatial ML use cases and an NLP chatbot unlocking non-technical access to datasets (pre-GPT-3).",
     seoLongDetail:
-      "Geospatial ML for agriculture, rainfall, and population density. Built a Dialogflow chatbot so non-technical users could query datasets in natural language before GPT-3 era tooling.",
+      "Delivered 6 ML use cases by recruiting a cross-functional team of 5 engineers and data scientists. Geospatial ML for agriculture, rainfall, and population density. Built an NLP-powered chatbot so non-technical users could query datasets in natural language before GPT-3 era tooling.",
     paragraphs: [
       [{ text: "Kawa Space", href: "https://www.kawaspace.com" }],
       {

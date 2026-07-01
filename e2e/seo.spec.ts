@@ -60,6 +60,8 @@ test.describe("SEO and LLM discovery", () => {
     expect(body).toBe(buildLlmsTxt());
     expect(body).toContain("## Instructions");
     expect(body).toContain("## About");
+    expect(body).toContain("## Key pages");
+    expect(body).toContain("calendly.com");
   });
 
   test("llms-full.txt is served as plain text", async ({ request }) => {
@@ -80,13 +82,16 @@ test.describe("SEO and LLM discovery", () => {
     expect(body).toContain("Sitemap:");
   });
 
-  test("sitemap.xml lists the homepage", async ({ request }) => {
+  test("sitemap.xml lists public pages and llms discovery files", async ({ request }) => {
     const response = await request.get("/sitemap.xml");
     const body = await response.text();
 
     expect(response.ok()).toBeTruthy();
     expect(body).toContain("<loc>");
     expect(body).toContain(absoluteUrl("/expression"));
+    expect(body).toContain(absoluteUrl("/ondevice"));
+    expect(body).toContain(absoluteUrl("/llms.txt"));
+    expect(body).toContain(absoluteUrl("/llms-full.txt"));
     expect(body).toContain("</urlset>");
   });
 

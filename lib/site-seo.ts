@@ -1,14 +1,14 @@
-import { projects, workExperience } from "@/content/portfolio";
-import { emailLink, linksById, socialLinks } from "@/content/site";
+import { projects, workExperience, educationLabel } from "@/content/portfolio";
+import { calendlyLink, emailLink, linksById, socialLinks } from "@/content/site";
 import type { PortfolioEntry } from "@/content/types";
 import { absoluteUrl, siteConfig } from "@/lib/metadata";
 
 export const seoConfig = {
   title: `${siteConfig.creator} | ${siteConfig.introRole}`,
   description:
-    "Technical product manager and engineer building apps and AI agent systems end-to-end. Admissions AI, animation tooling, fintech, edtech.",
+    "Technical product manager and engineer building apps and AI agent systems end-to-end.",
   longDescription:
-    "Raashi Shah is a technical product manager and engineer who designs and ships consumer apps and enterprise AI agent systems end-to-end. Experience spans admissions automation, animation tooling, fintech, geospatial ML, and edtech.",
+    "Raashi Shah is a technical product manager and AI engineer who designs and ships consumer apps and enterprise AI agent systems end-to-end. Current work spans admissions evaluation agents, animation production tooling, offline exhibition apps, and on-device health AI. Previously led product and tech at Pluto, co-founded OnDevice, and built geospatial ML at Kawa Space and retention analytics at Aula Education.",
   keywords: [
     "Raashi Shah",
     "technical product manager",
@@ -18,16 +18,21 @@ export const seoConfig = {
     "full-stack product manager",
     "Google ADK",
     "agentic applications",
+    "on-device AI",
+    "admissions automation",
+    "animation tooling",
     "portfolio",
   ],
 } as const;
 
 export const llmsSummary =
-  "Technical product manager and engineer with seven years at early-stage startups, building AI agent systems, consumer apps, and product-led teams end-to-end.";
+  "Technical product manager and AI engineer with seven years at early-stage startups, building agentic systems, consumer apps, and product-led teams end-to-end.";
 
-export const llmsProfile = `Raashi Shah works at the intersection of product management and hands-on engineering. She has led cross-functional teams at Pluto, Kawa Space, and Aula Education, and currently builds agentic systems and applications independently.
+export const llmsProfile = `Raashi Shah works at the intersection of product management and hands-on engineering. She currently builds agentic AI systems and applications independently — admissions QA agents, animation colouring agents, offline-first web apps, and on-device health AI.
 
-Core focus areas: enterprise AI agents (admissions evaluation, RAG, telemetry), creative tooling (Expression frame-by-frame animation coloring), offline-first web apps, on-device inference, and 0-to-1 product delivery.`;
+Previously led product and technology at Pluto (Magic Batch, Pluto, Create Layer), co-founded OnDevice for privacy-first on-device health AI, and delivered geospatial ML at Kawa Space and customer success analytics at Aula Education in the UK.
+
+Core focus: enterprise AI agents (RAG, telemetry, Google ADK), creative production tooling, on-device inference, and 0-to-1 product delivery.`;
 
 function portfolioSeoName(entry: PortfolioEntry) {
   return entry.seoName ?? entry.title;
@@ -86,6 +91,8 @@ export function getStructuredDataJsonLd() {
           "Technical product management",
           "AI agents",
           "Application development",
+          "On-device inference",
+          "Animation production tooling",
           "Product strategy",
           "Machine learning products",
         ],
@@ -97,7 +104,11 @@ export function getStructuredDataJsonLd() {
 export function buildLlmsTxt(): string {
   const homeUrl = absoluteUrl("/");
   const llmsFullUrl = absoluteUrl("/llms-full.txt");
+  const expressionUrl = absoluteUrl("/expression");
+  const ondeviceUrl = absoluteUrl("/ondevice");
   const twitterLink = linksById.twitter;
+  const expressionProject = projects.find((project) => project.id === "expression");
+  const ondeviceRole = workExperience.find((role) => role.id === "ondevice");
 
   const lines = [
     `# ${siteConfig.creator}`,
@@ -110,6 +121,8 @@ export function buildLlmsTxt(): string {
     "",
     `- **Name**: ${siteConfig.creator}`,
     `- **Role**: ${siteConfig.introRole}`,
+    `- **Tagline**: ${siteConfig.introTagline}`,
+    `- **Education**: ${educationLabel}`,
     `- **Site type**: Personal portfolio`,
     `- **Extended context**: [llms-full.txt](${llmsFullUrl})`,
     "",
@@ -118,6 +131,18 @@ export function buildLlmsTxt(): string {
     "- Homepage UI copy is informal; this file and HTML metadata are the authoritative professional summary.",
     `- For full project and work-history detail, read [llms-full.txt](${llmsFullUrl}).`,
     "- Contact via email for consulting, collaborations, and hiring inquiries.",
+    "",
+    "## Key pages",
+    "",
+    `- [Homepage](${homeUrl}): Portfolio with expandable project and work history.`,
+    ...(expressionProject
+      ? [
+          `- [Expression](${expressionUrl}): ${expressionProject.seoDescription}`,
+        ]
+      : []),
+    ...(ondeviceRole
+      ? [`- [OnDevice](${ondeviceUrl}): ${ondeviceRole.seoDescription}`]
+      : []),
     "",
     "## Projects",
     "",
@@ -135,13 +160,18 @@ export function buildLlmsTxt(): string {
     "## Contact",
     "",
     `- [${emailLink.label}](${emailLink.href}): Primary contact for consulting and collaborations.`,
+    `- [${calendlyLink.label}](${calendlyLink.href}): Schedule a meeting.`,
     `- [Twitter / X](${twitterLink.href}): Public updates and applied AI content.`,
-    `- [Homepage](${homeUrl}): Portfolio with expandable project and work history.`,
     "",
     "## Optional",
     "",
     ...socialLinks
-      .filter((link) => link.id !== "email" && link.id !== "twitter")
+      .filter(
+        (link) =>
+          link.id !== "email" &&
+          link.id !== "twitter" &&
+          link.id !== "calendly",
+      )
       .map((link) => `- [${link.label}](${link.href}): Social and writing profiles.`),
   ];
 
