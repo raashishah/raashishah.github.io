@@ -42,7 +42,7 @@ export const socialLinks: SocialLink[] = [
   {
     id: "soundcloud",
     label: "SoundCloud",
-    href: "https://soundcloud.com",
+    href: "https://m.soundcloud.com/raashi-shah",
   },
   {
     id: "email",
