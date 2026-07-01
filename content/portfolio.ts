@@ -154,7 +154,7 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Aula Education, UK, US", href: "https://www.aula.education" }],
       {
-        text: "Analysed user feedback and optimised engineering pipelines",
+        text: "Analysed user feedback and optimised shipping pipelines",
         pullquote: true,
       },
     ],

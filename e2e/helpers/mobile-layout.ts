@@ -115,7 +115,7 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
     return {
       contentLeft: Math.round(contentLeft),
       contentRight: Math.round(contentRight),
-      metaRight: Math.round(metaRect.right),
+      metaLeft: Math.round(metaRect.left),
       markLeft: Math.round(markRect.left),
       yearRight: Math.round(yearRect.right),
       markBeforeYear: markRect.left <= yearRect.left,
@@ -128,8 +128,8 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
   }
 
   expect(alignment.markBeforeYear).toBe(true);
+  expect(alignment.metaLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
   expect(alignment.markLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
-  expect(alignment.metaRight).toBeLessThanOrEqual(alignment.contentRight + 1);
   expect(alignment.yearRight).toBeLessThanOrEqual(alignment.contentRight + 1);
 }
 
