@@ -135,7 +135,7 @@ export const workExperience = [
         },
       ],
       {
-        text: "Chatbot for users to get inference just by asking [ made pre-GPT3 ]",
+        text: "Chatbot for users to get inference just by asking [ built pre-GPT3 ]",
         pullquote: true,
       },
     ],
