@@ -114,7 +114,7 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Twitter", href: "https://x.com/useondevice" }],
       {
-        text: "Designed a health app for diabetic patients",
+        text: "Health app for diabetic patients",
         pullquote: true,
       },
     ],
