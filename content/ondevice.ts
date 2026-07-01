@@ -1,15 +1,33 @@
+import type { PortfolioEntry } from "./types";
+
 export const ondeviceContent = {
-  title: "OnDevice",
-  role: "Agentic health app",
-  tagline: "Type II diabetes management with on-device AI — private by default.",
+  introRole: "Agentic health app",
+  introTagline:
+    "Type II diabetes management with on-device AI — private by default.",
+  idPrefix: "ondevice",
   sections: [
     {
-      heading: "Privacy",
-      body: "Health data stays on the device. Product direction came from 30 interviews and 10 surveys with a privacy-by-default UX.",
+      id: "privacy",
+      title: "Privacy",
+      seoDescription:
+        "Health data stays on the device with privacy-by-default UX.",
+      paragraphs: [
+        "Health data stays on the device. Product direction came from 30 interviews and 10 surveys with a privacy-by-default UX.",
+      ],
     },
     {
-      heading: "On-device inference",
-      body: "Agentic flows run locally to enable personalised actions without sending sensitive data to the cloud.",
+      id: "on-device-inference",
+      title: "On-device inference",
+      seoDescription:
+        "Agentic flows run locally for personalised actions without cloud data.",
+      paragraphs: [
+        "Agentic flows run locally to enable personalised actions without sending sensitive data to the cloud.",
+      ],
     },
   ],
-} as const;
+} as const satisfies {
+  introRole: string;
+  introTagline: string;
+  idPrefix: string;
+  sections: readonly PortfolioEntry[];
+};
