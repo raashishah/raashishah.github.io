@@ -133,7 +133,11 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Kawa Space", href: "https://www.kawaspace.com" }],
       {
-        text: "Chatbot to get model inferences [ built pre-GPT3 ]",
+        text: "Chatbot to get model inferences",
+        pullquote: true,
+      },
+      {
+        text: "built pre-GPT3",
         pullquote: true,
       },
     ],
