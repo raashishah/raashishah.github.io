@@ -28,7 +28,8 @@
 }
 
 .home__footer-icon--giphy {
-  transform: scale(1.16);
+  transform: translateY(0.5px) scale(1.08);
+  transform-origin: center center;
 }
 
 .home__footer-icon--medium {
@@ -124,6 +125,12 @@
     width: 1.0625rem;
     height: 1.0625rem;
     font-size: 1.0625rem;
+  }
+
+  .home__footer-icon--giphy {
+    width: 1rem;
+    height: 1rem;
+    transform: translateY(0.5px) scale(1.08);
   }
 
   .home__footer-icon--legacy {
