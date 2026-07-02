@@ -27,3 +27,11 @@
 - Site metadata in `lib/metadata.ts` (creator "Raashi Shah", `twitterHandle` `@rash_driving`, canonical intro fields); SEO/llms in `lib/site-seo.ts` — `seoConfig.ogTitle` (`siteConfig.name`) for Open Graph/Twitter title, `seoConfig.title` for browser tab (`Raashi Shah | Technical Product Manager, AI Engineer`), `seoConfig.description` uses canonical `siteConfig.description` (`${introRole}. ${introTagline}` ending at "end-to-end" with no product/industry list); `buildLlmsTxt()` / `buildLlmsFullTxt()` served at `/llms.txt` and `/llms-full.txt`; sitemap includes llms routes; favicon wired in `app/layout.tsx`; OG share image is static `app/opengraph-image.png` (1200×630 Figma export) with metadata URLs at `/opengraph-image.png` (not `/opengraph-image`) in `app/layout.tsx` and sub-pages — code-generated `opengraph-image.tsx` / `OgImage.tsx` / `lib/og-fonts.ts` removed; `nameEasterEggHref` Spotify track in `content/site.ts`.
 - `PRODUCT.md` and `DESIGN.md` at project root document product purpose and design system (Apple HIG motion/spacing) for agent context.
 - Intro copy lives in `siteConfig` (`lib/metadata.ts`); later polish commits have accidentally reverted it — tests should import `siteConfig` not hardcode strings.
+
+## Cursor Cloud specific instructions
+
+- Single Next.js App Router service, no database/Docker; Node 22 (`.node-version`). Standard commands are in `README.md` and `package.json` scripts (`dev`, `build`, `lint`, `test`, `test:e2e`, `typecheck`).
+- The update script runs `npm ci` and `npx playwright install chromium` on startup, so deps and the e2e browser are already present.
+- Dev server: `npm run dev` uses port 3000, but 3000 is often busy — run `npm run dev -- -p 3002` and open `http://localhost:3002`. Playwright e2e is separate: `playwright.config.ts` starts its own dev server on port 3100 (override with `PLAYWRIGHT_PORT`), so no manual server is needed for `npm run test:e2e`.
+- `npm run lint` and `npm run build` emit a known `no-img-element` warning for `components/SiteShell.tsx`; this is expected and does not fail the build.
+- Spotify env vars in `.env.example` are optional — the site runs fully without them.
