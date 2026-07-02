@@ -29,19 +29,6 @@ export function ProjectPage({
         <section className="home__intro" aria-label={pageLabel}>
           <p className="home__line home__line--role">{introRole}</p>
           <p className="home__line home__line--tagline">{introTagline}</p>
-          {showBookDemo ? (
-            <p className="home__line home__line--cta">
-              <a
-                href={calendlyLink.href}
-                className="home__link home__link--header home__link--cta"
-                aria-label="Book now (opens in new tab)"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Book now
-              </a>
-            </p>
-          ) : null}
         </section>
       }
       work={
@@ -56,6 +43,19 @@ export function ProjectPage({
           <p className="home__line home__line--role home__updating-note">
             still updating this page
           </p>
+          {showBookDemo ? (
+            <p className="home__line home__line--cta">
+              <a
+                href={calendlyLink.href}
+                className="home__link home__link--header home__link--cta"
+                aria-label="Book demo (opens in new tab)"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book demo
+              </a>
+            </p>
+          ) : null}
         </section>
       }
     />

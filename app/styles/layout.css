@@ -126,7 +126,11 @@
 }
 
 .home__line--cta {
-  margin-top: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.home__link--cta {
+  color: var(--accent);
 }
 
 .home__updating-note {
