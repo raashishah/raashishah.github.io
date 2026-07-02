@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { NameEasterEggLink } from "@/components/NameEasterEggLink";
 import { SocialIcon } from "@/components/SocialIcon";
-import type { NameEasterEgg } from "@/content/site";
 import {
   calendlyLink,
   emailLink,
@@ -43,7 +41,6 @@ type SiteShellProps = {
   children: React.ReactNode;
   nameHref: string;
   nameExternal?: boolean;
-  nameEasterEgg?: NameEasterEgg;
   nameAsHeading?: boolean;
   emailLink?: SocialLink;
   calendlyLink?: SocialLink;
@@ -54,15 +51,12 @@ export function SiteShell({
   children,
   nameHref,
   nameExternal = false,
-  nameEasterEgg,
   nameAsHeading = true,
   emailLink: email = emailLink,
   calendlyLink: calendly = calendlyLink,
   footerLinks: footer = footerLinks,
 }: SiteShellProps) {
-  const nameLink = nameEasterEgg ? (
-    <NameEasterEggLink easterEgg={nameEasterEgg} />
-  ) : nameExternal ? (
+  const nameLink = nameExternal ? (
     <a
       href={nameHref}
       className="home__name-link"

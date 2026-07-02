@@ -1,15 +1,7 @@
 import type { FooterSocialLink, FooterSocialLinkId, SocialLink, SocialLinkId } from "./types";
 
-export const nameEasterEgg = {
-  spotifyTrackId: "0Si6B4gh96eFsjFMplPGtJ",
-  spotifyUrl: "https://open.spotify.com/track/0Si6B4gh96eFsjFMplPGtJ",
-  appleMusicUrl:
-    "https://music.apple.com/us/album/who-i-am-channel-tres-remix/1583616462?i=1583616467",
-} as const;
-
-export type NameEasterEgg = typeof nameEasterEgg;
-
-export const nameEasterEggHref = nameEasterEgg.spotifyUrl;
+export const nameEasterEggHref =
+  "https://open.spotify.com/track/0Si6B4gh96eFsjFMplPGtJ";
 
 export const footerDiscoveryHint = "something's hidden somewhere here";
 
