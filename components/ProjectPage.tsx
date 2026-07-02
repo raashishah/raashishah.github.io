@@ -40,9 +40,6 @@ export function ProjectPage({
               ariaLabel={pageLabel}
             />
           </DetailsAccordion>
-          <p className="home__line home__line--role home__updating-note">
-            still updating this page
-          </p>
           {showBookDemo ? (
             <p className="home__line home__line--cta">
               <a
@@ -56,6 +53,9 @@ export function ProjectPage({
               </a>
             </p>
           ) : null}
+          <p className="home__line home__line--role home__updating-note">
+            still updating this page
+          </p>
         </section>
       }
     />
