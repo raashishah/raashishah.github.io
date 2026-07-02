@@ -106,7 +106,6 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
     const homeRect = home.getBoundingClientRect();
     const metaRect = meta.getBoundingClientRect();
     const markRect = mark.getBoundingClientRect();
-    const yearRect = year.getBoundingClientRect();
     const homeStyles = getComputedStyle(home);
     const padLeft = Number.parseFloat(homeStyles.paddingLeft);
     const padRight = Number.parseFloat(homeStyles.paddingRight);
