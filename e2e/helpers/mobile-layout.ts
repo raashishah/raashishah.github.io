@@ -97,8 +97,9 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
     const meta = document.querySelector(".home__footer-meta");
     const mark = document.querySelector(".home__footer-mark");
     const year = document.querySelector(".home__footer-meta-year");
+    const hint = document.querySelector(".home__footer-meta-hint");
 
-    if (!home || !meta || !mark || !year) {
+    if (!home || !meta || !mark || !year || !hint) {
       return null;
     }
 
@@ -116,9 +117,12 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
       contentLeft: Math.round(contentLeft),
       contentRight: Math.round(contentRight),
       metaLeft: Math.round(metaRect.left),
+      metaRight: Math.round(metaRect.right),
       markLeft: Math.round(markRect.left),
-      yearRight: Math.round(yearRect.right),
-      markBeforeYear: markRect.left <= yearRect.left,
+      yearBeforeMark:
+        (year.compareDocumentPosition(mark) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0,
+      markBeforeHint:
+        (mark.compareDocumentPosition(hint) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0,
     };
   });
 
@@ -127,10 +131,11 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
     return;
   }
 
-  expect(alignment.markBeforeYear).toBe(true);
+  expect(alignment.yearBeforeMark).toBe(true);
+  expect(alignment.markBeforeHint).toBe(true);
   expect(alignment.metaLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
   expect(alignment.markLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
-  expect(alignment.yearRight).toBeLessThanOrEqual(alignment.contentRight + 1);
+  expect(alignment.metaRight).toBeLessThanOrEqual(alignment.contentRight + 1);
 }
 
 export async function getBodyCopyColor(page: Page) {

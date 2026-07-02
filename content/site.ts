@@ -11,7 +11,7 @@ export type NameEasterEgg = typeof nameEasterEgg;
 
 export const nameEasterEggHref = nameEasterEgg.spotifyUrl;
 
-export const footerDiscoveryHint = "i've hid something here";
+export const footerDiscoveryHint = "something's hidden somewhere here";
 
 export const socialLinks = [
   {

@@ -73,11 +73,6 @@
   line-height: 1.35;
 }
 
-.home__footer-meta-separator {
-  color: var(--text-muted);
-  user-select: none;
-}
-
 .home__footer-meta-hint {
   color: var(--text-muted);
 }
