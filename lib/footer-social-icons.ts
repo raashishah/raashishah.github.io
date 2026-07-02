@@ -14,7 +14,7 @@ type FaIconDescriptor = {
 type SvgIconDescriptor = {
   kind: "svg";
   legacyKey: keyof typeof legacyFooterSocialSvgIcons;
-  scaleClass?: "home__footer-icon--giphy" | "home__footer-icon--medium";
+  scaleClass?: "home__footer-icon--medium";
 };
 
 export type FooterIconDescriptor = FaIconDescriptor | SvgIconDescriptor;
@@ -31,9 +31,5 @@ export const footerIconDescriptors: Record<FooterSocialLinkId, FooterIconDescrip
   spotify: { kind: "fa", iconClass: "fa-brands fa-spotify" },
   soundcloud: { kind: "fa", iconClass: "fa-brands fa-soundcloud" },
   duolingo: { kind: "fa", iconClass: "fa-brands fa-duolingo" },
-  giphy: {
-    kind: "svg",
-    legacyKey: "giphy",
-    scaleClass: "home__footer-icon--giphy",
-  },
+  giphy: { kind: "fa", iconClass: "fa-solid fa-file" },
 };

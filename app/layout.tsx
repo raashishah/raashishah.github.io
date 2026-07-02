@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { PersonJsonLd } from "@/components/metadata/PersonJsonLd";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/brands.min.css";
+import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "./globals.css";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/metadata";
 import { seoConfig } from "@/lib/site-seo";
