@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-const introRole = "Technical Product Manager, AI Engineer";
-const introTagline = "Designing and developing apps and AI agents end-to-end";
+const introRole = "Product Manager, AI Engineer";
+const introTagline = "Designing and developing apps and AI agents.";
 const introDescription = `${introRole}. ${introTagline}`;
 
 export const siteConfig = {

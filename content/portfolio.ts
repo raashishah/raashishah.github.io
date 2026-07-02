@@ -14,19 +14,19 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Admissions evaluation agent",
+          text: "Admissions Cycle",
           href: "https://admissions.raashishah.com",
         },
       ],
       {
-        text: "Processes applications for academic institutions",
+        text: "Processes school and uni applications",
         pullquote: true,
       },
     ],
   },
   {
     id: "expression",
-    title: "Professional Tool for Animators",
+    title: "Pro Animation Tool",
     seoName: "Expression",
     primaryUrl: "https://raashishah.com/expression",
     seoDescription:
@@ -102,7 +102,7 @@ export const workExperience = [
   },
   {
     id: "ondevice",
-    title: "On-device AI",
+    title: "On-device AI Agent",
     seoName: "OnDevice",
     seoPeriod: "2025",
     seoDescription:
@@ -110,9 +110,9 @@ export const workExperience = [
     seoLongDetail:
       "Co-founded and led product for a privacy-first type II diabetes health app using on-device inference. Led 30 interviews and 10 surveys to define privacy-by-default UX, reducing cognitive load and accelerating task completion by 42%. Defined agentic on-device flows enabling 200+ personalized user actions. Early GTM via applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
     paragraphs: [
-      [{ text: "Agentic Health App", href: "/ondevice" }],
+      [{ text: "Health app", href: "/ondevice" }],
       {
-        text: "For type II diabetes management",
+        text: "Type II diabetes",
         pullquote: true,
       },
     ],
@@ -150,7 +150,7 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Aula Education, UK, US", href: "https://www.aula.education" }],
       {
-        text: "Analysed user feedback and optimised shipping pipelines",
+        text: "Optimised workflows with feedback",
         pullquote: true,
       },
     ],

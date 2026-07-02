@@ -1,7 +1,7 @@
 import type { PortfolioEntry } from "./types";
 
 export const ondeviceContent = {
-  introRole: "Agentic health app",
+  introRole: "Health app",
   introTagline:
     "Type II diabetes management with on-device AI — private by default.",
   idPrefix: "ondevice",

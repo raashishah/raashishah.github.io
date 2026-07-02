@@ -8,10 +8,10 @@ export const seoConfig = {
   ogTitle: siteConfig.name,
   description: siteConfig.description,
   longDescription:
-    "Raashi Shah is a technical product manager and AI engineer who designs and ships consumer apps and enterprise AI agent systems end-to-end. Current work spans admissions evaluation agents, animation production tooling, offline exhibition apps, and on-device health AI. Previously led product and tech at Pluto, co-founded OnDevice, and built geospatial ML at Kawa Space and retention analytics at Aula Education.",
+    "Raashi Shah is a product manager and AI engineer who designs and ships consumer apps and enterprise AI agent systems. Current work spans admissions agents, pro animation tool, offline exhibition apps, and on-device health AI. Previously led product and tech at Pluto, co-founded OnDevice, and built geospatial ML at Kawa Space and retention analytics at Aula Education.",
   keywords: [
     "Raashi Shah",
-    "technical product manager",
+    "product manager",
     "AI engineer",
     "AI agents",
     "product engineer",
@@ -26,7 +26,7 @@ export const seoConfig = {
 } as const;
 
 export const llmsSummary =
-  "Technical product manager and AI engineer with seven years at early-stage startups, building agentic systems, consumer apps, and product-led teams end-to-end.";
+  "Product manager and AI engineer with seven years at early-stage startups, building agentic systems, consumer apps, and product-led teams.";
 
 export const llmsProfile = `Raashi Shah works at the intersection of product management and hands-on engineering. She currently builds agentic AI systems and applications independently — admissions QA agents, animation colouring agents, offline-first web apps, and on-device health AI.
 
@@ -88,7 +88,7 @@ export function getStructuredDataJsonLd() {
           email: emailLink.href.replace(/^mailto:/, ""),
         },
         knowsAbout: [
-          "Technical product management",
+          "Product management",
           "AI agents",
           "Application development",
           "On-device inference",

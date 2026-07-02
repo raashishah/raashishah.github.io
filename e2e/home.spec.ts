@@ -26,7 +26,7 @@ test("project details expand with body copy", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Professional Tool for Animators" })
+    .filter({ hasText: "Pro Animation Tool" })
     .click();
   await expect(
     page.getByRole("link", { name: "Colouring for hand drawn animation" }),
@@ -46,7 +46,7 @@ test("project details expand with body copy", async ({ page }) => {
     page.getByText("This problem remains unsolved worldwide"),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "View Professional Tool for Animators" }),
+    page.getByRole("link", { name: "View Pro Animation Tool" }),
   ).toHaveCount(0);
 });
 
@@ -58,7 +58,7 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
     .click();
 
   const projectLink = page.getByRole("link", {
-    name: "Admissions evaluation agent",
+    name: "Admissions Cycle",
   });
   await expect(projectLink).toBeVisible();
   await expect(projectLink).toHaveAttribute(
@@ -75,7 +75,7 @@ test("opening a second dropdown closes the first", async ({ page }) => {
   const enterpriseDetails = page
     .locator("details")
     .filter({ hasText: "Enterprise-Grade Agents" });
-  const onDeviceDetails = page.locator("details").filter({ hasText: "On-device AI" });
+  const onDeviceDetails = page.locator("details").filter({ hasText: "On-device AI Agent" });
 
   await enterpriseDetails.locator("summary").click();
   await expect(enterpriseDetails).toHaveAttribute("open", "");
@@ -89,7 +89,7 @@ test("expanded body copy uses the secondary ink color", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Professional Tool for Animators" })
+    .filter({ hasText: "Pro Animation Tool" })
     .click();
 
   const expected = await getSemanticColor(page, "--ink-secondary");
@@ -118,7 +118,7 @@ test.describe("mobile layout", () => {
       await page.goto("/");
       await page
         .locator("summary.home__details-summary")
-        .filter({ hasText: "Professional Tool for Animators" })
+        .filter({ hasText: "Pro Animation Tool" })
         .click();
 
       await assertInlineLinkArrowOnLastLine(
@@ -132,7 +132,7 @@ test.describe("mobile layout", () => {
       await page.goto("/");
       await page
         .locator("summary.home__details-summary")
-        .filter({ hasText: "Professional Tool for Animators" })
+        .filter({ hasText: "Pro Animation Tool" })
         .click();
 
       const pullquoteStyles = await page.evaluate(() => {
