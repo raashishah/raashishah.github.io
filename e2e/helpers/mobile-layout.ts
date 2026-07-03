@@ -137,6 +137,28 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
   expect(alignment.metaRight).toBeLessThanOrEqual(alignment.contentRight + 1);
 }
 
+export async function getComputedFontSize(page: Page, selector: string) {
+  return page.evaluate((sel) => {
+    const el = document.querySelector(sel);
+    if (!el) {
+      return 0;
+    }
+    return Number.parseFloat(getComputedStyle(el).fontSize);
+  }, selector);
+}
+
+export async function assertTypographyHierarchy(page: Page) {
+  const taglineSize = await getComputedFontSize(page, ".home__line--tagline");
+  const accordionTitleSize = await getComputedFontSize(
+    page,
+    ".home__project-title",
+  );
+  const roleSize = await getComputedFontSize(page, ".home__intro .home__line--role");
+
+  expect(taglineSize).toBeGreaterThan(accordionTitleSize);
+  expect(accordionTitleSize).toBeGreaterThan(roleSize);
+}
+
 export async function getBodyCopyColor(page: Page) {
   return page.evaluate(() => {
     const paragraph = document.querySelector(

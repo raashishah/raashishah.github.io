@@ -31,10 +31,10 @@
   flex: 1;
   min-width: 0;
   font-family: var(--font-medium);
-  font-size: var(--text-headline);
+  font-size: var(--type-headline-inline-size);
   font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  line-height: var(--type-headline-inline-leading);
+  letter-spacing: var(--type-headline-inline-tracking);
 }
 
 .home__disclosure {
@@ -157,10 +157,6 @@
 }
 
 @media (max-width: 39.99rem) {
-  .home__project-title {
-    font-size: clamp(1.0625rem, 4.4vw, 1.1875rem);
-  }
-
   .home__details-summary,
   .home__project-static {
     padding-inline: 0;

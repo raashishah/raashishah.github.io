@@ -42,12 +42,37 @@
   --duration-short: 250ms;
   --duration-standard: 350ms;
 
-  /* Type scale */
+  /* Type scale — fluid size tokens */
   --text-title: clamp(1.375rem, 2vw, 1.5rem);
   --text-headline: clamp(1.0625rem, 1.6vw, 1.1875rem);
   --text-body: clamp(1rem, 1.2vw, 1.0625rem);
   --text-subhead: clamp(0.9375rem, 1.3vw, 1rem);
   --text-caption: clamp(0.875rem, 1.1vw, 0.9375rem);
+
+  /* Bundled semantic type styles (Apple HIG roles: size + leading + tracking) */
+  --type-title-size: var(--text-title);
+  --type-title-leading: 1.2;
+  --type-title-tracking: -0.022em;
+
+  --type-headline-size: var(--text-headline);
+  --type-headline-leading: 1.35;
+  --type-headline-tracking: -0.015em;
+
+  --type-headline-inline-size: var(--text-body);
+  --type-headline-inline-leading: 1.3;
+  --type-headline-inline-tracking: -0.015em;
+
+  --type-body-size: var(--text-body);
+  --type-body-leading: 1.55;
+  --type-body-tracking: normal;
+
+  --type-subhead-size: var(--text-subhead);
+  --type-subhead-leading: 1.47;
+  --type-subhead-tracking: normal;
+
+  --type-caption-size: var(--text-caption);
+  --type-caption-leading: 1.35;
+  --type-caption-tracking: normal;
 }
 
 @media (prefers-color-scheme: dark) {

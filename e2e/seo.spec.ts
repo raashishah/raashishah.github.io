@@ -99,6 +99,10 @@ test.describe("SEO and LLM discovery", () => {
     const response = await page.goto("/expression", { waitUntil: "domcontentloaded" });
     expect(response?.ok()).toBeTruthy();
 
+    await expect(page.getByRole("heading", { level: 1, name: siteConfig.name })).toBeVisible();
+    await expect(page.locator("h2.home__line--tagline")).toHaveText(
+      "Auto-colour hand-drawn animation frames — with the artist in control.",
+    );
     await expect(page.getByText("Agentic tools for artists")).toBeVisible();
     await expect(
       page.locator("summary.home__details-summary").filter({ hasText: "The problem" }),

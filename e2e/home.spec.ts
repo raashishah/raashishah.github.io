@@ -6,6 +6,7 @@ import {
   assertHeaderContactDoesNotOrphanOr,
   assertInlineLinkArrowOnLastLine,
   assertNoHorizontalScroll,
+  assertTypographyHierarchy,
   getBodyCopyColor,
   getFirstLineText,
   getSemanticColor,
@@ -94,6 +95,16 @@ test("expanded body copy uses the secondary ink color", async ({ page }) => {
 
   const expected = await getSemanticColor(page, "--ink-secondary");
   await expect(await getBodyCopyColor(page)).toBe(expected);
+});
+
+test.describe("typography hierarchy", () => {
+  for (const width of [390, 1280] as const) {
+    test(`tagline > accordion title > role at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await page.goto("/");
+      await assertTypographyHierarchy(page);
+    });
+  }
 });
 
 test.describe("mobile layout", () => {

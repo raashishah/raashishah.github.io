@@ -107,7 +107,7 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
-    await expect(page.getByText("Agentic health app")).toBeVisible();
+    await expect(page.getByText("Health app")).toBeVisible();
     await expect(page.getByText("still updating this page")).toBeVisible();
   });
 

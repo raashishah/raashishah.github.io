@@ -35,6 +35,12 @@ typography:
     fontWeight: 400
     lineHeight: 1.47
     letterSpacing: "normal"
+  caption:
+    fontFamily: "Satoshi, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: "clamp(0.875rem, 1.1vw, 0.9375rem)"
+    fontWeight: 400
+    lineHeight: 1.35
+    letterSpacing: "normal"
 rounded:
   control: "4px"
 spacing:
@@ -55,7 +61,8 @@ components:
     size: "{spacing.touch-min}"
   details-summary:
     textColor: "{colors.ink}"
-    typography: "{typography.headline}"
+    typography: "{typography.body}"
+    fontWeight: 500
     padding: "8px 4px"
     size: "{spacing.touch-min}"
   details-body:
@@ -68,13 +75,13 @@ components:
 
 Light, top-aligned personal homepage. Near-white eggshell surface (`#faf9f6`), Apple-tinted neutrals, Satoshi type, no cards or hero chrome. Layout: horizontal header (name left, contact nav right), two-column body on wide screens (intro left, expandable lists right), footer socials. Motion is restrained and HIG-aligned: 350ms standard UI, ease-out on enter, ease-in on exit.
 
-Root `html` font-size is 112.5% for slightly larger readable type. Canonical intro strings live in `lib/metadata.ts` (`siteConfig`) and must match homepage, metadata, and OG image. System dark mode follows `prefers-color-scheme` via semantic token overrides in `globals.css`.
+Root `html` font-size is **112.5%** (18px base instead of 16px), so all `rem`-based type tokens render ~12.5% larger than their nominal values. Canonical intro strings live in `lib/metadata.ts` (`siteConfig`) and must match homepage, metadata, and OG image. System dark mode follows `prefers-color-scheme` via semantic token overrides in `globals.css`.
 
 ## Colors (light)
 
 | Role | Token | Value | Use |
 |------|-------|-------|-----|
-| Primary text | `ink` | `#1d1d1f` | Name, tagline, project titles |
+| Primary text | `ink` | `#1d1d1f` | Name, tagline, accordion titles |
 | Body text | `ink-secondary` | `#515154` | Dropdown paragraphs, page body copy |
 | Muted | `ink-tertiary` | `#86868b` | Role line, footer social links, inline link default |
 | Background | `surface` | `#faf9f6` | Page background (eggshell) |
@@ -90,7 +97,7 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 
 | Role | Token | Value | Use |
 |------|-------|-------|-----|
-| Primary text | `ink` | `#f5f5f7` | Name, tagline, project titles |
+| Primary text | `ink` | `#f5f5f7` | Name, tagline, accordion titles |
 | Body text | `ink-secondary` | `#aeaeb2` | Dropdown paragraphs, page body copy |
 | Muted | `ink-tertiary` | `#8e8e93` | Role line, footer social links, inline link default |
 | Background | `surface` | `#1a1a1c` | Page background (tinted dark) |
@@ -102,9 +109,23 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 
 - **Family:** Self-hosted Satoshi variable (`app/fonts/Satoshi-Variable.woff2`), fallback to system UI stack.
 - **Weights:** 500 (medium) for UI, headings, links; 400 (regular) for dropdown body paragraphs.
-- **Scale:** Fluid `clamp()` tokens in `globals.css` (`--text-title` through `--text-caption`).
+- **Scale:** Fluid `clamp()` size tokens in `app/styles/tokens.css` (`--text-title` through `--text-caption`).
+- **Bundled roles:** Each semantic role bundles size + leading + tracking (`--type-*-size`, `--type-*-leading`, `--type-*-tracking`). Components reference bundles, not raw size + ad hoc leading.
 - **Measure:** Intro column max `34ch` (`--home-measure-narrow`); dropdown body max `50ch` (`--home-measure-body`).
 - **OG image:** Static Figma PNG at `app/opengraph-image.png` (light layout; not scheme-aware).
+
+### Apple HIG role map
+
+| Role | Size token | Weight | Color | Used by |
+|------|-----------|--------|-------|---------|
+| `type-title` | `--text-title` | 500 | `--text` | Name in header (`h1`) |
+| `type-headline` | `--text-headline` | 500 | `--text` | Intro tagline only |
+| `type-headline-inline` | `--text-body` | 500 | `--text` | Accordion summaries, inline links |
+| `type-body` | `--text-body` | 400 | `--color-body` | Dropdown paragraphs |
+| `type-subhead` | `--text-subhead` | 400 | `--text-muted` | Role, education, updating note, footer links |
+| `type-caption` | `--text-caption` | 400 | `--text-muted` | Footer meta |
+
+Sub-pages use `h1` for site name (linked home) and `h2` for page tagline. Homepage keeps tagline as `p` (one `h1` per page).
 
 ## Elevation
 
@@ -117,7 +138,7 @@ Flex row, baseline-aligned, bottom border separator. Name uses `title` scale wit
 
 ### Project / job lists
 Two groups separated by `--space-7` (48px): 3 projects (`home__project-groups`), then 4 jobs (`home__experience-groups`). No section headings. Static education line below jobs (`BSc in Product, from Aston, UK`). Each row is a native `<details>` with:
-- Summary row: role-focused title + CSS plus icon (44px min height)
+- Summary row: role-focused title at body scale + medium weight + CSS plus icon (44px min height)
 - Expand: grid `0fr → 1fr` height (350ms ease-out), body opacity fade
 - Collapse: 250ms ease-in; no transition delay on close
 - Inline body links with `ExternalLinkArrow` ↗ (old rose icon, grey default text); grouped multi-link rows use `·` separators
