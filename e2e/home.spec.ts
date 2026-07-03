@@ -59,7 +59,7 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
     .click();
 
   const projectLink = page.getByRole("link", {
-    name: "Admissions Cycle",
+    name: "Admissions cycle",
   });
   await expect(projectLink).toBeVisible();
   await expect(projectLink).toHaveAttribute(

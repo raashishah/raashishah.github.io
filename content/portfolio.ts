@@ -14,7 +14,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Admissions Cycle",
+          text: "Admissions cycle",
           href: "https://admissions.raashishah.com",
         },
       ],
@@ -58,7 +58,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Exhibition Site",
+          text: "Exhibition site",
           href: "https://povindex.designpovindia.com/home",
         },
       ],
