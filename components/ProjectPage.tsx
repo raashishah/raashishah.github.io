@@ -24,11 +24,10 @@ export function ProjectPage({
   return (
     <PortfolioShell
       nameHref="/"
-      nameAsHeading={false}
       intro={
         <section className="home__intro" aria-label={pageLabel}>
           <p className="home__line home__line--role">{introRole}</p>
-          <p className="home__line home__line--tagline">{introTagline}</p>
+          <h2 className="home__line home__line--tagline">{introTagline}</h2>
         </section>
       }
       work={

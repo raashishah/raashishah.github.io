@@ -64,9 +64,10 @@
   margin: 0;
   color: var(--text-muted);
   font-family: var(--font-regular);
-  font-size: var(--text-caption);
+  font-size: var(--type-caption-size);
   font-weight: 400;
-  line-height: 1.35;
+  line-height: var(--type-caption-leading);
+  letter-spacing: var(--type-caption-tracking);
 }
 
 .home__footer-meta-hint {

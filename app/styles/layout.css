@@ -68,10 +68,10 @@
 .home__name {
   margin: 0;
   font-family: var(--font-medium);
-  font-size: var(--text-title);
+  font-size: var(--type-title-size);
   font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.022em;
+  line-height: var(--type-title-leading);
+  letter-spacing: var(--type-title-tracking);
 }
 
 .home__name-link {
@@ -110,17 +110,19 @@
 
 .home__line--role {
   font-family: var(--font-regular);
-  font-size: var(--text-subhead);
+  font-size: var(--type-subhead-size);
   font-weight: 400;
+  line-height: var(--type-subhead-leading);
+  letter-spacing: var(--type-subhead-tracking);
   color: var(--text-muted);
 }
 
 .home__line--tagline {
   font-family: var(--font-medium);
-  font-size: var(--text-headline);
+  font-size: var(--type-headline-size);
   font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: -0.015em;
+  line-height: var(--type-headline-leading);
+  letter-spacing: var(--type-headline-tracking);
   color: var(--text);
   margin-top: var(--space-1);
 }
@@ -279,8 +281,9 @@
   margin: 0;
   font-family: var(--font-regular);
   font-weight: 400;
-  font-size: var(--text-body);
-  line-height: 1.55;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+  letter-spacing: var(--type-body-tracking);
   color: var(--color-body);
 }
 
@@ -308,14 +311,6 @@
 
   .home__content {
     gap: var(--space-6);
-  }
-
-  .home__line--role {
-    font-size: var(--text-body);
-  }
-
-  .home__line--tagline {
-    font-size: clamp(1.0625rem, 4.2vw, 1.1875rem);
   }
 
   .home__header-contact {
