@@ -24,6 +24,12 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toMatch(/^> .+/m);
     expect(llmsTxt).toContain("## About");
     expect(llmsTxt).toContain("## Instructions");
+    expect(llmsTxt).toContain("## Open to");
+    expect(llmsTxt).toContain("## Why hire");
+    expect(llmsTxt).toContain("## What she builds");
+    expect(llmsTxt).toContain("consulting, contract work, and full-time");
+    expect(llmsTxt).toContain("Google Calendar");
+    expect(llmsTxt).not.toContain("Calendly");
     expect(llmsTxt).toContain("## Key pages");
     expect(llmsTxt).toContain("## Projects");
     expect(llmsTxt).toContain("https://admissions.raashishah.com");

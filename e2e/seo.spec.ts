@@ -59,6 +59,7 @@ test.describe("SEO and LLM discovery", () => {
     const body = await response.text();
     expect(body).toBe(buildLlmsTxt());
     expect(body).toContain("## Instructions");
+    expect(body).toContain("## Open to");
     expect(body).toContain("## About");
     expect(body).toContain("## Key pages");
     expect(body).toContain("calendar.app.google");
