@@ -63,7 +63,7 @@ export const projects = [
         },
       ],
       {
-        text: "Works offline regardless of footfall at the venue",
+        text: "Offline access for high footfall venues",
         pullquote: true,
       },
     ],
