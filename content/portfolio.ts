@@ -58,7 +58,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Design POV Exhibition",
+          text: "Architecture Expo",
           href: "https://povindex.designpovindia.com/home",
         },
       ],
@@ -112,7 +112,7 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Health app", href: "/ondevice" }],
       {
-        text: "Type II diabetes",
+        text: "Type II diabetes mgmt",
         pullquote: true,
       },
     ],
