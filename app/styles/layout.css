@@ -129,8 +129,24 @@
   margin-top: var(--space-6);
 }
 
-.home__link--cta {
+.home__link.home__link--cta {
   color: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home__link.home__link--cta:hover {
+    color: var(--ink);
+  }
+}
+
+@media (hover: none) {
+  .home__link.home__link--cta:active {
+    color: var(--ink);
+  }
+}
+
+.home__link.home__link--cta:focus-visible {
+  color: var(--ink);
 }
 
 .home__updating-note {
