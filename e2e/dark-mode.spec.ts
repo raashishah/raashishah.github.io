@@ -95,8 +95,8 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
-    await expect(page.getByText("Agentic tools for artists")).toBeVisible();
-    await expect(page.getByText("still updating this page")).toBeVisible();
+    await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
+    await expect(page.getByText("Still updating this page")).toBeVisible();
   });
 
   test("ondevice page uses dark semantic tokens", async ({ page }) => {
@@ -107,8 +107,8 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
-    await expect(page.getByText("Health app")).toBeVisible();
-    await expect(page.getByText("still updating this page")).toBeVisible();
+    await expect(page.getByText("Health App")).toBeVisible();
+    await expect(page.getByText("Still updating this page")).toBeVisible();
   });
 
   test("switching from dark to light updates tokens", async ({ page }) => {

@@ -103,15 +103,15 @@ test.describe("SEO and LLM discovery", () => {
     await expect(page.locator("h2.home__line--tagline")).toHaveText(
       "Auto-colour hand-drawn animation frames — with the artist in control.",
     );
-    await expect(page.getByText("Agentic tools for artists")).toBeVisible();
+    await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
     await expect(
-      page.locator("summary.home__details-summary").filter({ hasText: "The problem" }),
+      page.locator("summary.home__details-summary").filter({ hasText: "The Problem" }),
     ).toBeVisible();
     await expect(page.getByRole("link", { name: "Book demo" })).toHaveAttribute(
       "href",
       "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
     );
-    await expect(page.getByText("still updating this page")).toBeVisible();
+    await expect(page.getByText("Still updating this page")).toBeVisible();
     await expect(page.getByRole("link", { name: "Raashi Shah" })).toHaveAttribute("href", "/");
   });
 

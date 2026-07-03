@@ -36,7 +36,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Colouring for hand drawn animation",
+          text: "Colouring for hand-drawn animation",
           href: "/expression",
         },
       ],
@@ -95,7 +95,7 @@ export const workExperience = [
         },
       ],
       {
-        text: "Transformed a creative studio into a product led team",
+        text: "Transformed a creative studio into a product-led team",
         pullquote: true,
       },
     ],
@@ -110,7 +110,7 @@ export const workExperience = [
     seoLongDetail:
       "Co-founded and led product for a privacy-first type II diabetes health app using on-device inference. Led 30 interviews and 10 surveys to define privacy-by-default UX, reducing cognitive load and accelerating task completion by 42%. Defined agentic on-device flows enabling 200+ personalized user actions. Early GTM via applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
     paragraphs: [
-      [{ text: "Health app", href: "/ondevice" }],
+      [{ text: "Health App", href: "/ondevice" }],
       {
         text: "Type II diabetes mgmt",
         pullquote: true,
@@ -129,11 +129,11 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Kawa Space", href: "https://www.kawaspace.com" }],
       {
-        text: "Chatbot to get model inferences",
+        text: "Chatbot for model inferences",
         pullquote: true,
       },
       {
-        text: "built pre-GPT3",
+        text: "Built pre-GPT 3",
         pullquote: true,
       },
     ],

@@ -109,7 +109,6 @@ export function SiteShell({
             ))}
           </nav>
           <p className="home__footer-meta">
-            <span className="home__footer-meta-year">2026</span>
             <img
               src="/img/footer-mark.svg"
               alt=""

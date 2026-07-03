@@ -1,7 +1,7 @@
 import type { PortfolioEntry } from "./types";
 
 export const expressionContent = {
-  introRole: "Agentic tools for artists",
+  introRole: "Agentic Tools for Artists",
   introTagline:
     "Auto-colour hand-drawn animation frames — with the artist in control.",
   showBookDemo: true,
@@ -9,7 +9,7 @@ export const expressionContent = {
   sections: [
     {
       id: "the-problem",
-      title: "The problem",
+      title: "The Problem",
       seoDescription:
         "A one-minute shot at 25 fps is 1,500 frames — each coloured by hand.",
       paragraphs: [
@@ -27,7 +27,7 @@ export const expressionContent = {
     },
     {
       id: "auto-colour",
-      title: "Auto-colour",
+      title: "Auto-Colour",
       seoDescription: "Colours to other frames across poses and holds.",
       paragraphs: ["Colours to other frames across poses and holds."],
     },

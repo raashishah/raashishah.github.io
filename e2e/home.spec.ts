@@ -30,18 +30,18 @@ test("project details expand with body copy", async ({ page }) => {
     .filter({ hasText: "Pro Animation Tool" })
     .click();
   await expect(
-    page.getByRole("link", { name: "Colouring for hand drawn animation" }),
+    page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Colouring for hand drawn animation" }),
+    page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
   ).toHaveAttribute("href", "/expression");
   await expect(
     page
-      .getByRole("link", { name: "Colouring for hand drawn animation" })
+      .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .locator(".home__inline-link-icon"),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Colouring for hand drawn animation" }),
+    page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
   ).not.toHaveAttribute("target", "_blank");
   await expect(
     page.getByText("Unsolved problem worldwide"),

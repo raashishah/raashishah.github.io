@@ -53,7 +53,7 @@ export function ProjectPage({
             </p>
           ) : null}
           <p className="home__line home__line--role home__updating-note">
-            still updating this page
+            Still updating this page
           </p>
         </section>
       }
