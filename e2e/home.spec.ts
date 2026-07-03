@@ -43,7 +43,7 @@ test("project details expand with body copy", async ({ page }) => {
     page.getByRole("link", { name: "Colouring for hand drawn animation" }),
   ).not.toHaveAttribute("target", "_blank");
   await expect(
-    page.getByText("This problem remains unsolved worldwide"),
+    page.getByText("Unsolved problem worldwide"),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "View Pro Animation Tool" }),

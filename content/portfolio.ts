@@ -41,7 +41,7 @@ export const projects = [
         },
       ],
       {
-        text: "This problem remains unsolved worldwide",
+        text: "Unsolved problem worldwide",
         pullquote: true,
       },
     ],
@@ -58,7 +58,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Architecture Expo",
+          text: "Exhibition Site",
           href: "https://povindex.designpovindia.com/home",
         },
       ],
