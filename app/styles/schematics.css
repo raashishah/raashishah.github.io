@@ -1,28 +1,33 @@
 /* Accordion art tiles — thin strokes, one-shot motion on expand. */
 
 .home__schematic .schematic__ink {
-  stroke: color-mix(in srgb, var(--ink) 55%, transparent);
+  stroke: color-mix(in srgb, var(--ink) 42%, transparent);
   stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
 }
 
-.home__schematic .schematic__frame {
-  stroke: color-mix(in srgb, var(--ink) 40%, transparent);
+.home__schematic .schematic__frame,
+.home__schematic .schematic__halo {
+  stroke: color-mix(in srgb, var(--ink) 28%, transparent);
   stroke-width: 1;
   fill: none;
 }
 
 .home__schematic .schematic__accent {
-  stroke: color-mix(in srgb, var(--accent) 75%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 62%, transparent);
   stroke-width: 1;
   fill: none;
 }
 
 .home__schematic .schematic__accent-fill {
-  fill: color-mix(in srgb, var(--accent) 22%, transparent);
+  fill: color-mix(in srgb, var(--accent) 14%, transparent);
   stroke: none;
+}
+
+.home__schematic .schematic__mark {
+  stroke-width: 1;
 }
 
 .home__schematic .schematic__dot {
@@ -155,26 +160,27 @@
 }
 
 .home__details[open]:not(.home__details--closing) .home__schematic .schematic__bar,
+.home__details[open]:not(.home__details--closing) .home__schematic .schematic__mark,
 .home__details[open]:not(.home__details--closing) .home__schematic .schematic__accent-dot {
   animation: art-fade-up var(--duration-standard) var(--ease-out) both;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--admissions-agent
-  .schematic__bar--1 {
+  .schematic__mark--1 {
   animation-delay: 60ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--admissions-agent
-  .schematic__bar--2 {
-  animation-delay: 120ms;
+  .schematic__mark--2 {
+  animation-delay: 140ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--admissions-agent
-  .schematic__bar--3 {
-  animation-delay: 180ms;
+  .schematic__mark--3 {
+  animation-delay: 220ms;
 }
 
 .home__details[open]:not(.home__details--closing)
