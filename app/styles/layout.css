@@ -306,11 +306,16 @@
 
 .home__schematic {
   flex-shrink: 0;
-  width: 7rem;
-  height: 4.5rem;
-  border-radius: 4px;
-  background: var(--surface);
-  overflow: hidden;
+  align-self: flex-start;
+  width: 8.5rem;
+  height: 5.25rem;
+  margin: 0;
+  margin-top: var(--space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  opacity: 0.88;
 }
 
 .home__schematic-svg {

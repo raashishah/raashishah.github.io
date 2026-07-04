@@ -1,78 +1,60 @@
-/* Schematic tile animations — gated by accordion open state (no JS). */
+/* Accordion art tiles — thin strokes, one-shot motion on expand. */
 
 .home__schematic .schematic__ink {
-  stroke: var(--ink);
-  stroke-width: 2;
+  stroke: color-mix(in srgb, var(--ink) 55%, transparent);
+  stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
 }
 
 .home__schematic .schematic__frame {
-  stroke: var(--ink);
-  stroke-width: 2;
-  fill: var(--surface);
+  stroke: color-mix(in srgb, var(--ink) 40%, transparent);
+  stroke-width: 1;
+  fill: none;
 }
 
 .home__schematic .schematic__accent {
-  stroke: var(--accent);
+  stroke: color-mix(in srgb, var(--accent) 75%, transparent);
+  stroke-width: 1;
   fill: none;
 }
 
 .home__schematic .schematic__accent-fill {
-  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+  fill: color-mix(in srgb, var(--accent) 22%, transparent);
   stroke: none;
-}
-
-.home__schematic .schematic__accent-text {
-  fill: var(--accent);
-}
-
-.home__schematic .schematic__label {
-  font-family: var(--font-regular);
-  font-size: 7px;
-  fill: var(--ink);
-}
-
-.home__schematic .schematic__caption {
-  font-family: var(--font-regular);
-  font-size: 6px;
-  fill: var(--ink-secondary);
 }
 
 .home__schematic .schematic__dot {
-  fill: var(--ink);
-}
-
-.home__schematic .schematic__roof {
-  fill: var(--ink);
+  fill: color-mix(in srgb, var(--ink) 45%, transparent);
   stroke: none;
 }
 
-.home__schematic .schematic__roof--target {
-  fill: var(--ink-secondary);
+.home__schematic .schematic__tile {
+  fill: color-mix(in srgb, var(--ink) 30%, transparent);
+  stroke: none;
+}
+
+.home__schematic .schematic__tile--accent {
+  fill: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .home__schematic .schematic__card {
-  fill: var(--ink);
+  fill: color-mix(in srgb, var(--ink) 28%, transparent);
   stroke: none;
-  opacity: 0.35;
 }
 
 .home__schematic .schematic__card--done {
-  fill: var(--accent);
-  opacity: 0.5;
+  fill: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 .home__schematic .schematic__card--moving {
-  fill: var(--ink);
-  opacity: 1;
+  fill: color-mix(in srgb, var(--ink) 50%, transparent);
 }
 
 .home__schematic .schematic__bubble {
-  fill: var(--ink);
-  stroke: var(--ink);
-  stroke-width: 1.5;
+  fill: color-mix(in srgb, var(--ink) 35%, transparent);
+  stroke: none;
 }
 
 .home__schematic .schematic__you-core {
@@ -81,322 +63,227 @@
 }
 
 .home__schematic .schematic__you-marker {
+  fill: color-mix(in srgb, var(--accent) 55%, transparent);
+  stroke: none;
+}
+
+.home__schematic .schematic__accent-dot {
   fill: var(--accent);
-  stroke: var(--accent);
+  stroke: none;
 }
 
 .home__schematic .schematic__pulse-ring {
   fill: none;
-  stroke: var(--accent);
-  stroke-width: 1.5;
+  stroke: color-mix(in srgb, var(--accent) 50%, transparent);
+  stroke-width: 1;
   opacity: 0;
 }
 
-/* Default: static / reset when closed */
-.home__schematic .schematic__row,
-.home__schematic .schematic__check,
+.home__schematic .schematic__orbit {
+  stroke: color-mix(in srgb, var(--ink) 35%, transparent);
+  stroke-width: 1;
+  fill: none;
+}
+
+.home__schematic .schematic__bar,
 .home__schematic .schematic__branch,
+.home__schematic .schematic__path,
 .home__schematic .schematic__bubble,
-.home__schematic .schematic__bbox,
-.home__schematic .schematic__chat-q,
-.home__schematic .schematic__chat-a,
-.home__schematic .schematic__alert-icon,
-.home__schematic .schematic__alert-text,
-.home__schematic .schematic__meds-check,
-.home__schematic .schematic__meds-text,
-.home__schematic .schematic__card--moving,
-.home__schematic .schematic__cog {
+.home__schematic .schematic__ring,
+.home__schematic .schematic__ring-core,
+.home__schematic .schematic__accent-dot,
+.home__schematic .schematic__orbit--draw,
+.home__schematic .schematic__satellite,
+.home__schematic .schematic__card--moving {
   transform-box: fill-box;
   transform-origin: center;
 }
 
-/* --- 1. Admissions scoreboard: rows slide in, check pops --- */
-@keyframes schematic-row-in {
+@keyframes art-fade-up {
   from {
     opacity: 0;
-    transform: translateX(-6px);
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
-@keyframes schematic-check-pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.4);
-  }
-  70% {
-    transform: scale(1.15);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--admissions-agent
-  .schematic__row {
-  animation: schematic-row-in var(--duration-standard) var(--ease-out) both;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--admissions-agent
-  .schematic__row--1 {
-  animation-delay: 80ms;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--admissions-agent
-  .schematic__row--2 {
-  animation-delay: 160ms;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--admissions-agent
-  .schematic__row--3 {
-  animation-delay: 240ms;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--admissions-agent
-  .schematic__row--4 {
-  animation-delay: 320ms;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--admissions-agent
-  .schematic__row-highlight {
-  animation: schematic-row-in var(--duration-standard) var(--ease-out) 80ms both;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--admissions-agent
-  .schematic__check {
-  animation: schematic-check-pop 320ms var(--ease-out) 420ms both;
-}
-
-/* --- 2. Expression: branch draws, bubbles pop rose --- */
-@keyframes schematic-draw {
+@keyframes art-draw {
   from {
-    stroke-dashoffset: 120;
+    stroke-dashoffset: 80;
   }
   to {
     stroke-dashoffset: 0;
   }
 }
 
-@keyframes schematic-bubble-pop {
+@keyframes art-pulse-once {
   0% {
     opacity: 0;
-    transform: scale(0.3);
-    fill: var(--ink);
+    transform: scale(0.85);
   }
-  60% {
-    transform: scale(1.12);
+  40% {
+    opacity: 0.55;
+    transform: scale(1.15);
   }
   100% {
-    opacity: 1;
-    transform: scale(1);
-    fill: var(--accent);
-    stroke: var(--accent);
+    opacity: 0;
+    transform: scale(1.35);
   }
+}
+
+@keyframes art-ring-drift {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes art-card-glide {
+  0% {
+    transform: translate(0, 0);
+    fill: color-mix(in srgb, var(--ink) 50%, transparent);
+  }
+  100% {
+    transform: translate(44px, 6px);
+    fill: color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+}
+
+.home__details[open]:not(.home__details--closing) .home__schematic .schematic__bar,
+.home__details[open]:not(.home__details--closing) .home__schematic .schematic__accent-dot {
+  animation: art-fade-up var(--duration-standard) var(--ease-out) both;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__bar--1 {
+  animation-delay: 60ms;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__bar--2 {
+  animation-delay: 120ms;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__bar--3 {
+  animation-delay: 180ms;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__accent-dot--1 {
+  animation-delay: 280ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--expression
   .schematic__branch {
-  stroke-dasharray: 120;
-  stroke-dashoffset: 120;
-  animation: schematic-draw 600ms var(--ease-out) 100ms forwards;
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: art-draw 700ms var(--ease-out) 80ms forwards;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--expression
+  .schematic__bubble {
+  animation: art-fade-up 320ms var(--ease-out) both;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--expression
   .schematic__bubble--1 {
-  animation: schematic-bubble-pop 400ms var(--ease-out) 500ms forwards;
+  animation-delay: 320ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--expression
   .schematic__bubble--2 {
-  animation: schematic-bubble-pop 400ms var(--ease-out) 650ms forwards;
+  animation-delay: 420ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--expression
   .schematic__bubble--3 {
-  animation: schematic-bubble-pop 400ms var(--ease-out) 800ms forwards;
+  animation-delay: 520ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--expression
   .schematic__bubble--4 {
-  animation: schematic-bubble-pop 400ms var(--ease-out) 950ms forwards;
-}
-
-/* --- 3. Offline nav: rose marker pulse --- */
-@keyframes schematic-pulse-ring {
-  0% {
-    opacity: 0.6;
-    transform: scale(0.8);
-  }
-  70% {
-    opacity: 0;
-    transform: scale(1.6);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.6);
-  }
+  animation-delay: 620ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--offline-expo-nav
+  .schematic__pulse-ring,
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--ondevice
   .schematic__pulse-ring {
-  animation: schematic-pulse-ring 1.8s var(--ease-out) 200ms infinite;
+  animation: art-pulse-once 1.1s var(--ease-out) 200ms forwards;
 }
 
-/* --- 4. Pluto: interlocking cogs rotate --- */
-@keyframes schematic-cog-cw {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--offline-expo-nav
+  .schematic__path {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: art-draw 500ms var(--ease-out) 100ms forwards;
 }
 
-@keyframes schematic-cog-ccw {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--offline-expo-nav
+  .schematic__path--b {
+  animation-delay: 280ms;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--pluto
-  .schematic__cog--center {
-  animation: schematic-cog-cw 4s linear infinite;
+  .schematic__ring--a {
+  animation: art-ring-drift 900ms var(--ease-out) 120ms forwards;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--pluto
-  .schematic__cog--tl,
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--pluto
-  .schematic__cog--tr,
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--pluto
-  .schematic__cog--bl,
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--pluto
-  .schematic__cog--br {
-  animation: schematic-cog-ccw 4s linear infinite;
-}
-
-/* --- 5. OnDevice: alert pulse, meds check draws --- */
-@keyframes schematic-alert-in {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  50% {
-    transform: scale(1.06);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes schematic-check-draw {
-  from {
-    stroke-dashoffset: 24;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--ondevice
-  .schematic__alert-icon,
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--ondevice
-  .schematic__alert-text {
-  animation: schematic-alert-in 450ms var(--ease-out) 150ms both;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--ondevice
-  .schematic__meds-check {
-  stroke-dasharray: 24;
-  stroke-dashoffset: 24;
-  animation: schematic-check-draw 400ms var(--ease-out) 550ms forwards;
-}
-
-.home__details[open]:not(.home__details--closing)
-  .home__schematic--ondevice
-  .schematic__meds-text {
-  animation: schematic-row-in var(--duration-standard) var(--ease-out) 700ms both;
-}
-
-/* --- 6. Kawa Space: bbox draws, chat types in --- */
-@keyframes schematic-fade-type {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  .schematic__ring--b {
+  animation: art-ring-drift 900ms var(--ease-out) 120ms reverse forwards;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--kawa-space
-  .schematic__bbox {
-  stroke-dasharray: 72;
-  stroke-dashoffset: 72;
-  animation: schematic-draw 500ms var(--ease-out) 200ms forwards;
+  .schematic__orbit--draw {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: art-draw 600ms var(--ease-out) 250ms forwards;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--kawa-space
-  .schematic__chat-q {
-  animation: schematic-fade-type 300ms var(--ease-out) 600ms both;
-}
-
+  .schematic__satellite--1,
 .home__details[open]:not(.home__details--closing)
   .home__schematic--kawa-space
-  .schematic__chat-a {
-  animation: schematic-fade-type 300ms var(--ease-out) 900ms both;
-}
-
-/* --- 7. Aula kanban: card glides to done --- */
-@keyframes schematic-card-glide {
-  0% {
-    transform: translate(0, 0);
-    fill: var(--ink);
-    opacity: 1;
-  }
-  70% {
-    transform: translate(48px, 6px);
-    fill: var(--ink);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(64px, 0);
-    fill: var(--accent);
-    opacity: 1;
-  }
+  .schematic__satellite--2 {
+  animation: art-fade-up 320ms var(--ease-out) 500ms both;
 }
 
 .home__details[open]:not(.home__details--closing)
   .home__schematic--aula-education
   .schematic__card--moving {
-  animation: schematic-card-glide 1.2s var(--ease-out) 300ms forwards;
+  animation: art-card-glide 900ms var(--ease-out) 250ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__details[open] .home__schematic * {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

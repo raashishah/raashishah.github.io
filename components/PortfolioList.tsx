@@ -133,12 +133,12 @@ function ProjectListItem({
         }
       >
         <div className="home__project-body">
-          {item.schematicId ? (
-            <AccordionSchematic schematicId={item.schematicId} />
-          ) : null}
           {item.paragraphs.map((paragraph, index) => (
             <BodyParagraphBlock key={index} paragraph={paragraph} />
           ))}
+          {item.schematicId ? (
+            <AccordionSchematic schematicId={item.schematicId} />
+          ) : null}
         </div>
       </AnimatedDetails>
     </li>
