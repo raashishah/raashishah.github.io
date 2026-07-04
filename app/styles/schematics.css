@@ -1,0 +1,402 @@
+/* Schematic tile animations — gated by accordion open state (no JS). */
+
+.home__schematic .schematic__ink {
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.home__schematic .schematic__frame {
+  stroke: var(--ink);
+  stroke-width: 2;
+  fill: var(--surface);
+}
+
+.home__schematic .schematic__accent {
+  stroke: var(--accent);
+  fill: none;
+}
+
+.home__schematic .schematic__accent-fill {
+  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+  stroke: none;
+}
+
+.home__schematic .schematic__accent-text {
+  fill: var(--accent);
+}
+
+.home__schematic .schematic__label {
+  font-family: var(--font-regular);
+  font-size: 7px;
+  fill: var(--ink);
+}
+
+.home__schematic .schematic__caption {
+  font-family: var(--font-regular);
+  font-size: 6px;
+  fill: var(--ink-secondary);
+}
+
+.home__schematic .schematic__dot {
+  fill: var(--ink);
+}
+
+.home__schematic .schematic__roof {
+  fill: var(--ink);
+  stroke: none;
+}
+
+.home__schematic .schematic__roof--target {
+  fill: var(--ink-secondary);
+}
+
+.home__schematic .schematic__card {
+  fill: var(--ink);
+  stroke: none;
+  opacity: 0.35;
+}
+
+.home__schematic .schematic__card--done {
+  fill: var(--accent);
+  opacity: 0.5;
+}
+
+.home__schematic .schematic__card--moving {
+  fill: var(--ink);
+  opacity: 1;
+}
+
+.home__schematic .schematic__bubble {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.home__schematic .schematic__you-core {
+  fill: var(--surface);
+  stroke: none;
+}
+
+.home__schematic .schematic__you-marker {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.home__schematic .schematic__pulse-ring {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+}
+
+/* Default: static / reset when closed */
+.home__schematic .schematic__row,
+.home__schematic .schematic__check,
+.home__schematic .schematic__branch,
+.home__schematic .schematic__bubble,
+.home__schematic .schematic__bbox,
+.home__schematic .schematic__chat-q,
+.home__schematic .schematic__chat-a,
+.home__schematic .schematic__alert-icon,
+.home__schematic .schematic__alert-text,
+.home__schematic .schematic__meds-check,
+.home__schematic .schematic__meds-text,
+.home__schematic .schematic__card--moving,
+.home__schematic .schematic__cog {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* --- 1. Admissions scoreboard: rows slide in, check pops --- */
+@keyframes schematic-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes schematic-check-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__row {
+  animation: schematic-row-in var(--duration-standard) var(--ease-out) both;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__row--1 {
+  animation-delay: 80ms;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__row--2 {
+  animation-delay: 160ms;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__row--3 {
+  animation-delay: 240ms;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__row--4 {
+  animation-delay: 320ms;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__row-highlight {
+  animation: schematic-row-in var(--duration-standard) var(--ease-out) 80ms both;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--admissions-agent
+  .schematic__check {
+  animation: schematic-check-pop 320ms var(--ease-out) 420ms both;
+}
+
+/* --- 2. Expression: branch draws, bubbles pop rose --- */
+@keyframes schematic-draw {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes schematic-bubble-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+    fill: var(--ink);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    fill: var(--accent);
+    stroke: var(--accent);
+  }
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--expression
+  .schematic__branch {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: schematic-draw 600ms var(--ease-out) 100ms forwards;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--expression
+  .schematic__bubble--1 {
+  animation: schematic-bubble-pop 400ms var(--ease-out) 500ms forwards;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--expression
+  .schematic__bubble--2 {
+  animation: schematic-bubble-pop 400ms var(--ease-out) 650ms forwards;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--expression
+  .schematic__bubble--3 {
+  animation: schematic-bubble-pop 400ms var(--ease-out) 800ms forwards;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--expression
+  .schematic__bubble--4 {
+  animation: schematic-bubble-pop 400ms var(--ease-out) 950ms forwards;
+}
+
+/* --- 3. Offline nav: rose marker pulse --- */
+@keyframes schematic-pulse-ring {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--offline-expo-nav
+  .schematic__pulse-ring {
+  animation: schematic-pulse-ring 1.8s var(--ease-out) 200ms infinite;
+}
+
+/* --- 4. Pluto: interlocking cogs rotate --- */
+@keyframes schematic-cog-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes schematic-cog-ccw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--pluto
+  .schematic__cog--center {
+  animation: schematic-cog-cw 4s linear infinite;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--pluto
+  .schematic__cog--tl,
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--pluto
+  .schematic__cog--tr,
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--pluto
+  .schematic__cog--bl,
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--pluto
+  .schematic__cog--br {
+  animation: schematic-cog-ccw 4s linear infinite;
+}
+
+/* --- 5. OnDevice: alert pulse, meds check draws --- */
+@keyframes schematic-alert-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes schematic-check-draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--ondevice
+  .schematic__alert-icon,
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--ondevice
+  .schematic__alert-text {
+  animation: schematic-alert-in 450ms var(--ease-out) 150ms both;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--ondevice
+  .schematic__meds-check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: schematic-check-draw 400ms var(--ease-out) 550ms forwards;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--ondevice
+  .schematic__meds-text {
+  animation: schematic-row-in var(--duration-standard) var(--ease-out) 700ms both;
+}
+
+/* --- 6. Kawa Space: bbox draws, chat types in --- */
+@keyframes schematic-fade-type {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--kawa-space
+  .schematic__bbox {
+  stroke-dasharray: 72;
+  stroke-dashoffset: 72;
+  animation: schematic-draw 500ms var(--ease-out) 200ms forwards;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--kawa-space
+  .schematic__chat-q {
+  animation: schematic-fade-type 300ms var(--ease-out) 600ms both;
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--kawa-space
+  .schematic__chat-a {
+  animation: schematic-fade-type 300ms var(--ease-out) 900ms both;
+}
+
+/* --- 7. Aula kanban: card glides to done --- */
+@keyframes schematic-card-glide {
+  0% {
+    transform: translate(0, 0);
+    fill: var(--ink);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(48px, 6px);
+    fill: var(--ink);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(64px, 0);
+    fill: var(--accent);
+    opacity: 1;
+  }
+}
+
+.home__details[open]:not(.home__details--closing)
+  .home__schematic--aula-education
+  .schematic__card--moving {
+  animation: schematic-card-glide 1.2s var(--ease-out) 300ms forwards;
+}

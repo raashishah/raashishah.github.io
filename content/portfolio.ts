@@ -4,6 +4,7 @@ import { INLINE_LINK_SEPARATOR } from "./types";
 export const projects = [
   {
     id: "admissions-agent",
+    schematicId: "admissions-agent",
     title: "Enterprise-Grade Agents",
     seoName: "Admission Evaluation Agent",
     primaryUrl: "https://admissions.raashishah.com",
@@ -26,6 +27,7 @@ export const projects = [
   },
   {
     id: "expression",
+    schematicId: "expression",
     title: "Pro Animation Tool",
     seoName: "Expression",
     primaryUrl: "https://raashishah.com/expression",
@@ -48,6 +50,7 @@ export const projects = [
   },
   {
     id: "offline-expo-nav",
+    schematicId: "offline-expo-nav",
     title: "Expo Offline Navigation",
     seoName: "Expo Offline Navigation",
     primaryUrl: "https://povindex.designpovindia.com/home",
@@ -73,6 +76,7 @@ export const projects = [
 export const workExperience = [
   {
     id: "pluto",
+    schematicId: "pluto",
     title: "Working with Artists",
     seoName: "Pluto",
     seoPeriod: "2021–2024",
@@ -102,6 +106,7 @@ export const workExperience = [
   },
   {
     id: "ondevice",
+    schematicId: "ondevice",
     title: "On-device AI Agent",
     seoName: "OnDevice",
     seoPeriod: "2025",
@@ -119,6 +124,7 @@ export const workExperience = [
   },
   {
     id: "kawa-space",
+    schematicId: "kawa-space",
     title: "Geospatial Machine Learning",
     seoName: "Kawa Space",
     seoPeriod: "2020",
@@ -140,6 +146,7 @@ export const workExperience = [
   },
   {
     id: "aula-education",
+    schematicId: "aula-education",
     title: "Doubled Engineering Speed",
     seoName: "Aula Education",
     seoPeriod: "2018–2019, UK",
