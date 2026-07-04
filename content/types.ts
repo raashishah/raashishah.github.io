@@ -28,9 +28,19 @@ export type RichLine = string | readonly RichSegment[];
 export type PullquoteParagraph = { text: RichLine; pullquote: true };
 export type BodyParagraph = string | RichLine | PullquoteParagraph;
 
+export type SchematicId =
+  | "admissions-agent"
+  | "expression"
+  | "offline-expo-nav"
+  | "pluto"
+  | "ondevice"
+  | "kawa-space"
+  | "aula-education";
+
 export type PortfolioEntry = {
   id: string;
   title: string;
+  schematicId?: SchematicId;
   seoName?: string;
   primaryUrl?: string;
   seoDescription: string;
