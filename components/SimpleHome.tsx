@@ -1,3 +1,4 @@
+import { HomepageMarker } from "@/components/HomepageMarker";
 import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { PortfolioList } from "@/components/PortfolioList";
 import { PortfolioShell } from "@/components/PortfolioShell";
@@ -12,7 +13,8 @@ export function SimpleHome({
   educationLabel,
 }: HomeContent) {
   return (
-    <PortfolioShell
+    <HomepageMarker>
+      <PortfolioShell
       nameHref={nameEasterEggHref}
       nameExternal
       intro={
@@ -41,5 +43,6 @@ export function SimpleHome({
         </section>
       }
     />
+    </HomepageMarker>
   );
 }

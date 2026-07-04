@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
+import { DetailProvider } from "@/components/DetailProvider";
 import { PersonJsonLd } from "@/components/metadata/PersonJsonLd";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/brands.min.css";
@@ -78,12 +79,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  detail,
+}: {
+  children: React.ReactNode;
+  detail: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={`${satoshi.className} ${satoshi.variable}`}>
         <PersonJsonLd />
-        {children}
+        <DetailProvider detail={detail}>{children}</DetailProvider>
       </body>
     </html>
   );

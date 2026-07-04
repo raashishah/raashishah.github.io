@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { Fragment } from "react";
 import { AccordionSchematic } from "@/components/AccordionSchematic";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
+import { useDetail } from "@/components/DetailProvider";
 import { ExternalLinkArrow } from "@/components/ExternalLinkArrow";
 import {
   INLINE_LINK_SEPARATOR,
@@ -26,7 +29,9 @@ function isExternalHref(href: string) {
 }
 
 function InlineBodyLink({ href, text }: { href: string; text: string }) {
+  const { path: detailPath } = useDetail();
   const external = isExternalHref(href);
+  const isCurrent = !external && detailPath === href;
   const label = (
     <>
       {text}
@@ -50,7 +55,11 @@ function InlineBodyLink({ href, text }: { href: string; text: string }) {
   }
 
   return (
-    <Link href={href} className="home__inline-link">
+    <Link
+      href={href}
+      className="home__inline-link"
+      aria-current={isCurrent ? "page" : undefined}
+    >
       {label}
     </Link>
   );

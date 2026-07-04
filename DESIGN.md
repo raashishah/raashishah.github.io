@@ -148,7 +148,16 @@ Two groups separated by `--space-7` (48px): 3 projects (`home__project-groups`),
 Social links from `content/site.ts` (LinkedIn first). Desktop: text labels only (`home__link--footer`, muted tertiary). Mobile: 8-column icon grid with visually hidden labels; FA brands + legacy Giphy/Medium SVGs via `SocialIcon.tsx`. Meta row: `2026` + coral favicon mark.
 
 ### Subpages (`/expression`, `/ondevice`)
-Minimal `ProjectPage` layout inside `SiteShell` — same tokens and typography, not homepage clones.
+
+Soft navigation from the homepage opens project detail in-context: **bottom sheet** on phone (`< 40rem`), **split view** on desktop/iPad (`≥ 40rem`) with the site tagline staying in the primary column and detail stacking below. Full-page routes remain for SEO, direct links, and crawlers.
+
+**Phone sheet:** dimmed scrim, medium detent (~50dvh) on open, grabber to resize, swipe-down dismiss, Close on leading edge, 44px touch targets, safe-area padding.
+
+**Desktop split:** balanced two-pane grid (`1fr / 1fr`); lists stay interactive on the right; detail enters with `translateX(-16px)` + opacity (350ms ease-out). Active inline link uses `aria-current="page"` (old rose).
+
+**Motion:** transform + opacity only; 350ms open / 250ms close; no glass or card chrome. Intercepting routes (`@detail` parallel slot) keep the homepage mounted on soft nav; `router.back()` and Close all dismiss.
+
+Full-page fallback uses `ProjectPage` → `ProjectDetail` inside `SiteShell` — same tokens and typography.
 
 ### Motion tokens (in `globals.css`)
 - `--ease-out`: cubic-bezier(0, 0, 0.2, 1)

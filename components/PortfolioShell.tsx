@@ -1,4 +1,8 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { DetailPanelContent } from "@/components/DetailPanel";
+import { useDetail } from "@/components/DetailProvider";
 import { SiteShell } from "@/components/SiteShell";
 
 type PortfolioShellProps = {
@@ -16,15 +20,22 @@ export function PortfolioShell({
   intro,
   work,
 }: PortfolioShellProps) {
+  const { isOpen, route } = useDetail();
+
   return (
     <SiteShell
       nameHref={nameHref}
       nameExternal={nameExternal}
       nameAsHeading={nameAsHeading}
     >
-      <div className="home__content">
-        {intro}
-        {work}
+      <div
+        className={`home__content${isOpen ? " home__content--detail-open" : ""}`}
+      >
+        <div className="home__primary">
+          {intro}
+          {route ? <DetailPanelContent route={route} /> : null}
+        </div>
+        <div className="home__work">{work}</div>
       </div>
     </SiteShell>
   );

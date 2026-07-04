@@ -179,6 +179,95 @@ test.describe("mobile layout", () => {
   }
 });
 
+test.describe("detail panel", () => {
+  test("mobile opens expression in a bottom sheet without leaving homepage", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
+
+    await expect(page).toHaveURL("/expression");
+    await expect(page.locator(".home__sheet")).toBeVisible();
+    await expect(page.locator(".home__scrim")).toBeVisible();
+    await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
+    await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
+    await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
+      siteConfig.introTagline,
+    );
+  });
+
+  test("desktop opens expression in split view under site tagline", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
+
+    await expect(page).toHaveURL("/expression");
+    await expect(page.locator(".home__detail")).toBeVisible();
+    await expect(page.locator(".home__sheet")).toHaveCount(0);
+    await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
+      siteConfig.introTagline,
+    );
+    await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
+    await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
+    ).toHaveAttribute("aria-current", "page");
+  });
+
+  test("mobile close button returns to homepage", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
+    await page.getByRole("button", { name: "Close", exact: true }).click();
+
+    await expect(page).toHaveURL("/");
+    await expect(page.locator(".home__sheet")).toHaveCount(0);
+  });
+
+  test("desktop browser back closes detail panel", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "On-device AI Agent" })
+      .click();
+    await page.getByRole("link", { name: "Health App" }).click();
+
+    await expect(page).toHaveURL("/ondevice");
+    await expect(page.locator(".home__detail")).toBeVisible();
+
+    await page.goBack();
+    await expect(page).toHaveURL("/");
+    await expect(page.locator(".home__detail")).toHaveCount(0);
+  });
+
+  test("mobile sheet closed keeps footer meta within home padding", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
+    await page.getByRole("button", { name: "Close", exact: true }).click();
+    await assertFooterMetaWithinHomePadding(page);
+    await assertNoHorizontalScroll(page);
+  });
+});
+
 test.describe("footer layout", () => {
   test("footer meta aligns to the content edge on desktop", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
