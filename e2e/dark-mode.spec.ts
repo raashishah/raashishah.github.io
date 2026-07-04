@@ -95,7 +95,9 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
-    await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
+    await expect(page.locator(".home__intro .home__line--role")).toHaveText(
+      "Agentic Tools for Artists",
+    );
     await expect(page.getByText("Still updating this page")).toBeVisible();
   });
 
@@ -107,8 +109,26 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
-    await expect(page.getByText("Health App")).toBeVisible();
+    await expect(page.locator(".home__intro .home__line--role")).toHaveText(
+      "Health App",
+    );
     await expect(page.getByText("Still updating this page")).toBeVisible();
+  });
+
+  test("soft nav expression panel uses dark semantic tokens", async ({ page }) => {
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
+
+    const colors = await getPageColors(page);
+    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
+    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
+    await expect(page.locator(".home__detail")).toBeVisible();
   });
 
   test("switching from dark to light updates tokens", async ({ page }) => {
