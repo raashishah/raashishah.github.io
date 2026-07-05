@@ -36,14 +36,16 @@ isProject: false
 
 ## Design Health Score (typography focus)
 
-| Area | Score | Notes |
-|------|-------|-------|
-| Semantic roles | 6/10 | Five size tokens exist, but weight/leading/color are applied ad hoc per component |
-| Scale contrast | 5/10 | Only title→headline hits ~1.26×; lower steps are ~1.06–1.12× (impeccable recommends ≥1.25× between hierarchy levels) |
-| Cross-breakpoint consistency | 4/10 | Mobile overrides collapse role into body size; duplicate `clamp()` on tagline vs accordion |
-| Apple HIG alignment | 6/10 | Good: tinted neutrals, 400/500 weights, restrained palette. Weak: no true “headline = body size + emphasis” pattern |
-| Accessibility semantics | 5/10 | Sub-pages drop `h1` for name; no `prefers-reduced-motion` concern here, but no response to user font-size preferences beyond `rem` |
-| Documentation drift | 6/10 | [`DESIGN.md`](DESIGN.md) omits `--text-caption`; line-heights differ from code |
+
+| Area                         | Score | Notes                                                                                                                              |
+| ---------------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Semantic roles               | 6/10  | Five size tokens exist, but weight/leading/color are applied ad hoc per component                                                  |
+| Scale contrast               | 5/10  | Only title→headline hits ~1.26×; lower steps are ~1.06–1.12× (impeccable recommends ≥1.25× between hierarchy levels)               |
+| Cross-breakpoint consistency | 4/10  | Mobile overrides collapse role into body size; duplicate `clamp()` on tagline vs accordion                                         |
+| Apple HIG alignment          | 6/10  | Good: tinted neutrals, 400/500 weights, restrained palette. Weak: no true “headline = body size + emphasis” pattern                |
+| Accessibility semantics      | 5/10  | Sub-pages drop `h1` for name; no `prefers-reduced-motion` concern here, but no response to user font-size preferences beyond `rem` |
+| Documentation drift          | 6/10  | `[DESIGN.md](DESIGN.md)` omits `--text-caption`; line-heights differ from code                                                     |
+
 
 **Overall typography hierarchy: 5.5/10** — calm and on-brand, but levels are too close and role meaning is split across files.
 
@@ -53,13 +55,15 @@ isProject: false
 
 Apple does not ask you to copy SF Pro point sizes. It asks for **semantic text styles** where hierarchy is conveyed through **size, weight, and color together**, and **relative order is preserved when text scales**.
 
-| Apple semantic style | Intended role | Current site mapping |
-|---------------------|---------------|---------------------|
-| Title 2 / Title 3 | Page identity | `.home__name` → `--text-title` ✓ |
-| Headline | Emphasized label, list-row title | `.home__line--tagline` AND `.home__project-title` → same token ✗ |
-| Body | Multi-line reading text | `.home__project-body p` → `--text-body` ✓ |
-| Subheadline | Secondary meta, role lines | `.home__line--role`, footer links → `--text-subhead` ✓ |
-| Caption | Fine print | `.home__footer-meta` → `--text-caption` ✓ |
+
+| Apple semantic style | Intended role                    | Current site mapping                                             |
+| -------------------- | -------------------------------- | ---------------------------------------------------------------- |
+| Title 2 / Title 3    | Page identity                    | `.home__name` → `--text-title` ✓                                 |
+| Headline             | Emphasized label, list-row title | `.home__line--tagline` AND `.home__project-title` → same token ✗ |
+| Body                 | Multi-line reading text          | `.home__project-body p` → `--text-body` ✓                        |
+| Subheadline          | Secondary meta, role lines       | `.home__line--role`, footer links → `--text-subhead` ✓           |
+| Caption              | Fine print                       | `.home__footer-meta` → `--text-caption` ✓                        |
+
 
 **Key HIG insight the site misses:** On iOS, **Headline and Body share the same point size** (17pt); Headline is Semibold, Body is Regular. Your accordion row titles use a *larger* size than body (`--text-headline`), which makes them **visual peers of the intro tagline** instead of scannable list labels.
 
@@ -88,11 +92,13 @@ flowchart TB
   end
 ```
 
+
+
 ---
 
 ## What is working
 
-1. **Ink ladder matches Apple neutrals** — primary (`--ink`), secondary (`--color-body`), tertiary (`--text-muted`) in [`app/styles/tokens.css`](app/styles/tokens.css) mirrors SF label hierarchy.
+1. **Ink ladder matches Apple neutrals** — primary (`--ink`), secondary (`--color-body`), tertiary (`--text-muted`) in `[app/styles/tokens.css](app/styles/tokens.css)` mirrors SF label hierarchy.
 2. **One family, two weights** — Satoshi 400/500 only; no light weights (HIG-approved).
 3. **Measure constraints** — `--home-measure-narrow` (34ch) and `--home-measure-body` (50ch) keep line length readable; HIG-friendly.
 4. **Footer tiering** — subhead links + caption meta is correct Apple caption/footnote placement.
@@ -141,11 +147,11 @@ On a 2-column desktop layout, the left intro punchline and right list titles rea
 ```
 
 - Role jumps **up** to body size (loses subhead distinction).
-- Tagline gets a **one-off clamp** instead of the shared token (accordion has a slightly different clamp in [`accordion.css`](app/styles/accordion.css) line 161).
+- Tagline gets a **one-off clamp** instead of the shared token (accordion has a slightly different clamp in `[accordion.css](app/styles/accordion.css)` line 161).
 
 HIG: *“Maintain the relative hierarchy when people adjust text sizes.”* These overrides break that on phone.
 
-**Fix:** Delete mobile size overrides; let `--text-*` tokens handle fluid scaling. If phone needs more contrast, widen token min/max values once in `tokens.css`, not per-class.
+**Fix:** Delete mobile size overrides; let `--text-`* tokens handle fluid scaling. If phone needs more contrast, widen token min/max values once in `tokens.css`, not per-class.
 
 ---
 
@@ -181,12 +187,14 @@ Component CSS references bundles, not raw size + guessed leading.
 
 At max viewport (with `html { font-size: 112.5% }`):
 
-| Step | Ratio to previous |
-|------|-------------------|
-| title → headline | ~1.26× ✓ |
-| headline → body | ~1.12× ✗ |
-| body → subhead | ~1.06× ✗ |
-| subhead → caption | ~1.07× ✗ |
+
+| Step              | Ratio to previous |
+| ----------------- | ----------------- |
+| title → headline  | ~1.26× ✓          |
+| headline → body   | ~1.12× ✗          |
+| body → subhead    | ~1.06× ✗          |
+| subhead → caption | ~1.07× ✗          |
+
 
 The intro tagline does not feel clearly above body copy; role and education blur into footer subhead.
 
@@ -196,7 +204,7 @@ The intro tagline does not feel clearly above body copy; role and education blur
 
 ### P5 — Semantic HTML heading order
 
-[`SiteShell.tsx`](components/SiteShell.tsx) uses `h1` on homepage but `p` on sub-pages (`nameAsHeading={false}`). Visual styles match; **document outline does not**.
+`[SiteShell.tsx](components/SiteShell.tsx)` uses `h1` on homepage but `p` on sub-pages (`nameAsHeading={false}`). Visual styles match; **document outline does not**.
 
 **Fix:** Sub-pages: `h1` for site name (linked home), `h2` for page tagline (`.home__line--tagline`). Preserves one `h1` per page per WCAG/HIG.
 
@@ -212,7 +220,7 @@ Pullquotes use same size/weight as paragraphs; only a rose left border different
 
 ## Minor observations
 
-- `html { font-size: 112.5% }` inflates all `rem` tokens by 12.5%; document in [`DESIGN.md`](DESIGN.md) so token math is transparent.
+- `html { font-size: 112.5% }` inflates all `rem` tokens by 12.5%; document in `[DESIGN.md](DESIGN.md)` so token math is transparent.
 - `.home__link` forces `font-medium` at body size even for header contact nav — correct for interactive emphasis.
 - Education line reuses `--role` styling inside accordion column — good reuse, but after P2 fix ensure it stays visually below accordion titles.
 - No automated typography assertions in tests; e2e checks copy, not computed styles.
@@ -225,22 +233,24 @@ Pullquotes use same size/weight as paragraphs; only a rose left border different
 
 ### Proposed role map
 
-| Role | Size token | Weight | Color | Used by |
-|------|-----------|--------|-------|---------|
-| `type-title` | `--text-title` | 500 | `--text` | Name in header |
-| `type-headline` | `--text-headline` | 500 | `--text` | Intro tagline only |
-| `type-body` | `--text-body` | 400 | `--color-body` | Dropdown paragraphs |
-| `type-headline-inline` | `--text-body` | 500 | `--text` | Accordion summaries, inline links |
-| `type-subhead` | `--text-subhead` | 400 | `--text-muted` | Role, education, updating note |
-| `type-caption` | `--text-caption` | 400 | `--text-muted` | Footer meta |
+
+| Role                   | Size token        | Weight | Color          | Used by                           |
+| ---------------------- | ----------------- | ------ | -------------- | --------------------------------- |
+| `type-title`           | `--text-title`    | 500    | `--text`       | Name in header                    |
+| `type-headline`        | `--text-headline` | 500    | `--text`       | Intro tagline only                |
+| `type-body`            | `--text-body`     | 400    | `--color-body` | Dropdown paragraphs               |
+| `type-headline-inline` | `--text-body`     | 500    | `--text`       | Accordion summaries, inline links |
+| `type-subhead`         | `--text-subhead`  | 400    | `--text-muted` | Role, education, updating note    |
+| `type-caption`         | `--text-caption`  | 400    | `--text-muted` | Footer meta                       |
+
 
 ### File changes (implementation phase)
 
-1. [`app/styles/tokens.css`](app/styles/tokens.css) — add leading/tracking tokens per role; tune clamp values if needed after role reassignment.
-2. [`app/styles/layout.css`](app/styles/layout.css) — tagline uses full `type-headline` bundle; remove mobile overrides; map `.home__line--role` to `type-subhead` bundle.
-3. [`app/styles/accordion.css`](app/styles/accordion.css) — `.home__project-title` → `type-headline-inline` (body size + medium); remove mobile clamp override.
-4. [`components/SiteShell.tsx`](components/SiteShell.tsx) + [`components/ProjectPage.tsx`](components/ProjectPage.tsx) — fix heading semantics (`h1`/`h2`).
-5. [`DESIGN.md`](DESIGN.md) — document caption token, bundled styles, Apple role mapping, `112.5%` root note.
+1. `[app/styles/tokens.css](app/styles/tokens.css)` — add leading/tracking tokens per role; tune clamp values if needed after role reassignment.
+2. `[app/styles/layout.css](app/styles/layout.css)` — tagline uses full `type-headline` bundle; remove mobile overrides; map `.home__line--role` to `type-subhead` bundle.
+3. `[app/styles/accordion.css](app/styles/accordion.css)` — `.home__project-title` → `type-headline-inline` (body size + medium); remove mobile clamp override.
+4. `[components/SiteShell.tsx](components/SiteShell.tsx)` + `[components/ProjectPage.tsx](components/ProjectPage.tsx)` — fix heading semantics (`h1`/`h2`).
+5. `[DESIGN.md](DESIGN.md)` — document caption token, bundled styles, Apple role mapping, `112.5%` root note.
 6. **Tests** — add one Vitest or Playwright check that computed `font-size` of tagline > accordion title > role (preserves hierarchy at desktop and mobile widths).
 
 ### Verification (execution phase)
