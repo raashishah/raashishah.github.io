@@ -23,6 +23,7 @@ type BottomSheetProps = {
   title: string;
   onClose: () => void;
   requestClose?: () => Promise<void>;
+  onExitComplete?: () => void;
   closing?: boolean;
   children: ReactNode;
 };
@@ -40,6 +41,7 @@ export function BottomSheet({
   title,
   onClose,
   requestClose: requestCloseAnimated,
+  onExitComplete,
   closing: closingExternal = false,
   children,
 }: BottomSheetProps) {
@@ -62,8 +64,49 @@ export function BottomSheet({
       return;
     }
     setClosingLocal(true);
-    window.setTimeout(onClose, PANEL_CLOSE_MS);
-  }, [closing, onClose, requestCloseAnimated]);
+  }, [closing, requestCloseAnimated]);
+
+  const completeExit = useCallback(() => {
+    if (onExitComplete) {
+      onExitComplete();
+      return;
+    }
+    onClose();
+  }, [onClose, onExitComplete]);
+
+  useEffect(() => {
+    if (!closing || !sheetRef.current) {
+      return;
+    }
+
+    const sheet = sheetRef.current;
+    let finished = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      if (closingLocal) {
+        setClosingLocal(false);
+      }
+      completeExit();
+    };
+
+    const onAnimationEnd = (event: AnimationEvent) => {
+      if (event.target !== sheet || event.animationName !== "home-sheet-exit") {
+        return;
+      }
+      finish();
+    };
+
+    sheet.addEventListener("animationend", onAnimationEnd);
+    const fallbackTimer = window.setTimeout(finish, PANEL_CLOSE_MS + 50);
+
+    return () => {
+      finished = true;
+      sheet.removeEventListener("animationend", onAnimationEnd);
+      window.clearTimeout(fallbackTimer);
+    };
+  }, [closing, closingLocal, completeExit]);
 
   const cycleDetent = useCallback(() => {
     setDetent((current) => (current === "medium" ? "large" : "medium"));

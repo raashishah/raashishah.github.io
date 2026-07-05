@@ -141,12 +141,14 @@ export function AnimatedDetails({
     cancelAnimation();
 
     if (details.open) {
-      await runTransition("close");
+      const shouldCloseDetail =
+        isOpen && path && accordionId && getDetailAccordionId(path) === accordionId;
+      await Promise.all([
+        runTransition("close"),
+        shouldCloseDetail ? requestCloseDetail() : Promise.resolve(),
+      ]);
       if (accordionId && accordion) {
         accordion.notifyClosed(accordionId);
-      }
-      if (isOpen && path && accordionId && getDetailAccordionId(path) === accordionId) {
-        await requestCloseDetail();
       }
       return;
     }

@@ -18,7 +18,7 @@ import {
   type DetailPath,
   type DetailRouteConfig,
 } from "@/lib/detail-routes";
-import { PANEL_CLOSE_MS, SHEET_BREAKPOINT } from "@/lib/motion";
+import { PANEL_CLOSE_MS, SHEET_BREAKPOINT, TRANSITION_FALLBACK_BUFFER_MS } from "@/lib/motion";
 
 type DetailContextValue = {
   isOpen: boolean;
@@ -29,6 +29,7 @@ type DetailContextValue = {
   isMediaReady: boolean;
   closeDetail: () => void;
   requestCloseDetail: () => Promise<void>;
+  finishDetailClose: () => void;
 };
 
 const DetailContext = createContext<DetailContextValue | null>(null);
@@ -45,6 +46,7 @@ export function useDetail() {
       isMediaReady: false,
       closeDetail: () => {},
       requestCloseDetail: async () => {},
+      finishDetailClose: () => {},
     } satisfies DetailContextValue;
   }
   return context;
@@ -76,6 +78,7 @@ export function DetailProvider({ children, detail }: DetailProviderProps) {
   const router = useRouter();
   const [isClosing, setIsClosing] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
+  const closeResolveRef = useRef<(() => void) | null>(null);
   const { matches: isDesktop, ready: isMediaReady } = useMediaQuery(
     `(min-width: ${SHEET_BREAKPOINT})`,
   );
@@ -98,6 +101,20 @@ export function DetailProvider({ children, detail }: DetailProviderProps) {
     };
   }, []);
 
+  const finishDetailClose = useCallback(() => {
+    if (!closeResolveRef.current && !closeTimerRef.current) {
+      return;
+    }
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    const resolve = closeResolveRef.current;
+    closeResolveRef.current = null;
+    router.back();
+    resolve?.();
+  }, [router]);
+
   const closeDetail = useCallback(() => {
     router.back();
   }, [router]);
@@ -110,13 +127,12 @@ export function DetailProvider({ children, detail }: DetailProviderProps) {
     setIsClosing(true);
 
     return new Promise<void>((resolve) => {
+      closeResolveRef.current = resolve;
       closeTimerRef.current = window.setTimeout(() => {
-        closeTimerRef.current = null;
-        router.back();
-        resolve();
-      }, PANEL_CLOSE_MS);
+        finishDetailClose();
+      }, PANEL_CLOSE_MS + TRANSITION_FALLBACK_BUFFER_MS);
     });
-  }, [isClosing, isIntercept, router]);
+  }, [finishDetailClose, isClosing, isIntercept]);
 
   const value = useMemo(
     () => ({
@@ -128,8 +144,9 @@ export function DetailProvider({ children, detail }: DetailProviderProps) {
       isMediaReady,
       closeDetail,
       requestCloseDetail,
+      finishDetailClose,
     }),
-    [isIntercept, isClosing, path, route, isDesktop, isMediaReady, closeDetail, requestCloseDetail],
+    [isIntercept, isClosing, path, route, isDesktop, isMediaReady, closeDetail, requestCloseDetail, finishDetailClose],
   );
 
   return (

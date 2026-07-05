@@ -42,14 +42,17 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
 
   const prepareOpen = useCallback(async (id: string) => {
     const currentOpenId = openIdRef.current;
-    if (currentOpenId && currentOpenId !== id) {
-      await closersRef.current.get(currentOpenId)?.();
-    }
-    openIdRef.current = id;
+    const closingDetail =
+      isOpen && path && getDetailAccordionId(path) !== id
+        ? requestCloseDetail()
+        : Promise.resolve();
+    const closingAccordion =
+      currentOpenId && currentOpenId !== id
+        ? (closersRef.current.get(currentOpenId)?.() ?? Promise.resolve())
+        : Promise.resolve();
 
-    if (isOpen && path && getDetailAccordionId(path) !== id) {
-      await requestCloseDetail();
-    }
+    await Promise.all([closingDetail, closingAccordion]);
+    openIdRef.current = id;
   }, [isOpen, path, requestCloseDetail]);
 
   const notifyClosed = useCallback((id: string) => {
