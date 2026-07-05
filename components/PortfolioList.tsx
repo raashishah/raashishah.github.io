@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Fragment } from "react";
-import { AccordionSchematic } from "@/components/AccordionSchematic";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { useDetail } from "@/components/DetailProvider";
 import { ExternalLinkArrow } from "@/components/ExternalLinkArrow";
@@ -136,9 +135,6 @@ function ProjectListItem({
           {item.paragraphs.map((paragraph, index) => (
             <BodyParagraphBlock key={index} paragraph={paragraph} />
           ))}
-          {item.schematicId ? (
-            <AccordionSchematic schematicId={item.schematicId} />
-          ) : null}
         </div>
       </AnimatedDetails>
     </li>
