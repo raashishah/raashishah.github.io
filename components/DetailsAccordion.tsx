@@ -8,6 +8,8 @@ import {
   useRef,
   type ReactNode,
 } from "react";
+import { useDetail } from "@/components/DetailProvider";
+import { getDetailAccordionId } from "@/lib/detail-routes";
 
 type CloseHandler = () => Promise<void>;
 
@@ -28,6 +30,7 @@ export function useDetailsAccordion() {
 export function DetailsAccordion({ children }: { children: ReactNode }) {
   const openIdRef = useRef<string | null>(null);
   const closersRef = useRef(new Map<string, CloseHandler>());
+  const { isOpen, path, closeDetail } = useDetail();
 
   const register = useCallback((id: string, close: CloseHandler) => {
     closersRef.current.set(id, close);
@@ -43,7 +46,11 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
       await closersRef.current.get(currentOpenId)?.();
     }
     openIdRef.current = id;
-  }, []);
+
+    if (isOpen && path && getDetailAccordionId(path) !== id) {
+      closeDetail();
+    }
+  }, [closeDetail, isOpen, path]);
 
   const notifyClosed = useCallback((id: string) => {
     if (openIdRef.current === id) {

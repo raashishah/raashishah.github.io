@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { useDetail } from "@/components/DetailProvider";
-import { ExternalLinkArrow } from "@/components/ExternalLinkArrow";
+import { InlineLinkArrow } from "@/components/ExternalLinkArrow";
 import {
   INLINE_LINK_SEPARATOR,
   type BodyParagraph,
@@ -35,7 +35,7 @@ function InlineBodyLink({ href, text }: { href: string; text: string }) {
     <>
       {text}
       {"\u00a0"}
-      <ExternalLinkArrow className="home__inline-link-icon" />
+      <InlineLinkArrow href={href} />
     </>
   );
 

@@ -237,6 +237,27 @@ test.describe("detail panel", () => {
     await expect(page.locator(".home__sheet")).toHaveCount(0);
   });
 
+  test("desktop opening another accordion dismisses split detail", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
+
+    await expect(page).toHaveURL("/expression");
+    await expect(page.locator(".home__detail")).toBeVisible();
+
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Enterprise-Grade Agents" })
+      .click();
+
+    await expect(page).toHaveURL("/");
+    await expect(page.locator(".home__detail")).toHaveCount(0);
+  });
+
   test("desktop browser back closes detail panel", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 800 });
     await page.goto("/");

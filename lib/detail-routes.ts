@@ -28,6 +28,15 @@ export const detailRoutes: Record<DetailPath, DetailRouteConfig> = {
   },
 };
 
+export const DETAIL_ACCORDION_ID: Record<DetailPath, string> = {
+  "/expression": "expression",
+  "/ondevice": "ondevice",
+};
+
+export function getDetailAccordionId(path: DetailPath): string {
+  return DETAIL_ACCORDION_ID[path];
+}
+
 export function isDetailPath(path: string): path is DetailPath {
   return DETAIL_PATHS.includes(path as DetailPath);
 }

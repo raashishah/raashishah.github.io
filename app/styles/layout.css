@@ -236,6 +236,20 @@
   white-space: nowrap;
 }
 
+.home__inline-link-icon--detail .home__inline-link-icon-right {
+  display: none;
+}
+
+@media (min-width: 40rem) {
+  .home__inline-link-icon--detail .home__inline-link-icon-up {
+    display: none;
+  }
+
+  .home__inline-link-icon--detail .home__inline-link-icon-right {
+    display: inline;
+  }
+}
+
 .home__link:focus-visible,
 .home__details-summary:focus-visible {
   outline: 2px solid var(--accent-focus-ring);
