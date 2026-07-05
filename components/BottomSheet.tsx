@@ -22,6 +22,8 @@ type SheetDetent = "medium" | "large";
 type BottomSheetProps = {
   title: string;
   onClose: () => void;
+  requestClose?: () => Promise<void>;
+  closing?: boolean;
   children: ReactNode;
 };
 
@@ -34,9 +36,16 @@ function getFocusableElements(container: HTMLElement) {
   );
 }
 
-export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
+export function BottomSheet({
+  title,
+  onClose,
+  requestClose: requestCloseAnimated,
+  closing: closingExternal = false,
+  children,
+}: BottomSheetProps) {
   const [mounted, setMounted] = useState(false);
-  const [closing, setClosing] = useState(false);
+  const [closingLocal, setClosingLocal] = useState(false);
+  const closing = closingExternal || closingLocal;
   const [detent, setDetent] = useState<SheetDetent>("medium");
   const sheetRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -46,11 +55,15 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
 
   const sheetHeight = detent === "medium" ? SHEET_HEIGHT_MEDIUM : SHEET_HEIGHT_LARGE;
 
-  const requestClose = useCallback(() => {
+  const handleRequestClose = useCallback(() => {
     if (closing) return;
-    setClosing(true);
+    if (requestCloseAnimated) {
+      void requestCloseAnimated();
+      return;
+    }
+    setClosingLocal(true);
     window.setTimeout(onClose, PANEL_CLOSE_MS);
-  }, [closing, onClose]);
+  }, [closing, onClose, requestCloseAnimated]);
 
   const cycleDetent = useCallback(() => {
     setDetent((current) => (current === "medium" ? "large" : "medium"));
@@ -123,7 +136,7 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        requestClose();
+        handleRequestClose();
         return;
       }
 
@@ -151,7 +164,7 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [requestClose]);
+  }, [handleRequestClose]);
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     dragStartY.current = event.clientY;
@@ -172,7 +185,7 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
     sheetRef.current.style.transform = "";
 
     if (dragDeltaY.current > SHEET_DISMISS_THRESHOLD_PX) {
-      requestClose();
+      handleRequestClose();
     }
 
     dragStartY.current = null;
@@ -189,7 +202,7 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
         type="button"
         className={`home__scrim${closing ? " home__scrim--exit" : ""}`}
         aria-label="Close detail panel"
-        onClick={requestClose}
+        onClick={handleRequestClose}
       />
       <div
         ref={sheetRef}
@@ -223,7 +236,7 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
           <button
             type="button"
             className="home__sheet-close"
-            onClick={requestClose}
+            onClick={handleRequestClose}
           >
             Close
           </button>

@@ -237,6 +237,28 @@ test.describe("detail panel", () => {
     await expect(page.locator(".home__sheet")).toHaveCount(0);
   });
 
+  test("desktop opens ondevice in split view under site tagline", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "On-device AI Agent" })
+      .click();
+    await page.getByRole("link", { name: "Health App" }).click();
+
+    await expect(page).toHaveURL("/ondevice");
+    await expect(page.locator(".home__detail")).toBeVisible();
+    await expect(page.locator(".home__sheet")).toHaveCount(0);
+    await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
+      siteConfig.introTagline,
+    );
+    await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Health App" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+  });
+
   test("desktop opening another accordion dismisses split detail", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 800 });
     await page.goto("/");

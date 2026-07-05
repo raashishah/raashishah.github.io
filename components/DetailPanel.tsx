@@ -12,7 +12,8 @@ type DetailPanelProps = {
 };
 
 export function DetailPanel({ route }: DetailPanelProps) {
-  const { isDesktop, closeDetail, path } = useDetail();
+  const { isDesktop, isMediaReady, closeDetail, requestCloseDetail, isClosing, path } =
+    useDetail();
   const detailRef = useRef<HTMLDivElement>(null);
   const previousPathRef = useRef(path);
 
@@ -34,9 +35,18 @@ export function DetailPanel({ route }: DetailPanelProps) {
     previousPathRef.current = path;
   }, [path]);
 
+  if (!isMediaReady) {
+    return null;
+  }
+
   if (!isDesktop) {
     return (
-      <BottomSheet title={route.pageLabel} onClose={closeDetail}>
+      <BottomSheet
+        title={route.pageLabel}
+        onClose={closeDetail}
+        requestClose={requestCloseDetail}
+        closing={isClosing}
+      >
         <ProjectDetail {...route} />
       </BottomSheet>
     );
@@ -46,17 +56,17 @@ export function DetailPanel({ route }: DetailPanelProps) {
 }
 
 export function DetailPanelContent({ route }: DetailPanelProps) {
-  const { isOpen, isDesktop } = useDetail();
+  const { isOpen, isClosing, isDesktop, isMediaReady } = useDetail();
   const detailRef = useRef<HTMLDivElement>(null);
 
-  if (!isOpen || !isDesktop) {
+  if (!isMediaReady || (!isOpen && !isClosing) || !isDesktop) {
     return null;
   }
 
   return (
     <div
       ref={detailRef}
-      className="home__detail home__detail--enter"
+      className={`home__detail${isClosing ? " home__detail--exit" : " home__detail--enter"}`}
       tabIndex={-1}
       aria-label={route.pageLabel}
     >

@@ -20,7 +20,8 @@ export function PortfolioShell({
   intro,
   work,
 }: PortfolioShellProps) {
-  const { isOpen, route } = useDetail();
+  const { isOpen, isClosing, route } = useDetail();
+  const showDetailLayout = isOpen || isClosing;
 
   return (
     <SiteShell
@@ -29,7 +30,7 @@ export function PortfolioShell({
       nameAsHeading={nameAsHeading}
     >
       <div
-        className={`home__content${isOpen ? " home__content--detail-open" : ""}`}
+        className={`home__content${showDetailLayout ? " home__content--detail-open" : ""}${isClosing ? " home__content--detail-closing" : ""}`}
       >
         <div className="home__primary">
           {intro}

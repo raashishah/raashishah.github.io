@@ -69,6 +69,10 @@
 }
 
 @media (min-width: 40rem) {
+  .home__content {
+    transition: grid-template-columns var(--duration-short) var(--ease-in);
+  }
+
   .home__content--detail-open {
     grid-template-columns: 1fr 1fr;
   }
@@ -76,6 +80,10 @@
   .home__content--detail-open .home__work {
     transform: translateX(0);
     transition: transform var(--duration-standard) var(--ease-out);
+  }
+
+  .home__content--detail-closing .home__work {
+    transition: transform var(--duration-short) var(--ease-in);
   }
 }
 

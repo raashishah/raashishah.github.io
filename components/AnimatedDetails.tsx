@@ -65,7 +65,7 @@ export function AnimatedDetails({
   const shellRef = useRef<HTMLDivElement>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
   const accordion = useDetailsAccordion();
-  const { isOpen, path, closeDetail } = useDetail();
+  const { isOpen, path, requestCloseDetail } = useDetail();
 
   const cancelAnimation = () => {
     cleanupRef.current?.();
@@ -146,7 +146,7 @@ export function AnimatedDetails({
         accordion.notifyClosed(accordionId);
       }
       if (isOpen && path && accordionId && getDetailAccordionId(path) === accordionId) {
-        closeDetail();
+        await requestCloseDetail();
       }
       return;
     }

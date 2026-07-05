@@ -56,6 +56,7 @@ function InlineBodyLink({ href, text }: { href: string; text: string }) {
   return (
     <Link
       href={href}
+      scroll={false}
       className="home__inline-link"
       aria-current={isCurrent ? "page" : undefined}
     >
