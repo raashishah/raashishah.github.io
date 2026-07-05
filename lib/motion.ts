@@ -12,4 +12,4 @@ export const PANEL_CROSSFADE_MS = 150;
 export const SHEET_DISMISS_THRESHOLD_PX = 80;
 export const SHEET_BREAKPOINT = "40rem";
 export const SHEET_HEIGHT_MEDIUM = "50dvh";
-export const SHEET_HEIGHT_LARGE = "92dvh";
+export const SHEET_HEIGHT_LARGE = "82dvh";

@@ -39,6 +39,7 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
   const [closing, setClosing] = useState(false);
   const [detent, setDetent] = useState<SheetDetent>("medium");
   const sheetRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const dragStartY = useRef<number | null>(null);
   const dragDeltaY = useRef(0);
@@ -54,6 +55,51 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
   const cycleDetent = useCallback(() => {
     setDetent((current) => (current === "medium" ? "large" : "medium"));
   }, []);
+
+  const expandDetent = useCallback(() => {
+    setDetent((current) => (current === "medium" ? "large" : current));
+  }, []);
+
+  useEffect(() => {
+    const body = bodyRef.current;
+    if (!body) return;
+
+    const onScroll = () => {
+      if (body.scrollTop > 0) {
+        expandDetent();
+      }
+    };
+
+    const onWheel = (event: WheelEvent) => {
+      if (event.deltaY < 0) {
+        expandDetent();
+      }
+    };
+
+    let touchStartY = 0;
+    const onTouchStart = (event: TouchEvent) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      const touchY = event.touches[0]?.clientY ?? touchStartY;
+      if (touchStartY - touchY > 12) {
+        expandDetent();
+      }
+    };
+
+    body.addEventListener("scroll", onScroll, { passive: true });
+    body.addEventListener("wheel", onWheel, { passive: true });
+    body.addEventListener("touchstart", onTouchStart, { passive: true });
+    body.addEventListener("touchmove", onTouchMove, { passive: true });
+
+    return () => {
+      body.removeEventListener("scroll", onScroll);
+      body.removeEventListener("wheel", onWheel);
+      body.removeEventListener("touchstart", onTouchStart);
+      body.removeEventListener("touchmove", onTouchMove);
+    };
+  }, [expandDetent]);
 
   useEffect(() => {
     setMounted(true);
@@ -185,7 +231,9 @@ export function BottomSheet({ title, onClose, children }: BottomSheetProps) {
             {title}
           </p>
         </header>
-        <div className="home__sheet-body">{children}</div>
+        <div ref={bodyRef} className="home__sheet-body">
+          {children}
+        </div>
       </div>
     </>,
     document.body,
