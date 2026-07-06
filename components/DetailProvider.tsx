@@ -12,6 +12,7 @@ import {
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { DetailPanel } from "@/components/DetailPanel";
+import { isHomepageMounted } from "@/components/HomepageMarker";
 import {
   getDetailRoute,
   isDetailPath,
@@ -70,20 +71,24 @@ function useMediaQuery(query: string) {
 
 type DetailProviderProps = {
   children: ReactNode;
-  detail: ReactNode;
 };
 
-export function DetailProvider({ children, detail }: DetailProviderProps) {
+export function DetailProvider({ children }: DetailProviderProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [isClosing, setIsClosing] = useState(false);
+  const [isHomepage, setIsHomepage] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
   const closeResolveRef = useRef<(() => void) | null>(null);
   const { matches: isDesktop, ready: isMediaReady } = useMediaQuery(
     `(min-width: ${SHEET_BREAKPOINT})`,
   );
 
-  const isIntercept = detail !== null && isDetailPath(pathname);
+  useEffect(() => {
+    setIsHomepage(isHomepageMounted());
+  }, [pathname]);
+
+  const isIntercept = isHomepage && isDetailPath(pathname);
   const path = isIntercept ? (pathname as DetailPath) : null;
   const route = path ? getDetailRoute(path) : null;
 

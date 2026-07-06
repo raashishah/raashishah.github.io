@@ -90,7 +90,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${satoshi.className} ${satoshi.variable}`}>
         <PersonJsonLd />
-        <DetailProvider detail={detail}>{children}</DetailProvider>
+        <DetailProvider>{children}</DetailProvider>
         {detail}
       </body>
     </html>

@@ -56,6 +56,10 @@
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
     gap: clamp(var(--space-7), 7vw, var(--space-8));
   }
+
+  .home__work {
+    min-width: 0;
+  }
 }
 
 .home__intro {
