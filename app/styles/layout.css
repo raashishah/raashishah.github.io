@@ -57,6 +57,10 @@
     gap: clamp(var(--space-7), 7vw, var(--space-8));
   }
 
+  .home__primary {
+    max-width: var(--home-measure-narrow);
+  }
+
   .home__work {
     min-width: 0;
   }
@@ -66,7 +70,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  max-width: var(--home-measure-narrow);
 }
 
 .home__name {
@@ -323,10 +326,6 @@
 }
 
 @media (max-width: 39.99rem) {
-  .home__intro {
-    max-width: none;
-  }
-
   .home__content {
     gap: var(--space-6);
   }

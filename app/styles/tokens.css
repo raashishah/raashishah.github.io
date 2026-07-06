@@ -35,6 +35,8 @@
   --home-max-width: 68rem;
   --home-measure-narrow: 34ch;
   --home-measure-body: 50ch;
+  /* Split-view / sheet breakpoint — keep in sync with SHEET_BREAKPOINT in lib/motion.ts */
+  --home-detail-viewport-offset: 12rem;
 
   /* Motion — Apple HIG: 0.35s default, ease-in-out; ease-out enter, ease-in exit */
   --ease-out: cubic-bezier(0, 0, 0.2, 1);

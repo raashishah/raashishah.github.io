@@ -10,13 +10,12 @@
 .home__detail {
   overflow-y: auto;
   width: 100%;
-  max-width: min(var(--home-measure-body), 100%);
   -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 40rem) {
   .home__detail {
-    max-height: calc(100dvh - 12rem);
+    max-height: calc(100dvh - var(--home-detail-viewport-offset));
   }
 }
 
