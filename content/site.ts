@@ -3,7 +3,9 @@ import type { FooterSocialLink, FooterSocialLinkId, SocialLink, SocialLinkId } f
 export const nameEasterEggHref =
   "https://open.spotify.com/track/0Si6B4gh96eFsjFMplPGtJ";
 
-export const footerDiscoveryHint = "something's hidden somewhere here";
+export const footerDiscoveryHintBefore = "something's hidden";
+export const footerDiscoveryHintAfter = "somewhere here";
+export const footerDiscoveryHint = `${footerDiscoveryHintBefore} ${footerDiscoveryHintAfter}`;
 
 export const socialLinks = [
   {

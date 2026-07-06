@@ -117,8 +117,7 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
       metaLeft: Math.round(metaRect.left),
       metaRight: Math.round(metaRect.right),
       markLeft: Math.round(markRect.left),
-      markBeforeHint:
-        (mark.compareDocumentPosition(hint) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0,
+      markInHint: hint.contains(mark),
     };
   });
 
@@ -127,7 +126,7 @@ export async function assertFooterMetaWithinHomePadding(page: Page) {
     return;
   }
 
-  expect(alignment.markBeforeHint).toBe(true);
+  expect(alignment.markInHint).toBe(true);
   expect(alignment.metaLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
   expect(alignment.markLeft).toBeGreaterThanOrEqual(alignment.contentLeft - 1);
   expect(alignment.metaRight).toBeLessThanOrEqual(alignment.contentRight + 1);

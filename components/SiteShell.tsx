@@ -3,7 +3,8 @@ import { SocialIcon } from "@/components/SocialIcon";
 import {
   calendlyLink,
   emailLink,
-  footerDiscoveryHint,
+  footerDiscoveryHintAfter,
+  footerDiscoveryHintBefore,
   footerLinks,
 } from "@/content/site";
 import type { FooterSocialLink, FooterSocialLinkId, SocialLink } from "@/content/types";
@@ -109,13 +110,16 @@ export function SiteShell({
             ))}
           </nav>
           <p className="home__footer-meta">
-            <img
-              src="/img/footer-mark.svg"
-              alt=""
-              aria-hidden="true"
-              className="home__footer-mark"
-            />
-            <span className="home__footer-meta-hint">{footerDiscoveryHint}</span>
+            <span className="home__footer-meta-hint">
+              {footerDiscoveryHintBefore}{" "}
+              <img
+                src="/img/footer-mark.svg"
+                alt=""
+                aria-hidden="true"
+                className="home__footer-mark"
+              />{" "}
+              {footerDiscoveryHintAfter}
+            </span>
           </p>
         </footer>
       </main>

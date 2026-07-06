@@ -94,13 +94,14 @@
 }
 
 .home__footer-mark {
-  display: block;
+  display: inline-block;
   width: 1.0625rem;
   height: 1.0625rem;
   flex-shrink: 0;
+  margin-inline: 0.12em;
   object-fit: contain;
   object-position: center center;
-  transform: translateY(-0.06em);
+  vertical-align: -0.06em;
 }
 
 @media (max-width: 39.99rem) {
