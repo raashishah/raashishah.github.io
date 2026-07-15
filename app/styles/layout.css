@@ -92,19 +92,14 @@
   outline: 2px solid var(--accent-focus-ring);
   outline-offset: 2px;
   border-radius: 2px;
+  color: var(--accent);
 }
 
 .home__name-link:active {
   color: var(--accent);
 }
 
-@media (max-width: 63.99rem) {
-  .home__name-link {
-    color: var(--accent);
-  }
-}
-
-@media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
   .home__name-link:hover {
     color: var(--accent);
   }
@@ -180,11 +175,14 @@
 }
 
 .home__link--header {
-  display: inline;
-  min-height: 0;
-  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--home-touch-min);
+  padding-block: var(--space-1);
+  padding-inline: var(--space-1);
   margin: 0;
   border-radius: 2px;
+  vertical-align: baseline;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
