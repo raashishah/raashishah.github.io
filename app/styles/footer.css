@@ -105,11 +105,6 @@
 }
 
 @media (max-width: 39.99rem) {
-  .home {
-    /* Fit eight 44px icon targets across the viewport when possible */
-    --home-pad-inline: max(var(--space-2), calc((100vw - 8 * var(--home-touch-min)) / 2));
-  }
-
   .home__footer {
     padding-top: var(--space-4);
     gap: var(--space-3);
@@ -148,22 +143,15 @@
   .home__link--footer {
     justify-content: center;
     width: 100%;
-    min-width: var(--home-touch-min);
+    min-width: 0;
     min-height: var(--home-touch-min);
     padding-inline: 0;
   }
 
   .home__footer-meta {
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
     min-height: 1.25rem;
-  }
-}
-
-@media (max-width: 23.99rem) {
-  .home__footer-nav {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: var(--space-1);
   }
 }
