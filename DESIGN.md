@@ -137,7 +137,7 @@ No shadows on the homepage. Depth comes from typography hierarchy and spacing, n
 Flex row, baseline-aligned, bottom border separator. Name uses `title` scale with old rose on hover/focus (Spotify easter egg link). Contact nav: `email me` / `or` / `let's meet sometime` (Calendly) — no underlines; old rose on hover/focus/active. Twitter is footer-only.
 
 ### Project / job lists
-Two groups separated by `--space-7` (48px): 3 projects (`home__project-groups`), then 4 jobs (`home__experience-groups`). No section headings. Static education line below jobs (`BSc in Product, from Aston, UK`). Each row is a native `<details>` with:
+Two groups separated by `--space-7` (48px): 5 projects (`home__project-groups`), then 4 jobs (`home__experience-groups`). No section headings. Static education line below jobs (`BSc in Product, from Aston, UK`). Each row is a native `<details>` with:
 - Summary row: role-focused title at body scale + medium weight + CSS plus icon (44px min height)
 - Expand: grid `0fr → 1fr` height (350ms ease-out), body opacity fade
 - Collapse: 250ms ease-in; no transition delay on close

@@ -25,6 +25,50 @@ export const projects = [
     ],
   },
   {
+    id: "pink-depot",
+    title: "Inventory for Makers",
+    seoName: "Pink Depot",
+    primaryUrl: "https://pinkdepot.raashishah.com",
+    seoDescription:
+      "iPad-first inventory and order-costing app for small businesses that buy materials, make products, and track stock, cost, and profit.",
+    seoLongDetail:
+      "Built an iPad-first inventory and order-costing app for maker businesses (gift, fashion, cloud kitchen). Tracks materials, products with ingredient lists, client orders with auto stock deduction, vendors, and monthly profit without spreadsheets. Next.js on Vercel with Supabase auth and Postgres RLS; live at pinkdepot.raashishah.com.",
+    paragraphs: [
+      [
+        {
+          text: "Managing stock",
+          href: "https://pinkdepot.raashishah.com",
+        },
+      ],
+      {
+        text: "Materials products and profit",
+        pullquote: true,
+      },
+    ],
+  },
+  {
+    id: "apple-hig",
+    title: "Apple Design Skill",
+    seoName: "Apple HIG",
+    primaryUrl: "https://github.com/raashishah/apple-hig",
+    seoDescription:
+      "Public Cursor skill that designs and implements React web app structure and chrome from Apple Human Interface Guidelines, with hard FAIL grammar for toolbars, lists, forms, and sidebars.",
+    seoLongDetail:
+      "Open-sourced a Cursor /hig skill that designs a React or Next.js web app like an Apple designer from existing requirements, then implements navigation, lists, forms, sheets, and materials in the same run. Brand colors and fonts stay in the project; chrome grammar encodes hard FAIL gates so soft density advice cannot ship childish UI. Dogfooded on Pink Depot and admissionsdemo.",
+    paragraphs: [
+      [
+        {
+          text: "Apple HIG plugin",
+          href: "https://github.com/raashishah/apple-hig",
+        },
+      ],
+      {
+        text: "Design React like Apple",
+        pullquote: true,
+      },
+    ],
+  },
+  {
     id: "expression",
     title: "Pro Animation Tool",
     seoName: "Expression",

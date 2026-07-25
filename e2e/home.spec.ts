@@ -71,6 +71,46 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
   ).toHaveCount(0);
 });
 
+test("Pink Depot shows managing stock link when expanded", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Inventory for Makers" })
+    .click();
+
+  const projectLink = page.getByRole("link", {
+    name: "Managing stock",
+  });
+  await expect(projectLink).toBeVisible();
+  await expect(projectLink).toHaveAttribute(
+    "href",
+    "https://pinkdepot.raashishah.com",
+  );
+  await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(projectLink).toHaveAttribute("target", "_blank");
+  await expect(page.getByText("Materials products and profit")).toBeVisible();
+});
+
+test("Apple HIG plugin shows github link when expanded", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Apple Design Skill" })
+    .click();
+
+  const projectLink = page.getByRole("link", {
+    name: "Apple HIG plugin",
+  });
+  await expect(projectLink).toBeVisible();
+  await expect(projectLink).toHaveAttribute(
+    "href",
+    "https://github.com/raashishah/apple-hig",
+  );
+  await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(projectLink).toHaveAttribute("target", "_blank");
+  await expect(page.getByText("Design React like Apple")).toBeVisible();
+});
+
 test("opening a second dropdown closes the first", async ({ page }) => {
   await page.goto("/");
   const enterpriseDetails = page

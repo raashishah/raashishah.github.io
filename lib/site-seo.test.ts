@@ -33,6 +33,8 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("## Key pages");
     expect(llmsTxt).toContain("## Projects");
     expect(llmsTxt).toContain("https://admissions.raashishah.com");
+    expect(llmsTxt).toContain("https://pinkdepot.raashishah.com");
+    expect(llmsTxt).toContain("https://github.com/raashishah/apple-hig");
     expect(llmsTxt).toContain("/llms-full.txt");
     expect(llmsTxt).toContain("/expression");
     expect(llmsTxt).toContain("/ondevice");
