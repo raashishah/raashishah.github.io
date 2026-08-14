@@ -3,6 +3,28 @@ import { INLINE_LINK_SEPARATOR } from "./types";
 
 export const projects = [
   {
+    id: "pocket-analyst",
+    title: "Easy Business Insights",
+    seoName: "Pocket Analyst",
+    primaryUrl: "https://sexypa.raashishah.com",
+    seoDescription:
+      "Easy insights for traditional business owners, inside GPT — financial intelligence from Tally data via ChatGPT MCP.",
+    seoLongDetail:
+      "Building Pocket Analyst for traditional business owners who run on Tally and spreadsheets. Lives inside GPT via MCP at sexypa.raashishah.com; warehouse trial-balance data in Supabase.",
+    paragraphs: [
+      [
+        {
+          text: "Pocket Analyst",
+          href: "https://sexypa.raashishah.com",
+        },
+      ],
+      {
+        text: "Easy insights for traditional business owners, inside GPT",
+        pullquote: true,
+      },
+    ],
+  },
+  {
     id: "admissions-agent",
     title: "Enterprise-Grade Agents",
     seoName: "Admission Evaluation Agent",
