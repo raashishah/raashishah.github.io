@@ -12,12 +12,7 @@ export const projects = [
     seoLongDetail:
       "Building Pocket Analyst for traditional business owners who run on Tally and spreadsheets. Lives inside GPT via MCP at sexypa.raashishah.com; warehouse trial-balance data in Supabase.",
     paragraphs: [
-      [
-        {
-          text: "Pocket Analyst",
-          href: "https://sexypa.raashishah.com",
-        },
-      ],
+      "Pocket Analyst",
       {
         text: "Easy insights for traditional business owners, inside GPT",
         pullquote: true,
@@ -26,7 +21,7 @@ export const projects = [
   },
   {
     id: "astrothunder",
-    title: "Vedic Chart Engine",
+    title: "Vedic Astrology Engine",
     seoName: "Astrothunder",
     primaryUrl: "https://astrothunder.life",
     seoDescription:

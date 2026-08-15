@@ -75,7 +75,7 @@ test("Astrothunder shows chart engine link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Vedic Chart Engine" })
+    .filter({ hasText: "Vedic Astrology Engine" })
     .click();
 
   const projectLink = page.getByRole("link", {
