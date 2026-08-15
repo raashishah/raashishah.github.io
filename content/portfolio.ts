@@ -25,6 +25,28 @@ export const projects = [
     ],
   },
   {
+    id: "astrothunder",
+    title: "Vedic Chart Engine",
+    seoName: "Astrothunder",
+    primaryUrl: "https://astrothunder.life",
+    seoDescription:
+      "Vedic astrology engine that starts from a full birth chart and an exact question, then shows supporting and conflicting evidence across classical schools.",
+    seoLongDetail:
+      "Building Astrothunder as show-your-work Vedic astrology. Starts from a full birth chart and the exact question, then compares Parashara, Jaimini, and KP before showing what supports the answer, what conflicts, and how sure it is. Chart engines and a question compiler sit on structured classical texts ingested from scanned sources. Live at astrothunder.life.",
+    paragraphs: [
+      [
+        {
+          text: "Astrothunder",
+          href: "https://astrothunder.life",
+        },
+      ],
+      {
+        text: "Starts from the chart, then shows the working",
+        pullquote: true,
+      },
+    ],
+  },
+  {
     id: "admissions-agent",
     title: "Enterprise-Grade Agents",
     seoName: "Admission Evaluation Agent",

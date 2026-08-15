@@ -71,6 +71,28 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
   ).toHaveCount(0);
 });
 
+test("Astrothunder shows chart engine link when expanded", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Vedic Chart Engine" })
+    .click();
+
+  const projectLink = page.getByRole("link", {
+    name: "Astrothunder",
+  });
+  await expect(projectLink).toBeVisible();
+  await expect(projectLink).toHaveAttribute(
+    "href",
+    "https://astrothunder.life",
+  );
+  await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(projectLink).toHaveAttribute("target", "_blank");
+  await expect(
+    page.getByText("Starts from the chart, then shows the working"),
+  ).toBeVisible();
+});
+
 test("Pink Depot shows managing stock link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
