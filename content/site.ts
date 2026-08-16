@@ -4,7 +4,7 @@ export const nameEasterEggHref =
   "https://open.spotify.com/track/0Si6B4gh96eFsjFMplPGtJ";
 
 export const footerDiscoveryHintBefore = "something's hidden";
-export const footerDiscoveryHintAfter = "somewhere here";
+export const footerDiscoveryHintAfter = "on this page";
 export const footerDiscoveryHint = `${footerDiscoveryHintBefore} ${footerDiscoveryHintAfter}`;
 
 export const socialLinks = [
