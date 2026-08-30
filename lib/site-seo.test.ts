@@ -10,7 +10,7 @@ import {
 
 describe("site SEO copy", () => {
   it("uses professional crawler copy separate from homepage intro fields", () => {
-    expect(seoConfig.title).toContain("Raashi Shah");
+    expect(seoConfig.title).toContain("Decavalent");
     expect(seoConfig.title).not.toBe("apps and ai tools designer and engineer");
     expect(seoConfig.description.length).toBeLessThanOrEqual(160);
     expect(seoConfig.longDescription.length).toBeGreaterThan(120);
@@ -20,7 +20,7 @@ describe("site SEO copy", () => {
   it("builds llms.txt with required spec structure", () => {
     const llmsTxt = buildLlmsTxt();
 
-    expect(llmsTxt.startsWith("# Raashi Shah\n")).toBe(true);
+    expect(llmsTxt.startsWith("# Decavalent\n")).toBe(true);
     expect(llmsTxt).toMatch(/^> .+/m);
     expect(llmsTxt).toContain("## About");
     expect(llmsTxt).toContain("## Instructions");

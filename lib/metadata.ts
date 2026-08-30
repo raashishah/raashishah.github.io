@@ -5,12 +5,12 @@ const introTagline = "Scoping and developing apps and AI agents.";
 const introDescription = `${introRole}. ${introTagline}`;
 
 export const siteConfig = {
-  name: "Raashi Shah",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://raashishah.com",
+  name: "Decavalent",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://decavalent.com",
   introRole,
   introTagline,
   description: introDescription,
-  creator: "Raashi Shah",
+  creator: "Decavalent",
   twitterHandle: "@rash_driving",
 } as const;
 

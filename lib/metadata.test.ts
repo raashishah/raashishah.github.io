@@ -39,7 +39,7 @@ describe("metadata helpers", () => {
 
     const metadata = await importMetadataModule();
 
-    expect(metadata.absoluteUrl("/")).toBe("https://raashishah.com/");
+    expect(metadata.absoluteUrl("/")).toBe("https://decavalent.com/");
   });
 
   it("keeps intro copy aligned across homepage, metadata, and OG image", async () => {

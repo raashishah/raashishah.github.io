@@ -113,7 +113,7 @@ test.describe("SEO and LLM discovery", () => {
       "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
     );
     await expect(page.getByText("Still updating this page")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Raashi Shah" })).toHaveAttribute("href", "/");
+    await expect(page.getByRole("link", { name: "Decavalent" })).toHaveAttribute("href", "/");
   });
 
   test("opengraph-image serves the Figma export", async ({ request }) => {
