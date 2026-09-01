@@ -240,4 +240,3 @@ export const workExperience = [
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
 
-export const educationLabel = "BSc in Product, from Aston, UK";

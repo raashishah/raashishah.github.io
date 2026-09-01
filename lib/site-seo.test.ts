@@ -39,7 +39,6 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("/llms-full.txt");
     expect(llmsTxt).toContain("/expression");
     expect(llmsTxt).toContain("/ondevice");
-    expect(llmsTxt).toContain("BSc in Product");
     expect(llmsTxt).toContain("## Optional");
   });
 

@@ -1,4 +1,4 @@
-import { projects, workExperience, educationLabel } from "@/content/portfolio";
+import { projects, workExperience } from "@/content/portfolio";
 import { calendlyLink, emailLink, linksById, socialLinks } from "@/content/site";
 import type { PortfolioEntry } from "@/content/types";
 import { absoluteUrl, siteConfig } from "@/lib/metadata";
@@ -160,7 +160,6 @@ export function buildLlmsTxt(): string {
     `- **Name**: ${siteConfig.creator}`,
     `- **Role**: ${siteConfig.introRole}`,
     `- **Tagline**: ${siteConfig.introTagline}`,
-    `- **Education**: ${educationLabel}`,
     `- **Site type**: Personal portfolio`,
     `- **Extended context**: [llms-full.txt](${llmsFullUrl})`,
     "",

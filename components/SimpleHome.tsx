@@ -10,7 +10,6 @@ export function SimpleHome({
   introTagline,
   projects,
   workExperience,
-  educationLabel,
 }: HomeContent) {
   return (
     <HomepageMarker>
@@ -30,13 +29,6 @@ export function SimpleHome({
               <PortfolioList items={projects} ariaLabel="Projects" />
               <div className="home__experience-groups">
                 <PortfolioList items={workExperience} ariaLabel="Experience" />
-                <ul className="home__project-list" aria-label="Education">
-                  <li className="home__project-item">
-                    <p className="home__project-static home__line home__line--role">
-                      {educationLabel}
-                    </p>
-                  </li>
-                </ul>
               </div>
             </div>
           </DetailsAccordion>

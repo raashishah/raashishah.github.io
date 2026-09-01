@@ -1,4 +1,4 @@
-import { educationLabel, projects, workExperience } from "@/content/portfolio";
+import { projects, workExperience } from "@/content/portfolio";
 import { nameEasterEggHref } from "@/content/site";
 import type { PortfolioEntry } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
@@ -9,7 +9,6 @@ export type HomeContent = {
   introTagline: string;
   projects: readonly PortfolioEntry[];
   workExperience: readonly PortfolioEntry[];
-  educationLabel: string;
 };
 
 export function getHomeContent(): HomeContent {
@@ -19,6 +18,5 @@ export function getHomeContent(): HomeContent {
     introTagline: siteConfig.introTagline,
     projects,
     workExperience,
-    educationLabel,
   };
 }
