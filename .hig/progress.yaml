@@ -1,0 +1,6 @@
+version: 1
+sections:
+  foundations-materials:
+    status: verified
+    spec: .hig/specs/review-home-2026-07-15.md
+    updatedAt: 2026-07-15T08:32:04.259Z
