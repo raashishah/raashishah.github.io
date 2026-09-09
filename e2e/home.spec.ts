@@ -113,24 +113,35 @@ test("Pink Depot shows managing stock link when expanded", async ({ page }) => {
   await expect(page.getByText("Materials products and profit")).toBeVisible();
 });
 
-test("Apple HIG plugin shows github link when expanded", async ({ page }) => {
+test("Agentic Workflows shows skill links when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Apple Design Skill" })
+    .filter({ hasText: "Agentic Workflows" })
     .click();
 
-  const projectLink = page.getByRole("link", {
-    name: "Apple HIG plugin",
+  const appleHigLink = page.getByRole("link", {
+    name: "Apple HIG",
   });
-  await expect(projectLink).toBeVisible();
-  await expect(projectLink).toHaveAttribute(
+  await expect(appleHigLink).toBeVisible();
+  await expect(appleHigLink).toHaveAttribute(
     "href",
     "https://github.com/raashishah/apple-hig",
   );
-  await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
-  await expect(projectLink).toHaveAttribute("target", "_blank");
-  await expect(page.getByText("Design React like Apple")).toBeVisible();
+  await expect(appleHigLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(appleHigLink).toHaveAttribute("target", "_blank");
+
+  const userCallLink = page.getByRole("link", {
+    name: "User Call",
+  });
+  await expect(userCallLink).toBeVisible();
+  await expect(userCallLink).toHaveAttribute(
+    "href",
+    "https://github.com/raashishah/user-call",
+  );
+  await expect(userCallLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(userCallLink).toHaveAttribute("target", "_blank");
+  await expect(page.getByText("Skills for cursor codex cc")).toBeVisible();
 });
 
 test("opening a second dropdown closes the first", async ({ page }) => {

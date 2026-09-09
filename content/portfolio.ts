@@ -86,23 +86,27 @@ export const projects = [
     ],
   },
   {
-    id: "apple-hig",
-    title: "Apple Design Skill",
-    seoName: "Apple HIG",
-    primaryUrl: "https://github.com/raashishah/apple-hig",
+    id: "agentic-workflows",
+    title: "Agentic Workflows",
+    seoName: "Agentic Workflows",
     seoDescription:
-      "Public Cursor skill that designs and implements React web app structure and chrome from Apple Human Interface Guidelines, with hard FAIL grammar for toolbars, lists, forms, and sidebars.",
+      "Public Cursor and Codex skills — Apple HIG for React chrome and User Call for interview transcription and product insight synthesis.",
     seoLongDetail:
-      "Open-sourced a Cursor /hig skill that designs a React or Next.js web app like an Apple designer from existing requirements, then implements navigation, lists, forms, sheets, and materials in the same run. Brand colors and fonts stay in the project; chrome grammar encodes hard FAIL gates so soft density advice cannot ship childish UI. Dogfooded on Pink Depot and admissionsdemo.",
+      "Open-sourced agent skills installable from GitHub: Apple HIG (/hig) designs and implements React web app structure and chrome from Human Interface Guidelines with hard FAIL grammar; User Call transcribes Hinglish interview recordings locally and pressure-tests product insights with the office-hours diagnostic. GitHub repo per skill — npx skills add or clone to ~/.cursor/skills/.",
     paragraphs: [
       [
         {
-          text: "Apple HIG plugin",
+          text: "Apple HIG",
           href: "https://github.com/raashishah/apple-hig",
+        },
+        INLINE_LINK_SEPARATOR,
+        {
+          text: "User Call",
+          href: "https://github.com/raashishah/user-call",
         },
       ],
       {
-        text: "Design React like Apple",
+        text: "Skills for cursor codex cc",
         pullquote: true,
       },
     ],

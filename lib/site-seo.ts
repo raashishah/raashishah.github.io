@@ -43,6 +43,17 @@ function portfolioSeoName(entry: PortfolioEntry) {
   return entry.seoName ?? entry.title;
 }
 
+function portfolioLlmsLine(entry: PortfolioEntry) {
+  const name = portfolioSeoName(entry);
+  if (entry.id === "agentic-workflows") {
+    return `- ${name}: ${entry.seoDescription} — [Apple HIG](https://github.com/raashishah/apple-hig), [User Call](https://github.com/raashishah/user-call)`;
+  }
+  if (entry.primaryUrl) {
+    return `- [${name}](${entry.primaryUrl}): ${entry.seoDescription}`;
+  }
+  return `- ${name}: ${entry.seoDescription}`;
+}
+
 function portfolioFullHeading(entry: PortfolioEntry) {
   const name = portfolioSeoName(entry);
   return entry.seoPeriod ? `${name} (${entry.seoPeriod})` : name;
@@ -177,10 +188,7 @@ export function buildLlmsTxt(): string {
     "",
     "## Projects",
     "",
-    ...projects.map(
-      (project) =>
-        `- [${portfolioSeoName(project)}](${project.primaryUrl}): ${project.seoDescription}`,
-    ),
+    ...projects.map((project) => portfolioLlmsLine(project)),
     "",
     "## Professional experience",
     "",
