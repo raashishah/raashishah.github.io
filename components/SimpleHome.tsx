@@ -22,8 +22,8 @@ export function SimpleHome({
         <section className="home__intro" aria-label="About">
           <h2 className="home__line home__line--name">{introName}</h2>
           <p className="home__line home__line--role">{introRole}</p>
-          <p className="home__line home__line--subline">{introSubline}</p>
           <p className="home__line home__line--tagline">{introTagline}</p>
+          <p className="home__line home__line--subline">{introSubline}</p>
         </section>
       }
       work={
