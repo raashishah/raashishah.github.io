@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { homePortrait } from "../content/site";
 import { siteConfig } from "../lib/metadata";
 import {
   MOBILE_WIDTHS,
@@ -25,6 +26,7 @@ test("homepage shows intro and project list", async ({ page }) => {
   );
   await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
   await expect(page.getByRole("link", { name: "email me" })).toBeVisible();
+  await expect(page.getByRole("img", { name: homePortrait.alt })).toBeVisible();
 });
 
 test("project details expand with body copy", async ({ page }) => {
@@ -276,6 +278,70 @@ test.describe("detail panel", () => {
     await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
       siteConfig.introTagline,
     );
+  });
+
+  test("desktop portrait stays in the left column without shifting work", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/");
+
+    const portrait = page.locator(".home__portrait");
+    const work = page.locator(".home__work");
+    await expect(portrait).toBeVisible();
+
+    const portraitBox = await portrait.boundingBox();
+    const workBox = await work.boundingBox();
+    expect(portraitBox).not.toBeNull();
+    expect(workBox).not.toBeNull();
+    expect(portraitBox!.x + portraitBox!.width).toBeLessThanOrEqual(workBox!.x + 1);
+    expect(workBox!.x).toBeGreaterThan(portraitBox!.x);
+  });
+
+  test("mobile portrait sits below the work list", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+
+    const portrait = page.locator(".home__portrait");
+    const work = page.locator(".home__work");
+    await expect(portrait).toBeVisible();
+
+    const portraitBox = await portrait.boundingBox();
+    const workBox = await work.boundingBox();
+    expect(portraitBox).not.toBeNull();
+    expect(workBox).not.toBeNull();
+    expect(portraitBox!.y).toBeGreaterThan(workBox!.y + workBox!.height - 1);
+  });
+
+  test("desktop split view hides the portrait and restores it on close", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/");
+    await expect(page.locator(".home__portrait")).toBeVisible();
+
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
+
+    await expect(page.locator(".home__detail")).toBeVisible();
+    await expect(page.locator(".home__portrait")).toHaveCount(0);
+
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Enterprise-Grade Agents" })
+      .click();
+
+    await expect(page).toHaveURL("/");
+    await expect(page.locator(".home__detail")).toHaveCount(0);
+    await expect(page.locator(".home__portrait")).toBeVisible();
+  });
+
+  test("expression page does not show the homepage portrait", async ({ page }) => {
+    await page.goto("/expression");
+    await expect(page.locator(".home__portrait")).toHaveCount(0);
   });
 
   test("desktop opens expression in split view under site tagline", async ({ page }) => {

@@ -83,3 +83,10 @@ export const footerLinks = footerLinkOrder.map(
 
 export const emailLink = linksById.email;
 export const calendlyLink = linksById.calendly;
+
+export const homePortrait = {
+  src: "/img/window.jpg",
+  alt: "A cat looking out of a window at dusk",
+  width: 768,
+  height: 1024,
+} as const;

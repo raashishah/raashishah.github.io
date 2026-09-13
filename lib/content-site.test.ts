@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { footerSocialIconIds } from "@/lib/footer-social-icons";
-import { footerLinkOrder, footerLinks } from "@/content/site";
+import { footerLinkOrder, footerLinks, homePortrait } from "@/content/site";
 
 describe("content/site", () => {
   it("puts LinkedIn first in the footer", () => {
@@ -22,5 +22,12 @@ describe("content/site", () => {
     for (const link of footerLinks) {
       expect(iconIds.has(link.id)).toBe(true);
     }
+  });
+
+  it("keeps the homepage portrait as a local dusk window photo", () => {
+    expect(homePortrait.src).toBe("/img/window.jpg");
+    expect(homePortrait.alt).toBe("A cat looking out of a window at dusk");
+    expect(homePortrait.width).toBe(768);
+    expect(homePortrait.height).toBe(1024);
   });
 });

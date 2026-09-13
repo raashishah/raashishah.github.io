@@ -54,16 +54,41 @@
 @media (min-width: 40rem) {
   .home__content {
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-    gap: clamp(var(--space-7), 7vw, var(--space-8));
+    column-gap: clamp(var(--space-7), 7vw, var(--space-8));
+    row-gap: var(--space-6);
   }
 
   .home__primary {
     max-width: var(--home-measure-narrow);
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .home__work {
     min-width: 0;
+    grid-column: 2;
+    grid-row: 1 / -1;
   }
+
+  .home__portrait {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: var(--home-measure-narrow);
+  }
+}
+
+.home__portrait {
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.home__portrait-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
 
 .home__intro {

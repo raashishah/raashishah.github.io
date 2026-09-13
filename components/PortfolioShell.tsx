@@ -11,6 +11,7 @@ type PortfolioShellProps = {
   nameAsHeading?: boolean;
   intro: ReactNode;
   work: ReactNode;
+  portrait?: ReactNode;
 };
 
 export function PortfolioShell({
@@ -19,8 +20,10 @@ export function PortfolioShell({
   nameAsHeading = true,
   intro,
   work,
+  portrait,
 }: PortfolioShellProps) {
-  const { route } = useDetail();
+  const { route, isDesktop, isMediaReady } = useDetail();
+  const showPortrait = Boolean(portrait) && !(isMediaReady && isDesktop && route);
 
   return (
     <SiteShell
@@ -34,6 +37,7 @@ export function PortfolioShell({
           {route ? <DetailPanelContent route={route} /> : null}
         </div>
         <div className="home__work">{work}</div>
+        {showPortrait ? portrait : null}
       </div>
     </SiteShell>
   );
