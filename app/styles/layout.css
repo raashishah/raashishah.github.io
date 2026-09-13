@@ -115,7 +115,25 @@
   line-height: 1.47;
 }
 
+.home__line--name {
+  font-family: var(--font-medium);
+  font-size: var(--type-title-size);
+  font-weight: 500;
+  line-height: var(--type-title-leading);
+  letter-spacing: var(--type-title-tracking);
+  color: var(--text);
+}
+
 .home__line--role {
+  font-family: var(--font-regular);
+  font-size: var(--type-subhead-size);
+  font-weight: 400;
+  line-height: var(--type-subhead-leading);
+  letter-spacing: var(--type-subhead-tracking);
+  color: var(--text-muted);
+}
+
+.home__line--subline {
   font-family: var(--font-regular);
   font-size: var(--type-subhead-size);
   font-weight: 400;

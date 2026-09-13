@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 
+const introName = "Raashi Shah";
 const introRole = "Product Management, AI Engineering";
+const introSubline =
+  "Over eight years working with human engineers, now with agent engineers.";
 const introTagline = "Scoping and developing apps and AI agents.";
-const introDescription = `${introRole}. ${introTagline}`;
+const introDescription = `${introName}. ${introRole}. ${introSubline} ${introTagline}`;
 
 export const siteConfig = {
   name: "Decavalent",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://decavalent.com",
+  introName,
   introRole,
+  introSubline,
   introTagline,
   description: introDescription,
   creator: "Decavalent",

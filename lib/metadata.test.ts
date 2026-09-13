@@ -46,7 +46,9 @@ describe("metadata helpers", () => {
     const metadata = await importMetadataModule();
     const { siteConfig } = metadata;
 
+    expect(siteConfig.description).toContain(siteConfig.introName);
     expect(siteConfig.description).toContain(siteConfig.introRole);
+    expect(siteConfig.description).toContain(siteConfig.introSubline);
     expect(siteConfig.description).toContain(siteConfig.introTagline);
     expect(siteConfig.creator).toBe(siteConfig.name);
   });
