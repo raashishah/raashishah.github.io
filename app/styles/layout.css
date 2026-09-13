@@ -69,7 +69,20 @@
 .home__intro {
   display: flex;
   flex-direction: column;
+  gap: var(--space-5);
+}
+
+.home__intro-identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.home__intro-lede {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-3);
+  max-width: var(--home-measure-body);
 }
 
 .home__name {
@@ -135,11 +148,11 @@
 
 .home__line--subline {
   font-family: var(--font-regular);
-  font-size: var(--type-subhead-size);
+  font-size: var(--type-body-size);
   font-weight: 400;
-  line-height: var(--type-subhead-leading);
-  letter-spacing: var(--type-subhead-tracking);
-  color: var(--text-muted);
+  line-height: var(--type-body-leading);
+  letter-spacing: var(--type-body-tracking);
+  color: var(--color-body);
 }
 
 .home__line--tagline {
@@ -149,7 +162,6 @@
   line-height: var(--type-headline-leading);
   letter-spacing: var(--type-headline-tracking);
   color: var(--text);
-  margin-top: var(--space-1);
 }
 
 .home__line--cta {

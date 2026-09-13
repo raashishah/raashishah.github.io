@@ -16,29 +16,33 @@ export function SimpleHome({
   return (
     <HomepageMarker>
       <PortfolioShell
-      nameHref={nameEasterEggHref}
-      nameExternal
-      intro={
-        <section className="home__intro" aria-label="About">
-          <h2 className="home__line home__line--name">{introName}</h2>
-          <p className="home__line home__line--role">{introRole}</p>
-          <p className="home__line home__line--tagline">{introTagline}</p>
-          <p className="home__line home__line--subline">{introSubline}</p>
-        </section>
-      }
-      work={
-        <section aria-label="Work and experience">
-          <DetailsAccordion>
-            <div className="home__project-groups">
-              <PortfolioList items={projects} ariaLabel="Projects" />
-              <div className="home__experience-groups">
-                <PortfolioList items={workExperience} ariaLabel="Experience" />
-              </div>
+        nameHref={nameEasterEggHref}
+        nameExternal
+        intro={
+          <section className="home__intro" aria-label="About">
+            <div className="home__intro-identity">
+              <h2 className="home__line home__line--name">{introName}</h2>
+              <p className="home__line home__line--role">{introRole}</p>
             </div>
-          </DetailsAccordion>
-        </section>
-      }
-    />
+            <div className="home__intro-lede">
+              <p className="home__line home__line--tagline">{introTagline}</p>
+              <p className="home__line home__line--subline">{introSubline}</p>
+            </div>
+          </section>
+        }
+        work={
+          <section aria-label="Work and experience">
+            <DetailsAccordion>
+              <div className="home__project-groups">
+                <PortfolioList items={projects} ariaLabel="Projects" />
+                <div className="home__experience-groups">
+                  <PortfolioList items={workExperience} ariaLabel="Experience" />
+                </div>
+              </div>
+            </DetailsAccordion>
+          </section>
+        }
+      />
     </HomepageMarker>
   );
 }
