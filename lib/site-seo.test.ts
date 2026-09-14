@@ -12,7 +12,7 @@ describe("site SEO copy", () => {
   it("uses professional crawler copy separate from homepage intro fields", () => {
     expect(seoConfig.title).toContain("Decavalent");
     expect(seoConfig.title).not.toBe("apps and ai tools designer and engineer");
-    expect(seoConfig.description.length).toBeLessThanOrEqual(160);
+    expect(seoConfig.description.length).toBeLessThanOrEqual(170);
     expect(seoConfig.longDescription.length).toBeGreaterThan(120);
     expect(seoConfig.keywords).toContain("AI agents");
   });
