@@ -178,7 +178,9 @@ test("expanded body copy uses the secondary ink color", async ({ page }) => {
 
 test.describe("typography hierarchy", () => {
   for (const width of [390, 1280] as const) {
-    test(`tagline > accordion title > role at ${width}px`, async ({ page }) => {
+    test(`name is title medium; intro lede lines share body regular at ${width}px`, async ({
+      page,
+    }) => {
       await page.setViewportSize({ width, height: 800 });
       await page.goto("/");
       await assertTypographyHierarchy(page);
