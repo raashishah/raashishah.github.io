@@ -142,7 +142,18 @@ export async function getComputedFontSize(page: Page, selector: string) {
   }, selector);
 }
 
+export async function getComputedFontWeight(page: Page, selector: string) {
+  return page.evaluate((sel) => {
+    const el = document.querySelector(sel);
+    if (!el) {
+      return 0;
+    }
+    return Number.parseInt(getComputedStyle(el).fontWeight, 10);
+  }, selector);
+}
+
 export async function assertTypographyHierarchy(page: Page) {
+  const nameSize = await getComputedFontSize(page, ".home__intro .home__line--name");
   const roleSize = await getComputedFontSize(page, ".home__intro .home__line--role");
   const taglineSize = await getComputedFontSize(
     page,
@@ -152,14 +163,17 @@ export async function assertTypographyHierarchy(page: Page) {
     page,
     ".home__intro .home__line--subline",
   );
-  const accordionTitleSize = await getComputedFontSize(
+  const nameWeight = await getComputedFontWeight(page, ".home__intro .home__line--name");
+  const taglineWeight = await getComputedFontWeight(
     page,
-    ".home__project-title",
+    ".home__intro .home__line--tagline",
   );
 
+  expect(nameWeight).toBe(500);
+  expect(taglineWeight).toBe(400);
   expect(roleSize).toBe(taglineSize);
   expect(taglineSize).toBe(sublineSize);
-  expect(accordionTitleSize).toBeGreaterThan(roleSize);
+  expect(nameSize).toBeGreaterThan(roleSize);
 }
 
 export async function getBodyCopyColor(page: Page) {
