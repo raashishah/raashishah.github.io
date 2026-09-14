@@ -143,14 +143,22 @@ export async function getComputedFontSize(page: Page, selector: string) {
 }
 
 export async function assertTypographyHierarchy(page: Page) {
-  const taglineSize = await getComputedFontSize(page, ".home__line--tagline");
+  const roleSize = await getComputedFontSize(page, ".home__intro .home__line--role");
+  const taglineSize = await getComputedFontSize(
+    page,
+    ".home__intro .home__line--tagline",
+  );
+  const sublineSize = await getComputedFontSize(
+    page,
+    ".home__intro .home__line--subline",
+  );
   const accordionTitleSize = await getComputedFontSize(
     page,
     ".home__project-title",
   );
-  const roleSize = await getComputedFontSize(page, ".home__intro .home__line--role");
 
-  expect(taglineSize).toBeGreaterThan(accordionTitleSize);
+  expect(roleSize).toBe(taglineSize);
+  expect(taglineSize).toBe(sublineSize);
   expect(accordionTitleSize).toBeGreaterThan(roleSize);
 }
 
