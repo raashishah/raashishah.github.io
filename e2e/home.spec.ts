@@ -178,7 +178,7 @@ test("expanded body copy uses the secondary ink color", async ({ page }) => {
 
 test.describe("typography hierarchy", () => {
   for (const width of [390, 1280] as const) {
-    test(`name is title medium; intro lede lines share body regular at ${width}px`, async ({
+    test(`name and tagline have distinct emphasis at ${width}px`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 800 });
@@ -196,13 +196,13 @@ test.describe("mobile layout", () => {
       await assertNoHorizontalScroll(page);
     });
 
-    test(`tagline fills the line before wrapping at ${width}px`, async ({ page }) => {
+    test(`tagline avoids a single-word tail at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 844 });
       await page.goto("/");
 
       const firstLine = await getFirstLineText(page, ".home__line--tagline");
-      expect(firstLine).toContain("apps");
-      expect(firstLine.endsWith("developing")).toBe(false);
+      const remaining = siteConfig.introTagline.slice(firstLine.length).trim();
+      expect(remaining === "" || remaining.split(/\s+/).length > 1).toBe(true);
     });
 
     test(`inline link arrow stays on the last line at ${width}px`, async ({ page }) => {

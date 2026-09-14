@@ -170,7 +170,7 @@ export async function assertTypographyHierarchy(page: Page) {
   );
 
   expect(nameWeight).toBe(500);
-  expect(taglineWeight).toBe(400);
+  expect(taglineWeight).toBe(500);
   expect(roleSize).toBe(taglineSize);
   expect(taglineSize).toBe(sublineSize);
   expect(nameSize).toBeGreaterThan(roleSize);

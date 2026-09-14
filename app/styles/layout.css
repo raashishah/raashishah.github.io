@@ -97,7 +97,7 @@
 .home__intro {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-5);
 }
 
 .home__intro-identity {
@@ -192,7 +192,7 @@
   color: var(--text);
 }
 
-/* Homepage intro: one medium name, three regular body lines — hierarchy via color only */
+/* Keep supporting copy readable, with a medium-weight, balanced proposition. */
 .home__intro .home__line--role,
 .home__intro .home__line--tagline,
 .home__intro .home__line--subline {
@@ -204,10 +204,12 @@
 }
 
 .home__intro .home__line--role {
-  color: var(--text-muted);
+  color: var(--color-body);
 }
 
 .home__intro .home__line--tagline {
+  font-weight: 500;
+  text-wrap: balance;
   color: var(--text);
 }
 
