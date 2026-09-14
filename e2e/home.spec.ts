@@ -296,6 +296,12 @@ test.describe("detail panel", () => {
     expect(workBox).not.toBeNull();
     expect(portraitBox!.x + portraitBox!.width).toBeLessThanOrEqual(workBox!.x + 1);
     expect(workBox!.x).toBeGreaterThan(portraitBox!.x);
+    const introBox = await page.locator(".home__intro").boundingBox();
+    const rowGap = await page.locator(".home__content").evaluate(
+      (element) => parseFloat(getComputedStyle(element).rowGap),
+    );
+    expect(introBox).not.toBeNull();
+    expect(portraitBox!.y - (introBox!.y + introBox!.height)).toBeCloseTo(rowGap, 0);
   });
 
   test("mobile portrait sits below the work list", async ({ page }) => {
