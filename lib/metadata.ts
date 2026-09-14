@@ -4,7 +4,7 @@ const introName = "Raashi Shah";
 const introRole = "Product Management, AI Engineering";
 const introSubline =
   "Over eight years working with human engineers, now with agent engineers";
-const introTagline = "Scoping and developing apps and AI agents";
+const introTagline = "Scoping and developing apps and agents";
 const introDescription = `${introName}. ${introRole}. ${introTagline}. ${introSubline}.`;
 
 export const siteConfig = {
@@ -15,6 +15,7 @@ export const siteConfig = {
   introSubline,
   introTagline,
   description: introDescription,
+  socialDescription: "AI Engineering. Scoping and developing apps and agents.",
   creator: "Decavalent",
   twitterHandle: "@rash_driving",
 } as const;
