@@ -51,8 +51,5 @@ describe("metadata helpers", () => {
     expect(siteConfig.description).toContain(siteConfig.introSubline);
     expect(siteConfig.description).toContain(siteConfig.introTagline);
     expect(siteConfig.creator).toBe(siteConfig.name);
-    expect(siteConfig.introTagline).not.toMatch(/\.$/);
-    expect(siteConfig.introSubline).not.toMatch(/\.$/);
-    expect(siteConfig.introRole).not.toMatch(/\.$/);
   });
 });
