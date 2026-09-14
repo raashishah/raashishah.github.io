@@ -116,3 +116,111 @@ test.describe("detail panel accordion interaction", () => {
     );
   });
 });
+
+test.describe("nested detail panel accordions", () => {
+  async function openExpressionDetail(page: import("@playwright/test").Page) {
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Pro Animation Tool" })
+      .click();
+    await page
+      .getByRole("link", { name: "Colouring for hand-drawn animation" })
+      .click();
+    await expect(page).toHaveURL("/expression");
+  }
+
+  async function openOnDeviceDetail(page: import("@playwright/test").Page) {
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "On-device AI Agent" })
+      .click();
+    await page.getByRole("link", { name: "Health App" }).click();
+    await expect(page).toHaveURL("/ondevice");
+  }
+
+  test("clicking Auto-Colour inside expression detail keeps panel open on desktop", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 768, height: 800 });
+    await openExpressionDetail(page);
+    await expect(page.locator(".home__detail")).toBeVisible();
+
+    await page
+      .locator(".home__detail-content summary.home__details-summary")
+      .filter({ hasText: "Auto-Colour" })
+      .click();
+
+    await page.waitForTimeout(AFTER_CLOSE_MS);
+
+    await expect(page).toHaveURL("/expression");
+    await expect(page.locator(".home__detail")).toBeVisible();
+    await expect(
+      page.locator(".home__detail-content details").filter({ hasText: "Auto-Colour" }),
+    ).toHaveAttribute("open");
+  });
+
+  test("clicking Auto-Colour inside expression detail keeps sheet open on mobile", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await openExpressionDetail(page);
+    await expect(page.locator(".home__sheet")).toBeVisible();
+
+    await page
+      .locator(".home__sheet summary.home__details-summary")
+      .filter({ hasText: "Auto-Colour" })
+      .click();
+
+    await page.waitForTimeout(AFTER_CLOSE_MS);
+
+    await expect(page).toHaveURL("/expression");
+    await expect(page.locator(".home__sheet")).toBeVisible();
+    await expect(
+      page.locator(".home__sheet details").filter({ hasText: "Auto-Colour" }),
+    ).toHaveAttribute("open");
+  });
+
+  test("clicking Privacy inside ondevice detail keeps panel open on desktop", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 768, height: 800 });
+    await openOnDeviceDetail(page);
+    await expect(page.locator(".home__detail")).toBeVisible();
+
+    await page
+      .locator(".home__detail-content summary.home__details-summary")
+      .filter({ hasText: "Privacy" })
+      .click();
+
+    await page.waitForTimeout(AFTER_CLOSE_MS);
+
+    await expect(page).toHaveURL("/ondevice");
+    await expect(page.locator(".home__detail")).toBeVisible();
+    await expect(
+      page.locator(".home__detail-content details").filter({ hasText: "Privacy" }),
+    ).toHaveAttribute("open");
+  });
+
+  test("clicking On-Device Inference inside ondevice detail keeps sheet open on mobile", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 844 });
+    await openOnDeviceDetail(page);
+    await expect(page.locator(".home__sheet")).toBeVisible();
+
+    await page
+      .locator(".home__sheet summary.home__details-summary")
+      .filter({ hasText: "On-Device Inference" })
+      .click();
+
+    await page.waitForTimeout(AFTER_CLOSE_MS);
+
+    await expect(page).toHaveURL("/ondevice");
+    await expect(page.locator(".home__sheet")).toBeVisible();
+    await expect(
+      page.locator(".home__sheet details").filter({ hasText: "On-Device Inference" }),
+    ).toHaveAttribute("open");
+  });
+});
