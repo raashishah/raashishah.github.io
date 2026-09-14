@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const introName = "Raashi Shah";
 const introRole = "Product Management, AI Engineering";
 const introSubline =
-  "Over eight years working with human engineers, now with agent engineers";
+  "Over seven years working with human engineers, now with agent engineers";
 const introTagline = "Scoping and developing apps and agents";
 const introDescription = `${introName}. ${introRole}. ${introTagline}. ${introSubline}.`;
 

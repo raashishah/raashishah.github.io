@@ -152,6 +152,16 @@ export async function getComputedFontWeight(page: Page, selector: string) {
   }, selector);
 }
 
+export async function getComputedColor(page: Page, selector: string) {
+  return page.evaluate((sel) => {
+    const el = document.querySelector(sel);
+    if (!el) {
+      return "";
+    }
+    return getComputedStyle(el).color;
+  }, selector);
+}
+
 export async function assertTypographyHierarchy(page: Page) {
   const nameSize = await getComputedFontSize(page, ".home__intro .home__line--name");
   const roleSize = await getComputedFontSize(page, ".home__intro .home__line--role");
@@ -164,16 +174,29 @@ export async function assertTypographyHierarchy(page: Page) {
     ".home__intro .home__line--subline",
   );
   const nameWeight = await getComputedFontWeight(page, ".home__intro .home__line--name");
+  const roleWeight = await getComputedFontWeight(page, ".home__intro .home__line--role");
   const taglineWeight = await getComputedFontWeight(
     page,
     ".home__intro .home__line--tagline",
   );
+  const sublineWeight = await getComputedFontWeight(
+    page,
+    ".home__intro .home__line--subline",
+  );
+  const roleColor = await getComputedColor(page, ".home__intro .home__line--role");
+  const taglineColor = await getComputedColor(page, ".home__intro .home__line--tagline");
+  const sublineColor = await getComputedColor(page, ".home__intro .home__line--subline");
 
   expect(nameWeight).toBe(500);
+  expect(roleWeight).toBe(400);
   expect(taglineWeight).toBe(500);
-  expect(roleSize).toBe(taglineSize);
-  expect(taglineSize).toBe(sublineSize);
-  expect(nameSize).toBeGreaterThan(roleSize);
+  expect(sublineWeight).toBe(400);
+  expect(nameSize).toBeGreaterThan(taglineSize);
+  expect(taglineSize).toBeGreaterThan(sublineSize);
+  expect(sublineSize).toBeGreaterThan(roleSize);
+  expect(roleColor).toBe(await getSemanticColor(page, "--text-muted"));
+  expect(taglineColor).toBe(await getSemanticColor(page, "--text"));
+  expect(sublineColor).toBe(await getSemanticColor(page, "--color-body"));
 }
 
 export async function getBodyCopyColor(page: Page) {
