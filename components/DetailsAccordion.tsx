@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { useDetail } from "@/components/DetailProvider";
-import { getDetailAccordionId } from "@/lib/detail-routes";
+import { isDetailPanelAccordion } from "@/lib/detail-routes";
 
 type CloseHandler = () => Promise<void>;
 
@@ -43,7 +43,7 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
   const prepareOpen = useCallback(async (id: string) => {
     const currentOpenId = openIdRef.current;
     const closingDetail =
-      isOpen && path && getDetailAccordionId(path) !== id
+      isOpen && path && !isDetailPanelAccordion(path, id)
         ? requestCloseDetail()
         : Promise.resolve();
     const closingAccordion =
