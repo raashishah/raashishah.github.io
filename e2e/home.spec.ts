@@ -16,8 +16,10 @@ import {
 test("homepage shows intro and project list", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: siteConfig.name })).toBeVisible();
-  await expect(page.locator(".home__intro .home__line--name")).toHaveText(siteConfig.introName);
-  await expect(page.locator(".home__intro .home__line--role")).toHaveText(siteConfig.introRole);
+  await expect(page.locator(".home__intro .home__line--name")).toHaveText(
+    siteConfig.introIdentity,
+  );
+  await expect(page.locator(".home__intro .home__line--role")).toHaveCount(0);
   await expect(page.locator(".home__intro .home__line--subline")).toHaveText(
     siteConfig.introSubline,
   );

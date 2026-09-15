@@ -192,29 +192,8 @@
   color: var(--text);
 }
 
-/* Keep supporting copy readable, with a medium-weight, balanced proposition. */
-.home__intro .home__line--role,
-.home__intro .home__line--tagline,
-.home__intro .home__line--subline {
-  font-family: var(--font-regular);
-  font-size: var(--type-body-size);
-  font-weight: 400;
-  line-height: var(--type-body-leading);
-  letter-spacing: var(--type-body-tracking);
-}
-
-.home__intro .home__line--role {
-  color: var(--color-body);
-}
-
 .home__intro .home__line--tagline {
-  font-weight: 500;
   text-wrap: balance;
-  color: var(--text);
-}
-
-.home__intro .home__line--subline {
-  color: var(--color-body);
 }
 
 .home__line--cta {

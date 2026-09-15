@@ -118,10 +118,10 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 
 | Role | Size token | Weight | Color | Used by |
 |------|-----------|--------|-------|---------|
-| `type-title` | `--text-title` | 500 | `--text` | Name in header (`h1`) |
+| `type-title` | `--text-title` | 500 | `--text` | Header name (`h1`); homepage intro identity (`h2`) |
 | `type-headline` | `--text-headline` | 500 | `--text` | Intro tagline only |
 | `type-headline-inline` | `--text-body` | 500 | `--text` | Accordion summaries, inline links |
-| `type-body` | `--text-body` | 400 | `--color-body` | Dropdown paragraphs |
+| `type-body` | `--text-body` | 400 | `--color-body` | Intro subline; dropdown paragraphs |
 | `type-subhead` | `--text-subhead` | 400 | `--text-muted` | Role, education, updating note, footer links |
 | `type-caption` | `--text-caption` | 400 | `--text-muted` | Footer meta |
 

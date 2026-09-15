@@ -24,11 +24,9 @@ test.describe("SEO and LLM discovery", () => {
     );
 
     await expect(page.locator(".home__intro .home__line--name")).toHaveText(
-      siteConfig.introName,
+      siteConfig.introIdentity,
     );
-    await expect(page.locator(".home__intro .home__line--role")).toHaveText(
-      siteConfig.introRole,
-    );
+    await expect(page.locator(".home__intro .home__line--role")).toHaveCount(0);
     await expect(page.locator(".home__intro .home__line--subline")).toHaveText(
       siteConfig.introSubline,
     );
