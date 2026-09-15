@@ -37,7 +37,7 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("https://astrothunder.life");
     expect(llmsTxt).toContain("https://github.com/raashishah/apple-hig");
     expect(llmsTxt).toContain("https://github.com/raashishah/user-call");
-    expect(llmsTxt).toContain("Agentic Workflows");
+    expect(llmsTxt).toContain("- Skills:");
     expect(llmsTxt).toContain("/llms-full.txt");
     expect(llmsTxt).toContain("/expression");
     expect(llmsTxt).toContain("/ondevice");

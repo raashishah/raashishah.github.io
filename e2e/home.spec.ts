@@ -26,7 +26,7 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.locator(".home__line--tagline")).toHaveText(
     siteConfig.introTagline,
   );
-  await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
+  await expect(page.getByText("Academic Agent Harness")).toBeVisible();
   await expect(page.getByRole("link", { name: "email me" })).toBeVisible();
   await expect(page.getByRole("img", { name: homePortrait.alt })).toBeVisible();
 });
@@ -63,7 +63,7 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Enterprise-Grade Agents" })
+    .filter({ hasText: "Academic Agent Harness" })
     .click();
 
   const projectLink = page.getByRole("link", {
@@ -75,7 +75,7 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
     "https://admissions.raashishah.com",
   );
   await expect(
-    page.getByRole("link", { name: /View Enterprise-Grade Agents/ }),
+    page.getByRole("link", { name: /View Academic Agent Harness/ }),
   ).toHaveCount(0);
 });
 
@@ -83,7 +83,7 @@ test("Astrothunder shows chart engine link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Vedic Astrology Engine" })
+    .filter({ hasText: "Vedic Astrology Agent" })
     .click();
 
   const projectLink = page.getByRole("link", {
@@ -98,18 +98,18 @@ test("Astrothunder shows chart engine link when expanded", async ({ page }) => {
   await expect(projectLink).toHaveAttribute("target", "_blank");
   await expect(
     page.getByText("Starts from the chart, then shows the working"),
-  ).toBeVisible();
+  ).toHaveCount(0);
 });
 
-test("Pink Depot shows managing stock link when expanded", async ({ page }) => {
+test("Pink Depot shows body link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Inventory for Makers" })
+    .filter({ hasText: "Inventory for small businesses" })
     .click();
 
   const projectLink = page.getByRole("link", {
-    name: "Managing stock",
+    name: "Pink Depot",
   });
   await expect(projectLink).toBeVisible();
   await expect(projectLink).toHaveAttribute(
@@ -118,14 +118,14 @@ test("Pink Depot shows managing stock link when expanded", async ({ page }) => {
   );
   await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
   await expect(projectLink).toHaveAttribute("target", "_blank");
-  await expect(page.getByText("Materials products and profit")).toBeVisible();
+  await expect(page.getByText("Materials products and profit")).toHaveCount(0);
 });
 
-test("Agentic Workflows shows skill links when expanded", async ({ page }) => {
+test("Skills shows skill links when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Agentic Workflows" })
+    .filter({ has: page.locator(".home__project-title", { hasText: /^Skills$/ }) })
     .click();
 
   const appleHigLink = page.getByRole("link", {
@@ -149,14 +149,57 @@ test("Agentic Workflows shows skill links when expanded", async ({ page }) => {
   );
   await expect(userCallLink.locator(".home__inline-link-icon")).toBeVisible();
   await expect(userCallLink).toHaveAttribute("target", "_blank");
-  await expect(page.getByText("Skills for cursor codex cc")).toBeVisible();
+  await expect(page.getByText("Skills for cursor codex cc")).toHaveCount(0);
+});
+
+test("Pocket Analytics heading is not duplicated in the body", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Pocket Analytics" })
+    .click();
+
+  await expect(
+    page.getByText("Analytics for traditional business owners, inside GPT"),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Pocket Analytics" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Pocket Analyst" })).toHaveCount(0);
+});
+
+test("Expo map pullquote links to the exhibition webapp", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Expo map and website" })
+    .click();
+
+  const webappLink = page
+    .locator(".home__details[open] .home__project-body-pullquote")
+    .getByRole("link", { name: "Offline access for high footfall venues" });
+  await expect(webappLink).toBeVisible();
+  await expect(webappLink).toHaveAttribute(
+    "href",
+    "https://povindex.designpovindia.com/home",
+  );
+  await expect(page.getByRole("link", { name: "Exhibition site" })).toHaveCount(0);
+});
+
+test("Academic Agent Harness shows ADK pullquote when expanded", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Academic Agent Harness" })
+    .click();
+
+  await expect(page.getByText("Made with Google ADK")).toBeVisible();
+  await expect(page.getByText("Processes school and uni applications")).toHaveCount(0);
 });
 
 test("opening a second dropdown closes the first", async ({ page }) => {
   await page.goto("/");
   const enterpriseDetails = page
     .locator("details")
-    .filter({ hasText: "Enterprise-Grade Agents" });
+    .filter({ hasText: "Academic Agent Harness" });
   const onDeviceDetails = page.locator("details").filter({ hasText: "On-device AI Agent" });
 
   await enterpriseDetails.locator("summary").click();
@@ -277,7 +320,7 @@ test.describe("detail panel", () => {
     await expect(page).toHaveURL("/expression");
     await expect(page.locator(".home__sheet")).toBeVisible();
     await expect(page.locator(".home__scrim")).toBeVisible();
-    await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
+    await expect(page.getByText("Academic Agent Harness")).toBeVisible();
     await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
     await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
       siteConfig.introTagline,
@@ -341,7 +384,7 @@ test.describe("detail panel", () => {
 
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Enterprise-Grade Agents" })
+      .filter({ hasText: "Academic Agent Harness" })
       .click();
 
     await expect(page).toHaveURL("/");
@@ -370,7 +413,7 @@ test.describe("detail panel", () => {
       siteConfig.introTagline,
     );
     await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
-    await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
+    await expect(page.getByText("Academic Agent Harness")).toBeVisible();
     await expect(
       page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
     ).toHaveAttribute("aria-current", "page");
@@ -405,7 +448,7 @@ test.describe("detail panel", () => {
     await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
       siteConfig.introTagline,
     );
-    await expect(page.getByText("Enterprise-Grade Agents")).toBeVisible();
+    await expect(page.getByText("Academic Agent Harness")).toBeVisible();
     await expect(page.getByRole("link", { name: "Health App" })).toHaveAttribute(
       "aria-current",
       "page",
@@ -426,7 +469,7 @@ test.describe("detail panel", () => {
 
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Enterprise-Grade Agents" })
+      .filter({ hasText: "Academic Agent Harness" })
       .click();
 
     await expect(page).toHaveURL("/");

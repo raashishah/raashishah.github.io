@@ -4,15 +4,14 @@ import { INLINE_LINK_SEPARATOR } from "./types";
 export const projects = [
   {
     id: "pocket-analyst",
-    title: "Easy Business Insights",
-    seoName: "Pocket Analyst",
+    title: "Pocket Analytics",
+    seoName: "Pocket Analytics",
     primaryUrl: "https://sexypa.raashishah.com",
     seoDescription:
       "Analytics for traditional business owners, inside GPT — financial intelligence from Tally data via ChatGPT MCP.",
     seoLongDetail:
-      "Building Pocket Analyst for traditional business owners who run on Tally and spreadsheets. Lives inside GPT via MCP at sexypa.raashishah.com; warehouse trial-balance data in Supabase.",
+      "Building Pocket Analytics for traditional business owners who run on Tally and spreadsheets. Lives inside GPT via MCP at sexypa.raashishah.com; warehouse trial-balance data in Supabase.",
     paragraphs: [
-      "Pocket Analyst",
       {
         text: "Analytics for traditional business owners, inside GPT",
         pullquote: true,
@@ -21,7 +20,7 @@ export const projects = [
   },
   {
     id: "astrothunder",
-    title: "Vedic Astrology Engine",
+    title: "Vedic Astrology Agent",
     seoName: "Astrothunder",
     primaryUrl: "https://astrothunder.life",
     seoDescription:
@@ -35,15 +34,11 @@ export const projects = [
           href: "https://astrothunder.life",
         },
       ],
-      {
-        text: "Starts from the chart, then shows the working",
-        pullquote: true,
-      },
     ],
   },
   {
     id: "admissions-agent",
-    title: "Enterprise-Grade Agents",
+    title: "Academic Agent Harness",
     seoName: "Admission Evaluation Agent",
     primaryUrl: "https://admissions.raashishah.com",
     seoDescription:
@@ -58,14 +53,14 @@ export const projects = [
         },
       ],
       {
-        text: "Processes school and uni applications",
+        text: "Made with Google ADK",
         pullquote: true,
       },
     ],
   },
   {
     id: "pink-depot",
-    title: "Inventory for Makers",
+    title: "Inventory for small businesses",
     seoName: "Pink Depot",
     primaryUrl: "https://pinkdepot.raashishah.com",
     seoDescription:
@@ -75,20 +70,16 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Managing stock",
+          text: "Pink Depot",
           href: "https://pinkdepot.raashishah.com",
         },
       ],
-      {
-        text: "Materials products and profit",
-        pullquote: true,
-      },
     ],
   },
   {
     id: "agentic-workflows",
-    title: "Agentic Workflows",
-    seoName: "Agentic Workflows",
+    title: "Skills",
+    seoName: "Skills",
     seoDescription:
       "Public Cursor and Codex skills — Apple HIG for React chrome and User Call for interview transcription and product insight synthesis.",
     seoLongDetail:
@@ -105,10 +96,6 @@ export const projects = [
           href: "https://github.com/raashishah/user-call",
         },
       ],
-      {
-        text: "Skills for cursor codex cc",
-        pullquote: true,
-      },
     ],
   },
   {
@@ -135,22 +122,21 @@ export const projects = [
   },
   {
     id: "offline-expo-nav",
-    title: "Expo Offline Navigation",
-    seoName: "Expo Offline Navigation",
+    title: "Expo map and website",
+    seoName: "Expo map and website",
     primaryUrl: "https://povindex.designpovindia.com/home",
     seoDescription:
       "Offline-capable exhibition navigation web app built for high footfall environments.",
     seoLongDetail:
       "Web application for exhibition wayfinding that remains usable offline regardless of venue footfall or connectivity.",
     paragraphs: [
-      [
-        {
-          text: "Exhibition site",
-          href: "https://povindex.designpovindia.com/home",
-        },
-      ],
       {
-        text: "Offline access for high footfall venues",
+        text: [
+          {
+            text: "Offline access for high footfall venues",
+            href: "https://povindex.designpovindia.com/home",
+          },
+        ],
         pullquote: true,
       },
     ],
