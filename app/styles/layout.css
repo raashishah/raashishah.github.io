@@ -263,7 +263,7 @@
 .home__project-groups {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
+  gap: var(--space-6);
 }
 
 .home__list-section {
@@ -274,13 +274,21 @@
 
 .home__list-section-heading {
   margin: 0;
-  padding-inline: var(--space-1);
+  padding-inline: 0;
   font-family: var(--font-medium);
-  font-size: var(--type-headline-size);
+  font-size: var(--type-caption-size);
   font-weight: 500;
-  line-height: var(--type-headline-leading);
-  letter-spacing: var(--type-headline-tracking);
-  color: var(--text);
+  line-height: var(--type-caption-leading);
+  letter-spacing: var(--type-caption-tracking);
+  color: var(--color-body);
+}
+
+.home__list-section .home__project-list {
+  gap: var(--space-1);
+}
+
+.home__list-section .home__project-body {
+  padding-block-end: var(--space-3);
 }
 
 .home__project-item {
