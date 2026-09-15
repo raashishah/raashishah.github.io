@@ -5,8 +5,7 @@ import { siteConfig } from "@/lib/metadata";
 
 export type HomeContent = {
   nameEasterEggHref: string;
-  introName: string;
-  introRole: string;
+  introIdentity: string;
   introSubline: string;
   introTagline: string;
   projects: readonly PortfolioEntry[];
@@ -16,8 +15,7 @@ export type HomeContent = {
 export function getHomeContent(): HomeContent {
   return {
     nameEasterEggHref,
-    introName: siteConfig.introName,
-    introRole: siteConfig.introRole,
+    introIdentity: siteConfig.introIdentity,
     introSubline: siteConfig.introSubline,
     introTagline: siteConfig.introTagline,
     projects,

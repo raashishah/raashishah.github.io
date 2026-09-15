@@ -6,13 +6,16 @@ async function getPageColors(page: import("@playwright/test").Page) {
   return page.evaluate(() => {
     const body = document.body;
     const bodyStyles = getComputedStyle(body);
-    const role = document.querySelector(".home__line--role");
-    const roleColor = role ? getComputedStyle(role).color : "";
+    const name = document.querySelector(".home__intro .home__line--name");
+    const tagline = document.querySelector(".home__intro .home__line--tagline");
+    const subline = document.querySelector(".home__intro .home__line--subline");
 
     return {
       background: bodyStyles.backgroundColor,
       text: bodyStyles.color,
-      role: roleColor,
+      name: name ? getComputedStyle(name).color : "",
+      tagline: tagline ? getComputedStyle(tagline).color : "",
+      subline: subline ? getComputedStyle(subline).color : "",
     };
   });
 }
@@ -25,7 +28,9 @@ test.describe("light mode (default)", () => {
     const colors = await getPageColors(page);
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
-    expect(colors.role).toBe(await getSemanticColor(page, "--ink-tertiary"));
+    expect(colors.name).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.tagline).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.subline).toBe(await getSemanticColor(page, "--ink-secondary"));
   });
 
   test("expanded body copy uses secondary ink in light mode", async ({ page }) => {
@@ -67,11 +72,13 @@ test.describe("dark mode (system preference)", () => {
     const colors = await getPageColors(page);
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
-    expect(colors.role).toBe(await getSemanticColor(page, "--ink-tertiary"));
+    expect(colors.name).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.tagline).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.subline).toBe(await getSemanticColor(page, "--ink-secondary"));
 
     await expect(page.getByRole("heading", { name: siteConfig.name })).toBeVisible();
-    await expect(page.locator(".home__intro .home__line--role")).toHaveText(
-      siteConfig.introRole,
+    await expect(page.locator(".home__intro .home__line--name")).toHaveText(
+      siteConfig.introIdentity,
     );
   });
 

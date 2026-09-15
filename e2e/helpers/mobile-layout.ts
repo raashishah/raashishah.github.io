@@ -154,7 +154,6 @@ export async function getComputedFontWeight(page: Page, selector: string) {
 
 export async function assertTypographyHierarchy(page: Page) {
   const nameSize = await getComputedFontSize(page, ".home__intro .home__line--name");
-  const roleSize = await getComputedFontSize(page, ".home__intro .home__line--role");
   const taglineSize = await getComputedFontSize(
     page,
     ".home__intro .home__line--tagline",
@@ -168,12 +167,16 @@ export async function assertTypographyHierarchy(page: Page) {
     page,
     ".home__intro .home__line--tagline",
   );
+  const sublineWeight = await getComputedFontWeight(
+    page,
+    ".home__intro .home__line--subline",
+  );
 
   expect(nameWeight).toBe(500);
   expect(taglineWeight).toBe(500);
-  expect(roleSize).toBe(taglineSize);
-  expect(taglineSize).toBe(sublineSize);
-  expect(nameSize).toBeGreaterThan(roleSize);
+  expect(sublineWeight).toBe(400);
+  expect(nameSize).toBeGreaterThan(taglineSize);
+  expect(taglineSize).toBeGreaterThan(sublineSize);
 }
 
 export async function getBodyCopyColor(page: Page) {
