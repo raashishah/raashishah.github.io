@@ -272,15 +272,15 @@
   gap: var(--space-2);
 }
 
-.home__list-section-label {
+.home__list-section-heading {
   margin: 0;
   padding-inline: var(--space-1);
-  font-family: var(--font-regular);
-  font-size: var(--type-caption-size);
-  font-weight: 400;
-  line-height: var(--type-caption-leading);
-  letter-spacing: var(--type-caption-tracking);
-  color: var(--text-muted);
+  font-family: var(--font-medium);
+  font-size: var(--type-headline-size);
+  font-weight: 500;
+  line-height: var(--type-headline-leading);
+  letter-spacing: var(--type-headline-tracking);
+  color: var(--text);
 }
 
 .home__project-item {

@@ -8,6 +8,7 @@ import {
   assertInlineLinkArrowOnLastLine,
   assertNoHorizontalScroll,
   assertTypographyHierarchy,
+  assertListSectionHeadingHierarchy,
   getBodyCopyColor,
   getFirstLineText,
   getSemanticColor,
@@ -256,6 +257,18 @@ test.describe("typography hierarchy", () => {
       await page.setViewportSize({ width, height: 800 });
       await page.goto("/");
       await assertTypographyHierarchy(page);
+    });
+  }
+});
+
+test.describe("list section headings", () => {
+  for (const width of [375, 768] as const) {
+    test(`category headings sit above accordion titles at ${width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto("/");
+      await assertListSectionHeadingHierarchy(page);
     });
   }
 });

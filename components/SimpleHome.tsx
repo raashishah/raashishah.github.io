@@ -41,7 +41,7 @@ export function SimpleHome({
                       className="home__list-section"
                       aria-labelledby={headingId}
                     >
-                      <h3 id={headingId} className="home__list-section-label">
+                      <h3 id={headingId} className="home__list-section-heading">
                         {group.label}
                       </h3>
                       <PortfolioList items={group.items} labelledBy={headingId} />
