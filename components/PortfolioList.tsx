@@ -146,11 +146,21 @@ type PortfolioListProps = {
   items: readonly PortfolioEntry[];
   idPrefix?: string;
   ariaLabel?: string;
+  labelledBy?: string;
 };
 
-export function PortfolioList({ items, idPrefix, ariaLabel }: PortfolioListProps) {
+export function PortfolioList({
+  items,
+  idPrefix,
+  ariaLabel,
+  labelledBy,
+}: PortfolioListProps) {
   return (
-    <ul className="home__project-list" aria-label={ariaLabel}>
+    <ul
+      className="home__project-list"
+      aria-label={labelledBy ? undefined : ariaLabel}
+      aria-labelledby={labelledBy}
+    >
       {items.map((item) => (
         <ProjectListItem
           key={item.id}

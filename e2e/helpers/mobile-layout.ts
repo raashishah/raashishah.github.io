@@ -179,6 +179,48 @@ export async function assertTypographyHierarchy(page: Page) {
   expect(taglineSize).toBeGreaterThan(sublineSize);
 }
 
+export async function assertListSectionHeadingHierarchy(page: Page) {
+  const heading = page.locator(".home__list-section-heading").first();
+  const rowTitle = page.locator(".home__project-title").first();
+  await expect(heading).toBeVisible();
+  await expect(rowTitle).toBeVisible();
+
+  const metrics = await page.evaluate(() => {
+    const sectionHeading = document.querySelector(".home__list-section-heading");
+    const title = document.querySelector(".home__project-title");
+    const tagline = document.querySelector(".home__intro .home__line--tagline");
+    const identity = document.querySelector(".home__intro .home__line--name");
+    if (!sectionHeading || !title || !tagline || !identity) {
+      return null;
+    }
+
+    const headingStyles = getComputedStyle(sectionHeading);
+    const titleStyles = getComputedStyle(title);
+    return {
+      headingSize: Number.parseFloat(headingStyles.fontSize),
+      headingWeight: Number.parseInt(headingStyles.fontWeight, 10),
+      headingColor: headingStyles.color,
+      rowSize: Number.parseFloat(titleStyles.fontSize),
+      taglineSize: Number.parseFloat(getComputedStyle(tagline).fontSize),
+      identitySize: Number.parseFloat(getComputedStyle(identity).fontSize),
+    };
+  });
+
+  expect(metrics).not.toBeNull();
+  if (!metrics) {
+    return;
+  }
+
+  const ink = await getSemanticColor(page, "--text");
+  const muted = await getSemanticColor(page, "--text-muted");
+  expect(metrics.headingWeight).toBe(500);
+  expect(metrics.headingColor).toBe(ink);
+  expect(metrics.headingColor).not.toBe(muted);
+  expect(metrics.headingSize).toBeGreaterThan(metrics.rowSize);
+  expect(metrics.headingSize).toBeCloseTo(metrics.taglineSize, 1);
+  expect(metrics.identitySize).toBeGreaterThan(metrics.headingSize);
+}
+
 export async function getBodyCopyColor(page: Page) {
   return page.evaluate(() => {
     const paragraph = document.querySelector(

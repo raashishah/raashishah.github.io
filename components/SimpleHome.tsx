@@ -10,8 +10,7 @@ export function SimpleHome({
   introIdentity,
   introSubline,
   introTagline,
-  projects,
-  workExperience,
+  workGroups,
 }: HomeContent) {
   return (
     <HomepageMarker>
@@ -34,10 +33,21 @@ export function SimpleHome({
           <section aria-label="Work and experience">
             <DetailsAccordion>
               <div className="home__project-groups">
-                <PortfolioList items={projects} ariaLabel="Projects" />
-                <div className="home__experience-groups">
-                  <PortfolioList items={workExperience} ariaLabel="Experience" />
-                </div>
+                {workGroups.map((group) => {
+                  const headingId = `work-group-${group.id}`;
+                  return (
+                    <section
+                      key={group.id}
+                      className="home__list-section"
+                      aria-labelledby={headingId}
+                    >
+                      <h3 id={headingId} className="home__list-section-heading">
+                        {group.label}
+                      </h3>
+                      <PortfolioList items={group.items} labelledBy={headingId} />
+                    </section>
+                  );
+                })}
               </div>
             </DetailsAccordion>
           </section>
