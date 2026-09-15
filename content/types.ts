@@ -38,3 +38,21 @@ export type PortfolioEntry = {
   seoPeriod?: string;
   paragraphs: readonly BodyParagraph[];
 };
+
+export type WorkGroupId =
+  | "agents"
+  | "machine-learning"
+  | "web-apps"
+  | "product-management";
+
+export type WorkGroupSpec = {
+  id: WorkGroupId;
+  label: string;
+  itemIds: readonly string[];
+};
+
+export type WorkGroup = {
+  id: WorkGroupId;
+  label: string;
+  items: readonly PortfolioEntry[];
+};

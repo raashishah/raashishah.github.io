@@ -1,4 +1,4 @@
-import type { PortfolioEntry } from "./types";
+import type { PortfolioEntry, WorkGroup, WorkGroupSpec } from "./types";
 import { INLINE_LINK_SEPARATOR } from "./types";
 
 export const projects = [
@@ -229,4 +229,52 @@ export const workExperience = [
     ],
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
+
+export const workGroupSpecs = [
+  {
+    id: "agents",
+    label: "Agents",
+    itemIds: [
+      "pocket-analyst",
+      "astrothunder",
+      "admissions-agent",
+      "agentic-workflows",
+      "ondevice",
+    ],
+  },
+  {
+    id: "machine-learning",
+    label: "Machine Learning",
+    itemIds: ["expression", "kawa-space"],
+  },
+  {
+    id: "web-apps",
+    label: "Web apps",
+    itemIds: ["offline-expo-nav", "pink-depot"],
+  },
+  {
+    id: "product-management",
+    label: "Product Management",
+    itemIds: ["pluto", "aula-education"],
+  },
+] as const satisfies ReadonlyArray<WorkGroupSpec>;
+
+export function resolveWorkGroups(
+  projectItems: readonly PortfolioEntry[] = projects,
+  jobItems: readonly PortfolioEntry[] = workExperience,
+): readonly WorkGroup[] {
+  const catalog = [...projectItems, ...jobItems];
+
+  return workGroupSpecs.map((group) => ({
+    id: group.id,
+    label: group.label,
+    items: group.itemIds.map((itemId) => {
+      const item = catalog.find((entry) => entry.id === itemId);
+      if (!item) {
+        throw new Error(`Unknown portfolio entry in work group ${group.id}: ${itemId}`);
+      }
+      return item;
+    }),
+  }));
+}
 

@@ -1,6 +1,6 @@
-import { projects, workExperience } from "@/content/portfolio";
+import { projects, resolveWorkGroups, workExperience } from "@/content/portfolio";
 import { nameEasterEggHref } from "@/content/site";
-import type { PortfolioEntry } from "@/content/types";
+import type { PortfolioEntry, WorkGroup } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
 
 export type HomeContent = {
@@ -10,6 +10,7 @@ export type HomeContent = {
   introTagline: string;
   projects: readonly PortfolioEntry[];
   workExperience: readonly PortfolioEntry[];
+  workGroups: readonly WorkGroup[];
 };
 
 export function getHomeContent(): HomeContent {
@@ -20,5 +21,6 @@ export function getHomeContent(): HomeContent {
     introTagline: siteConfig.introTagline,
     projects,
     workExperience,
+    workGroups: resolveWorkGroups(),
   };
 }

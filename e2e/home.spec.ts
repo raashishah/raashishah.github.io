@@ -29,6 +29,12 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.getByText("Academic Agent Harness")).toBeVisible();
   await expect(page.getByRole("link", { name: "email me" })).toBeVisible();
   await expect(page.getByRole("img", { name: homePortrait.alt })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Agents", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Machine Learning" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Web apps" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Product Management" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Projects" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Experience" })).toHaveCount(0);
 });
 
 test("project details expand with body copy", async ({ page }) => {
@@ -193,6 +199,27 @@ test("Academic Agent Harness shows ADK pullquote when expanded", async ({ page }
 
   await expect(page.getByText("Made with Google ADK")).toBeVisible();
   await expect(page.getByText("Processes school and uni applications")).toHaveCount(0);
+});
+
+test("work groups mix projects and jobs without Projects or Experience headings", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const titles = await page.locator(".home__project-title").allTextContents();
+  expect(titles).toEqual([
+    "Pocket Analytics",
+    "Vedic Astrology Agent",
+    "Academic Agent Harness",
+    "Skills",
+    "On-device AI Agent",
+    "Pro Animation Tool",
+    "Geospatial Machine Learning",
+    "Expo map and website",
+    "Inventory for small businesses",
+    "Working with Artists",
+    "Doubled Engineering Speed",
+  ]);
 });
 
 test("opening a second dropdown closes the first", async ({ page }) => {
