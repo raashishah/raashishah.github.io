@@ -118,10 +118,10 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 
 | Role | Size token | Weight | Color | Used by |
 |------|-----------|--------|-------|---------|
-| `type-title` | `--text-title` | 500 | `--text` | Name in header (`h1`) |
-| `type-headline` | `--text-headline` | 500 | `--text` | Intro tagline only |
+| `type-title` | `--text-title` | 500 | `--text` | Header name (`h1`); homepage intro identity (`h2`) |
+| `type-headline` | `--text-headline` | 500 | `--text` | Intro tagline; homepage list-section headings |
 | `type-headline-inline` | `--text-body` | 500 | `--text` | Accordion summaries, inline links |
-| `type-body` | `--text-body` | 400 | `--color-body` | Dropdown paragraphs |
+| `type-body` | `--text-body` | 400 | `--color-body` | Intro subline; dropdown paragraphs |
 | `type-subhead` | `--text-subhead` | 400 | `--text-muted` | Role, education, updating note, footer links |
 | `type-caption` | `--text-caption` | 400 | `--text-muted` | Footer meta |
 
@@ -137,7 +137,7 @@ No shadows on the homepage. Depth comes from typography hierarchy and spacing, n
 Flex row, baseline-aligned, bottom border separator. Name uses `title` scale with old rose on hover/focus (Spotify easter egg link). Contact nav: `email me` / `or` / `let's meet sometime` (Calendly) — no underlines; old rose on hover/focus/active. Twitter is footer-only.
 
 ### Project / job lists
-Two groups separated by `--space-7` (48px): 5 projects (`home__project-groups`), then 4 jobs (`home__experience-groups`). No section headings. Static education line below jobs (`BSc in Product, from Aston, UK`). Each row is a native `<details>` with:
+Four HIG grouped-list sections separated by `--space-7` (48px): Agents, Machine Learning, Web apps, Product Management (`home__project-groups` / `.home__list-section`). Section headings use `type-headline` (500, `--text`) via `.home__list-section-heading` — larger than accordion row titles (`type-headline-inline`); no Projects/Experience headings. Rows mix projects and jobs. Each row is a native `<details>` with:
 - Summary row: role-focused title at body scale + medium weight + CSS plus icon (44px min height)
 - Expand: grid `0fr → 1fr` height (350ms ease-out), body opacity fade
 - Collapse: 250ms ease-in; no transition delay on close

@@ -7,12 +7,10 @@ import type { HomeContent } from "@/lib/home-content";
 
 export function SimpleHome({
   nameEasterEggHref,
-  introName,
-  introRole,
+  introIdentity,
   introSubline,
   introTagline,
-  projects,
-  workExperience,
+  workGroups,
 }: HomeContent) {
   return (
     <HomepageMarker>
@@ -22,8 +20,7 @@ export function SimpleHome({
         intro={
           <section className="home__intro" aria-label="About">
             <div className="home__intro-identity">
-              <h2 className="home__line home__line--name">{introName}</h2>
-              <p className="home__line home__line--role">{introRole}</p>
+              <h2 className="home__line home__line--name">{introIdentity}</h2>
             </div>
             <div className="home__intro-lede">
               <p className="home__line home__line--tagline">{introTagline}</p>
@@ -36,10 +33,21 @@ export function SimpleHome({
           <section aria-label="Work and experience">
             <DetailsAccordion>
               <div className="home__project-groups">
-                <PortfolioList items={projects} ariaLabel="Projects" />
-                <div className="home__experience-groups">
-                  <PortfolioList items={workExperience} ariaLabel="Experience" />
-                </div>
+                {workGroups.map((group) => {
+                  const headingId = `work-group-${group.id}`;
+                  return (
+                    <section
+                      key={group.id}
+                      className="home__list-section"
+                      aria-labelledby={headingId}
+                    >
+                      <h3 id={headingId} className="home__list-section-heading">
+                        {group.label}
+                      </h3>
+                      <PortfolioList items={group.items} labelledBy={headingId} />
+                    </section>
+                  );
+                })}
               </div>
             </DetailsAccordion>
           </section>

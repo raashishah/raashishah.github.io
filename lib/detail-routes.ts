@@ -37,6 +37,18 @@ export function getDetailAccordionId(path: DetailPath): string {
   return DETAIL_ACCORDION_ID[path];
 }
 
+/** True when accordionId is the homepage row or a nested section inside the open detail panel. */
+export function isDetailPanelAccordion(
+  path: DetailPath,
+  accordionId: string,
+): boolean {
+  const detailAccordionId = getDetailAccordionId(path);
+  return (
+    accordionId === detailAccordionId ||
+    accordionId.startsWith(`${detailAccordionId}-`)
+  );
+}
+
 export function isDetailPath(path: string): path is DetailPath {
   return DETAIL_PATHS.includes(path as DetailPath);
 }

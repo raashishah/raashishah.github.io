@@ -2,8 +2,6 @@
 
 import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { useDetailsAccordion } from "@/components/DetailsAccordion";
-import { useDetail } from "@/components/DetailProvider";
-import { getDetailAccordionId } from "@/lib/detail-routes";
 import {
   ACCORDION_CLOSE_MS,
   ACCORDION_OPEN_MS,
@@ -65,7 +63,6 @@ export function AnimatedDetails({
   const shellRef = useRef<HTMLDivElement>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
   const accordion = useDetailsAccordion();
-  const { isOpen, path, requestCloseDetail } = useDetail();
 
   const cancelAnimation = () => {
     cleanupRef.current?.();
@@ -141,12 +138,7 @@ export function AnimatedDetails({
     cancelAnimation();
 
     if (details.open) {
-      const shouldCloseDetail =
-        isOpen && path && accordionId && getDetailAccordionId(path) === accordionId;
-      await Promise.all([
-        runTransition("close"),
-        shouldCloseDetail ? requestCloseDetail() : Promise.resolve(),
-      ]);
+      await runTransition("close");
       if (accordionId && accordion) {
         accordion.notifyClosed(accordionId);
       }

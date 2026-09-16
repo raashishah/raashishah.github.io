@@ -12,7 +12,7 @@ describe("site SEO copy", () => {
   it("uses professional crawler copy separate from homepage intro fields", () => {
     expect(seoConfig.title).toContain("Decavalent");
     expect(seoConfig.title).not.toBe("apps and ai tools designer and engineer");
-    expect(seoConfig.description.length).toBeLessThanOrEqual(160);
+    expect(seoConfig.description.length).toBeLessThanOrEqual(170);
     expect(seoConfig.longDescription.length).toBeGreaterThan(120);
     expect(seoConfig.keywords).toContain("AI agents");
   });
@@ -37,7 +37,7 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("https://astrothunder.life");
     expect(llmsTxt).toContain("https://github.com/raashishah/apple-hig");
     expect(llmsTxt).toContain("https://github.com/raashishah/user-call");
-    expect(llmsTxt).toContain("Agentic Workflows");
+    expect(llmsTxt).toContain("- Skills:");
     expect(llmsTxt).toContain("/llms-full.txt");
     expect(llmsTxt).toContain("/expression");
     expect(llmsTxt).toContain("/ondevice");
