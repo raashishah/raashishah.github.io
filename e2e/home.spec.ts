@@ -176,12 +176,12 @@ test("Expo map pullquote links to the exhibition webapp", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Expo map and website" })
+    .filter({ hasText: "Expo map website" })
     .click();
 
   const webappLink = page
     .locator(".home__details[open] .home__project-body-pullquote")
-    .getByRole("link", { name: "Offline access for high footfall venues" });
+    .getByRole("link", { name: "After loading, stays available offline" });
   await expect(webappLink).toBeVisible();
   await expect(webappLink).toHaveAttribute(
     "href",
@@ -215,7 +215,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Skills",
     "Animation",
     "Geospatial",
-    "Expo map and website",
+    "Expo map website",
     "Inventory for small businesses",
     "Working with Artists",
     "Doubled Engineering Speed",

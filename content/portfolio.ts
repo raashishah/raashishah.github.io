@@ -122,8 +122,8 @@ export const projects = [
   },
   {
     id: "offline-expo-nav",
-    title: "Expo map and website",
-    seoName: "Expo map and website",
+    title: "Expo map website",
+    seoName: "Expo map website",
     primaryUrl: "https://povindex.designpovindia.com/home",
     seoDescription:
       "Offline-capable exhibition navigation web app built for high footfall environments.",
@@ -133,7 +133,7 @@ export const projects = [
       {
         text: [
           {
-            text: "Offline access for high footfall venues",
+            text: "After loading, stays available offline",
             href: "https://povindex.designpovindia.com/home",
           },
         ],
