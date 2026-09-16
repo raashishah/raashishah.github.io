@@ -112,7 +112,7 @@ test("Pink Depot shows body link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Inventory for small businesses" })
+    .filter({ hasText: "inventory management" })
     .click();
 
   const projectLink = page.getByRole("link", {
@@ -176,7 +176,7 @@ test("Expo map pullquote links to the exhibition webapp", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Expo map website" })
+    .filter({ hasText: "Expo map" })
     .click();
 
   const webappLink = page
@@ -215,8 +215,8 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Skills",
     "Animation",
     "Geospatial",
-    "Expo map website",
-    "Inventory for small businesses",
+    "Expo map",
+    "inventory management",
     "Working with Artists",
     "Doubled Engineering Speed",
   ]);

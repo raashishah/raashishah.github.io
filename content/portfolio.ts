@@ -60,7 +60,7 @@ export const projects = [
   },
   {
     id: "pink-depot",
-    title: "Inventory for small businesses",
+    title: "inventory management",
     seoName: "Pink Depot",
     primaryUrl: "https://pinkdepot.raashishah.com",
     seoDescription:
@@ -122,8 +122,8 @@ export const projects = [
   },
   {
     id: "offline-expo-nav",
-    title: "Expo map website",
-    seoName: "Expo map website",
+    title: "Expo map",
+    seoName: "Expo map",
     primaryUrl: "https://povindex.designpovindia.com/home",
     seoDescription:
       "Offline-capable exhibition navigation web app built for high footfall environments.",
