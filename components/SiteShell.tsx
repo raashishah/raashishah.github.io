@@ -57,6 +57,17 @@ export function SiteShell({
   calendlyLink: calendly = calendlyLink,
   footerLinks: footer = footerLinks,
 }: SiteShellProps) {
+  const brand = (
+    <>
+      {siteConfig.name}
+      <img
+        src="/img/footer-mark.svg"
+        alt=""
+        aria-hidden="true"
+        className="home__header-mark"
+      />
+    </>
+  );
   const nameLink = nameExternal ? (
     <a
       href={nameHref}
@@ -65,11 +76,11 @@ export function SiteShell({
       target="_blank"
       rel="noopener noreferrer"
     >
-      {siteConfig.name}
+      {brand}
     </a>
   ) : (
     <Link href={nameHref} className="home__name-link">
-      {siteConfig.name}
+      {brand}
     </Link>
   );
 

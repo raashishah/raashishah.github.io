@@ -123,10 +123,20 @@
 }
 
 .home__name-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   color: inherit;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   transition: color var(--duration-short) var(--ease-out);
+}
+
+.home__header-mark {
+  width: 0.85em;
+  height: 0.85em;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .home__name-link:focus-visible {
@@ -284,7 +294,26 @@
 .home__project-groups {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
+  gap: var(--space-6);
+}
+
+.home__list-section-heading {
+  margin: 0;
+  padding-inline: 0;
+  font-family: var(--font-medium);
+  font-size: var(--type-caption-size);
+  font-weight: 500;
+  line-height: var(--type-caption-leading);
+  letter-spacing: var(--type-caption-tracking);
+  color: var(--color-body);
+}
+
+.home__list-section .home__project-list {
+  gap: var(--space-1);
+}
+
+.home__list-section .home__project-body {
+  padding-block-end: var(--space-3);
 }
 
 .home__experience-groups {
