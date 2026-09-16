@@ -1,7 +1,7 @@
 .dictionary-entry {
   margin: 0;
   max-width: var(--home-measure-body);
-  font-family: var(--font-regular);
+  font-family: var(--font-dictionary), Georgia, "Times New Roman", serif;
   font-size: var(--type-body-size);
   line-height: var(--type-body-leading);
   letter-spacing: var(--type-body-tracking);
@@ -22,9 +22,8 @@
 
 .dictionary-entry__lemma {
   margin: 0;
-  font-family: var(--font-medium);
   font-size: var(--type-headline-size);
-  font-weight: 500;
+  font-weight: 700;
   line-height: var(--type-headline-leading);
   letter-spacing: var(--type-headline-tracking);
   color: var(--accent);
@@ -43,7 +42,7 @@
 
 .dictionary-entry__pos {
   font-style: italic;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-body);
 }
 
@@ -51,9 +50,8 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  font-family: var(--font-medium);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -84,8 +82,7 @@
 }
 
 .dictionary-entry__locale {
-  font-family: var(--font-medium);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--text);
 }
 
@@ -116,13 +113,11 @@
 
 .dictionary-entry__sense-index {
   margin-inline-end: 0.35em;
-  font-family: var(--font-medium);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .dictionary-entry__gloss strong {
-  font-family: var(--font-medium);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .dictionary-entry__examples {
