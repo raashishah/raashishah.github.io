@@ -9,6 +9,7 @@ import {
   assertNoHorizontalScroll,
   assertTypographyHierarchy,
   assertListSectionHeadingHierarchy,
+  assertDictionaryTypeMix,
   getBodyCopyColor,
   getFirstLineText,
   getSemanticColor,
@@ -17,6 +18,10 @@ import {
 test("homepage shows intro and project list", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: siteConfig.name })).toBeVisible();
+  await expect(
+    page.getByRole("article", { name: "Dictionary entry for decavalent" }),
+  ).toBeVisible();
+  await expect(page.locator(".dictionary-entry__lemma")).toHaveText("decavalent");
   await expect(page.locator(".home__intro .home__line--name")).toHaveText(
     siteConfig.introIdentity,
   );
@@ -258,6 +263,13 @@ test.describe("typography hierarchy", () => {
       await assertTypographyHierarchy(page);
     });
   }
+
+  test("dictionary mixes Newsreader lexical type with Satoshi metadata", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await assertDictionaryTypeMix(page);
+  });
 });
 
 test.describe("list section headings", () => {

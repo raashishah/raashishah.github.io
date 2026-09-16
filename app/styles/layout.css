@@ -94,11 +94,20 @@
   gap: var(--space-4);
 }
 
+.home__intro--masthead {
+  gap: var(--space-6);
+}
+
+.home__intro-person {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
 .home__intro-identity {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  margin-top: var(--space-4);
 }
 
 .home__intro-lede {
@@ -207,9 +216,9 @@
 .home__intro .home__line--name {
   font-family: var(--font-regular);
   font-weight: 400;
-  font-size: var(--type-identity-size);
-  line-height: var(--type-identity-leading);
-  letter-spacing: var(--type-identity-tracking);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+  letter-spacing: var(--type-body-tracking);
 }
 
 .home__intro .home__line--tagline {

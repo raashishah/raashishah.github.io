@@ -21,17 +21,19 @@ export function SimpleHome({
         nameHref={nameEasterEggHref}
         nameExternal
         intro={
-          <section className="home__intro" aria-label="About">
+          <section className="home__intro home__intro--masthead" aria-label="About">
             <DecavalentDictionary />
-            <div className="home__intro-identity">
-              <h2 className="home__line home__line--name">
-                <span className="home__intro-name">{`${introName},`}</span>
-                <span className="home__intro-role">{` ${introRole}`}</span>
-              </h2>
-            </div>
-            <div className="home__intro-lede">
-              <p className="home__line home__line--tagline">{introTagline}</p>
-              <p className="home__line home__line--subline">{introSubline}</p>
+            <div className="home__intro-person">
+              <div className="home__intro-identity">
+                <h2 className="home__line home__line--name">
+                  <span className="home__intro-name">{`${introName},`}</span>
+                  <span className="home__intro-role">{` ${introRole}`}</span>
+                </h2>
+              </div>
+              <div className="home__intro-lede">
+                <p className="home__line home__line--tagline">{introTagline}</p>
+                <p className="home__line home__line--subline">{introSubline}</p>
+              </div>
             </div>
           </section>
         }

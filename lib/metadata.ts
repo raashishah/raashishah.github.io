@@ -10,7 +10,7 @@ const introDescription = `${introIdentity}. ${introTagline}. ${introSubline}.`;
 const socialDescription = `${introRole}. ${introTagline}.`;
 
 export const siteConfig = {
-  name: "Decavalent",
+  name: "Decavalent Labs",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? process.env.SITE_URL ?? "https://decavalent.com",
   introName,
   introRole,
@@ -19,7 +19,7 @@ export const siteConfig = {
   introTagline,
   description: introDescription,
   socialDescription,
-  creator: "Decavalent",
+  creator: "Decavalent Labs",
   twitterHandle: "@rash_driving",
 } as const;
 

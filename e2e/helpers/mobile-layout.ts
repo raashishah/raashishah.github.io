@@ -175,8 +175,9 @@ export async function assertTypographyHierarchy(page: Page) {
   expect(nameWeight).toBe(400);
   expect(taglineWeight).toBe(400);
   expect(sublineWeight).toBe(400);
-  expect(nameSize).toBeGreaterThan(taglineSize);
+  expect(taglineSize).toBeGreaterThan(nameSize);
   expect(taglineSize).toBeGreaterThan(sublineSize);
+  expect(nameSize).toBeCloseTo(sublineSize, 1);
 }
 
 export async function assertListSectionHeadingHierarchy(page: Page) {
@@ -190,7 +191,8 @@ export async function assertListSectionHeadingHierarchy(page: Page) {
     const title = document.querySelector(".home__project-title");
     const tagline = document.querySelector(".home__intro .home__line--tagline");
     const identity = document.querySelector(".home__intro .home__line--name");
-    if (!sectionHeading || !title || !tagline || !identity) {
+    const lemma = document.querySelector(".dictionary-entry__lemma");
+    if (!sectionHeading || !title || !tagline || !identity || !lemma) {
       return null;
     }
 
@@ -203,6 +205,7 @@ export async function assertListSectionHeadingHierarchy(page: Page) {
       rowSize: Number.parseFloat(titleStyles.fontSize),
       taglineSize: Number.parseFloat(getComputedStyle(tagline).fontSize),
       identitySize: Number.parseFloat(getComputedStyle(identity).fontSize),
+      lemmaSize: Number.parseFloat(getComputedStyle(lemma).fontSize),
     };
   });
 
@@ -218,7 +221,35 @@ export async function assertListSectionHeadingHierarchy(page: Page) {
   expect(metrics.headingColor).not.toBe(muted);
   expect(metrics.headingSize).toBeGreaterThan(metrics.rowSize);
   expect(metrics.headingSize).toBeCloseTo(metrics.taglineSize, 1);
-  expect(metrics.identitySize).toBeGreaterThan(metrics.headingSize);
+  expect(metrics.lemmaSize).toBeGreaterThan(metrics.headingSize);
+  expect(metrics.identitySize).toBeLessThan(metrics.headingSize);
+}
+
+export async function assertDictionaryTypeMix(page: Page) {
+  const fonts = await page.evaluate(() => {
+    const family = (selector: string) => {
+      const el = document.querySelector(selector);
+      return el ? getComputedStyle(el).fontFamily.toLowerCase() : "";
+    };
+
+    return {
+      lemma: family(".dictionary-entry__lemma"),
+      gloss: family(".dictionary-entry__gloss"),
+      example: family(".dictionary-entry__example"),
+      origin: family(".dictionary-entry__origin"),
+      ipa: family(".dictionary-entry__ipa"),
+      pos: family(".dictionary-entry__pos-word"),
+      label: family(".dictionary-entry__label"),
+    };
+  });
+
+  expect(fonts.lemma).toMatch(/newsreader/i);
+  expect(fonts.gloss).toMatch(/newsreader/i);
+  expect(fonts.example).toMatch(/newsreader/i);
+  expect(fonts.origin).toMatch(/newsreader/i);
+  expect(fonts.ipa).toMatch(/satoshi/i);
+  expect(fonts.pos).toMatch(/satoshi/i);
+  expect(fonts.label).toMatch(/satoshi/i);
 }
 
 export async function getBodyCopyColor(page: Page) {

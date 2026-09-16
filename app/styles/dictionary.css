@@ -1,7 +1,8 @@
 .dictionary-entry {
   margin: 0;
   max-width: 100%;
-  font-family: var(--font-dictionary), Georgia, "Times New Roman", serif;
+  font-family: var(--font-dictionary), "Newsreader", Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
   font-size: var(--type-body-size);
   line-height: var(--type-body-leading);
   letter-spacing: var(--type-body-tracking);
@@ -18,56 +19,74 @@
 
 .dictionary-entry__lemma {
   font-size: var(--type-identity-size);
-  font-weight: 700;
+  font-weight: 600;
   line-height: var(--type-identity-leading);
   letter-spacing: var(--type-identity-tracking);
   color: var(--text);
 }
 
-.dictionary-entry__pronunciation {
-  font-size: var(--type-body-size);
-  font-weight: 400;
-  color: var(--text-muted);
-}
-
+.dictionary-entry__pronunciation,
 .dictionary-entry__ipa {
-  color: var(--text-muted);
-}
-
-.dictionary-entry__pos {
-  margin: var(--space-4) 0 0;
+  font-family: var(--font-regular);
   font-size: var(--type-subhead-size);
-  font-style: italic;
   font-weight: 400;
-  line-height: var(--type-subhead-leading);
-  color: var(--text-muted);
-}
-
-.dictionary-entry__grammar {
-  font-style: italic;
-}
-
-.dictionary-entry__sense {
-  margin: var(--space-4) 0 0;
-  padding-inline-start: var(--space-5);
-  color: var(--text);
-  text-wrap: pretty;
-}
-
-.dictionary-entry__sense em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--color-body);
-}
-
-.dictionary-entry__pipe,
-.dictionary-entry__label {
   font-style: normal;
   color: var(--text-muted);
 }
 
+.dictionary-entry__pos {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-regular);
+  font-size: var(--type-subhead-size);
+  line-height: var(--type-subhead-leading);
+  color: var(--text-muted);
+}
+
+.dictionary-entry__pos-word {
+  font-weight: 700;
+  font-style: normal;
+}
+
+.dictionary-entry__grammar {
+  font-weight: 700;
+  font-style: italic;
+}
+
+.dictionary-entry__sense {
+  margin: var(--space-3) 0 0;
+  padding-inline-start: var(--space-4);
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+.dictionary-entry__gloss {
+  font-weight: 500;
+  font-style: normal;
+  color: var(--text);
+}
+
+.dictionary-entry__example {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.dictionary-entry__pipe {
+  font-family: var(--font-regular);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.dictionary-entry__label {
+  font-family: var(--font-regular);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
 .dictionary-entry__etymology {
-  margin-top: var(--space-5);
+  margin-top: var(--space-6);
 }
 
 .dictionary-entry__origin-label {
@@ -75,7 +94,7 @@
   font-size: var(--type-caption-size);
   font-weight: 600;
   line-height: var(--type-caption-leading);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -88,6 +107,7 @@
 
 .dictionary-entry__origin {
   margin: 0;
-  padding-inline-start: var(--space-5);
-  color: var(--color-body);
+  padding-inline-start: var(--space-4);
+  font-weight: 500;
+  color: var(--text);
 }

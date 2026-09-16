@@ -107,7 +107,7 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 
 ## Typography
 
-- **Family:** Self-hosted Satoshi variable (`app/fonts/Satoshi-Variable.woff2`), fallback to system UI stack.
+- **Family:** Self-hosted Satoshi variable (`app/fonts/Satoshi-Variable.woff2`) for UI and metadata, fallback to system UI stack. Newsreader (Google, self-hosted via `next/font`) for dictionary lexical copy.
 - **Weights:** 500 (medium) for UI, headings, links; 400 (regular) for dropdown body paragraphs.
 - **Scale:** Fluid `clamp()` size tokens in `app/styles/tokens.css` (`--text-title` through `--text-caption`).
 - **Bundled roles:** Each semantic role bundles size + leading + tracking (`--type-*-size`, `--type-*-leading`, `--type-*-tracking`). Components reference bundles, not raw size + ad hoc leading.
@@ -118,10 +118,11 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 
 | Role | Size token | Weight | Color | Used by |
 |------|-----------|--------|-------|---------|
-| `type-title` | `--text-title` | 500 | `--text` | Header name (`h1`); homepage intro identity (`h2`) |
+| `type-title` | `--text-title` | 500 | `--text` | Header name (`h1`) |
+| `type-identity` | `--text-identity` | 600 | `--text` | Dictionary lemma (`decavalent`) |
 | `type-headline` | `--text-headline` | 500 | `--text` | Intro tagline; homepage list-section headings |
 | `type-headline-inline` | `--text-body` | 500 | `--text` | Accordion summaries, inline links |
-| `type-body` | `--text-body` | 400 | `--color-body` | Intro subline; dropdown paragraphs |
+| `type-body` | `--text-body` | 400 | `--color-body` | Homepage byline (`h2`); intro subline; dropdown paragraphs |
 | `type-subhead` | `--text-subhead` | 400 | `--text-muted` | Role, education, updating note, footer links |
 | `type-caption` | `--text-caption` | 400 | `--text-muted` | Footer meta |
 
@@ -135,6 +136,9 @@ No shadows on the homepage. Depth comes from typography hierarchy and spacing, n
 
 ### Header
 Flex row, baseline-aligned, bottom border separator. Name uses `title` scale with old rose on hover/focus (Spotify easter egg link). Contact nav: `email me` / `or` / `let's meet sometime` (Calendly) — no underlines; old rose on hover/focus/active. Twitter is footer-only.
+
+### Dictionary masthead
+Homepage left column opens with the Decavalent dictionary entry, then a person cluster (byline name + tagline + subline). No extra hairline between them. **Newsreader** for lemma, gloss, examples, origin; **Satoshi** for IPA, part of speech, and figurative label. Lemma uses `type-identity`; name is a body-scale byline so it does not compete with `decavalent`.
 
 ### Project / job lists
 Four HIG grouped-list sections separated by `--space-7` (48px): Agents, Machine Learning, Web apps, Product Management (`home__project-groups` / `.home__list-section`). Section headings use `type-headline` (500, `--text`) via `.home__list-section-heading` — larger than accordion row titles (`type-headline-inline`); no Projects/Experience headings. Rows mix projects and jobs. Each row is a native `<details>` with:

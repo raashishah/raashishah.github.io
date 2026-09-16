@@ -1,9 +1,9 @@
-import { Source_Serif_4 } from "next/font/google";
+import { Newsreader } from "next/font/google";
 import { decavalentDictionary } from "@/content/decavalent";
 
-const dictionarySerif = Source_Serif_4({
+const dictionarySerif = Newsreader({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-dictionary",
@@ -36,26 +36,25 @@ export function DecavalentDictionary() {
       </p>
 
       <p className="dictionary-entry__pos">
-        {partOfSpeech}{" "}
+        <span className="dictionary-entry__pos-word">{partOfSpeech}</span>{" "}
         <span className="dictionary-entry__grammar">[{grammarLabel}]</span>
       </p>
 
       <p className="dictionary-entry__sense">
-        {gloss}:{" "}
+        <span className="dictionary-entry__gloss">{gloss}:</span>{" "}
         {citations.map((citation, index) => (
           <span key={citation.example}>
             {index > 0 ? (
               <>
                 <span className="dictionary-entry__pipe"> | </span>
                 {"label" in citation && citation.label ? (
-                  <>
-                    <span className="dictionary-entry__label">[{citation.label}]</span>
-                    {" : "}
-                  </>
+                  <span className="dictionary-entry__label">
+                    [{citation.label}] :{" "}
+                  </span>
                 ) : null}
               </>
             ) : null}
-            <em>{citation.example}</em>
+            <em className="dictionary-entry__example">{citation.example}</em>
           </span>
         ))}
       </p>

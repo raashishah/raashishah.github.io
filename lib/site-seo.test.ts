@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { safeJsonLdStringify } from "./json-ld";
+import { siteConfig } from "./metadata";
 import {
   buildLlmsFullTxt,
   buildLlmsTxt,
@@ -10,7 +11,7 @@ import {
 
 describe("site SEO copy", () => {
   it("uses professional crawler copy separate from homepage intro fields", () => {
-    expect(seoConfig.title).toContain("Decavalent");
+    expect(seoConfig.title).toContain(siteConfig.creator);
     expect(seoConfig.title).not.toBe("apps and ai tools designer and engineer");
     expect(seoConfig.description.length).toBeLessThanOrEqual(170);
     expect(seoConfig.longDescription.length).toBeGreaterThan(120);
@@ -20,7 +21,7 @@ describe("site SEO copy", () => {
   it("builds llms.txt with required spec structure", () => {
     const llmsTxt = buildLlmsTxt();
 
-    expect(llmsTxt.startsWith("# Decavalent\n")).toBe(true);
+    expect(llmsTxt.startsWith(`# ${siteConfig.creator}\n`)).toBe(true);
     expect(llmsTxt).toMatch(/^> .+/m);
     expect(llmsTxt).toContain("## About");
     expect(llmsTxt).toContain("## Instructions");
