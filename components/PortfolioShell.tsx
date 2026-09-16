@@ -14,6 +14,16 @@ type PortfolioShellProps = {
   portrait?: ReactNode;
 };
 
+function portraitWrapClass(isDesktop: boolean, hasRoute: boolean, isClosing: boolean) {
+  if (!isDesktop || !hasRoute) {
+    return "home__portrait-wrap";
+  }
+
+  return isClosing
+    ? "home__portrait-wrap home__portrait-wrap--exit"
+    : "home__portrait-wrap home__portrait-wrap--enter";
+}
+
 export function PortfolioShell({
   nameHref,
   nameExternal = false,
@@ -22,8 +32,11 @@ export function PortfolioShell({
   work,
   portrait,
 }: PortfolioShellProps) {
-  const { route, isDesktop, isMediaReady } = useDetail();
-  const showPortrait = Boolean(portrait) && !(isMediaReady && isDesktop && route);
+  const { route, isDesktop, isMediaReady, isClosing } = useDetail();
+  const portraitInPrimary = isMediaReady ? isDesktop : false;
+  const portraitNode = portrait ? (
+    <div className={portraitWrapClass(isDesktop, Boolean(route), isClosing)}>{portrait}</div>
+  ) : null;
 
   return (
     <SiteShell
@@ -35,9 +48,10 @@ export function PortfolioShell({
         <div className="home__primary">
           {intro}
           {route ? <DetailPanelContent route={route} /> : null}
+          {portraitInPrimary ? portraitNode : null}
         </div>
         <div className="home__work">{work}</div>
-        {showPortrait ? portrait : null}
+        {!portraitInPrimary ? portraitNode : null}
       </div>
     </SiteShell>
   );

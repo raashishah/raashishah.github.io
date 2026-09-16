@@ -70,12 +70,6 @@
     grid-column: 2;
     grid-row: 1 / 3;
   }
-
-  .home__portrait {
-    grid-column: 1;
-    grid-row: 2;
-    max-width: var(--home-measure-narrow);
-  }
 }
 
 .home__portrait {

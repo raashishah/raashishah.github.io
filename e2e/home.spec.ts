@@ -383,11 +383,11 @@ test.describe("detail panel", () => {
     expect(portraitBox!.x + portraitBox!.width).toBeLessThanOrEqual(workBox!.x + 1);
     expect(workBox!.x).toBeGreaterThan(portraitBox!.x);
     const introBox = await page.locator(".home__intro").boundingBox();
-    const rowGap = await page.locator(".home__content").evaluate(
-      (element) => parseFloat(getComputedStyle(element).rowGap),
+    const primaryGap = await page.locator(".home__primary").evaluate(
+      (element) => parseFloat(getComputedStyle(element).gap),
     );
     expect(introBox).not.toBeNull();
-    expect(portraitBox!.y - (introBox!.y + introBox!.height)).toBeCloseTo(rowGap, 0);
+    expect(portraitBox!.y - (introBox!.y + introBox!.height)).toBeCloseTo(primaryGap, 0);
   });
 
   test("mobile portrait sits below the work list", async ({ page }) => {
@@ -405,7 +405,7 @@ test.describe("detail panel", () => {
     expect(portraitBox!.y).toBeGreaterThan(workBox!.y + workBox!.height - 1);
   });
 
-  test("desktop split view hides the portrait and restores it on close", async ({
+  test("desktop split view keeps the portrait below the detail panel", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1024, height: 800 });
@@ -419,7 +419,15 @@ test.describe("detail panel", () => {
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
     await expect(page.locator(".home__detail")).toBeVisible();
-    await expect(page.locator(".home__portrait")).toHaveCount(0);
+    const portrait = page.locator(".home__portrait");
+    await expect(portrait).toBeVisible();
+    await expect(page.locator(".home__portrait-wrap--enter")).toBeVisible();
+
+    const detailBox = await page.locator(".home__detail").boundingBox();
+    const portraitBox = await portrait.boundingBox();
+    expect(detailBox).not.toBeNull();
+    expect(portraitBox).not.toBeNull();
+    expect(portraitBox!.y).toBeGreaterThan(detailBox!.y + detailBox!.height - 1);
 
     await page
       .locator("summary.home__details-summary")
@@ -428,7 +436,7 @@ test.describe("detail panel", () => {
 
     await expect(page).toHaveURL("/");
     await expect(page.locator(".home__detail")).toHaveCount(0);
-    await expect(page.locator(".home__portrait")).toBeVisible();
+    await expect(portrait).toBeVisible();
   });
 
   test("expression page does not show the homepage portrait", async ({ page }) => {

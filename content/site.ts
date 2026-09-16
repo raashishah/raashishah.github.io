@@ -89,8 +89,8 @@ export const coral = {
 } as const;
 
 export const homePortrait = {
-  src: "/img/window.jpg",
-  alt: "A cat looking out of a window at dusk",
-  width: 768,
-  height: 1024,
+  src: "/img/rambo.jpg",
+  alt: "Rambo the cat",
+  width: 1536,
+  height: 1152,
 } as const;

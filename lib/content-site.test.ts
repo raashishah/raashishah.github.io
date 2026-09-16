@@ -28,10 +28,10 @@ describe("content/site", () => {
     expect(coral.src).toBe("/img/coral.svg");
   });
 
-  it("keeps the homepage portrait as a local dusk window photo", () => {
-    expect(homePortrait.src).toBe("/img/window.jpg");
-    expect(homePortrait.alt).toBe("A cat looking out of a window at dusk");
-    expect(homePortrait.width).toBe(768);
-    expect(homePortrait.height).toBe(1024);
+  it("keeps the homepage portrait as a local rambo photo", () => {
+    expect(homePortrait.src).toBe("/img/rambo.jpg");
+    expect(homePortrait.alt).toBe("Rambo the cat");
+    expect(homePortrait.width).toBe(1536);
+    expect(homePortrait.height).toBe(1152);
   });
 });
