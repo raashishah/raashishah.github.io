@@ -1,10 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BottomSheet } from "@/components/BottomSheet";
 import { ProjectDetail } from "@/components/ProjectDetail";
 import { useDetail } from "@/components/DetailProvider";
-import { PANEL_CLOSE_MS, PANEL_CROSSFADE_MS } from "@/lib/motion";
+import {
+  PANEL_CLOSE_MS,
+  PANEL_CROSSFADE_MS,
+  PANEL_OPEN_MS,
+  TRANSITION_FALLBACK_BUFFER_MS,
+} from "@/lib/motion";
 import type { DetailRouteConfig } from "@/lib/detail-routes";
 
 type DetailPanelProps = {
@@ -67,6 +72,63 @@ export function DetailPanelContent({ route }: DetailPanelProps) {
   const { isOpen, isClosing, isDesktop, isMediaReady, finishDetailClose } = useDetail();
   const detailRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
+  const [shellOpen, setShellOpen] = useState(false);
+
+  useEffect(() => {
+    if (isClosing) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setShellOpen(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, [isClosing]);
+
+  useEffect(() => {
+    if (!shellOpen || isClosing) {
+      return;
+    }
+
+    const shell = shellRef.current;
+    if (!shell) {
+      return;
+    }
+
+    shell.classList.add("home__detail-shell--opening");
+    void shell.offsetHeight;
+
+    let finished = false;
+    const finishOpening = () => {
+      if (finished) {
+        return;
+      }
+      finished = true;
+      shell.classList.remove("home__detail-shell--opening");
+    };
+
+    const onTransitionEnd = (event: TransitionEvent) => {
+      if (event.target !== shell || event.propertyName !== "grid-template-rows") {
+        return;
+      }
+      finishOpening();
+    };
+
+    shell.addEventListener("transitionend", onTransitionEnd);
+    const fallbackTimer = window.setTimeout(
+      finishOpening,
+      PANEL_OPEN_MS + TRANSITION_FALLBACK_BUFFER_MS,
+    );
+
+    return () => {
+      finished = true;
+      shell.removeEventListener("transitionend", onTransitionEnd);
+      window.clearTimeout(fallbackTimer);
+    };
+  }, [isClosing, shellOpen]);
 
   useEffect(() => {
     if (!isClosing) {
@@ -124,14 +186,19 @@ export function DetailPanelContent({ route }: DetailPanelProps) {
     return null;
   }
 
+  const shellClassName = [
+    "home__detail-shell",
+    shellOpen ? "home__detail-shell--open" : "",
+    isClosing ? "home__detail-shell--closing" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div
-      ref={shellRef}
-      className={`home__detail-shell${isClosing ? " home__detail-shell--closing" : ""}`}
-    >
+    <div ref={shellRef} className={shellClassName}>
       <div
         ref={detailRef}
-        className={`home__detail${isClosing ? " home__detail--exit" : " home__detail--enter"}`}
+        className={`home__detail${isClosing ? " home__detail--exit" : ""}`}
         tabIndex={-1}
         aria-label={route.pageLabel}
       >
