@@ -4,13 +4,13 @@
   font-weight: 400;
   font-size: var(--text-subhead);
   min-height: var(--home-touch-min);
+  min-width: var(--home-touch-min);
   padding-block: var(--space-2);
-  padding-inline: 0;
+  padding-inline: var(--space-2);
   border-radius: 2px;
   flex-shrink: 0;
   justify-content: center;
-  width: 100%;
-  min-width: 0;
+  width: auto;
 }
 
 .home__footer-icon {
@@ -63,10 +63,11 @@
 }
 
 .home__footer-nav {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 0;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-1);
   width: 100%;
 }
 
