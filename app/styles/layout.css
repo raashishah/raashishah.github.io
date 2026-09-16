@@ -203,7 +203,14 @@
   text-wrap: balance;
 }
 
-.home__intro .home__line--name,
+.home__intro .home__line--name {
+  font-family: var(--font-regular);
+  font-weight: 400;
+  font-size: var(--type-identity-size);
+  line-height: var(--type-identity-leading);
+  letter-spacing: var(--type-identity-tracking);
+}
+
 .home__intro .home__line--tagline {
   font-family: var(--font-regular);
   font-weight: 400;
