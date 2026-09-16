@@ -22,8 +22,8 @@ export function SimpleHome({
           <section className="home__intro" aria-label="About">
             <div className="home__intro-identity">
               <h2 className="home__line home__line--name">
-                <span className="home__intro-name">{introName}</span>
-                <span className="home__intro-role">{`, ${introRole}`}</span>
+                <span className="home__intro-name">{`${introName},`}</span>
+                <span className="home__intro-role">{` ${introRole}`}</span>
               </h2>
             </div>
             <div className="home__intro-lede">
