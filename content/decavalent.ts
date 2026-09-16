@@ -1,29 +1,23 @@
-export type DictionarySense = {
-  gloss: string;
-  examples: readonly string[];
+export type DictionaryCitation = {
+  label?: string;
+  example: string;
 };
 
 export const decavalentDictionary = {
   lemma: "decavalent",
+  pronunciation: "dɪˈkeɪ.və.lənt",
   partOfSpeech: "adjective",
-  subjects: ["CHEMISTRY", "specialized"] as const,
-  pronunciations: {
-    uk: "/dɪˈkeɪ.və.lənt/",
-    us: "/dɪˈkeɪ.və.lənt/",
-  },
-  senses: [
+  grammarLabel: "chemistry",
+  gloss:
+    "having a valence of ten; having an unusually high capacity to combine or bond",
+  citations: [
+    { example: "a decavalent atom" },
     {
-      gloss: "having a valence of ten",
-      examples: [
-        "Decavalent is a chemistry term meaning 'having a valence of ten'. Valence is an atom's capacity to combine or bond.",
-        "I liked the idea of unusually high capacity for connection — one thing capable of combining with many others.",
-      ],
+      label: "figurative",
+      example:
+        "combining different ideas, technologies and people into something more valuable.",
     },
-    {
-      gloss: "representing the power of connection",
-      examples: [
-        "For us, it represents the power of connection — taking different ideas, technologies and people and combining them into something more valuable.",
-      ],
-    },
-  ] as const satisfies readonly DictionarySense[],
+  ] as const satisfies readonly DictionaryCitation[],
+  origin:
+    "From Greek deka ‘ten’ + valent, from Latin valentia ‘capacity’.",
 } as const;

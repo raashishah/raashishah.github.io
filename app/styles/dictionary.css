@@ -1,6 +1,6 @@
 .dictionary-entry {
   margin: 0;
-  max-width: var(--home-measure-body);
+  max-width: 100%;
   font-family: var(--font-dictionary), Georgia, "Times New Roman", serif;
   font-size: var(--type-body-size);
   line-height: var(--type-body-leading);
@@ -8,136 +8,86 @@
   color: var(--color-body);
 }
 
-.dictionary-entry__kicker {
-  margin: 0 0 var(--space-2);
-  font-size: var(--type-caption-size);
-  font-weight: 400;
-  line-height: var(--type-caption-leading);
-  color: var(--text-muted);
-}
-
-.dictionary-entry__kicker-lemma {
-  font-style: italic;
+.dictionary-entry__headword {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35em 0.7em;
+  margin: 0;
 }
 
 .dictionary-entry__lemma {
-  margin: 0;
-  font-size: var(--type-headline-size);
+  font-size: var(--type-identity-size);
   font-weight: 700;
-  line-height: var(--type-headline-leading);
-  letter-spacing: var(--type-headline-tracking);
-  color: var(--accent);
-}
-
-.dictionary-entry__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-  margin: var(--space-2) 0 0;
-  font-size: var(--type-caption-size);
-  line-height: var(--type-caption-leading);
-  color: var(--text-muted);
-}
-
-.dictionary-entry__pos {
-  font-style: italic;
-  font-weight: 600;
-  color: var(--color-body);
-}
-
-.dictionary-entry__subject {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.dictionary-entry__subject::before {
-  content: "";
-  width: 0.3125rem;
-  height: 0.3125rem;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.dictionary-entry__pronunciations {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3) var(--space-5);
-  margin: var(--space-3) 0 0;
+  line-height: var(--type-identity-leading);
+  letter-spacing: var(--type-identity-tracking);
+  color: var(--text);
 }
 
 .dictionary-entry__pronunciation {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  margin: 0;
-  font-size: var(--type-caption-size);
-  line-height: var(--type-caption-leading);
+  font-size: var(--type-body-size);
+  font-weight: 400;
   color: var(--text-muted);
-}
-
-.dictionary-entry__locale {
-  font-weight: 700;
-  color: var(--text);
 }
 
 .dictionary-entry__ipa {
   color: var(--text-muted);
 }
 
-.dictionary-entry__rule {
-  height: 1px;
-  margin: var(--space-4) 0;
-  background: var(--separator);
+.dictionary-entry__pos {
+  margin: var(--space-4) 0 0;
+  font-size: var(--type-subhead-size);
+  font-style: italic;
+  font-weight: 400;
+  line-height: var(--type-subhead-leading);
+  color: var(--text-muted);
 }
 
-.dictionary-entry__senses {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.dictionary-entry__grammar {
+  font-style: italic;
 }
 
-.dictionary-entry__sense + .dictionary-entry__sense {
-  margin-top: var(--space-4);
-}
-
-.dictionary-entry__gloss {
-  margin: 0;
+.dictionary-entry__sense {
+  margin: var(--space-4) 0 0;
+  padding-inline-start: var(--space-5);
   color: var(--text);
+  text-wrap: pretty;
 }
 
-.dictionary-entry__sense-index {
-  margin-inline-end: 0.35em;
-  font-weight: 600;
-}
-
-.dictionary-entry__gloss strong {
-  font-weight: 700;
-}
-
-.dictionary-entry__examples {
-  margin: var(--space-2) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.dictionary-entry__example {
-  margin: 0;
-  padding-inline-start: var(--space-4);
-  border-inline-start: 2px solid color-mix(in srgb, var(--accent) 40%, var(--separator));
+.dictionary-entry__sense em {
+  font-style: italic;
+  font-weight: 400;
   color: var(--color-body);
 }
 
-.dictionary-entry__example + .dictionary-entry__example {
-  margin-top: var(--space-3);
+.dictionary-entry__pipe,
+.dictionary-entry__label {
+  font-style: normal;
+  color: var(--text-muted);
 }
 
-.dictionary-entry__example em {
-  font-style: italic;
-  font-weight: 400;
+.dictionary-entry__etymology {
+  margin-top: var(--space-5);
+}
+
+.dictionary-entry__origin-label {
+  margin: 0;
+  font-size: var(--type-caption-size);
+  font-weight: 600;
+  line-height: var(--type-caption-leading);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dictionary-entry__rule {
+  height: 1px;
+  margin: var(--space-2) 0;
+  background: var(--separator);
+}
+
+.dictionary-entry__origin {
+  margin: 0;
+  padding-inline-start: var(--space-5);
+  color: var(--color-body);
 }

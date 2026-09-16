@@ -2,64 +2,69 @@ import { Source_Serif_4 } from "next/font/google";
 import { decavalentDictionary } from "@/content/decavalent";
 
 const dictionarySerif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "700"],
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-dictionary",
 });
 
 export function DecavalentDictionary() {
-  const { lemma, partOfSpeech, subjects, pronunciations, senses } = decavalentDictionary;
+  const {
+    lemma,
+    pronunciation,
+    partOfSpeech,
+    grammarLabel,
+    gloss,
+    citations,
+    origin,
+  } = decavalentDictionary;
 
   return (
     <article
       className={`dictionary-entry ${dictionarySerif.className} ${dictionarySerif.variable}`}
+      lang="en-GB"
       aria-label={`Dictionary entry for ${lemma}`}
     >
-      <p className="dictionary-entry__kicker">
-        Meaning of <span className="dictionary-entry__kicker-lemma">{lemma}</span> in English
+      <p className="dictionary-entry__headword">
+        <span className="dictionary-entry__lemma">{lemma}</span>
+        <span className="dictionary-entry__pronunciation">
+          <span aria-hidden="true">| </span>
+          <span className="dictionary-entry__ipa">{pronunciation}</span>
+          <span aria-hidden="true"> |</span>
+        </span>
       </p>
 
-      <p className="dictionary-entry__lemma">{lemma}</p>
+      <p className="dictionary-entry__pos">
+        {partOfSpeech}{" "}
+        <span className="dictionary-entry__grammar">[{grammarLabel}]</span>
+      </p>
 
-      <p className="dictionary-entry__meta">
-        <span className="dictionary-entry__pos">{partOfSpeech}</span>
-        {subjects.map((subject) => (
-          <span key={subject} className="dictionary-entry__subject">{subject}</span>
+      <p className="dictionary-entry__sense">
+        {gloss}:{" "}
+        {citations.map((citation, index) => (
+          <span key={citation.example}>
+            {index > 0 ? (
+              <>
+                <span className="dictionary-entry__pipe"> | </span>
+                {"label" in citation && citation.label ? (
+                  <>
+                    <span className="dictionary-entry__label">[{citation.label}]</span>
+                    {" : "}
+                  </>
+                ) : null}
+              </>
+            ) : null}
+            <em>{citation.example}</em>
+          </span>
         ))}
       </p>
 
-      <div className="dictionary-entry__pronunciations">
-        <p className="dictionary-entry__pronunciation">
-          <span className="dictionary-entry__locale">UK</span>
-          <span className="dictionary-entry__ipa">{pronunciations.uk}</span>
-        </p>
-        <p className="dictionary-entry__pronunciation">
-          <span className="dictionary-entry__locale">US</span>
-          <span className="dictionary-entry__ipa">{pronunciations.us}</span>
-        </p>
-      </div>
-
-      <div className="dictionary-entry__rule" aria-hidden="true" />
-
-      <ol className="dictionary-entry__senses">
-        {senses.map((sense, index) => (
-          <li key={sense.gloss} className="dictionary-entry__sense">
-            <p className="dictionary-entry__gloss">
-              <span className="dictionary-entry__sense-index">{index + 1}.</span>
-              <strong>{sense.gloss}</strong>
-            </p>
-            <ul className="dictionary-entry__examples">
-              {sense.examples.map((example) => (
-                <li key={example} className="dictionary-entry__example">
-                  <em>{example}</em>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ol>
+      <footer className="dictionary-entry__etymology">
+        <p className="dictionary-entry__origin-label">Origin</p>
+        <div className="dictionary-entry__rule" aria-hidden="true" />
+        <p className="dictionary-entry__origin">{origin}</p>
+      </footer>
     </article>
   );
 }
