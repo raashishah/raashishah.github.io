@@ -4,6 +4,8 @@ Homepage offer sits directly beneath Rambo, in the left column on desktop and af
 
 ₹2,500 buys one 60-minute, one-to-one session. Checkout uses the same Dodo hosted-session pattern as Astrothunder, with a separate mentoring product. After checkout, customers return to the existing Google Calendar booking link.
 
+Customers choose a whole number of hours on the homepage before opening checkout. Each hour adds one product unit at ₹2,500. There is no website-defined maximum; positive safe integers are validated server-side, and Dodo/payment-provider transaction limits still apply. Quantity does not change Calendar appointment lengths automatically: reconcile the purchased hours with bookings manually.
+
 ## Activation
 
 Add this note to the Dodo mentoring product description when configuring checkout: “After payment, choose your 60-minute session time on Google Calendar”. Keep booking instructions and availability links off the homepage.

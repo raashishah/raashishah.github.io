@@ -41,3 +41,39 @@ it("rejects unexpected redirects without exposing provider errors", async () => 
   expect(response.status).toBe(503);
   expect(await response.json()).toEqual({ error: "Checkout unavailable" });
 });
+
+it.each([2, 1000])("passes %i hours to Dodo without a business quantity cap", async (quantity) => {
+  vi.stubEnv("DODO_PAYMENTS_API_KEY", "test-key");
+  vi.stubEnv("DODO_MENTORING_PRODUCT_ID", "pdt_mentoring");
+  vi.stubEnv("DODO_PAYMENTS_ENVIRONMENT", "test_mode");
+  const fetch = vi.fn().mockResolvedValue(Response.json({ checkout_url: "https://test.checkout.dodopayments.com/session" }));
+  vi.stubGlobal("fetch", fetch);
+  const response = await POST(new NextRequest("https://example.com/api/mentoring/checkout", {
+    method: "POST", headers: { origin: "https://example.com", "Content-Type": "application/json" },
+    body: JSON.stringify({ quantity, product_id: "untrusted", price: 1 }),
+  }));
+  expect(response.status).toBe(200);
+  expect(JSON.parse(fetch.mock.calls[0][1].body).product_cart).toEqual([
+    { product_id: "pdt_mentoring", quantity },
+  ]);
+});
+
+it.each([0, -1, 1.5, "2", null, Number.MAX_SAFE_INTEGER + 1])("rejects invalid quantity %s before contacting Dodo", async (quantity) => {
+  const fetch = vi.fn();
+  vi.stubGlobal("fetch", fetch);
+  const response = await POST(new NextRequest("https://example.com/api/mentoring/checkout", {
+    method: "POST", headers: { origin: "https://example.com" }, body: JSON.stringify({ quantity }),
+  }));
+  expect(response.status).toBe(400);
+  expect(fetch).not.toHaveBeenCalled();
+});
+
+it.each(["{", "{}", "null", "[]"])("rejects malformed or missing quantity: %s", async (body) => {
+  const fetch = vi.fn();
+  vi.stubGlobal("fetch", fetch);
+  const response = await POST(new NextRequest("https://example.com/api/mentoring/checkout", {
+    method: "POST", headers: { origin: "https://example.com" }, body,
+  }));
+  expect(response.status).toBe(400);
+  expect(fetch).not.toHaveBeenCalled();
+});

@@ -7,6 +7,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
   }
 
+  // Empty bodies support pages opened before quantity selection was deployed.
+  let quantity = 1;
+  try {
+    const body = await request.text();
+    if (body) quantity = JSON.parse(body)?.quantity;
+    if (!Number.isSafeInteger(quantity) || quantity < 1) {
+      return NextResponse.json({ error: "Choose a whole number of hours, starting at 1" }, { status: 400 });
+    }
+  } catch {
+    return NextResponse.json({ error: "Invalid checkout request" }, { status: 400 });
+  }
+
   const key = process.env.DODO_PAYMENTS_API_KEY;
   // A dedicated one-time INR 2,500 product, never Astrothunder's licence product.
   const product = process.env.DODO_MENTORING_PRODUCT_ID;
@@ -23,7 +35,7 @@ export async function POST(request: NextRequest) {
       method: "POST",
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        product_cart: [{ product_id: product, quantity: 1 }],
+        product_cart: [{ product_id: product, quantity }],
         return_url: calendlyLink.href,
         customization: { theme: "light" },
         feature_flags: { allow_discount_code: false },
