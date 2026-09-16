@@ -73,8 +73,6 @@ export const footerLinkOrder = [
   "medium",
   "spotify",
   "soundcloud",
-  "duolingo",
-  "giphy",
 ] as const satisfies readonly FooterSocialLinkId[];
 
 export const footerLinks = footerLinkOrder.map(
