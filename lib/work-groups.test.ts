@@ -27,7 +27,7 @@ describe("homepage work groups", () => {
     expect(groups[0]?.items.map((item) => item.title)).toEqual([
       "Pocket Analytics",
       "Vedic Astrology Agent",
-      "Academic Agent Harness",
+      "Entreprise-grade Agent",
       "Skills",
       "On-device AI Agent",
     ]);

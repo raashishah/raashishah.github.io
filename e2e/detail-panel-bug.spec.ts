@@ -78,7 +78,7 @@ test.describe("detail panel accordion interaction", () => {
 
     await expect(page).toHaveURL("/expression");
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
-    await expect(page.getByText("Academic Agent Harness")).toBeVisible();
+    await expect(page.getByText("Entreprise-grade Agent")).toBeVisible();
     await expect(page.locator(".home__detail")).toBeVisible();
   });
 
@@ -94,7 +94,7 @@ test.describe("detail panel accordion interaction", () => {
     await expect(page).toHaveURL("/ondevice");
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
     await expect(page.locator(".home__sheet")).toBeVisible();
-    await expect(page.getByText("Academic Agent Harness")).toBeVisible();
+    await expect(page.getByText("Entreprise-grade Agent")).toBeVisible();
   });
 
   test("detail link keeps homepage list visible on desktop", async ({ page }) => {
@@ -110,7 +110,7 @@ test.describe("detail panel accordion interaction", () => {
 
     await expect(page).toHaveURL("/expression");
     await expect(page.locator(".home__detail")).toBeVisible();
-    await expect(page.getByText("Academic Agent Harness")).toBeVisible();
+    await expect(page.getByText("Entreprise-grade Agent")).toBeVisible();
     await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
       siteConfig.introTagline,
     );

@@ -38,7 +38,7 @@ export const projects = [
   },
   {
     id: "admissions-agent",
-    title: "Academic Agent Harness",
+    title: "Entreprise-grade Agent",
     seoName: "Admission Evaluation Agent",
     primaryUrl: "https://admissions.raashishah.com",
     seoDescription:
@@ -48,7 +48,7 @@ export const projects = [
     paragraphs: [
       [
         {
-          text: "Admissions cycle",
+          text: "Academic admissions cycle",
           href: "https://admissions.raashishah.com",
         },
       ],
