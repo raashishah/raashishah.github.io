@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SocialIcon } from "@/components/SocialIcon";
 import {
   calendlyLink,
+  coral,
   emailLink,
   footerDiscoveryHintAfter,
   footerDiscoveryHintBefore,
@@ -60,7 +61,7 @@ export function SiteShell({
   const brand = (
     <>
       <img
-        src="/img/footer-mark.svg"
+        src={coral.src}
         alt=""
         aria-hidden="true"
         className="home__header-mark"
@@ -124,7 +125,7 @@ export function SiteShell({
             <span className="home__footer-meta-hint">
               {footerDiscoveryHintBefore}{" "}
               <img
-                src="/img/footer-mark.svg"
+                src={coral.src}
                 alt=""
                 aria-hidden="true"
                 className="home__footer-mark"

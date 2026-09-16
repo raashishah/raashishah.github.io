@@ -126,7 +126,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--accent);
+  color: var(--ink);
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   transition: color var(--duration-short) var(--ease-out);
@@ -146,12 +146,12 @@
 }
 
 .home__name-link:active {
-  color: var(--ink);
+  color: var(--accent);
 }
 
-@media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
   .home__name-link:hover {
-    color: var(--ink);
+    color: var(--accent);
   }
 }
 
@@ -167,6 +167,15 @@
   line-height: var(--type-title-leading);
   letter-spacing: var(--type-title-tracking);
   color: var(--text);
+}
+
+.home__intro-name {
+  color: var(--accent);
+}
+
+.home__intro-role {
+  font-family: var(--font-regular);
+  font-weight: 400;
 }
 
 .home__line--role {

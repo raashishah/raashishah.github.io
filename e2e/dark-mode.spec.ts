@@ -6,7 +6,7 @@ async function getPageColors(page: import("@playwright/test").Page) {
   return page.evaluate(() => {
     const body = document.body;
     const bodyStyles = getComputedStyle(body);
-    const name = document.querySelector(".home__intro .home__line--name");
+    const name = document.querySelector(".home__intro .home__intro-name");
     const tagline = document.querySelector(".home__intro .home__line--tagline");
     const subline = document.querySelector(".home__intro .home__line--subline");
 
@@ -28,7 +28,7 @@ test.describe("light mode (default)", () => {
     const colors = await getPageColors(page);
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
-    expect(colors.name).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.name).toBe(await getSemanticColor(page, "--accent"));
     expect(colors.tagline).toBe(await getSemanticColor(page, "--ink"));
     expect(colors.subline).toBe(await getSemanticColor(page, "--ink-secondary"));
   });
@@ -72,7 +72,7 @@ test.describe("dark mode (system preference)", () => {
     const colors = await getPageColors(page);
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
-    expect(colors.name).toBe(await getSemanticColor(page, "--ink"));
+    expect(colors.name).toBe(await getSemanticColor(page, "--accent"));
     expect(colors.tagline).toBe(await getSemanticColor(page, "--ink"));
     expect(colors.subline).toBe(await getSemanticColor(page, "--ink-secondary"));
 

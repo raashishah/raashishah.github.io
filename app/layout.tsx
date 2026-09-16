@@ -6,6 +6,7 @@ import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/brands.min.css";
 import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "./globals.css";
+import { coral } from "@/content/site";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/metadata";
 import { seoConfig } from "@/lib/site-seo";
 
@@ -64,8 +65,8 @@ export const metadata: Metadata = {
     images: [absoluteUrl("/opengraph-image.png")],
   },
   icons: {
-    icon: [{ url: "/img/favicon.svg", type: "image/svg+xml" }],
-    apple: "/img/favicon.svg",
+    icon: [{ url: coral.src, type: "image/svg+xml" }],
+    apple: coral.src,
   },
   robots: {
     index: true,

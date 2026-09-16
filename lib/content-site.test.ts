@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { footerSocialIconIds } from "@/lib/footer-social-icons";
-import { footerLinkOrder, footerLinks, homePortrait } from "@/content/site";
+import { coral, footerLinkOrder, footerLinks, homePortrait } from "@/content/site";
 
 describe("content/site", () => {
   it("puts LinkedIn first in the footer", () => {
@@ -22,6 +22,10 @@ describe("content/site", () => {
     for (const link of footerLinks) {
       expect(iconIds.has(link.id)).toBe(true);
     }
+  });
+
+  it("keeps the brand coral mark at a single shared path", () => {
+    expect(coral.src).toBe("/img/coral.svg");
   });
 
   it("keeps the homepage portrait as a local dusk window photo", () => {

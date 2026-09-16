@@ -7,7 +7,8 @@ import type { HomeContent } from "@/lib/home-content";
 
 export function SimpleHome({
   nameEasterEggHref,
-  introIdentity,
+  introName,
+  introRole,
   introSubline,
   introTagline,
   workGroups,
@@ -20,7 +21,10 @@ export function SimpleHome({
         intro={
           <section className="home__intro" aria-label="About">
             <div className="home__intro-identity">
-              <h2 className="home__line home__line--name">{introIdentity}</h2>
+              <h2 className="home__line home__line--name">
+                <span className="home__intro-name">{introName}</span>
+                <span className="home__intro-role">{`, ${introRole}`}</span>
+              </h2>
             </div>
             <div className="home__intro-lede">
               <p className="home__line home__line--tagline">{introTagline}</p>
