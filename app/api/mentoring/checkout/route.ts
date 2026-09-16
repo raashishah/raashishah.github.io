@@ -7,17 +7,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
   }
 
-  // Empty bodies support pages opened before quantity selection was deployed.
-  let quantity = 1;
-  try {
-    const body = await request.text();
-    if (body) quantity = JSON.parse(body)?.quantity;
-    if (!Number.isSafeInteger(quantity) || quantity < 1) {
-      return NextResponse.json({ error: "Choose a whole number of hours, starting at 1" }, { status: 400 });
-    }
-  } catch {
-    return NextResponse.json({ error: "Invalid checkout request" }, { status: 400 });
-  }
+  const quantity = 1;
 
   const key = process.env.DODO_PAYMENTS_API_KEY;
   // A dedicated one-time INR 2,500 product, never Astrothunder's licence product.
