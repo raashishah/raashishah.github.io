@@ -209,6 +209,12 @@
   text-wrap: balance;
 }
 
+.home__intro .home__line--name,
+.home__intro .home__line--tagline {
+  font-family: var(--font-regular);
+  font-weight: 400;
+}
+
 .home__line--cta {
   margin-top: var(--space-6);
 }
