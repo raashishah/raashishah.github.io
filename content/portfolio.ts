@@ -4,7 +4,7 @@ import { INLINE_LINK_SEPARATOR } from "./types";
 export const projects = [
   {
     id: "pocket-analyst",
-    title: "Pocket Analytics",
+    title: "Pocket Analyst",
     seoName: "Pocket Analytics",
     primaryUrl: "https://sexypa.raashishah.com",
     seoDescription:
@@ -20,7 +20,7 @@ export const projects = [
   },
   {
     id: "astrothunder",
-    title: "Vedic Astrology Agent",
+    title: "Vedic Astrologer",
     seoName: "Astrothunder",
     primaryUrl: "https://astrothunder.life",
     seoDescription:
@@ -38,7 +38,7 @@ export const projects = [
   },
   {
     id: "admissions-agent",
-    title: "Entreprise-grade Agent",
+    title: "Entreprise-grade",
     seoName: "Admission Evaluation Agent",
     primaryUrl: "https://admissions.raashishah.com",
     seoDescription:
@@ -175,7 +175,7 @@ export const workExperience = [
   },
   {
     id: "ondevice",
-    title: "On-device AI Agent",
+    title: "On-device health",
     seoName: "OnDevice",
     seoPeriod: "2025",
     seoDescription:
@@ -238,8 +238,8 @@ export const workGroupSpecs = [
       "pocket-analyst",
       "astrothunder",
       "admissions-agent",
-      "agentic-workflows",
       "ondevice",
+      "agentic-workflows",
     ],
   },
   {

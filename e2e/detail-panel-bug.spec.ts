@@ -47,7 +47,7 @@ test.describe("detail panel accordion interaction", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device AI Agent" })
+      .filter({ hasText: "On-device health" })
       .click();
     await page.getByRole("link", { name: "Health App" }).click();
 
@@ -56,7 +56,7 @@ test.describe("detail panel accordion interaction", () => {
 
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device AI Agent" })
+      .filter({ hasText: "On-device health" })
       .click();
 
     await page.waitForTimeout(AFTER_CLOSE_MS);
@@ -78,7 +78,7 @@ test.describe("detail panel accordion interaction", () => {
 
     await expect(page).toHaveURL("/expression");
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
-    await expect(page.getByText("Entreprise-grade Agent")).toBeVisible();
+    await expect(page.getByText("Entreprise-grade")).toBeVisible();
     await expect(page.locator(".home__detail")).toBeVisible();
   });
 
@@ -87,14 +87,14 @@ test.describe("detail panel accordion interaction", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device AI Agent" })
+      .filter({ hasText: "On-device health" })
       .click();
     await page.getByRole("link", { name: "Health App" }).click();
 
     await expect(page).toHaveURL("/ondevice");
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
     await expect(page.locator(".home__sheet")).toBeVisible();
-    await expect(page.getByText("Entreprise-grade Agent")).toBeVisible();
+    await expect(page.getByText("Entreprise-grade")).toBeVisible();
   });
 
   test("detail link keeps homepage list visible on desktop", async ({ page }) => {
@@ -110,7 +110,7 @@ test.describe("detail panel accordion interaction", () => {
 
     await expect(page).toHaveURL("/expression");
     await expect(page.locator(".home__detail")).toBeVisible();
-    await expect(page.getByText("Entreprise-grade Agent")).toBeVisible();
+    await expect(page.getByText("Entreprise-grade")).toBeVisible();
     await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
       siteConfig.introTagline,
     );
@@ -134,7 +134,7 @@ test.describe("nested detail panel accordions", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device AI Agent" })
+      .filter({ hasText: "On-device health" })
       .click();
     await page.getByRole("link", { name: "Health App" }).click();
     await expect(page).toHaveURL("/ondevice");

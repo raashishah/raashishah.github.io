@@ -25,11 +25,11 @@ describe("homepage work groups", () => {
       "Product Management",
     ]);
     expect(groups[0]?.items.map((item) => item.title)).toEqual([
-      "Pocket Analytics",
-      "Vedic Astrology Agent",
-      "Entreprise-grade Agent",
+      "Pocket Analyst",
+      "Vedic Astrologer",
+      "Entreprise-grade",
+      "On-device health",
       "Skills",
-      "On-device AI Agent",
     ]);
     expect(groups[1]?.items.map((item) => item.title)).toEqual([
       "Pro Animation Tool",
