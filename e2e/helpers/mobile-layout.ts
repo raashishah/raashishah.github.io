@@ -227,29 +227,52 @@ export async function assertListSectionHeadingHierarchy(page: Page) {
 
 export async function assertDictionaryTypeMix(page: Page) {
   const fonts = await page.evaluate(() => {
-    const family = (selector: string) => {
+    const styleOf = (selector: string) => {
       const el = document.querySelector(selector);
-      return el ? getComputedStyle(el).fontFamily.toLowerCase() : "";
+      if (!el) {
+        return { family: "", weight: 0 };
+      }
+      const styles = getComputedStyle(el);
+      return {
+        family: styles.fontFamily.toLowerCase(),
+        weight: Number.parseInt(styles.fontWeight, 10),
+      };
     };
 
     return {
-      lemma: family(".dictionary-entry__lemma"),
-      gloss: family(".dictionary-entry__gloss"),
-      example: family(".dictionary-entry__example"),
-      origin: family(".dictionary-entry__origin"),
-      ipa: family(".dictionary-entry__ipa"),
-      pos: family(".dictionary-entry__pos-word"),
-      label: family(".dictionary-entry__label"),
+      lemma: styleOf(".dictionary-entry__lemma"),
+      gloss: styleOf(".dictionary-entry__gloss"),
+      example: styleOf(".dictionary-entry__example--lead"),
+      followExample: styleOf(
+        ".dictionary-entry__example:not(.dictionary-entry__example--lead)",
+      ),
+      origin: styleOf(".dictionary-entry__origin"),
+      ipa: styleOf(".dictionary-entry__ipa"),
+      pos: styleOf(".dictionary-entry__pos-word"),
+      grammar: styleOf(".dictionary-entry__grammar"),
+      label: styleOf(".dictionary-entry__label"),
     };
   });
 
-  expect(fonts.lemma).toMatch(/newsreader/i);
-  expect(fonts.gloss).toMatch(/newsreader/i);
-  expect(fonts.example).toMatch(/newsreader/i);
-  expect(fonts.origin).toMatch(/newsreader/i);
-  expect(fonts.ipa).toMatch(/satoshi/i);
-  expect(fonts.pos).toMatch(/satoshi/i);
-  expect(fonts.label).toMatch(/satoshi/i);
+  expect(fonts.lemma.family).toMatch(/newsreader/i);
+  expect(fonts.gloss.family).toMatch(/newsreader/i);
+  expect(fonts.example.family).toMatch(/newsreader/i);
+  expect(fonts.followExample.family).toMatch(/newsreader/i);
+  expect(fonts.origin.family).toMatch(/newsreader/i);
+  expect(fonts.ipa.family).toMatch(/newsreader/i);
+  expect(fonts.pos.family).toMatch(/satoshi/i);
+  expect(fonts.grammar.family).toMatch(/satoshi/i);
+  expect(fonts.label.family).toMatch(/satoshi/i);
+
+  expect(fonts.lemma.weight).toBe(600);
+  expect(fonts.gloss.weight).toBe(500);
+  expect(fonts.example.weight).toBe(500);
+  expect(fonts.followExample.weight).toBe(400);
+  expect(fonts.origin.weight).toBe(500);
+  expect(fonts.ipa.weight).toBe(400);
+  expect(fonts.pos.weight).toBe(700);
+  expect(fonts.grammar.weight).toBe(500);
+  expect(fonts.label.weight).toBe(400);
 }
 
 export async function getBodyCopyColor(page: Page) {

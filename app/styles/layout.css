@@ -180,6 +180,7 @@
 .home__intro-role {
   font-family: var(--font-regular);
   font-weight: 400;
+  color: var(--text);
 }
 
 .home__line--role {

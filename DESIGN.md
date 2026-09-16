@@ -138,7 +138,7 @@ No shadows on the homepage. Depth comes from typography hierarchy and spacing, n
 Flex row, baseline-aligned, bottom border separator. Name uses `title` scale with old rose on hover/focus (Spotify easter egg link). Contact nav: `email me` / `or` / `let's meet sometime` (Calendly) — no underlines; old rose on hover/focus/active. Twitter is footer-only.
 
 ### Dictionary masthead
-Homepage left column opens with the Decavalent dictionary entry, then a person cluster (byline name + tagline + subline). No extra hairline between them. **Newsreader** for lemma, gloss, examples, origin; **Satoshi** for IPA, part of speech, and figurative label. Lemma uses `type-identity`; name is a body-scale byline so it does not compete with `decavalent`.
+Homepage left column opens with the Decavalent dictionary entry, then a person cluster (byline name + tagline + subline). No extra hairline between them. **Newsreader** for lemma (600), IPA (400), gloss (500), examples (500 lead / 400 follow, italic), origin label (600) and origin (500). **Satoshi** for `adjective` (700), `[chemistry]` (500 italic), pipes, and `[figurative]` (400 italic). Lemma uses `type-identity`; name is a body-scale byline so it does not compete with `decavalent`.
 
 ### Project / job lists
 Four HIG grouped-list sections separated by `--space-7` (48px): Agents, Machine Learning, Web apps, Product Management (`home__project-groups` / `.home__list-section`). Section headings use `type-headline` (500, `--text`) via `.home__list-section-heading` — larger than accordion row titles (`type-headline-inline`); no Projects/Experience headings. Rows mix projects and jobs. Each row is a native `<details>` with:

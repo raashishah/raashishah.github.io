@@ -40,24 +40,37 @@ export function DecavalentDictionary() {
         <span className="dictionary-entry__grammar">[{grammarLabel}]</span>
       </p>
 
-      <p className="dictionary-entry__sense">
-        <span className="dictionary-entry__gloss">{gloss}:</span>{" "}
-        {citations.map((citation, index) => (
-          <span key={citation.example}>
-            {index > 0 ? (
-              <>
-                <span className="dictionary-entry__pipe"> | </span>
-                {"label" in citation && citation.label ? (
-                  <span className="dictionary-entry__label">
-                    [{citation.label}] :{" "}
-                  </span>
-                ) : null}
-              </>
-            ) : null}
-            <em className="dictionary-entry__example">{citation.example}</em>
-          </span>
-        ))}
-      </p>
+      <div className="dictionary-entry__sense">
+        <p className="dictionary-entry__gloss">{gloss}:</p>
+        <p className="dictionary-entry__citations">
+          {citations.map((citation, index) => (
+            <span key={citation.example}>
+              {index > 0 ? (
+                <>
+                  <span className="dictionary-entry__pipe"> | </span>
+                  {"label" in citation && citation.label ? (
+                    <>
+                      <span className="dictionary-entry__label">
+                        [{citation.label}]
+                      </span>
+                      <span className="dictionary-entry__pipe"> : </span>
+                    </>
+                  ) : null}
+                </>
+              ) : null}
+              <em
+                className={
+                  index === 0
+                    ? "dictionary-entry__example dictionary-entry__example--lead"
+                    : "dictionary-entry__example"
+                }
+              >
+                {citation.example}
+              </em>
+            </span>
+          ))}
+        </p>
+      </div>
 
       <footer className="dictionary-entry__etymology">
         <p className="dictionary-entry__origin-label">Origin</p>
