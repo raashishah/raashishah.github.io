@@ -32,8 +32,8 @@ describe("homepage work groups", () => {
       "Skills",
     ]);
     expect(groups[1]?.items.map((item) => item.title)).toEqual([
-      "Pro Animation Tool",
-      "Geospatial Machine Learning",
+      "Animation",
+      "Geospatial",
     ]);
     expect(groups[2]?.items.map((item) => item.title)).toEqual([
       "Expo map and website",

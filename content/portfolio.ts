@@ -100,7 +100,7 @@ export const projects = [
   },
   {
     id: "expression",
-    title: "Pro Animation Tool",
+    title: "Animation",
     seoName: "Expression",
     primaryUrl: "https://raashishah.com/expression",
     seoDescription:
@@ -192,7 +192,7 @@ export const workExperience = [
   },
   {
     id: "kawa-space",
-    title: "Geospatial Machine Learning",
+    title: "Geospatial",
     seoName: "Kawa Space",
     seoPeriod: "2020",
     seoDescription:
@@ -202,7 +202,7 @@ export const workExperience = [
     paragraphs: [
       [{ text: "Kawa Space", href: "https://www.kawaspace.com" }],
       {
-        text: "Chatbot for model inferences",
+        text: "In-house models inferenced by chatbot",
         pullquote: true,
       },
       {

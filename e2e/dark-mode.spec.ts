@@ -38,7 +38,7 @@ test.describe("light mode (default)", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
 
     const expected = await getSemanticColor(page, "--ink-secondary");
@@ -87,7 +87,7 @@ test.describe("dark mode (system preference)", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
 
     const expected = await getSemanticColor(page, "--ink-secondary");
@@ -128,7 +128,7 @@ test.describe("dark mode (system preference)", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 

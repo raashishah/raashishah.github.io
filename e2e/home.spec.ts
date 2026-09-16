@@ -42,7 +42,7 @@ test("project details expand with body copy", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Pro Animation Tool" })
+    .filter({ hasText: "Animation" })
     .click();
   await expect(
     page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
@@ -62,7 +62,7 @@ test("project details expand with body copy", async ({ page }) => {
     page.getByText("Unsolved problem worldwide"),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "View Pro Animation Tool" }),
+    page.getByRole("link", { name: "View Animation" }),
   ).toHaveCount(0);
 });
 
@@ -213,8 +213,8 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Entreprise-grade",
     "On-device health",
     "Skills",
-    "Pro Animation Tool",
-    "Geospatial Machine Learning",
+    "Animation",
+    "Geospatial",
     "Expo map and website",
     "Inventory for small businesses",
     "Working with Artists",
@@ -241,7 +241,7 @@ test("expanded body copy uses the secondary ink color", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Pro Animation Tool" })
+    .filter({ hasText: "Animation" })
     .click();
 
   const expected = await getSemanticColor(page, "--ink-secondary");
@@ -294,7 +294,7 @@ test.describe("mobile layout", () => {
       await page.goto("/");
       await page
         .locator("summary.home__details-summary")
-        .filter({ hasText: "Pro Animation Tool" })
+        .filter({ hasText: "Animation" })
         .click();
 
       await assertInlineLinkArrowOnLastLine(
@@ -308,7 +308,7 @@ test.describe("mobile layout", () => {
       await page.goto("/");
       await page
         .locator("summary.home__details-summary")
-        .filter({ hasText: "Pro Animation Tool" })
+        .filter({ hasText: "Animation" })
         .click();
 
       const pullquoteStyles = await page.evaluate(() => {
@@ -352,7 +352,7 @@ test.describe("detail panel", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
@@ -414,7 +414,7 @@ test.describe("detail panel", () => {
 
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
@@ -441,7 +441,7 @@ test.describe("detail panel", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
@@ -463,7 +463,7 @@ test.describe("detail panel", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
     await page.getByRole("button", { name: "Close", exact: true }).click();
@@ -499,7 +499,7 @@ test.describe("detail panel", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
@@ -537,7 +537,7 @@ test.describe("detail panel", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
     await page.getByRole("button", { name: "Close", exact: true }).click();

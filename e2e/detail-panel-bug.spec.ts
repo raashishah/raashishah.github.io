@@ -17,7 +17,7 @@ test.describe("detail panel accordion interaction", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
@@ -28,7 +28,7 @@ test.describe("detail panel accordion interaction", () => {
 
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
 
     await page.waitForTimeout(AFTER_CLOSE_MS);
@@ -36,7 +36,7 @@ test.describe("detail panel accordion interaction", () => {
     await expect(page).toHaveURL("/expression");
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(
-      page.locator("details").filter({ hasText: "Pro Animation Tool" }),
+      page.locator("details").filter({ hasText: "Animation" }),
     ).not.toHaveAttribute("open");
   });
 
@@ -70,7 +70,7 @@ test.describe("detail panel accordion interaction", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
@@ -102,7 +102,7 @@ test.describe("detail panel accordion interaction", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
@@ -122,7 +122,7 @@ test.describe("nested detail panel accordions", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "Pro Animation Tool" })
+      .filter({ hasText: "Animation" })
       .click();
     await page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
