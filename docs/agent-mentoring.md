@@ -6,6 +6,8 @@ Homepage offer sits directly beneath Rambo, in the left column on desktop and af
 
 ## Activation
 
+Add this note to the Dodo mentoring product description when configuring checkout: “After payment, choose your 60-minute session time on Google Calendar”. Keep booking instructions and availability links off the homepage.
+
 Create a one-time mentoring product in the existing Dodo account: INR 250000 in minor units, with tax configuration checked against the advertised ₹2,500 price. Use that product's ID, not the Astrothunder licence ID.
 
 Set server-only deployment variables:

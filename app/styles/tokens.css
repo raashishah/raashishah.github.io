@@ -12,6 +12,8 @@
   --separator: color-mix(in srgb, var(--ink) 12%, transparent);
   --focus-ring: color-mix(in srgb, var(--ink) 42%, transparent);
   --accent: #c08081;
+  --ink-on-accent: #1d1d1f;
+  --text-on-accent: #faf9f6;
   --accent-focus-ring: color-mix(in srgb, var(--accent) 40%, transparent);
 
   --text: var(--ink);

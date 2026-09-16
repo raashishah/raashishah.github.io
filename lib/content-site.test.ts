@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { footerSocialIconIds } from "@/lib/footer-social-icons";
 import { coral, footerLinkOrder, footerLinks, homePortrait } from "@/content/site";
+import type { FooterSocialLinkId } from "@/content/types";
 
 describe("content/site", () => {
   it("puts LinkedIn first in the footer", () => {
@@ -18,7 +19,7 @@ describe("content/site", () => {
   });
 
   it("maps every footer link to a social icon", () => {
-    const iconIds = new Set(footerSocialIconIds);
+    const iconIds = new Set<FooterSocialLinkId>(footerSocialIconIds);
     for (const link of footerLinks) {
       expect(iconIds.has(link.id)).toBe(true);
     }

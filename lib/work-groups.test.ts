@@ -37,7 +37,7 @@ describe("homepage work groups", () => {
     ]);
     expect(groups[2]?.items.map((item) => item.title)).toEqual([
       "Expo map",
-      "inventory management",
+      "Inventory management",
     ]);
     expect(groups[3]?.items.map((item) => item.title)).toEqual([
       "Working with Artists",

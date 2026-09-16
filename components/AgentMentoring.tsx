@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { calendlyLink, emailLink } from "@/content/site";
+import { emailLink } from "@/content/site";
 
 export function AgentMentoring() {
   const [busy, setBusy] = useState(false);
@@ -21,7 +21,7 @@ export function AgentMentoring() {
       }
       window.location.assign(result.checkoutUrl);
     } catch {
-      setError("Booking is temporarily unavailable. Please email me to arrange a session.");
+      setError("Couldn’t open checkout.");
       pending.current = false;
       setBusy(false);
     }
@@ -29,19 +29,20 @@ export function AgentMentoring() {
 
   return (
     <section className="home__mentoring" aria-labelledby="mentoring-title">
-      <p className="home__mentoring-eyebrow">One-to-one mentoring</p>
+      <p className="home__mentoring-eyebrow">
+        <span>1:1 mentoring</span>
+        <span aria-hidden="true">·</span>
+        <span className="home__mentoring-price">₹2,500 / hour</span>
+      </p>
       <h2 id="mentoring-title">Work with agents</h2>
       <p className="home__mentoring-description">
-        Bring your workflow. We’ll explore where agents can help and how to start using them
+        Explore what agents are. Understand why and how to use them in your workflow
       </p>
-      <p className="home__mentoring-price">₹2,500 <span>/ 60 minutes</span></p>
-      <button className="home__mentoring-book" onClick={bookSession} disabled={busy}>
-        {busy ? "Opening checkout…" : "Book a session"} <span aria-hidden="true">↗</span>
+      <button className="home__mentoring-book" onClick={bookSession} disabled={busy} aria-busy={busy} aria-live="polite">
+        <span className="home__mentoring-book-label">
+          {busy ? "Opening checkout…" : "Book a session"}
+        </span>
       </button>
-      <p className="home__mentoring-note">Pay, then pick a time on Google Calendar</p>
-      <a className="home__mentoring-availability" href={calendlyLink.href} target="_blank" rel="noopener noreferrer">
-        Check availability <span aria-hidden="true">↗</span>
-      </a>
       {error && <p className="home__mentoring-error" role="alert">{error} <a href={emailLink.href}>Email me ↗</a></p>}
     </section>
   );
