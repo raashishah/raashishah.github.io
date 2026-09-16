@@ -59,13 +59,13 @@ export function SiteShell({
 }: SiteShellProps) {
   const brand = (
     <>
-      {siteConfig.name}
       <img
         src="/img/footer-mark.svg"
         alt=""
         aria-hidden="true"
         className="home__header-mark"
       />
+      {siteConfig.name}
     </>
   );
   const nameLink = nameExternal ? (

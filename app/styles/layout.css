@@ -97,7 +97,7 @@
 .home__intro {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-2);
 }
 
 .home__intro-identity {
@@ -126,7 +126,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: inherit;
+  color: var(--accent);
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   transition: color var(--duration-short) var(--ease-out);
@@ -146,18 +146,12 @@
 }
 
 .home__name-link:active {
-  color: var(--accent);
-}
-
-@media (max-width: 63.99rem) {
-  .home__name-link {
-    color: var(--accent);
-  }
+  color: var(--ink);
 }
 
 @media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
   .home__name-link:hover {
-    color: var(--accent);
+    color: var(--ink);
   }
 }
 
