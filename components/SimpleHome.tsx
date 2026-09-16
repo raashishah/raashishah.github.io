@@ -1,4 +1,5 @@
 import { DetailsAccordion } from "@/components/DetailsAccordion";
+import { DecavalentDictionary } from "@/components/DecavalentDictionary";
 import { HomepageMarker } from "@/components/HomepageMarker";
 import { HomePortrait } from "@/components/HomePortrait";
 import { AgentMentoring } from "@/components/AgentMentoring";
@@ -21,6 +22,7 @@ export function SimpleHome({
         nameExternal
         intro={
           <section className="home__intro" aria-label="About">
+            <DecavalentDictionary />
             <div className="home__intro-identity">
               <h2 className="home__line home__line--name">
                 <span className="home__intro-name">{`${introName},`}</span>
