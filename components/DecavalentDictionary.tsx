@@ -1,19 +1,11 @@
-import { Source_Serif_4 } from "next/font/google";
 import { decavalentDictionary } from "@/content/decavalent";
-
-const dictionarySerif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 export function DecavalentDictionary() {
   const { lemma, partOfSpeech, subjects, pronunciations, senses } = decavalentDictionary;
 
   return (
     <article
-      className={`dictionary-entry ${dictionarySerif.className}`}
+      className="dictionary-entry"
       aria-label={`Dictionary entry for ${lemma}`}
     >
       <p className="dictionary-entry__kicker">
