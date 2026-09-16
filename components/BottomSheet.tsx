@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
@@ -11,7 +12,6 @@ import {
 import { createPortal } from "react-dom";
 import {
   PANEL_CLOSE_MS,
-  PANEL_OPEN_MS,
   SHEET_DISMISS_THRESHOLD_PX,
   SHEET_HEIGHT_LARGE,
   SHEET_HEIGHT_MEDIUM,
@@ -46,6 +46,8 @@ export function BottomSheet({
   children,
 }: BottomSheetProps) {
   const [mounted, setMounted] = useState(false);
+  const [entered, setEntered] = useState(false);
+  const draggedRef = useRef(false);
   const [closingLocal, setClosingLocal] = useState(false);
   const closing = closingExternal || closingLocal;
   const [detent, setDetent] = useState<SheetDetent>("medium");
@@ -54,6 +56,13 @@ export function BottomSheet({
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const dragStartY = useRef<number | null>(null);
   const dragDeltaY = useRef(0);
+
+  useLayoutEffect(() => {
+    if (!mounted || !sheetRef.current) return;
+    void sheetRef.current.offsetHeight;
+    setEntered(true);
+    sheetRef.current.querySelector<HTMLElement>(".home__sheet-close")?.focus();
+  }, [mounted]);
 
   const sheetHeight = detent === "medium" ? SHEET_HEIGHT_MEDIUM : SHEET_HEIGHT_LARGE;
 
@@ -91,19 +100,19 @@ export function BottomSheet({
       completeExit();
     };
 
-    const onAnimationEnd = (event: AnimationEvent) => {
-      if (event.target !== sheet || event.animationName !== "home-sheet-exit") {
+    const onAnimationEnd = (event: TransitionEvent) => {
+      if (event.target !== sheet || event.propertyName !== "transform") {
         return;
       }
       finish();
     };
 
-    sheet.addEventListener("animationend", onAnimationEnd);
+    sheet.addEventListener("transitionend", onAnimationEnd);
     const fallbackTimer = window.setTimeout(finish, PANEL_CLOSE_MS + 50);
 
     return () => {
       finished = true;
-      sheet.removeEventListener("animationend", onAnimationEnd);
+      sheet.removeEventListener("transitionend", onAnimationEnd);
       window.clearTimeout(fallbackTimer);
     };
   }, [closing, closingLocal, completeExit]);
@@ -155,7 +164,7 @@ export function BottomSheet({
       body.removeEventListener("touchstart", onTouchStart);
       body.removeEventListener("touchmove", onTouchMove);
     };
-  }, [expandDetent]);
+  }, [expandDetent, mounted]);
 
   useEffect(() => {
     setMounted(true);
@@ -210,6 +219,9 @@ export function BottomSheet({
   }, [handleRequestClose]);
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (closing || !sheetRef.current) return;
+    draggedRef.current = false;
+    sheetRef.current.style.transition = "none";
     dragStartY.current = event.clientY;
     dragDeltaY.current = 0;
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -218,6 +230,7 @@ export function BottomSheet({
   const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (dragStartY.current === null || !sheetRef.current) return;
     dragDeltaY.current = Math.max(0, event.clientY - dragStartY.current);
+    draggedRef.current ||= Math.abs(event.clientY - dragStartY.current) > 4;
     sheetRef.current.style.transform = `translateY(${dragDeltaY.current}px)`;
   };
 
@@ -225,9 +238,11 @@ export function BottomSheet({
     if (dragStartY.current === null || !sheetRef.current) return;
 
     event.currentTarget.releasePointerCapture(event.pointerId);
+    void sheetRef.current.offsetHeight;
+    sheetRef.current.style.transition = "";
     sheetRef.current.style.transform = "";
 
-    if (dragDeltaY.current > SHEET_DISMISS_THRESHOLD_PX) {
+    if (event.type !== "pointercancel" && dragDeltaY.current > SHEET_DISMISS_THRESHOLD_PX) {
       handleRequestClose();
     }
 
@@ -243,19 +258,18 @@ export function BottomSheet({
     <>
       <button
         type="button"
-        className={`home__scrim${closing ? " home__scrim--exit" : ""}`}
+        className={`home__scrim${entered && !closing ? " home__scrim--open" : ""}`}
         aria-label="Close detail panel"
         onClick={handleRequestClose}
       />
       <div
         ref={sheetRef}
-        className={`home__sheet${closing ? " home__sheet--exit" : ""}`}
+        className={`home__sheet${entered && !closing ? " home__sheet--open" : ""}${closing ? " home__sheet--exit" : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="home-sheet-title"
         style={{
           ["--sheet-height" as string]: sheetHeight,
-          transition: `height ${PANEL_OPEN_MS}ms cubic-bezier(0, 0, 0.2, 1)`,
         }}
       >
         <div
@@ -267,7 +281,10 @@ export function BottomSheet({
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
-          onClick={cycleDetent}
+          onClick={() => {
+            if (!draggedRef.current) cycleDetent();
+            draggedRef.current = false;
+          }}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();

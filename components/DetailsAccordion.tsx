@@ -42,6 +42,7 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
 
   const prepareOpen = useCallback(async (id: string) => {
     const currentOpenId = openIdRef.current;
+    openIdRef.current = id;
     const closingDetail =
       isOpen && path && !isDetailPanelAccordion(path, id)
         ? requestCloseDetail()
@@ -52,7 +53,6 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
         : Promise.resolve();
 
     await Promise.all([closingDetail, closingAccordion]);
-    openIdRef.current = id;
   }, [isOpen, path, requestCloseDetail]);
 
   const notifyClosed = useCallback((id: string) => {

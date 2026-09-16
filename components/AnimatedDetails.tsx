@@ -63,6 +63,9 @@ export function AnimatedDetails({
   const shellRef = useRef<HTMLDivElement>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
   const accordion = useDetailsAccordion();
+  const targetOpenRef = useRef(false);
+
+  useEffect(() => () => cleanupRef.current?.(), []);
 
   const cancelAnimation = () => {
     cleanupRef.current?.();
@@ -88,12 +91,16 @@ export function AnimatedDetails({
 
     return new Promise((resolve) => {
       cancelAnimation();
+      targetOpenRef.current = mode === "open";
 
-      if (mode === "open") {
+      if (mode === "open" && !details.open) {
         clearMotionClasses(details);
-        details.classList.add("home__details--opening");
+        details.classList.add("home__details--closing");
         details.open = true;
         void shell.offsetHeight;
+        details.classList.replace("home__details--closing", "home__details--opening");
+      } else if (mode === "open") {
+        details.classList.replace("home__details--closing", "home__details--opening");
       } else {
         details.classList.remove("home__details--opening");
         details.classList.add("home__details--closing");
@@ -115,7 +122,10 @@ export function AnimatedDetails({
         },
       );
 
-      cleanupRef.current = cleanup;
+      cleanupRef.current = () => {
+        cleanup();
+        resolve();
+      };
     });
   }, []);
 
@@ -135,18 +145,17 @@ export function AnimatedDetails({
     }
 
     event.preventDefault();
-    cancelAnimation();
 
-    if (details.open) {
+    if (targetOpenRef.current) {
       await runTransition("close");
-      if (accordionId && accordion) {
+      if (!targetOpenRef.current && accordionId && accordion) {
         accordion.notifyClosed(accordionId);
       }
       return;
     }
 
     if (accordionId && accordion) {
-      await accordion.prepareOpen(accordionId);
+      void accordion.prepareOpen(accordionId);
     }
 
     await runTransition("open");
