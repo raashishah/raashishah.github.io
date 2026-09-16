@@ -15,6 +15,7 @@ import {
   SHEET_DISMISS_THRESHOLD_PX,
   SHEET_HEIGHT_LARGE,
   SHEET_HEIGHT_MEDIUM,
+  watchTransition,
 } from "@/lib/motion";
 
 type SheetDetent = "medium" | "large";
@@ -89,32 +90,13 @@ export function BottomSheet({
     }
 
     const sheet = sheetRef.current;
-    let finished = false;
 
-    const finish = () => {
-      if (finished) return;
-      finished = true;
+    return watchTransition(sheet, "transform", PANEL_CLOSE_MS, () => {
       if (closingLocal) {
         setClosingLocal(false);
       }
       completeExit();
-    };
-
-    const onAnimationEnd = (event: TransitionEvent) => {
-      if (event.target !== sheet || event.propertyName !== "transform") {
-        return;
-      }
-      finish();
-    };
-
-    sheet.addEventListener("transitionend", onAnimationEnd);
-    const fallbackTimer = window.setTimeout(finish, PANEL_CLOSE_MS + 50);
-
-    return () => {
-      finished = true;
-      sheet.removeEventListener("transitionend", onAnimationEnd);
-      window.clearTimeout(fallbackTimer);
-    };
+    });
   }, [closing, closingLocal, completeExit]);
 
   const cycleDetent = useCallback(() => {

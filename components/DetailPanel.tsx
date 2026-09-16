@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BottomSheet } from "@/components/BottomSheet";
 import { ProjectDetail } from "@/components/ProjectDetail";
 import { useDetail } from "@/components/DetailProvider";
-import {
-  PANEL_CLOSE_MS,
-} from "@/lib/motion";
+import { PANEL_CLOSE_MS, watchTransition } from "@/lib/motion";
 import type { DetailRouteConfig } from "@/lib/detail-routes";
 
 type DetailPanelProps = {
@@ -45,47 +43,37 @@ export function DetailPanel({ route }: DetailPanelProps) {
 
 export function DetailPanelContent({ route }: DetailPanelProps) {
   const { isOpen, isClosing, isDesktop, isMediaReady, finishDetailClose } = useDetail();
-  const detailRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const [shellOpen, setShellOpen] = useState(false);
 
-  useLayoutEffect(() => {
-    if (!isMediaReady || !isDesktop || !shellRef.current) return;
-    // Commit the collapsed geometry before setting the destination.
-    void shellRef.current.offsetHeight;
-    setShellOpen(true);
-  }, [isMediaReady, isDesktop]);
+  useEffect(() => {
+    if (!isMediaReady || !isDesktop || !isOpen || isClosing) {
+      setShellOpen(false);
+      return;
+    }
+
+    setShellOpen(false);
+    const frame = window.requestAnimationFrame(() => {
+      if (shellRef.current) {
+        void shellRef.current.offsetHeight;
+      }
+      setShellOpen(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [isMediaReady, isDesktop, isOpen, isClosing, route.path]);
 
   useEffect(() => {
     if (!isClosing) {
       return;
     }
 
-    let finished = false;
-
-    const finish = () => {
-      if (finished) return;
-      finished = true;
-      finishDetailClose();
-    };
-
     const shell = shellRef.current;
+    if (!shell) {
+      return;
+    }
 
-    const onTransitionEnd = (event: TransitionEvent) => {
-      if (event.target !== shell || event.propertyName !== "grid-template-rows") {
-        return;
-      }
-      finish();
-    };
-
-    shell?.addEventListener("transitionend", onTransitionEnd);
-    const fallbackTimer = window.setTimeout(finish, PANEL_CLOSE_MS + 50);
-
-    return () => {
-      finished = true;
-      shell?.removeEventListener("transitionend", onTransitionEnd);
-      window.clearTimeout(fallbackTimer);
-    };
+    return watchTransition(shell, "grid-template-rows", PANEL_CLOSE_MS, finishDetailClose);
   }, [finishDetailClose, isClosing]);
 
   if (!isMediaReady || (!isOpen && !isClosing) || !isDesktop) {
@@ -103,7 +91,6 @@ export function DetailPanelContent({ route }: DetailPanelProps) {
   return (
     <div ref={shellRef} className={shellClassName}>
       <div
-        ref={detailRef}
         className="home__detail"
         tabIndex={-1}
         aria-label={route.pageLabel}

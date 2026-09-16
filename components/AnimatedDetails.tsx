@@ -5,7 +5,7 @@ import { useDetailsAccordion } from "@/components/DetailsAccordion";
 import {
   ACCORDION_CLOSE_MS,
   ACCORDION_OPEN_MS,
-  TRANSITION_FALLBACK_BUFFER_MS,
+  watchTransition,
 } from "@/lib/motion";
 
 type AnimatedDetailsProps = {
@@ -16,42 +16,6 @@ type AnimatedDetailsProps = {
 };
 
 type TransitionMode = "open" | "close";
-
-function watchTransition(
-  element: HTMLElement,
-  propertyName: string,
-  durationMs: number,
-  onComplete: () => void,
-): () => void {
-  let finished = false;
-
-  const finish = () => {
-    if (finished) return;
-    finished = true;
-    element.removeEventListener("transitionend", onTransitionEnd);
-    window.clearTimeout(fallbackTimer);
-    onComplete();
-  };
-
-  const onTransitionEnd = (event: TransitionEvent) => {
-    if (event.target !== element || event.propertyName !== propertyName) {
-      return;
-    }
-    finish();
-  };
-
-  element.addEventListener("transitionend", onTransitionEnd);
-  const fallbackTimer = window.setTimeout(
-    finish,
-    durationMs + TRANSITION_FALLBACK_BUFFER_MS,
-  );
-
-  return () => {
-    finished = true;
-    element.removeEventListener("transitionend", onTransitionEnd);
-    window.clearTimeout(fallbackTimer);
-  };
-}
 
 export function AnimatedDetails({
   className,

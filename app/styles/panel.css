@@ -76,10 +76,6 @@
 
 /* Mobile bottom sheet */
 
-.home--sheet-open {
-  overflow: hidden;
-}
-
 .home__scrim {
   position: fixed;
   inset: 0;
@@ -111,7 +107,7 @@
   border-start-end-radius: 12px;
   border-top: 1px solid var(--separator);
   box-shadow: 0 -4px 24px color-mix(in srgb, var(--ink) 8%, transparent);
-  height: var(--sheet-height, 50dvh);
+  height: var(--sheet-height, 70dvh);
   max-height: 82dvh;
   transform: translateY(100%);
   transition:

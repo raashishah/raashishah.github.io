@@ -421,7 +421,7 @@ test.describe("detail panel", () => {
     await expect(page.locator(".home__detail")).toBeVisible();
     const portrait = page.locator(".home__portrait");
     await expect(portrait).toBeVisible();
-    await expect(page.locator(".home__primary--detail-open")).toBeVisible();
+    await expect(page.locator(".home__detail-shell--open")).toBeVisible();
 
     const detailBox = await page.locator(".home__detail").boundingBox();
     const portraitBox = await portrait.boundingBox();

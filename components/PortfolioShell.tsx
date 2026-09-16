@@ -14,16 +14,6 @@ type PortfolioShellProps = {
   portrait?: ReactNode;
 };
 
-function primaryClassName(isDesktop: boolean, hasRoute: boolean, isClosing: boolean) {
-  return [
-    "home__primary",
-    isDesktop && hasRoute && !isClosing ? "home__primary--detail-open" : "",
-    isDesktop && isClosing ? "home__primary--detail-closing" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-}
-
 export function PortfolioShell({
   nameHref,
   nameExternal = false,
@@ -32,7 +22,7 @@ export function PortfolioShell({
   work,
   portrait,
 }: PortfolioShellProps) {
-  const { route, isDesktop, isMediaReady, isClosing } = useDetail();
+  const { route, isDesktop, isMediaReady } = useDetail();
   const portraitInPrimary = isMediaReady ? isDesktop : false;
   const portraitNode = portrait ? <div className="home__portrait-wrap">{portrait}</div> : null;
 
@@ -43,7 +33,7 @@ export function PortfolioShell({
       nameAsHeading={nameAsHeading}
     >
       <div className="home__content">
-        <div className={primaryClassName(isDesktop, Boolean(route), isClosing)}>
+        <div className="home__primary">
           {intro}
           {route ? <DetailPanelContent route={route} /> : null}
           {portraitInPrimary ? portraitNode : null}
