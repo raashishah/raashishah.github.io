@@ -1,0 +1,66 @@
+.home__mentoring {
+  margin-block-start: var(--space-6);
+  padding-block-start: var(--space-5);
+  border-top: 1px solid var(--separator);
+  max-width: var(--home-measure-narrow);
+}
+
+.home__mentoring p, .home__mentoring h2 { margin: 0; }
+.home__mentoring-eyebrow {
+  color: var(--color-body);
+  font-size: var(--text-caption);
+}
+.home__mentoring h2 {
+  margin-block: var(--space-2) var(--space-3);
+  font-size: var(--text-title);
+  font-weight: 500;
+  line-height: var(--type-title-leading);
+  letter-spacing: var(--type-title-tracking);
+}
+.home__mentoring-description {
+  color: var(--color-body);
+  font-size: var(--text-body);
+  line-height: var(--type-body-leading);
+}
+.home__mentoring .home__mentoring-price {
+  margin-block: var(--space-5) var(--space-2);
+  font-size: var(--text-headline);
+  font-weight: 500;
+}
+.home__mentoring-price span {
+  color: var(--color-body);
+  font-size: var(--text-subhead);
+  font-weight: 400;
+}
+.home__mentoring-book {
+  border: 0;
+  padding: 0;
+  min-height: var(--home-touch-min);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: start;
+}
+.home__mentoring-book span, .home__mentoring-availability span { color: var(--accent); }
+.home__mentoring-book:hover, .home__mentoring-availability:hover { color: var(--accent); }
+.home__mentoring-book:disabled { opacity: 0.6; cursor: progress; }
+.home__mentoring-book:focus-visible, .home__mentoring a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: var(--space-1);
+}
+.home__mentoring-note, .home__mentoring-availability, .home__mentoring-error {
+  color: var(--color-body);
+  font-size: var(--text-caption);
+  line-height: var(--type-body-leading);
+}
+.home__mentoring-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--home-touch-min);
+  text-decoration: none;
+}
+.home__mentoring .home__mentoring-error { margin-block-start: var(--space-3); }
+.home__mentoring-error a { color: inherit; }

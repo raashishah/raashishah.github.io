@@ -1,6 +1,7 @@
 import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { HomepageMarker } from "@/components/HomepageMarker";
 import { HomePortrait } from "@/components/HomePortrait";
+import { AgentMentoring } from "@/components/AgentMentoring";
 import { PortfolioList } from "@/components/PortfolioList";
 import { PortfolioShell } from "@/components/PortfolioShell";
 import type { HomeContent } from "@/lib/home-content";
@@ -32,7 +33,7 @@ export function SimpleHome({
             </div>
           </section>
         }
-        portrait={<HomePortrait />}
+        portrait={<><HomePortrait /><AgentMentoring /></>}
         work={
           <section aria-label="Work and experience">
             <DetailsAccordion>
