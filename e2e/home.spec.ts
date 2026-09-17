@@ -402,6 +402,10 @@ test.describe("detail panel", () => {
     expect(workBox).not.toBeNull();
     expect(workBox!.y).toBeGreaterThan(dictionaryBox!.y + dictionaryBox!.height - 1);
     expect(Math.abs(workBox!.y - introBox!.y)).toBeLessThan(2);
+    const contentBox = await page.locator(".home__content").boundingBox();
+    expect(contentBox).not.toBeNull();
+    expect(dictionaryBox!.width).toBeGreaterThan(contentBox!.width * 0.4);
+    expect(dictionaryBox!.width).toBeLessThan(contentBox!.width * 0.6);
   });
 
   test("desktop portrait stays in the left column without shifting work", async ({
