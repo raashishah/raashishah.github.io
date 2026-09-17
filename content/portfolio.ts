@@ -222,7 +222,10 @@ export const workExperience = [
       "Doubled engineering delivery speed via agile workflow changes with VP of Product. Led customer success analytics across UK and US universities. Improved retention from 9.2% to 32% with a combined qualitative and quantitative analytics toolkit.",
     paragraphs: [
       [{ text: "Aula Education, UK, US", href: "https://www.aula.education" }],
-      "doubled engg speed",
+      {
+        text: "Doubled Engineering Speed",
+        pullquote: true,
+      },
     ],
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
