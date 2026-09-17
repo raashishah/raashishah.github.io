@@ -59,21 +59,28 @@ test("work categories use list-group spacing, not a page-section break", async (
     const root = getComputedStyle(document.documentElement);
     const probe = document.createElement("div");
     probe.style.position = "absolute";
-    probe.style.height = root.getPropertyValue("--space-4").trim();
+    probe.style.height = root.getPropertyValue("--space-1").trim();
     document.body.append(probe);
-    const space4 = probe.getBoundingClientRect().height;
+    const space1 = probe.getBoundingClientRect().height;
+    probe.style.height = root.getPropertyValue("--space-5").trim();
+    const space5 = probe.getBoundingClientRect().height;
     probe.style.height = root.getPropertyValue("--space-7").trim();
     const space7 = probe.getBoundingClientRect().height;
     probe.remove();
     const styles = getComputedStyle(groups);
+    const list = document.querySelector(".home__list-section .home__project-list");
     return {
       groupGap: Number.parseFloat(styles.rowGap),
-      space4,
+      rowGap: list ? Number.parseFloat(getComputedStyle(list).rowGap) : 0,
+      space1,
+      space5,
       space7,
     };
   });
   expect(spacing).not.toBeNull();
-  expect(spacing!.groupGap).toBeCloseTo(spacing!.space4, 0);
+  expect(spacing!.rowGap).toBeCloseTo(spacing!.space1, 0);
+  expect(spacing!.groupGap).toBeCloseTo(spacing!.space5, 0);
+  expect(spacing!.groupGap).toBeGreaterThan(spacing!.rowGap);
   expect(spacing!.groupGap).toBeLessThan(spacing!.space7);
 });
 
@@ -514,13 +521,14 @@ test.describe("detail panel", () => {
     expect(
       Math.abs(contentBox!.y + contentBox!.height - (mentoringBox!.y + mentoringBox!.height)),
     ).toBeLessThan(2);
-    const bookBox = await page.locator(".home__mentoring-book").boundingBox();
+    const bookLabelBox = await page.locator(".home__mentoring-book-label").boundingBox();
     const degreeBox = await page.locator(".home__work .home__line--role").boundingBox();
-    expect(bookBox).not.toBeNull();
+    expect(bookLabelBox).not.toBeNull();
     expect(degreeBox).not.toBeNull();
-    expect(Math.abs(bookBox!.y + bookBox!.height - (degreeBox!.y + degreeBox!.height))).toBeLessThan(
-      2,
-    );
+    expect(Math.abs(bookLabelBox!.y - degreeBox!.y)).toBeLessThan(2);
+    expect(
+      Math.abs(bookLabelBox!.y + bookLabelBox!.height - (degreeBox!.y + degreeBox!.height)),
+    ).toBeLessThan(4);
   });
 
   test("mobile portrait sits below the work list", async ({ page }) => {

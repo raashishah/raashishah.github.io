@@ -26,6 +26,9 @@
   line-height: var(--type-body-leading);
   text-wrap: pretty;
 }
+.home__mentoring .home__mentoring-description + .home__mentoring-description {
+  margin-block-start: var(--space-3);
+}
 .home__mentoring-price {
   color: inherit;
   font-size: var(--text-caption);
@@ -38,7 +41,7 @@
   display: inline-flex;
   max-width: 100%;
   margin-block-start: var(--space-3);
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-start;
   gap: var(--space-2);
   padding: 0;
@@ -48,6 +51,7 @@
   font: inherit;
   font-size: var(--text-subhead);
   font-weight: 400;
+  line-height: var(--type-subhead-leading);
   cursor: pointer;
   text-align: start;
   transition: color 150ms ease-out, transform 150ms ease-out;

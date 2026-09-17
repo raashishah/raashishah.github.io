@@ -39,7 +39,10 @@ export function AgentMentoring() {
       </p>
       <h2 id="mentoring-title">Work with agents</h2>
       <p className="home__mentoring-description">
-        Explore what agents are. Understand why and how to use them in your workflow
+        What they are, why to use them, and how they fit your work
+      </p>
+      <p className="home__mentoring-description">
+        Send your workflow before the call. I prepare the hour around that process
       </p>
       <button
         type="button"

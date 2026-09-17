@@ -77,7 +77,8 @@
   .home__portrait-wrap {
     grid-column: 1;
     grid-row: 2;
-    align-self: end;
+    align-self: stretch;
+    justify-content: flex-end;
     max-width: var(--home-measure-narrow);
   }
 
@@ -377,7 +378,7 @@
 }
 
 .home__project-groups {
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .home__project-groups > .home__line--role {
@@ -392,9 +393,8 @@
 
   .home__work .home__project-groups > .home__line--role {
     margin-block-start: auto;
-    padding-block-start: var(--space-4);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     min-height: var(--home-touch-min);
   }
 }

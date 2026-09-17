@@ -2,7 +2,7 @@
 
 Homepage offer sits directly beneath Rambo. On desktop the pair is pinned to the bottom of the left column, just above the footer. On phones it follows the work list, still last before the footer.
 
-₹2,500 buys one 60-minute, one-to-one session. Checkout uses the same Dodo hosted-session pattern as Astrothunder, with a separate mentoring product. After checkout, customers return to the existing Cal.com booking link.
+₹2,500 buys one 60-minute, one-to-one session. The homepage asks the buyer to send their workflow before the call so the hour is prepared against that process. Checkout uses the same Dodo hosted-session pattern as Astrothunder, with a separate mentoring product. After checkout, customers return to the existing Cal.com booking link.
 
 Checkout is always one hour at ₹2,500. Dodo hosted checkout does not support customer-editable quantity, so multi-hour buyers need a separate purchase or should email to arrange. Quantity does not change Cal.com appointment lengths automatically: reconcile the purchased hours with bookings manually.
 
