@@ -46,6 +46,22 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Experience" })).toHaveCount(0);
 });
 
+test("clicking outside a project accordion runs the close animation", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const details = page
+    .locator(".home__work details")
+    .filter({ hasText: "Animation" })
+    .first();
+  await details.locator("summary").click();
+  await expect(details).toHaveAttribute("open");
+  const closing = expect(details).toHaveClass(/home__details--closing/);
+  await page.locator(".home__intro").click({ position: { x: 8, y: 8 } });
+  await closing;
+  await expect(details).not.toHaveAttribute("open");
+});
+
 test("project details expand with body copy", async ({ page }) => {
   await page.goto("/");
   await page

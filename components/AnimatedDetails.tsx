@@ -96,7 +96,13 @@ export function AnimatedDetails({
   useEffect(() => {
     if (!accordionId || !accordion) return;
 
-    accordion.register(accordionId, () => runTransition("close"));
+    accordion.register(accordionId, {
+      close: () => runTransition("close"),
+      contains: (node) => {
+        const details = detailsRef.current;
+        return Boolean(details && node && details.contains(node));
+      },
+    });
     return () => accordion.unregister(accordionId);
   }, [accordion, accordionId, runTransition]);
 
