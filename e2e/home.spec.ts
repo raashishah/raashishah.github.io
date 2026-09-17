@@ -571,27 +571,29 @@ test.describe("footer layout", () => {
     page,
   }) => {
     await page.goto("/");
-    const profile = page.locator(".home__intro").getByRole("link", {
+    const heatmapLink = page.locator(".home__intro").getByRole("link", {
       name: "Cursor profile @rashdriving (opens in new tab)",
     });
-    await expect(profile).toBeVisible();
-    await expect(profile).toHaveAttribute("href", "https://cursor.com/@rashdriving");
-    await expect(profile.locator(".home__intro-profile-avatar")).toBeVisible();
-    await expect(profile.locator(".home__cursor-heatmap")).toBeVisible();
-    await expect(profile.getByText("@rashdriving")).toHaveCount(0);
+    await expect(heatmapLink).toBeVisible();
+    await expect(heatmapLink).toHaveAttribute("href", "https://cursor.com/@rashdriving");
+    await expect(heatmapLink.locator(".home__cursor-heatmap")).toBeVisible();
+    await expect(page.locator(".home__intro-profile-avatar")).toBeVisible();
+    await expect(heatmapLink.locator(".home__intro-profile-avatar")).toHaveCount(0);
+    await expect(heatmapLink.getByText(siteConfig.introSubline)).toHaveCount(0);
     await expect(page.locator(".home__footer .home__intro-profile")).toHaveCount(0);
     await expect(page.getByText("1.4B")).toHaveCount(0);
     await expect(page.getByText("546")).toHaveCount(0);
   });
 
-  test("keeps the Cursor profile in the intro on desktop", async ({ page }) => {
+  test("keeps the Cursor heatmap in the intro on desktop", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto("/");
     const intro = page.locator(".home__intro");
-    const profile = intro.getByRole("link", {
-      name: "Cursor profile @rashdriving (opens in new tab)",
-    });
-    await expect(profile).toBeVisible();
+    await expect(
+      intro.getByRole("link", {
+        name: "Cursor profile @rashdriving (opens in new tab)",
+      }),
+    ).toBeVisible();
     await expect(page.locator(".home__work .home__intro-profile")).toHaveCount(0);
     await expect(page.locator(".home__footer .home__intro-profile")).toHaveCount(0);
   });

@@ -104,13 +104,17 @@
   align-items: stretch;
   gap: 1.25rem;
   width: 100%;
+}
+
+.home__intro-profile-heatmap-link {
+  display: block;
+  width: 100%;
   text-decoration: none;
-  color: inherit;
   border-radius: 4px;
   -webkit-tap-highlight-color: transparent;
 }
 
-.home__intro-profile:focus-visible {
+.home__intro-profile-heatmap-link:focus-visible {
   outline: 2px solid var(--accent-focus-ring);
   outline-offset: 4px;
 }
@@ -138,7 +142,8 @@
   flex: 1;
 }
 
-.home__intro .home__intro-profile .home__line--name {
+.home__intro-profile .home__line--name,
+.home__intro-profile .home__line--tagline {
   font-family: var(--font-regular);
   font-size: 1.0625rem;
   font-weight: 400;
@@ -146,16 +151,8 @@
   letter-spacing: -0.015em;
 }
 
-.home__intro .home__intro-profile .home__intro-role {
-  font-weight: 400;
-}
-
-.home__intro .home__intro-profile .home__line--tagline {
-  font-family: var(--font-regular);
-  font-size: 1.0625rem;
-  font-weight: 400;
-  line-height: 1.294;
-  letter-spacing: -0.015em;
+.home__intro-profile .home__line--tagline {
+  text-wrap: balance;
 }
 
 .home__intro-profile .home__line--subline {
@@ -165,14 +162,7 @@
   letter-spacing: normal;
 }
 
-.home__intro-profile-heatmap-wrap {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 0.625rem;
-}
-
-.home__intro-profile .home__cursor-heatmap {
+.home__intro-profile-heatmap-link .home__cursor-heatmap {
   display: block;
   width: 100%;
   max-width: 32.875rem;
@@ -181,11 +171,11 @@
 }
 
 @media (max-width: 39.99rem) {
-  .home__intro-profile-heatmap-wrap {
+  .home__intro-profile-heatmap-link {
     overflow: clip;
   }
 
-  .home__intro-profile .home__cursor-heatmap {
+  .home__intro-profile-heatmap-link .home__cursor-heatmap {
     width: 21.375rem;
     height: 3.0625rem;
     max-width: 100%;
@@ -193,7 +183,7 @@
 }
 
 @media (min-width: 40rem) {
-  .home__intro-profile .home__cursor-heatmap {
+  .home__intro-profile-heatmap-link .home__cursor-heatmap {
     max-width: none;
   }
 }
@@ -289,23 +279,6 @@
   line-height: var(--type-headline-leading);
   letter-spacing: var(--type-headline-tracking);
   color: var(--text);
-}
-
-.home__intro .home__line--tagline {
-  text-wrap: balance;
-}
-
-.home__intro .home__line--name {
-  font-family: var(--font-regular);
-  font-weight: 400;
-  font-size: var(--type-body-size);
-  line-height: var(--type-body-leading);
-  letter-spacing: var(--type-body-tracking);
-}
-
-.home__intro .home__line--tagline {
-  font-family: var(--font-regular);
-  font-weight: 400;
 }
 
 .home__line--cta {

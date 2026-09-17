@@ -18,13 +18,7 @@ export function HomeIntroProfile({
   const { avatar } = cursorProfile;
 
   return (
-    <a
-      className="home__intro-profile"
-      href={cursorProfile.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`${cursorProfile.label} (opens in new tab)`}
-    >
+    <div className="home__intro-profile">
       <div className="home__intro-profile-head">
         <Image
           src={avatar.src}
@@ -35,17 +29,23 @@ export function HomeIntroProfile({
           className="home__intro-profile-avatar"
         />
         <div className="home__intro-profile-stack">
-          <h2 className="home__line home__line--name">
+          <p className="home__line home__line--name">
             <span className="home__intro-name">{`${introName},`}</span>
             <span className="home__intro-role">{` ${introRole}`}</span>
-          </h2>
+          </p>
           <p className="home__line home__line--tagline">{introTagline}</p>
         </div>
       </div>
       <p className="home__line home__line--subline">{introSubline}</p>
-      <span className="home__intro-profile-heatmap-wrap">
+      <a
+        className="home__intro-profile-heatmap-link"
+        href={cursorProfile.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${cursorProfile.label} (opens in new tab)`}
+      >
         <CursorHeatmapSvg />
-      </span>
-    </a>
+      </a>
+    </div>
   );
 }
