@@ -437,7 +437,13 @@ test.describe("detail panel", () => {
       expect(introBox).not.toBeNull();
       expect(workBox).not.toBeNull();
       expect(workBox!.y).toBeGreaterThan(dictionaryBox!.y + dictionaryBox!.height - 1);
-      expect(introBox!.y - (dictionaryBox!.y + dictionaryBox!.height)).toBeCloseTo(48, 0);
+      const contentRowGap = await page.locator(".home__content").evaluate(
+        (element) => parseFloat(getComputedStyle(element).rowGap),
+      );
+      expect(introBox!.y - (dictionaryBox!.y + dictionaryBox!.height)).toBeCloseTo(
+        contentRowGap,
+        0,
+      );
       expect(Math.abs(workBox!.y - introBox!.y)).toBeLessThan(2);
       const contentBox = await page.locator(".home__content").boundingBox();
       expect(contentBox).not.toBeNull();

@@ -84,7 +84,7 @@
 
   .home__content--masthead .home__primary {
     grid-row: 2;
-    gap: var(--space-7);
+    gap: var(--space-6);
   }
 
   .home__content--masthead .home__work {
@@ -123,7 +123,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 1.25rem;
+  gap: var(--space-3);
   width: 100%;
 }
 
@@ -143,7 +143,7 @@
 .home__intro-profile-head {
   display: flex;
   align-items: center;
-  gap: 0.875rem;
+  gap: var(--space-3);
 }
 
 .home__intro-profile-avatar {
@@ -174,6 +174,10 @@
 
 .home__intro-profile .home__line--subline {
   max-width: var(--home-measure-body);
+}
+
+.home__intro-profile > .home__intro-profile-heatmap-link {
+  margin-block-start: var(--space-3);
 }
 
 .home__intro-profile-heatmap-link .home__cursor-heatmap {
@@ -355,6 +359,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-7);
+}
+
+.home__project-groups > .home__line--role {
+  margin-block-start: calc(var(--space-5) - var(--space-7));
 }
 
 .home__list-section {
