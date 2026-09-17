@@ -213,7 +213,7 @@ export const workExperience = [
   },
   {
     id: "aula-education",
-    title: "Doubled Engineering Speed",
+    title: "EdTech",
     seoName: "Aula Education",
     seoPeriod: "2018–2019, UK",
     seoDescription:
@@ -222,10 +222,7 @@ export const workExperience = [
       "Doubled engineering delivery speed via agile workflow changes with VP of Product. Led customer success analytics across UK and US universities. Improved retention from 9.2% to 32% with a combined qualitative and quantitative analytics toolkit.",
     paragraphs: [
       [{ text: "Aula Education, UK, US", href: "https://www.aula.education" }],
-      {
-        text: "Optimised workflows with feedback",
-        pullquote: true,
-      },
+      "doubled engg speed",
     ],
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;

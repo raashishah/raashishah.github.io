@@ -223,7 +223,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Expo map",
     "Inventory management",
     "Working with Artists",
-    "Doubled Engineering Speed",
+    "EdTech",
   ]);
 });
 
