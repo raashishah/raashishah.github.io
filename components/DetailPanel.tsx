@@ -15,7 +15,6 @@ export function DetailPanel({ route }: DetailPanelProps) {
   const {
     isDesktop,
     isMediaReady,
-    closeDetail,
     requestCloseDetail,
     finishDetailClose,
     isClosing,
@@ -28,7 +27,6 @@ export function DetailPanel({ route }: DetailPanelProps) {
     return (
       <BottomSheet
         title={route.pageLabel}
-        onClose={closeDetail}
         requestClose={requestCloseDetail}
         onExitComplete={finishDetailClose}
         closing={isClosing}
@@ -61,7 +59,7 @@ export function DetailPanelContent({ route }: DetailPanelProps) {
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [isMediaReady, isDesktop, isOpen, isClosing, route.path]);
+  }, [isMediaReady, isDesktop, isOpen, isClosing, route.slug]);
 
   useEffect(() => {
     if (!isClosing) {

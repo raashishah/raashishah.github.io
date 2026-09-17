@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
       {
         source: "/expression",
         destination: "/?detail=expression",
-        permanent: false,
+        permanent: true,
       },
     ];
   },

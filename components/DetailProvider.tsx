@@ -11,45 +11,45 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { DetailPanel } from "@/components/DetailPanel";
 import {
   DETAIL_SEARCH_PARAM,
-  getDetailPathFromSlug,
   getDetailRoute,
-  type DetailPath,
+  getDetailSlugFromSearchParam,
   type DetailRouteConfig,
+  type DetailSlug,
 } from "@/lib/detail-routes";
 import { PANEL_CLOSE_MS, SHEET_BREAKPOINT, TRANSITION_FALLBACK_BUFFER_MS } from "@/lib/motion";
 
 type DetailContextValue = {
   isOpen: boolean;
   isClosing: boolean;
-  path: DetailPath | null;
+  slug: DetailSlug | null;
   route: DetailRouteConfig | null;
   isDesktop: boolean;
   isMediaReady: boolean;
-  closeDetail: () => void;
   requestCloseDetail: () => Promise<void>;
   finishDetailClose: () => void;
 };
 
 const DetailContext = createContext<DetailContextValue | null>(null);
 
+const closedDetail: DetailContextValue = {
+  isOpen: false,
+  isClosing: false,
+  slug: null,
+  route: null,
+  isDesktop: false,
+  isMediaReady: false,
+  requestCloseDetail: async () => {},
+  finishDetailClose: () => {},
+};
+
 export function useDetail() {
   const context = useContext(DetailContext);
   if (!context) {
-    return {
-      isOpen: false,
-      isClosing: false,
-      path: null,
-      route: null,
-      isDesktop: false,
-      isMediaReady: false,
-      closeDetail: () => {},
-      requestCloseDetail: async () => {},
-      finishDetailClose: () => {},
-    } satisfies DetailContextValue;
+    throw new Error("useDetail must be used within DetailProvider");
   }
   return context;
 }
@@ -71,7 +71,6 @@ function useMediaQuery(query: string) {
 }
 
 function DetailProviderInner({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isClosing, setIsClosing] = useState(false);
@@ -81,12 +80,9 @@ function DetailProviderInner({ children }: { children: ReactNode }) {
     `(min-width: ${SHEET_BREAKPOINT})`,
   );
 
-  const path =
-    pathname === "/"
-      ? getDetailPathFromSlug(searchParams.get(DETAIL_SEARCH_PARAM))
-      : null;
-  const route = path ? getDetailRoute(path) : null;
-  const isOpen = Boolean(path);
+  const slug = getDetailSlugFromSearchParam(searchParams.get(DETAIL_SEARCH_PARAM));
+  const route = slug ? getDetailRoute(slug) : null;
+  const isOpen = route !== null;
 
   useEffect(() => {
     if (!isOpen) {
@@ -112,12 +108,8 @@ function DetailProviderInner({ children }: { children: ReactNode }) {
     }
     const resolve = closeResolveRef.current;
     closeResolveRef.current = null;
-    router.back();
+    router.replace("/");
     resolve?.();
-  }, [router]);
-
-  const closeDetail = useCallback(() => {
-    router.back();
   }, [router]);
 
   const requestCloseDetail = useCallback(() => {
@@ -139,28 +131,31 @@ function DetailProviderInner({ children }: { children: ReactNode }) {
     () => ({
       isOpen,
       isClosing,
-      path,
+      slug,
       route,
       isDesktop,
       isMediaReady,
-      closeDetail,
       requestCloseDetail,
       finishDetailClose,
     }),
-    [isOpen, isClosing, path, route, isDesktop, isMediaReady, closeDetail, requestCloseDetail, finishDetailClose],
+    [isOpen, isClosing, slug, route, isDesktop, isMediaReady, requestCloseDetail, finishDetailClose],
   );
 
   return (
     <DetailContext.Provider value={value}>
       {children}
-      {isOpen && route ? <DetailPanel route={route} /> : null}
+      {route ? <DetailPanel route={route} /> : null}
     </DetailContext.Provider>
   );
 }
 
 export function DetailProvider({ children }: { children: ReactNode }) {
   return (
-    <Suspense fallback={children}>
+    <Suspense
+      fallback={
+        <DetailContext.Provider value={closedDetail}>{children}</DetailContext.Provider>
+      }
+    >
       <DetailProviderInner>{children}</DetailProviderInner>
     </Suspense>
   );

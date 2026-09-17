@@ -1,6 +1,7 @@
 import type { PortfolioEntry } from "./types";
 
 export const expressionContent = {
+  pageLabel: "About Expression",
   introRole: "Agentic Tools for Artists",
   introTagline:
     "Auto-colour hand-drawn animation frames — with the artist in control.",
@@ -36,6 +37,7 @@ export const expressionContent = {
     },
   ],
 } as const satisfies {
+  pageLabel: string;
   introRole: string;
   introTagline: string;
   cta: { label: string; href: string };

@@ -1,10 +1,8 @@
 import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
-import { DetailProvider } from "@/components/DetailProvider";
 import { PersonJsonLd } from "@/components/metadata/PersonJsonLd";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/brands.min.css";
-import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "./globals.css";
 import { absoluteUrl, getSiteUrl, siteConfig } from "@/lib/metadata";
 import { seoConfig } from "@/lib/site-seo";
@@ -84,7 +82,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${satoshi.className} ${satoshi.variable}`}>
         <PersonJsonLd />
-        <DetailProvider>{children}</DetailProvider>
+        {children}
       </body>
     </html>
   );

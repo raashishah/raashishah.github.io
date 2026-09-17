@@ -74,7 +74,7 @@ test("project details expand with body copy", async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
-  ).toHaveAttribute("href", getDetailHref("/expression"));
+  ).toHaveAttribute("href", getDetailHref("expression"));
   await expect(
     page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
@@ -406,7 +406,7 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL(getDetailHref("/expression"));
+    await expect(page).toHaveURL(getDetailHref("expression"));
     await expect(page.locator(".home__sheet")).toBeVisible();
     await expect(page.locator(".home__scrim")).toBeVisible();
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
@@ -524,7 +524,7 @@ test.describe("detail panel", () => {
   }) => {
     await page.setViewportSize({ width: 1024, height: 800 });
     await page.goto("/expression");
-    await expect(page).toHaveURL(getDetailHref("/expression"));
+    await expect(page).toHaveURL(getDetailHref("expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(page.locator(".home__work")).toBeVisible();
     await expect(page.locator(".home__portrait")).toBeHidden();
@@ -539,7 +539,7 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL(getDetailHref("/expression"));
+    await expect(page).toHaveURL(getDetailHref("expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(page.locator(".home__sheet")).toHaveCount(0);
     await expect(page.locator(".home__intro")).toBeHidden();
@@ -578,7 +578,7 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL(getDetailHref("/expression"));
+    await expect(page).toHaveURL(getDetailHref("expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
 
     await page
@@ -599,7 +599,7 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL(getDetailHref("/expression"));
+    await expect(page).toHaveURL(getDetailHref("expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
 
     await page.goBack();
@@ -657,7 +657,7 @@ test.describe("footer layout", () => {
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto(getDetailHref("/expression"));
+    await page.goto(getDetailHref("expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(
       page.getByRole("link", {

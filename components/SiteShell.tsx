@@ -8,7 +8,7 @@ import {
   footerDiscoveryHintBefore,
   footerLinks,
 } from "@/content/site";
-import type { FooterSocialLink, FooterSocialLinkId, SocialLink } from "@/content/types";
+import type { FooterSocialLinkId } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
 
 function SocialAnchor({
@@ -43,20 +43,12 @@ type SiteShellProps = {
   children: React.ReactNode;
   nameHref: string;
   nameExternal?: boolean;
-  nameAsHeading?: boolean;
-  emailLink?: SocialLink;
-  calendlyLink?: SocialLink;
-  footerLinks?: readonly FooterSocialLink[];
 };
 
 export function SiteShell({
   children,
   nameHref,
   nameExternal = false,
-  nameAsHeading = true,
-  emailLink: email = emailLink,
-  calendlyLink: calendly = calendlyLink,
-  footerLinks: footer = footerLinks,
 }: SiteShellProps) {
   const brand = (
     <>
@@ -85,23 +77,21 @@ export function SiteShell({
     </Link>
   );
 
-  const NameTag = nameAsHeading ? "h1" : "p";
-
   return (
     <>
       <main className="home">
         <header className="home__header">
-          <NameTag className="home__name">{nameLink}</NameTag>
+          <h1 className="home__name">{nameLink}</h1>
           <nav className="home__header-contact" aria-label="Contact">
             <SocialAnchor
-              href={email.href}
-              label={email.label}
+              href={emailLink.href}
+              label={emailLink.label}
               className="home__link home__link--header"
             />
             <span> or </span>
             <SocialAnchor
-              href={calendly.href}
-              label={calendly.label}
+              href={calendlyLink.href}
+              label={calendlyLink.label}
               className="home__link home__link--header"
             />
           </nav>
@@ -112,7 +102,7 @@ export function SiteShell({
         <footer className="home__footer">
           <div className="home__footer-row">
             <nav className="home__footer-nav" aria-label="Social links">
-              {footer.map((link) => (
+              {footerLinks.map((link) => (
                 <SocialAnchor
                   key={link.id}
                   href={link.href}

@@ -1,3 +1,4 @@
+import { getDetailHref } from "@/lib/detail-routes";
 import type { PortfolioEntry, WorkGroup, WorkGroupSpec } from "./types";
 import { INLINE_LINK_SEPARATOR } from "./types";
 
@@ -110,7 +111,7 @@ export const projects = [
       [
         {
           text: "Colouring for hand-drawn animation",
-          href: "/?detail=expression",
+          href: getDetailHref("expression"),
         },
       ],
       {

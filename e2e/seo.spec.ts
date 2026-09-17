@@ -107,7 +107,7 @@ test.describe("SEO and LLM discovery", () => {
     const response = await page.goto("/expression", { waitUntil: "domcontentloaded" });
     expect(response?.ok()).toBeTruthy();
 
-    await expect(page).toHaveURL(getDetailHref("/expression"));
+    await expect(page).toHaveURL(getDetailHref("expression"));
     await expect(page.getByRole("heading", { level: 1, name: siteConfig.name })).toBeVisible();
     await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
     await expect(

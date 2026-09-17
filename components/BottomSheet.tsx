@@ -22,10 +22,9 @@ type SheetDetent = "medium" | "large";
 
 type BottomSheetProps = {
   title: string;
-  onClose: () => void;
-  requestClose?: () => Promise<void>;
-  onExitComplete?: () => void;
-  closing?: boolean;
+  requestClose: () => Promise<void>;
+  onExitComplete: () => void;
+  closing: boolean;
   children: ReactNode;
 };
 
@@ -40,17 +39,14 @@ function getFocusableElements(container: HTMLElement) {
 
 export function BottomSheet({
   title,
-  onClose,
-  requestClose: requestCloseAnimated,
+  requestClose,
   onExitComplete,
-  closing: closingExternal = false,
+  closing,
   children,
 }: BottomSheetProps) {
   const [mounted, setMounted] = useState(false);
   const [entered, setEntered] = useState(false);
   const draggedRef = useRef(false);
-  const [closingLocal, setClosingLocal] = useState(false);
-  const closing = closingExternal || closingLocal;
   const [detent, setDetent] = useState<SheetDetent>("medium");
   const sheetRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -69,20 +65,8 @@ export function BottomSheet({
 
   const handleRequestClose = useCallback(() => {
     if (closing) return;
-    if (requestCloseAnimated) {
-      void requestCloseAnimated();
-      return;
-    }
-    setClosingLocal(true);
-  }, [closing, requestCloseAnimated]);
-
-  const completeExit = useCallback(() => {
-    if (onExitComplete) {
-      onExitComplete();
-      return;
-    }
-    onClose();
-  }, [onClose, onExitComplete]);
+    void requestClose();
+  }, [closing, requestClose]);
 
   useEffect(() => {
     if (!closing || !sheetRef.current) {
@@ -91,13 +75,8 @@ export function BottomSheet({
 
     const sheet = sheetRef.current;
 
-    return watchTransition(sheet, "transform", PANEL_CLOSE_MS, () => {
-      if (closingLocal) {
-        setClosingLocal(false);
-      }
-      completeExit();
-    });
-  }, [closing, closingLocal, completeExit]);
+    return watchTransition(sheet, "transform", PANEL_CLOSE_MS, onExitComplete);
+  }, [closing, onExitComplete]);
 
   const cycleDetent = useCallback(() => {
     setDetent((current) => (current === "medium" ? "large" : "medium"));

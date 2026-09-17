@@ -29,9 +29,9 @@ function isExternalHref(href: string) {
 }
 
 function InlineBodyLink({ href, text }: { href: string; text: string }) {
-  const { path: detailPath } = useDetail();
+  const { slug } = useDetail();
   const external = isExternalHref(href);
-  const isCurrent = !external && detailPath !== null && getDetailHref(detailPath) === href;
+  const isCurrent = !external && slug !== null && getDetailHref(slug) === href;
   const label = (
     <>
       {text}

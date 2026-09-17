@@ -8,7 +8,6 @@ import { SiteShell } from "@/components/SiteShell";
 type PortfolioShellProps = {
   nameHref: string;
   nameExternal?: boolean;
-  nameAsHeading?: boolean;
   masthead?: ReactNode;
   intro: ReactNode;
   work: ReactNode;
@@ -18,7 +17,6 @@ type PortfolioShellProps = {
 export function PortfolioShell({
   nameHref,
   nameExternal = false,
-  nameAsHeading = true,
   masthead,
   intro,
   work,
@@ -39,7 +37,6 @@ export function PortfolioShell({
     <SiteShell
       nameHref={nameHref}
       nameExternal={nameExternal}
-      nameAsHeading={nameAsHeading}
     >
       <div className={contentClassName}>
         {masthead ? <div className="home__masthead">{masthead}</div> : null}

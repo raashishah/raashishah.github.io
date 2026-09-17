@@ -1,6 +1,7 @@
 import { projects, workExperience } from "@/content/portfolio";
 import { calendlyLink, emailLink, linksById, socialLinks } from "@/content/site";
 import type { PortfolioEntry } from "@/content/types";
+import { getDetailHref } from "@/lib/detail-routes";
 import { absoluteUrl, siteConfig } from "@/lib/metadata";
 
 export const seoConfig = {
@@ -122,7 +123,7 @@ export function getStructuredDataJsonLd() {
 export function buildLlmsTxt(): string {
   const homeUrl = absoluteUrl("/");
   const llmsFullUrl = absoluteUrl("/llms-full.txt");
-  const expressionUrl = absoluteUrl("/?detail=expression");
+  const expressionUrl = absoluteUrl(getDetailHref("expression"));
   const twitterLink = linksById.twitter;
   const scheduleLink = calendlyLink;
   const expressionProject = projects.find((project) => project.id === "expression");

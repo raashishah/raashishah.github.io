@@ -48,7 +48,7 @@ export function useDetailsAccordion() {
 export function DetailsAccordion({ children }: { children: ReactNode }) {
   const openIdRef = useRef<string | null>(null);
   const closersRef = useRef(new Map<string, AccordionEntry>());
-  const { isOpen, path, requestCloseDetail } = useDetail();
+  const { isOpen, slug, requestCloseDetail } = useDetail();
 
   const register = useCallback((id: string, entry: AccordionEntry) => {
     closersRef.current.set(id, entry);
@@ -62,7 +62,7 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
     const currentOpenId = openIdRef.current;
     openIdRef.current = id;
     const closingDetail =
-      isOpen && path && !isDetailPanelAccordion(path, id)
+      isOpen && slug && !isDetailPanelAccordion(slug, id)
         ? requestCloseDetail()
         : Promise.resolve();
     const closingAccordion =
@@ -71,7 +71,7 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
         : Promise.resolve();
 
     await Promise.all([closingDetail, closingAccordion]);
-  }, [isOpen, path, requestCloseDetail]);
+  }, [isOpen, slug, requestCloseDetail]);
 
   const notifyClosed = useCallback((id: string) => {
     if (openIdRef.current === id) {

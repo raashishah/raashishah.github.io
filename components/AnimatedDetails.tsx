@@ -125,7 +125,7 @@ export function AnimatedDetails({
     }
 
     if (accordionId && accordion) {
-      void accordion.prepareOpen(accordionId);
+      await accordion.prepareOpen(accordionId);
     }
 
     await runTransition("open");

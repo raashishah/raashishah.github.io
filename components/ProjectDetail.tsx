@@ -1,16 +1,6 @@
 import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { PortfolioList } from "@/components/PortfolioList";
-import type { PortfolioEntry } from "@/content/types";
-
-export type ProjectDetailProps = {
-  introRole: string;
-  introTagline: string;
-  sections: readonly PortfolioEntry[];
-  pageLabel: string;
-  idPrefix: string;
-  cta?: { label: string; href: string };
-  showIntro?: boolean;
-};
+import type { DetailRouteConfig } from "@/lib/detail-routes";
 
 export function ProjectDetail({
   introRole,
@@ -19,16 +9,13 @@ export function ProjectDetail({
   pageLabel,
   idPrefix,
   cta,
-  showIntro = true,
-}: ProjectDetailProps) {
+}: Omit<DetailRouteConfig, "slug">) {
   return (
     <section className="home__detail-content" aria-label={pageLabel}>
-      {showIntro ? (
-        <div className="home__detail-intro">
-          <p className="home__line home__line--role">{introRole}</p>
-          <h2 className="home__line home__line--tagline">{introTagline}</h2>
-        </div>
-      ) : null}
+      <div className="home__detail-intro">
+        <p className="home__line home__line--role">{introRole}</p>
+        <h2 className="home__line home__line--tagline">{introTagline}</h2>
+      </div>
       <DetailsAccordion>
         <PortfolioList items={sections} idPrefix={idPrefix} ariaLabel={pageLabel} />
       </DetailsAccordion>

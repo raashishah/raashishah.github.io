@@ -2,7 +2,7 @@ import { expressionContent } from "@/content/expression";
 import type { PortfolioEntry } from "@/content/types";
 
 export type DetailRouteConfig = {
-  path: DetailPath;
+  slug: DetailSlug;
   pageLabel: string;
   introRole: string;
   introTagline: string;
@@ -12,77 +12,53 @@ export type DetailRouteConfig = {
 };
 
 export const DETAIL_SEARCH_PARAM = "detail";
-export const DETAIL_PATHS = ["/expression"] as const;
-export type DetailPath = (typeof DETAIL_PATHS)[number];
+export const DETAIL_SLUGS = ["expression"] as const;
+export type DetailSlug = (typeof DETAIL_SLUGS)[number];
 
-export const detailRoutes: Record<DetailPath, DetailRouteConfig> = {
-  "/expression": {
-    path: "/expression",
-    pageLabel: "About Expression",
+const DETAIL_SLUG_SET: ReadonlySet<string> = new Set(DETAIL_SLUGS);
+
+export const detailRoutes: Record<DetailSlug, DetailRouteConfig> = {
+  expression: {
+    slug: "expression",
     ...expressionContent,
   },
 };
 
-export const DETAIL_ACCORDION_ID: Record<DetailPath, string> = {
-  "/expression": "expression",
-};
-
-export function getDetailAccordionId(path: DetailPath): string {
-  return DETAIL_ACCORDION_ID[path];
+export function getDetailHref(slug: DetailSlug): string {
+  return `/?${DETAIL_SEARCH_PARAM}=${slug}`;
 }
 
-export function getDetailSlug(path: DetailPath): string {
-  return path.slice(1);
+export function isDetailSlug(value: string): value is DetailSlug {
+  return DETAIL_SLUG_SET.has(value);
 }
 
-export function getDetailHref(path: DetailPath): string {
-  return `/?${DETAIL_SEARCH_PARAM}=${getDetailSlug(path)}`;
-}
-
-export function getDetailPathFromSlug(slug: string | null): DetailPath | null {
-  if (!slug) {
+export function getDetailSlugFromSearchParam(value: string | null): DetailSlug | null {
+  if (!value || !isDetailSlug(value)) {
     return null;
   }
-  const path = `/${slug}`;
-  return isDetailPath(path) ? path : null;
+  return value;
 }
 
-export function getDetailPathFromHref(href: string): DetailPath | null {
-  if (isDetailPath(href)) {
-    return href;
-  }
-
-  try {
-    const url = new URL(href, "https://decavalent.local");
-    return getDetailPathFromSlug(url.searchParams.get(DETAIL_SEARCH_PARAM));
-  } catch {
+export function getDetailSlugFromHref(href: string): DetailSlug | null {
+  const queryIndex = href.indexOf("?");
+  if (queryIndex === -1) {
     return null;
   }
-}
 
-/** True when accordionId is the homepage row or a nested section inside the open detail panel. */
-export function isDetailPanelAccordion(
-  path: DetailPath,
-  accordionId: string,
-): boolean {
-  const detailAccordionId = getDetailAccordionId(path);
-  return (
-    accordionId === detailAccordionId ||
-    accordionId.startsWith(`${detailAccordionId}-`)
+  const query = href.slice(queryIndex + 1).split("#", 1)[0];
+  return getDetailSlugFromSearchParam(
+    new URLSearchParams(query).get(DETAIL_SEARCH_PARAM),
   );
 }
 
-export function isDetailPath(path: string): path is DetailPath {
-  return DETAIL_PATHS.includes(path as DetailPath);
-}
-
 export function isDetailHref(href: string): boolean {
-  return getDetailPathFromHref(href) !== null;
+  return getDetailSlugFromHref(href) !== null;
 }
 
-export function getDetailRoute(path: string): DetailRouteConfig | null {
-  if (!isDetailPath(path)) {
-    return null;
-  }
-  return detailRoutes[path];
+export function isDetailPanelAccordion(slug: DetailSlug, accordionId: string): boolean {
+  return accordionId === slug || accordionId.startsWith(`${slug}-`);
+}
+
+export function getDetailRoute(slug: DetailSlug): DetailRouteConfig {
+  return detailRoutes[slug];
 }
