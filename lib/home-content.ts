@@ -9,7 +9,6 @@ export type HomeContent = {
   introName: string;
   introRole: string;
   introSubline: string;
-  introSublineParts: readonly string[];
   introTagline: string;
   projects: readonly PortfolioEntry[];
   workExperience: readonly PortfolioEntry[];
@@ -23,7 +22,6 @@ export function getHomeContent(): HomeContent {
     introName: siteConfig.introName,
     introRole: siteConfig.introRole,
     introSubline: siteConfig.introSubline,
-    introSublineParts: siteConfig.introSublineParts,
     introTagline: siteConfig.introTagline,
     projects,
     workExperience,
