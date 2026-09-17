@@ -175,7 +175,7 @@ export const workExperience = [
   },
   {
     id: "ondevice",
-    title: "On-device health",
+    title: "On-device",
     seoName: "OnDevice",
     seoPeriod: "2025",
     seoDescription:
@@ -183,9 +183,9 @@ export const workExperience = [
     seoLongDetail:
       "Co-founded and led product for a privacy-first type II diabetes health app using on-device inference. Led 30 interviews and 10 surveys to define privacy-by-default UX, reducing cognitive load and accelerating task completion by 42%. Defined agentic on-device flows enabling 200+ personalized user actions. Early GTM via applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
     paragraphs: [
-      [{ text: "Health App", href: "/ondevice" }],
+      [{ text: "Twitter", href: "https://x.com/useOnDevice" }],
       {
-        text: "Type II diabetes mgmt",
+        text: "Research",
         pullquote: true,
       },
     ],

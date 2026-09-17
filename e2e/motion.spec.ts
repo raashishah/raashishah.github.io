@@ -7,12 +7,6 @@ const detailRoutes = [
     linkName: "Colouring for hand-drawn animation",
     path: "/expression",
   },
-  {
-    label: "On-device health",
-    summary: "On-device health",
-    linkName: "Health App",
-    path: "/ondevice",
-  },
 ] as const;
 
 for (const width of [375, 768, 1280]) {

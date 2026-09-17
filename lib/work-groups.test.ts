@@ -29,7 +29,7 @@ describe("homepage work groups", () => {
       "Pocket Analyst",
       "Vedic Astrologer",
       "Entreprise-grade",
-      "On-device health",
+      "On-device",
       "Skills",
     ]);
     expect(groups[1]?.items.map((item) => item.title)).toEqual([

@@ -53,15 +53,6 @@ test.describe("light mode (default)", () => {
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
   });
-
-  test("ondevice page uses light semantic tokens", async ({ page }) => {
-    await page.emulateMedia({ colorScheme: "light" });
-    await page.goto("/ondevice");
-
-    const colors = await getPageColors(page);
-    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
-    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
-  });
 });
 
 test.describe("dark mode (system preference)", () => {
@@ -104,20 +95,6 @@ test.describe("dark mode (system preference)", () => {
 
     await expect(page.locator(".home__intro .home__line--role")).toHaveText(
       "Agentic Tools for Artists",
-    );
-    await expect(page.getByText("Still updating this page")).toBeVisible();
-  });
-
-  test("ondevice page uses dark semantic tokens", async ({ page }) => {
-    await page.emulateMedia({ colorScheme: "dark" });
-    await page.goto("/ondevice");
-
-    const colors = await getPageColors(page);
-    expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
-    expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
-
-    await expect(page.locator(".home__intro .home__line--role")).toHaveText(
-      "Health App",
     );
     await expect(page.getByText("Still updating this page")).toBeVisible();
   });

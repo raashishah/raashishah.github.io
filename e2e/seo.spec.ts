@@ -95,7 +95,7 @@ test.describe("SEO and LLM discovery", () => {
     expect(response.ok()).toBeTruthy();
     expect(body).toContain("<loc>");
     expect(body).toContain(absoluteUrl("/expression"));
-    expect(body).toContain(absoluteUrl("/ondevice"));
+    expect(body).not.toContain(absoluteUrl("/ondevice"));
     expect(body).toContain(absoluteUrl("/llms.txt"));
     expect(body).toContain(absoluteUrl("/llms-full.txt"));
     expect(body).toContain("</urlset>");

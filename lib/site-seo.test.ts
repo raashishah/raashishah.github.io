@@ -42,7 +42,8 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("- Skills:");
     expect(llmsTxt).toContain("/llms-full.txt");
     expect(llmsTxt).toContain("/expression");
-    expect(llmsTxt).toContain("/ondevice");
+    expect(llmsTxt).toContain("https://x.com/useOnDevice");
+    expect(llmsTxt).not.toContain("/ondevice");
     expect(llmsTxt).toContain("## Optional");
   });
 

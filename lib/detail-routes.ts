@@ -1,5 +1,4 @@
 import { expressionContent } from "@/content/expression";
-import { ondeviceContent } from "@/content/ondevice";
 import type { PortfolioEntry } from "@/content/types";
 
 export type DetailRouteConfig = {
@@ -12,7 +11,7 @@ export type DetailRouteConfig = {
   showBookDemo?: boolean;
 };
 
-export const DETAIL_PATHS = ["/expression", "/ondevice"] as const;
+export const DETAIL_PATHS = ["/expression"] as const;
 export type DetailPath = (typeof DETAIL_PATHS)[number];
 
 export const detailRoutes: Record<DetailPath, DetailRouteConfig> = {
@@ -21,16 +20,10 @@ export const detailRoutes: Record<DetailPath, DetailRouteConfig> = {
     pageLabel: "About Expression",
     ...expressionContent,
   },
-  "/ondevice": {
-    path: "/ondevice",
-    pageLabel: "About OnDevice",
-    ...ondeviceContent,
-  },
 };
 
 export const DETAIL_ACCORDION_ID: Record<DetailPath, string> = {
   "/expression": "expression",
-  "/ondevice": "ondevice",
 };
 
 export function getDetailAccordionId(path: DetailPath): string {

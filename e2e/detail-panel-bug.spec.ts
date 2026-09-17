@@ -40,31 +40,6 @@ test.describe("detail panel accordion interaction", () => {
     ).not.toHaveAttribute("open");
   });
 
-  test("collapsing same accordion keeps ondevice detail open on desktop", async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/");
-    await page
-      .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device health" })
-      .click();
-    await page.getByRole("link", { name: "Health App" }).click();
-
-    await expect(page).toHaveURL("/ondevice");
-    await expect(page.locator(".home__detail")).toBeVisible();
-
-    await page
-      .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device health" })
-      .click();
-
-    await page.waitForTimeout(AFTER_CLOSE_MS);
-
-    await expect(page).toHaveURL("/ondevice");
-    await expect(page.locator(".home__detail")).toBeVisible();
-  });
-
   test("soft navigation keeps homepage mounted on desktop", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto("/");
@@ -87,11 +62,13 @@ test.describe("detail panel accordion interaction", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device health" })
+      .filter({ hasText: "Animation" })
       .click();
-    await page.getByRole("link", { name: "Health App" }).click();
+    await page
+      .getByRole("link", { name: "Colouring for hand-drawn animation" })
+      .click();
 
-    await expect(page).toHaveURL("/ondevice");
+    await expect(page).toHaveURL("/expression");
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
     await expect(page.locator(".home__sheet")).toBeVisible();
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
@@ -128,16 +105,6 @@ test.describe("nested detail panel accordions", () => {
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .click();
     await expect(page).toHaveURL("/expression");
-  }
-
-  async function openOnDeviceDetail(page: import("@playwright/test").Page) {
-    await page.goto("/");
-    await page
-      .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device health" })
-      .click();
-    await page.getByRole("link", { name: "Health App" }).click();
-    await expect(page).toHaveURL("/ondevice");
   }
 
   test("clicking Auto-Colour inside expression detail keeps panel open on desktop", async ({
@@ -179,48 +146,6 @@ test.describe("nested detail panel accordions", () => {
     await expect(page.locator(".home__sheet")).toBeVisible();
     await expect(
       page.locator(".home__sheet details").filter({ hasText: "Auto-Colour" }),
-    ).toHaveAttribute("open");
-  });
-
-  test("clicking Privacy inside ondevice detail keeps panel open on desktop", async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 768, height: 800 });
-    await openOnDeviceDetail(page);
-    await expect(page.locator(".home__detail")).toBeVisible();
-
-    await page
-      .locator(".home__detail-content summary.home__details-summary")
-      .filter({ hasText: "Privacy" })
-      .click();
-
-    await page.waitForTimeout(AFTER_CLOSE_MS);
-
-    await expect(page).toHaveURL("/ondevice");
-    await expect(page.locator(".home__detail")).toBeVisible();
-    await expect(
-      page.locator(".home__detail-content details").filter({ hasText: "Privacy" }),
-    ).toHaveAttribute("open");
-  });
-
-  test("clicking On-Device Inference inside ondevice detail keeps sheet open on mobile", async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 375, height: 844 });
-    await openOnDeviceDetail(page);
-    await expect(page.locator(".home__sheet")).toBeVisible();
-
-    await page
-      .locator(".home__sheet summary.home__details-summary")
-      .filter({ hasText: "On-Device Inference" })
-      .click();
-
-    await page.waitForTimeout(AFTER_CLOSE_MS);
-
-    await expect(page).toHaveURL("/ondevice");
-    await expect(page.locator(".home__sheet")).toBeVisible();
-    await expect(
-      page.locator(".home__sheet details").filter({ hasText: "On-Device Inference" }),
     ).toHaveAttribute("open");
   });
 });

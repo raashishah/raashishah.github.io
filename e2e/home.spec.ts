@@ -180,6 +180,24 @@ test("Pocket Analyst heading is not duplicated in the body", async ({ page }) =>
   await expect(page.getByRole("link", { name: "Pocket Analytics" })).toHaveCount(0);
 });
 
+test("On-device links to Twitter with a Research pullquote", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "On-device" })
+    .click();
+
+  const twitterLink = page
+    .locator(".home__details[open] .home__project-body")
+    .getByRole("link", { name: "Twitter" });
+  await expect(twitterLink).toBeVisible();
+  await expect(twitterLink).toHaveAttribute("href", "https://x.com/useOnDevice");
+  await expect(
+    page.locator(".home__details[open] .home__project-body-pullquote"),
+  ).toHaveText("Research");
+  await expect(page.getByRole("link", { name: "Health App" })).toHaveCount(0);
+});
+
 test("Expo map pullquote links to the exhibition webapp", async ({ page }) => {
   await page.goto("/");
   await page
@@ -219,7 +237,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Pocket Analyst",
     "Vedic Astrologer",
     "Entreprise-grade",
-    "On-device health",
+    "On-device",
     "Skills",
     "Animation",
     "Geospatial",
@@ -235,7 +253,7 @@ test("opening a second dropdown closes the first", async ({ page }) => {
   const enterpriseDetails = page
     .locator("details")
     .filter({ hasText: "Entreprise-grade" });
-  const onDeviceDetails = page.locator("details").filter({ hasText: "On-device health" });
+  const onDeviceDetails = page.locator("details").filter({ hasText: "On-device" });
 
   await enterpriseDetails.locator("summary").click();
   await expect(enterpriseDetails).toHaveAttribute("open", "");
@@ -522,28 +540,6 @@ test.describe("detail panel", () => {
     await expect(page.locator(".home__sheet")).toHaveCount(0);
   });
 
-  test("desktop opens ondevice in split view under site tagline", async ({ page }) => {
-    await page.setViewportSize({ width: 1024, height: 800 });
-    await page.goto("/");
-    await page
-      .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device health" })
-      .click();
-    await page.getByRole("link", { name: "Health App" }).click();
-
-    await expect(page).toHaveURL("/ondevice");
-    await expect(page.locator(".home__detail")).toBeVisible();
-    await expect(page.locator(".home__sheet")).toHaveCount(0);
-    await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
-      siteConfig.introTagline,
-    );
-    await expect(page.getByText("Entreprise-grade")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Health App" })).toHaveAttribute(
-      "aria-current",
-      "page",
-    );
-  });
-
   test("desktop opening another accordion dismisses split detail", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 800 });
     await page.goto("/");
@@ -570,11 +566,11 @@ test.describe("detail panel", () => {
     await page.goto("/");
     await page
       .locator("summary.home__details-summary")
-      .filter({ hasText: "On-device health" })
+      .filter({ hasText: "Animation" })
       .click();
-    await page.getByRole("link", { name: "Health App" }).click();
+    await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL("/ondevice");
+    await expect(page).toHaveURL("/expression");
     await expect(page.locator(".home__detail")).toBeVisible();
 
     await page.goBack();

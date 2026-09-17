@@ -123,7 +123,6 @@ export function buildLlmsTxt(): string {
   const homeUrl = absoluteUrl("/");
   const llmsFullUrl = absoluteUrl("/llms-full.txt");
   const expressionUrl = absoluteUrl("/expression");
-  const ondeviceUrl = absoluteUrl("/ondevice");
   const twitterLink = linksById.twitter;
   const scheduleLink = calendlyLink;
   const expressionProject = projects.find((project) => project.id === "expression");
@@ -184,7 +183,7 @@ export function buildLlmsTxt(): string {
         ]
       : []),
     ...(ondeviceRole
-      ? [`- [OnDevice](${ondeviceUrl}): ${ondeviceRole.seoDescription}`]
+      ? [`- [OnDevice](https://x.com/useOnDevice): ${ondeviceRole.seoDescription}`]
       : []),
     "",
     "## Projects",
