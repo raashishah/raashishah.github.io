@@ -9,6 +9,7 @@ type PortfolioShellProps = {
   nameHref: string;
   nameExternal?: boolean;
   nameAsHeading?: boolean;
+  masthead?: ReactNode;
   intro: ReactNode;
   work: ReactNode;
   portrait?: ReactNode;
@@ -18,6 +19,7 @@ export function PortfolioShell({
   nameHref,
   nameExternal = false,
   nameAsHeading = true,
+  masthead,
   intro,
   work,
   portrait,
@@ -32,7 +34,8 @@ export function PortfolioShell({
       nameExternal={nameExternal}
       nameAsHeading={nameAsHeading}
     >
-      <div className="home__content">
+      <div className={masthead ? "home__content home__content--masthead" : "home__content"}>
+        {masthead ? <div className="home__masthead">{masthead}</div> : null}
         <div className="home__primary">
           {intro}
           {route ? <DetailPanelContent route={route} /> : null}

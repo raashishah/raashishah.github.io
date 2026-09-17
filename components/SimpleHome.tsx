@@ -21,9 +21,9 @@ export function SimpleHome({
       <PortfolioShell
         nameHref={nameEasterEggHref}
         nameExternal
+        masthead={<DecavalentDictionary />}
         intro={
-          <section className="home__intro home__intro--masthead" aria-label="About">
-            <DecavalentDictionary />
+          <section className="home__intro" aria-label="About">
             <HomeIntroProfile
               introName={introName}
               introRole={introRole}
