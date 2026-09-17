@@ -484,6 +484,13 @@ test.describe("detail panel", () => {
     expect(
       Math.abs(contentBox!.y + contentBox!.height - (mentoringBox!.y + mentoringBox!.height)),
     ).toBeLessThan(2);
+    const bookBox = await page.locator(".home__mentoring-book").boundingBox();
+    const degreeBox = await page.locator(".home__work .home__line--role").boundingBox();
+    expect(bookBox).not.toBeNull();
+    expect(degreeBox).not.toBeNull();
+    expect(Math.abs(bookBox!.y + bookBox!.height - (degreeBox!.y + degreeBox!.height))).toBeLessThan(
+      2,
+    );
   });
 
   test("mobile portrait sits below the work list", async ({ page }) => {

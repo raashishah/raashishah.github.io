@@ -33,7 +33,7 @@ export function SimpleHome({
       }
       portrait={<><HomePortrait /><AgentMentoring /></>}
       work={
-        <section aria-label="Work and experience">
+        <section className="home__work-stack" aria-label="Work and experience">
           <DetailsAccordion>
             <div className="home__project-groups">
               {workGroups.map((group) => {
