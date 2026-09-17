@@ -60,7 +60,7 @@ export const projects = [
   },
   {
     id: "pink-depot",
-    title: "Inventory management",
+    title: "Inventory mgmt",
     seoName: "Pink Depot",
     primaryUrl: "https://pinkdepot.raashishah.com",
     seoDescription:

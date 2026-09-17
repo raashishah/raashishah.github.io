@@ -120,7 +120,7 @@ test("Pink Depot shows body link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Inventory management" })
+    .filter({ hasText: "Inventory mgmt" })
     .click();
 
   const projectLink = page.getByRole("link", {
@@ -242,7 +242,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Animation",
     "Geospatial",
     "Expo map",
-    "Inventory management",
+    "Inventory mgmt",
     "Working with Artists",
     "EdTech",
   ]);
