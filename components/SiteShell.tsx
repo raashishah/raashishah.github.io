@@ -79,7 +79,7 @@ export function SiteShell({
 
   return (
     <>
-      <main className="home">
+      <main className="home" data-homepage="true">
         <header className="home__header">
           <h1 className="home__name">{nameLink}</h1>
           <nav className="home__header-contact" aria-label="Contact">

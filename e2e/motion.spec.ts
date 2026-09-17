@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test";
+import { getDetailHref } from "../lib/detail-routes";
 
 const detailRoutes = [
   {
     label: "Animation",
     summary: "Animation",
     linkName: "Colouring for hand-drawn animation",
-    path: "/?detail=expression",
+    path: getDetailHref("expression"),
   },
 ] as const;
 
