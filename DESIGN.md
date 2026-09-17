@@ -111,7 +111,7 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 - **Weights:** 500 (medium) for UI, headings, links; 400 (regular) for dropdown body paragraphs.
 - **Scale:** Fluid `clamp()` size tokens in `app/styles/tokens.css` (`--text-title` through `--text-caption`).
 - **Bundled roles:** Each semantic role bundles size + leading + tracking (`--type-*-size`, `--type-*-leading`, `--type-*-tracking`). Components reference bundles, not raw size + ad hoc leading.
-- **Measure:** Intro column max `34ch` (`--home-measure-narrow`); dropdown body max `50ch` (`--home-measure-body`).
+- **Measure:** Intro column max `34ch` (`--home-measure-narrow`); dropdown body max `50ch` (`--home-measure-body`); Rambo portrait `70%` of the intro column (`--home-portrait-width`).
 - **OG image:** Static Figma PNG at `app/opengraph-image.png` (light layout; not scheme-aware).
 
 ### Apple HIG role map

@@ -9,7 +9,7 @@ export function HomePortrait() {
         alt={homePortrait.alt}
         width={homePortrait.width}
         height={homePortrait.height}
-        sizes="(min-width: 40rem) 17rem, calc((100vw - 3rem) * 0.8)"
+        sizes="(min-width: 40rem) 15rem, calc((100vw - 3rem) * 0.7)"
         className="home__portrait-image"
       />
     </figure>

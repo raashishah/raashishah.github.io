@@ -100,7 +100,7 @@
 .home__portrait {
   margin: 0;
   min-width: 0;
-  width: 80%;
+  width: var(--home-portrait-width);
   overflow: hidden;
   border-radius: var(--space-4);
 }
