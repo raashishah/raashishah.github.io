@@ -3,7 +3,7 @@ import { decavalentDictionary } from "@/content/decavalent";
 
 const dictionarySerif = Newsreader({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-dictionary",
@@ -58,13 +58,7 @@ export function DecavalentDictionary() {
                   ) : null}
                 </>
               ) : null}
-              <em
-                className={
-                  index === 0
-                    ? "dictionary-entry__example dictionary-entry__example--lead"
-                    : "dictionary-entry__example"
-                }
-              >
+              <em className="dictionary-entry__example">
                 {citation.example}
               </em>
             </span>

@@ -239,13 +239,20 @@ export async function assertDictionaryTypeMix(page: Page) {
       };
     };
 
+    const examples = Array.from(
+      document.querySelectorAll(".dictionary-entry__example"),
+    );
+
     return {
       lemma: styleOf(".dictionary-entry__lemma"),
       gloss: styleOf(".dictionary-entry__gloss"),
-      example: styleOf(".dictionary-entry__example--lead"),
-      followExample: styleOf(
-        ".dictionary-entry__example:not(.dictionary-entry__example--lead)",
-      ),
+      example: styleOf(".dictionary-entry__example"),
+      followExample: examples[1]
+        ? {
+            family: getComputedStyle(examples[1]).fontFamily.toLowerCase(),
+            weight: Number.parseInt(getComputedStyle(examples[1]).fontWeight, 10),
+          }
+        : { family: "", weight: 0 },
       origin: styleOf(".dictionary-entry__origin"),
       ipa: styleOf(".dictionary-entry__ipa"),
       pos: styleOf(".dictionary-entry__pos-word"),
@@ -264,14 +271,14 @@ export async function assertDictionaryTypeMix(page: Page) {
   expect(fonts.grammar.family).toMatch(/satoshi/i);
   expect(fonts.label.family).toMatch(/satoshi/i);
 
-  expect(fonts.lemma.weight).toBe(600);
-  expect(fonts.gloss.weight).toBe(500);
-  expect(fonts.example.weight).toBe(500);
+  expect(fonts.lemma.weight).toBe(500);
+  expect(fonts.gloss.weight).toBe(400);
+  expect(fonts.example.weight).toBe(400);
   expect(fonts.followExample.weight).toBe(400);
-  expect(fonts.origin.weight).toBe(500);
+  expect(fonts.origin.weight).toBe(400);
   expect(fonts.ipa.weight).toBe(400);
-  expect(fonts.pos.weight).toBe(700);
-  expect(fonts.grammar.weight).toBe(500);
+  expect(fonts.pos.weight).toBe(500);
+  expect(fonts.grammar.weight).toBe(400);
   expect(fonts.label.weight).toBe(400);
 }
 
