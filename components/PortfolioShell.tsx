@@ -12,6 +12,7 @@ type PortfolioShellProps = {
   intro: ReactNode;
   work: ReactNode;
   portrait?: ReactNode;
+  showCursorHeatmap?: boolean;
 };
 
 export function PortfolioShell({
@@ -21,6 +22,7 @@ export function PortfolioShell({
   intro,
   work,
   portrait,
+  showCursorHeatmap = false,
 }: PortfolioShellProps) {
   const { route, isDesktop, isMediaReady } = useDetail();
   const portraitInPrimary = isMediaReady ? isDesktop : false;
@@ -31,6 +33,7 @@ export function PortfolioShell({
       nameHref={nameHref}
       nameExternal={nameExternal}
       nameAsHeading={nameAsHeading}
+      showCursorHeatmap={showCursorHeatmap}
     >
       <div className="home__content">
         <div className="home__primary">

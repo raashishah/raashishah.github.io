@@ -581,6 +581,15 @@ test.describe("footer layout", () => {
     await expect(page.getByText("546")).toHaveCount(0);
   });
 
+  test("keeps the Cursor heatmap off project pages", async ({ page }) => {
+    await page.goto("/expression");
+    await expect(
+      page.getByRole("link", {
+        name: "Cursor profile @rashdriving (opens in new tab)",
+      }),
+    ).toHaveCount(0);
+  });
+
   test("footer meta aligns to the content edge on desktop", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto("/");

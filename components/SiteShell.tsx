@@ -48,6 +48,7 @@ type SiteShellProps = {
   emailLink?: SocialLink;
   calendlyLink?: SocialLink;
   footerLinks?: readonly FooterSocialLink[];
+  showCursorHeatmap?: boolean;
 };
 
 export function SiteShell({
@@ -58,6 +59,7 @@ export function SiteShell({
   emailLink: email = emailLink,
   calendlyLink: calendly = calendlyLink,
   footerLinks: footer = footerLinks,
+  showCursorHeatmap = false,
 }: SiteShellProps) {
   const brand = (
     <>
@@ -111,7 +113,7 @@ export function SiteShell({
         {children}
 
         <footer className="home__footer">
-          <CursorHeatmap />
+          {showCursorHeatmap ? <CursorHeatmap /> : null}
           <nav className="home__footer-nav" aria-label="Social links">
             {footer.map((link) => (
               <SocialAnchor

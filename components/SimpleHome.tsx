@@ -20,6 +20,7 @@ export function SimpleHome({
       <PortfolioShell
         nameHref={nameEasterEggHref}
         nameExternal
+        showCursorHeatmap
         intro={
           <section className="home__intro home__intro--masthead" aria-label="About">
             <DecavalentDictionary />
