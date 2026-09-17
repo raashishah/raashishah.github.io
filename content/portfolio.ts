@@ -167,7 +167,7 @@ export const workExperience = [
         },
       ],
       {
-        text: "Transformed a creative studio into a product-led team",
+        text: "Transformed a creative studio into a tech-led team",
         pullquote: true,
       },
     ],
