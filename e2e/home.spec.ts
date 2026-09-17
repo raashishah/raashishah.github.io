@@ -47,6 +47,36 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Experience" })).toHaveCount(0);
 });
 
+test("work categories use list-group spacing, not a page-section break", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const spacing = await page.evaluate(() => {
+    const groups = document.querySelector(".home__project-groups");
+    if (!groups) {
+      return null;
+    }
+    const root = getComputedStyle(document.documentElement);
+    const probe = document.createElement("div");
+    probe.style.position = "absolute";
+    probe.style.height = root.getPropertyValue("--space-4").trim();
+    document.body.append(probe);
+    const space4 = probe.getBoundingClientRect().height;
+    probe.style.height = root.getPropertyValue("--space-7").trim();
+    const space7 = probe.getBoundingClientRect().height;
+    probe.remove();
+    const styles = getComputedStyle(groups);
+    return {
+      groupGap: Number.parseFloat(styles.rowGap),
+      space4,
+      space7,
+    };
+  });
+  expect(spacing).not.toBeNull();
+  expect(spacing!.groupGap).toBeCloseTo(spacing!.space4, 0);
+  expect(spacing!.groupGap).toBeLessThan(spacing!.space7);
+});
+
 test("clicking outside a project accordion runs the close animation", async ({
   page,
 }) => {
