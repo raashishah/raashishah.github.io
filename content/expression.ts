@@ -4,7 +4,10 @@ export const expressionContent = {
   introRole: "Agentic Tools for Artists",
   introTagline:
     "Auto-colour hand-drawn animation frames — with the artist in control.",
-  showBookDemo: true,
+  cta: {
+    label: "Try now",
+    href: "https://drive.google.com/drive/u/1/folders/1xeVuZEli4oMyaSOlae2FLMjXL0aXQ4a5",
+  },
   idPrefix: "expression",
   sections: [
     {
@@ -35,7 +38,7 @@ export const expressionContent = {
 } as const satisfies {
   introRole: string;
   introTagline: string;
-  showBookDemo: boolean;
+  cta: { label: string; href: string };
   idPrefix: string;
   sections: readonly PortfolioEntry[];
 };

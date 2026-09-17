@@ -90,6 +90,11 @@
   .home__content--masthead .home__work {
     grid-row: 2 / 4;
   }
+
+  .home__content--detail .home__primary > .home__intro,
+  .home__content--detail .home__primary > .home__portrait-wrap {
+    display: none;
+  }
 }
 
 .home__portrait {

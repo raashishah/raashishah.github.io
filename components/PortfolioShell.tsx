@@ -24,9 +24,16 @@ export function PortfolioShell({
   work,
   portrait,
 }: PortfolioShellProps) {
-  const { route, isDesktop, isMediaReady } = useDetail();
+  const { route, isDesktop, isMediaReady, isOpen, isClosing } = useDetail();
   const portraitInPrimary = isMediaReady ? isDesktop : false;
   const portraitNode = portrait ? <div className="home__portrait-wrap">{portrait}</div> : null;
+  const splitOpen = Boolean(route) && isMediaReady && isDesktop && (isOpen || isClosing);
+  const contentClassName = [
+    masthead ? "home__content home__content--masthead" : "home__content",
+    splitOpen ? "home__content--detail" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <SiteShell
@@ -34,7 +41,7 @@ export function PortfolioShell({
       nameExternal={nameExternal}
       nameAsHeading={nameAsHeading}
     >
-      <div className={masthead ? "home__content home__content--masthead" : "home__content"}>
+      <div className={contentClassName}>
         {masthead ? <div className="home__masthead">{masthead}</div> : null}
         <div className="home__primary">
           {intro}

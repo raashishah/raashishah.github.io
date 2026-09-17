@@ -42,7 +42,7 @@ describe("homepage work groups", () => {
     ]);
     expect(groups[3]?.items.map((item) => item.title)).toEqual([
       "Working with Artists",
-      "EdTech",
+      "Doubled engineering speed",
     ]);
   });
 

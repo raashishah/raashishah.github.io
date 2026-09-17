@@ -1,0 +1,11 @@
+---
+description: Ship directly to main without local tests or dev server
+alwaysApply: true
+---
+
+# Ship to main
+
+- Commit and push directly to `main` — no PR workflow, no feature branches unless parallel work needs isolation.
+- Do not run unit tests (`npm test`) or start a local dev server (`npm run dev`, localhost) before shipping unless the user explicitly asks.
+- Vercel production build on push is the verification gate.
+- Still update e2e/unit test files when behaviour changes; just do not run them locally before merge.

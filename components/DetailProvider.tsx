@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  Suspense,
   useCallback,
   useContext,
   useEffect,
@@ -10,12 +11,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DetailPanel } from "@/components/DetailPanel";
-import { isHomepageMounted } from "@/components/HomepageMarker";
 import {
+  DETAIL_SEARCH_PARAM,
+  getDetailPathFromSlug,
   getDetailRoute,
-  isDetailPath,
   type DetailPath,
   type DetailRouteConfig,
 } from "@/lib/detail-routes";
@@ -69,34 +70,29 @@ function useMediaQuery(query: string) {
   return { matches, ready };
 }
 
-type DetailProviderProps = {
-  children: ReactNode;
-};
-
-export function DetailProvider({ children }: DetailProviderProps) {
+function DetailProviderInner({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isClosing, setIsClosing] = useState(false);
-  const [isHomepage, setIsHomepage] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
   const closeResolveRef = useRef<(() => void) | null>(null);
   const { matches: isDesktop, ready: isMediaReady } = useMediaQuery(
     `(min-width: ${SHEET_BREAKPOINT})`,
   );
 
-  useEffect(() => {
-    setIsHomepage(isHomepageMounted());
-  }, [pathname]);
-
-  const isIntercept = isHomepage && isDetailPath(pathname);
-  const path = isIntercept ? (pathname as DetailPath) : null;
+  const path =
+    pathname === "/"
+      ? getDetailPathFromSlug(searchParams.get(DETAIL_SEARCH_PARAM))
+      : null;
   const route = path ? getDetailRoute(path) : null;
+  const isOpen = Boolean(path);
 
   useEffect(() => {
-    if (!isIntercept) {
+    if (!isOpen) {
       setIsClosing(false);
     }
-  }, [isIntercept]);
+  }, [isOpen]);
 
   useEffect(() => {
     return () => {
@@ -125,7 +121,7 @@ export function DetailProvider({ children }: DetailProviderProps) {
   }, [router]);
 
   const requestCloseDetail = useCallback(() => {
-    if (!isIntercept || isClosing) {
+    if (!isOpen || isClosing) {
       return Promise.resolve();
     }
 
@@ -137,11 +133,11 @@ export function DetailProvider({ children }: DetailProviderProps) {
         finishDetailClose();
       }, PANEL_CLOSE_MS + TRANSITION_FALLBACK_BUFFER_MS);
     });
-  }, [finishDetailClose, isClosing, isIntercept]);
+  }, [finishDetailClose, isClosing, isOpen]);
 
   const value = useMemo(
     () => ({
-      isOpen: isIntercept,
+      isOpen,
       isClosing,
       path,
       route,
@@ -151,13 +147,21 @@ export function DetailProvider({ children }: DetailProviderProps) {
       requestCloseDetail,
       finishDetailClose,
     }),
-    [isIntercept, isClosing, path, route, isDesktop, isMediaReady, closeDetail, requestCloseDetail, finishDetailClose],
+    [isOpen, isClosing, path, route, isDesktop, isMediaReady, closeDetail, requestCloseDetail, finishDetailClose],
   );
 
   return (
     <DetailContext.Provider value={value}>
       {children}
-      {isIntercept && route ? <DetailPanel route={route} /> : null}
+      {isOpen && route ? <DetailPanel route={route} /> : null}
     </DetailContext.Provider>
+  );
+}
+
+export function DetailProvider({ children }: { children: ReactNode }) {
+  return (
+    <Suspense fallback={children}>
+      <DetailProviderInner>{children}</DetailProviderInner>
+    </Suspense>
   );
 }

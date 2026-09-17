@@ -1,5 +1,6 @@
 ## Learned User Preferences
 
+- Ship straight to `main` — no PR workflow, no local dev server, no unit tests (`npm test`) before commit/push; Vercel production build is the gate.
 - Build the full site in one pass — no v1/v2 phasing; Next.js App Router confirmed.
 - Exclude Bible for Bad People and Kotak Securities from public listings; preserve legacy social links; footer brand icons via Font Awesome `<i class="fa-brands">` HTML (not react-fontawesome) with legacy inline SVGs for Giphy and Medium in `lib/legacy-social-icons.ts` (not in FA free / FA 7 changed Medium); `SocialIcon.tsx` adds `.home__footer-icon--giphy` (~1.16× scale) and `.home__footer-icon--medium` (~1.06×) for visual parity with FA icons.
 - Prefers agent execute deployment, setup, QA (`/gstack-qa`), and design review (`/gstack-design-review`) itself — not ask user to manually test or follow step-by-step instructions; use Composer for subagents (not Composer Fast or Sonnet).

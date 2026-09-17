@@ -122,7 +122,7 @@ export function getStructuredDataJsonLd() {
 export function buildLlmsTxt(): string {
   const homeUrl = absoluteUrl("/");
   const llmsFullUrl = absoluteUrl("/llms-full.txt");
-  const expressionUrl = absoluteUrl("/expression");
+  const expressionUrl = absoluteUrl("/?detail=expression");
   const twitterLink = linksById.twitter;
   const scheduleLink = calendlyLink;
   const expressionProject = projects.find((project) => project.id === "expression");

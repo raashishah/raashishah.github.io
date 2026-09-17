@@ -5,7 +5,7 @@ const detailRoutes = [
     label: "Animation",
     summary: "Animation",
     linkName: "Colouring for hand-drawn animation",
-    path: "/expression",
+    path: "/?detail=expression",
   },
 ] as const;
 

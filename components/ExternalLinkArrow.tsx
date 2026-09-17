@@ -1,4 +1,4 @@
-import { isDetailPath } from "@/lib/detail-routes";
+import { isDetailHref } from "@/lib/detail-routes";
 
 export function ExternalLinkArrow({ className }: { className?: string }) {
   return (
@@ -9,7 +9,7 @@ export function ExternalLinkArrow({ className }: { className?: string }) {
 }
 
 export function InlineLinkArrow({ href, className = "home__inline-link-icon" }: { href: string; className?: string }) {
-  if (isDetailPath(href)) {
+  if (isDetailHref(href)) {
     return (
       <span className={`${className} home__inline-link-icon--detail`} aria-hidden="true">
         <span className="home__inline-link-icon-up">↑</span>

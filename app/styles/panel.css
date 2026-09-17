@@ -29,7 +29,7 @@
   display: grid;
   grid-template-rows: 0fr;
   min-height: 0;
-  margin-block-end: calc(-1 * var(--space-5));
+  margin-block-end: calc(-1 * var(--space-7));
   transition:
     grid-template-rows var(--duration-standard) var(--ease-out),
     margin-block-end var(--duration-standard) var(--ease-out);

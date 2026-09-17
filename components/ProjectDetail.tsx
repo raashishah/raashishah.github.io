@@ -1,6 +1,5 @@
 import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { PortfolioList } from "@/components/PortfolioList";
-import { calendlyLink } from "@/content/site";
 import type { PortfolioEntry } from "@/content/types";
 
 export type ProjectDetailProps = {
@@ -9,7 +8,7 @@ export type ProjectDetailProps = {
   sections: readonly PortfolioEntry[];
   pageLabel: string;
   idPrefix: string;
-  showBookDemo?: boolean;
+  cta?: { label: string; href: string };
   showIntro?: boolean;
 };
 
@@ -19,7 +18,7 @@ export function ProjectDetail({
   sections,
   pageLabel,
   idPrefix,
-  showBookDemo = false,
+  cta,
   showIntro = true,
 }: ProjectDetailProps) {
   return (
@@ -33,16 +32,16 @@ export function ProjectDetail({
       <DetailsAccordion>
         <PortfolioList items={sections} idPrefix={idPrefix} ariaLabel={pageLabel} />
       </DetailsAccordion>
-      {showBookDemo ? (
+      {cta ? (
         <p className="home__line home__line--cta">
           <a
-            href={calendlyLink.href}
+            href={cta.href}
             className="home__link home__link--header home__link--cta"
-            aria-label="Book demo (opens in new tab)"
+            aria-label={`${cta.label} (opens in new tab)`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Book demo
+            {cta.label}
           </a>
         </p>
       ) : null}

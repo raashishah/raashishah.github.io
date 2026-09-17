@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
+import { expressionContent } from "../content/expression";
 import { calendlyLink } from "../content/site";
+import { getDetailHref } from "../lib/detail-routes";
 import { absoluteUrl, siteConfig } from "../lib/metadata";
 import { buildLlmsTxt, seoConfig } from "../lib/site-seo";
 
@@ -94,29 +96,26 @@ test.describe("SEO and LLM discovery", () => {
 
     expect(response.ok()).toBeTruthy();
     expect(body).toContain("<loc>");
-    expect(body).toContain(absoluteUrl("/expression"));
+    expect(body).not.toContain(absoluteUrl("/expression"));
     expect(body).not.toContain(absoluteUrl("/ondevice"));
     expect(body).toContain(absoluteUrl("/llms.txt"));
     expect(body).toContain(absoluteUrl("/llms-full.txt"));
     expect(body).toContain("</urlset>");
   });
 
-  test("expression page is reachable with project copy", async ({ page }) => {
+  test("legacy expression URL opens the homepage panel with project copy", async ({ page }) => {
     const response = await page.goto("/expression", { waitUntil: "domcontentloaded" });
     expect(response?.ok()).toBeTruthy();
 
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.getByRole("heading", { level: 1, name: siteConfig.name })).toBeVisible();
-    await expect(page.locator("h2.home__line--tagline")).toHaveText(
-      "Auto-colour hand-drawn animation frames — with the artist in control.",
-    );
     await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
     await expect(
       page.locator("summary.home__details-summary").filter({ hasText: "The Problem" }),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Book demo" })).toHaveAttribute(
-      "href",
-      calendlyLink.href,
-    );
+    await expect(
+      page.getByRole("link", { name: expressionContent.cta.label }),
+    ).toHaveAttribute("href", expressionContent.cta.href);
     await expect(page.getByText("Still updating this page")).toBeVisible();
     await expect(page.getByRole("link", { name: siteConfig.name })).toHaveAttribute("href", "/");
   });

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { getDetailHref } from "../lib/detail-routes";
 import { siteConfig } from "../lib/metadata";
 import {
   ACCORDION_CLOSE_MS,
@@ -23,7 +24,7 @@ test.describe("detail panel accordion interaction", () => {
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
 
     await page
@@ -33,7 +34,7 @@ test.describe("detail panel accordion interaction", () => {
 
     await page.waitForTimeout(AFTER_CLOSE_MS);
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(
       page.locator("details").filter({ hasText: "Animation" }),
@@ -51,7 +52,7 @@ test.describe("detail panel accordion interaction", () => {
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
     await expect(page.locator(".home__detail")).toBeVisible();
@@ -68,7 +69,7 @@ test.describe("detail panel accordion interaction", () => {
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
     await expect(page.locator(".home__sheet")).toBeVisible();
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
@@ -85,7 +86,7 @@ test.describe("detail panel accordion interaction", () => {
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
     await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
@@ -104,7 +105,7 @@ test.describe("nested detail panel accordions", () => {
     await page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .click();
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
   }
 
   test("clicking Auto-Colour inside expression detail keeps panel open on desktop", async ({
@@ -121,7 +122,7 @@ test.describe("nested detail panel accordions", () => {
 
     await page.waitForTimeout(AFTER_CLOSE_MS);
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(
       page.locator(".home__detail-content details").filter({ hasText: "Auto-Colour" }),
@@ -142,7 +143,7 @@ test.describe("nested detail panel accordions", () => {
 
     await page.waitForTimeout(AFTER_CLOSE_MS);
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__sheet")).toBeVisible();
     await expect(
       page.locator(".home__sheet details").filter({ hasText: "Auto-Colour" }),

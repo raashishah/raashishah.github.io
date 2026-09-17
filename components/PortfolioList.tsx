@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { useDetail } from "@/components/DetailProvider";
+import { getDetailHref } from "@/lib/detail-routes";
 import { InlineLinkArrow } from "@/components/ExternalLinkArrow";
 import {
   INLINE_LINK_SEPARATOR,
@@ -30,7 +31,7 @@ function isExternalHref(href: string) {
 function InlineBodyLink({ href, text }: { href: string; text: string }) {
   const { path: detailPath } = useDetail();
   const external = isExternalHref(href);
-  const isCurrent = !external && detailPath === href;
+  const isCurrent = !external && detailPath !== null && getDetailHref(detailPath) === href;
   const label = (
     <>
       {text}

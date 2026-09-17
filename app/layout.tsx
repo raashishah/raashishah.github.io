@@ -77,17 +77,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  detail,
 }: {
   children: React.ReactNode;
-  detail: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={`${satoshi.className} ${satoshi.variable}`}>
         <PersonJsonLd />
         <DetailProvider>{children}</DetailProvider>
-        {detail}
       </body>
     </html>
   );

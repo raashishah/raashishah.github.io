@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { homePortrait } from "../content/site";
+import { getDetailHref } from "../lib/detail-routes";
 import { siteConfig } from "../lib/metadata";
 import {
   MOBILE_WIDTHS,
@@ -73,7 +74,7 @@ test("project details expand with body copy", async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
-  ).toHaveAttribute("href", "/expression");
+  ).toHaveAttribute("href", getDetailHref("/expression"));
   await expect(
     page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
@@ -260,7 +261,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Expo map",
     "Inventory mgmt",
     "Working with Artists",
-    "EdTech",
+    "Doubled engineering speed",
   ]);
 });
 
@@ -405,7 +406,7 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__sheet")).toBeVisible();
     await expect(page.locator(".home__scrim")).toBeVisible();
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
@@ -484,7 +485,7 @@ test.describe("detail panel", () => {
     expect(portraitBox!.y).toBeGreaterThan(workBox!.y + workBox!.height - 1);
   });
 
-  test("desktop split view keeps the portrait below the detail panel", async ({
+  test("desktop split view hides the portrait and aligns with the work list", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1024, height: 800 });
@@ -499,14 +500,14 @@ test.describe("detail panel", () => {
 
     await expect(page.locator(".home__detail")).toBeVisible();
     const portrait = page.locator(".home__portrait");
-    await expect(portrait).toBeVisible();
+    await expect(portrait).toBeHidden();
     await expect(page.locator(".home__detail-shell--open")).toBeVisible();
 
     const detailBox = await page.locator(".home__detail").boundingBox();
-    const portraitBox = await portrait.boundingBox();
+    const workBox = await page.locator(".home__work").boundingBox();
     expect(detailBox).not.toBeNull();
-    expect(portraitBox).not.toBeNull();
-    expect(portraitBox!.y).toBeGreaterThan(detailBox!.y + detailBox!.height - 1);
+    expect(workBox).not.toBeNull();
+    expect(Math.abs(detailBox!.y - workBox!.y)).toBeLessThan(2);
 
     await page
       .locator("summary.home__details-summary")
@@ -518,12 +519,18 @@ test.describe("detail panel", () => {
     await expect(portrait).toBeVisible();
   });
 
-  test("expression page does not show the homepage portrait", async ({ page }) => {
+  test("legacy expression URL opens the homepage split, not a separate page", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
     await page.goto("/expression");
-    await expect(page.locator(".home__portrait")).toHaveCount(0);
+    await expect(page).toHaveURL(getDetailHref("/expression"));
+    await expect(page.locator(".home__detail")).toBeVisible();
+    await expect(page.locator(".home__work")).toBeVisible();
+    await expect(page.locator(".home__portrait")).toBeHidden();
   });
 
-  test("desktop opens expression in split view under site tagline", async ({ page }) => {
+  test("desktop opens expression in split view level with the work list", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 800 });
     await page.goto("/");
     await page
@@ -532,17 +539,20 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
     await expect(page.locator(".home__sheet")).toHaveCount(0);
-    await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
-      siteConfig.introTagline,
-    );
+    await expect(page.locator(".home__intro")).toBeHidden();
     await expect(page.getByText("Agentic Tools for Artists")).toBeVisible();
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
     await expect(
       page.getByRole("link", { name: "Colouring for hand-drawn animation" }),
     ).toHaveAttribute("aria-current", "page");
+    const detailBox = await page.locator(".home__detail").boundingBox();
+    const workBox = await page.locator(".home__work").boundingBox();
+    expect(detailBox).not.toBeNull();
+    expect(workBox).not.toBeNull();
+    expect(Math.abs(detailBox!.y - workBox!.y)).toBeLessThan(2);
   });
 
   test("mobile close button returns to homepage", async ({ page }) => {
@@ -568,7 +578,7 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
 
     await page
@@ -589,7 +599,7 @@ test.describe("detail panel", () => {
       .click();
     await page.getByRole("link", { name: "Colouring for hand-drawn animation" }).click();
 
-    await expect(page).toHaveURL("/expression");
+    await expect(page).toHaveURL(getDetailHref("/expression"));
     await expect(page.locator(".home__detail")).toBeVisible();
 
     await page.goBack();
@@ -643,13 +653,17 @@ test.describe("footer layout", () => {
     await expect(page.locator(".home__footer .home__intro-profile")).toHaveCount(0);
   });
 
-  test("keeps the Cursor heatmap off project pages", async ({ page }) => {
-    await page.goto("/expression");
+  test("hides the Cursor heatmap while the expression split is open", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(getDetailHref("/expression"));
+    await expect(page.locator(".home__detail")).toBeVisible();
     await expect(
       page.getByRole("link", {
         name: "Cursor profile @rashdriving (opens in new tab)",
       }),
-    ).toHaveCount(0);
+    ).toBeHidden();
   });
 
   test("footer meta aligns to the content edge on desktop", async ({ page }) => {

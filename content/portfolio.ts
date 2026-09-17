@@ -102,7 +102,6 @@ export const projects = [
     id: "expression",
     title: "Animation",
     seoName: "Expression",
-    primaryUrl: "https://raashishah.com/expression",
     seoDescription:
       "Animation agent that auto-colours 1,500-frame hand-drawn sequences from PNG line art with 1:1 parsing fidelity and full artist control.",
     seoLongDetail:
@@ -111,7 +110,7 @@ export const projects = [
       [
         {
           text: "Colouring for hand-drawn animation",
-          href: "/expression",
+          href: "/?detail=expression",
         },
       ],
       {
@@ -213,7 +212,7 @@ export const workExperience = [
   },
   {
     id: "aula-education",
-    title: "EdTech",
+    title: "Doubled engineering speed",
     seoName: "Aula Education",
     seoPeriod: "2018–2019, UK",
     seoDescription:
@@ -222,10 +221,6 @@ export const workExperience = [
       "Doubled engineering delivery speed via agile workflow changes with VP of Product. Led customer success analytics across UK and US universities. Improved retention from 9.2% to 32% with a combined qualitative and quantitative analytics toolkit.",
     paragraphs: [
       [{ text: "Aula Education, UK, US", href: "https://www.aula.education" }],
-      {
-        text: "Doubled Engineering Speed",
-        pullquote: true,
-      },
     ],
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;

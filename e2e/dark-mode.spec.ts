@@ -45,9 +45,9 @@ test.describe("light mode (default)", () => {
     await expect(await getBodyCopyColor(page)).toBe(expected);
   });
 
-  test("expression page uses light semantic tokens", async ({ page }) => {
+  test("expression panel uses light semantic tokens", async ({ page }) => {
     await page.emulateMedia({ colorScheme: "light" });
-    await page.goto("/expression");
+    await page.goto("/?detail=expression");
 
     const colors = await getPageColors(page);
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
@@ -85,15 +85,15 @@ test.describe("dark mode (system preference)", () => {
     await expect(await getBodyCopyColor(page)).toBe(expected);
   });
 
-  test("expression page uses dark semantic tokens", async ({ page }) => {
+  test("expression panel uses dark semantic tokens", async ({ page }) => {
     await page.emulateMedia({ colorScheme: "dark" });
-    await page.goto("/expression");
+    await page.goto("/?detail=expression");
 
     const colors = await getPageColors(page);
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
 
-    await expect(page.locator(".home__intro .home__line--role")).toHaveText(
+    await expect(page.locator(".home__detail .home__line--role")).toHaveText(
       "Agentic Tools for Artists",
     );
     await expect(page.getByText("Still updating this page")).toBeVisible();

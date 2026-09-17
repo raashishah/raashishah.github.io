@@ -41,7 +41,7 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("https://github.com/raashishah/user-call");
     expect(llmsTxt).toContain("- Skills:");
     expect(llmsTxt).toContain("/llms-full.txt");
-    expect(llmsTxt).toContain("/expression");
+    expect(llmsTxt).toContain("detail=expression");
     expect(llmsTxt).toContain("https://x.com/useOnDevice");
     expect(llmsTxt).not.toContain("/ondevice");
     expect(llmsTxt).toContain("## Optional");
