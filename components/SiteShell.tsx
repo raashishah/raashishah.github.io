@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CursorHeatmap } from "@/components/CursorHeatmap";
 import { SocialIcon } from "@/components/SocialIcon";
 import {
   calendlyLink,
@@ -110,6 +111,7 @@ export function SiteShell({
         {children}
 
         <footer className="home__footer">
+          <CursorHeatmap />
           <nav className="home__footer-nav" aria-label="Social links">
             {footer.map((link) => (
               <SocialAnchor

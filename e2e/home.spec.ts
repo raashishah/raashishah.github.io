@@ -567,6 +567,20 @@ test.describe("detail panel", () => {
 });
 
 test.describe("footer layout", () => {
+  test("shows an old-rose Cursor heatmap that links to the public profile", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const profile = page.getByRole("link", {
+      name: "Cursor profile @rashdriving (opens in new tab)",
+    });
+    await expect(profile).toBeVisible();
+    await expect(profile).toHaveAttribute("href", "https://cursor.com/@rashdriving");
+    await expect(profile.locator(".home__cursor-heatmap")).toBeVisible();
+    await expect(page.getByText("1.4B")).toHaveCount(0);
+    await expect(page.getByText("546")).toHaveCount(0);
+  });
+
   test("footer meta aligns to the content edge on desktop", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto("/");

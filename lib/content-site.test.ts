@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { footerSocialIconIds } from "@/lib/footer-social-icons";
-import { coral, footerLinkOrder, footerLinks, homePortrait } from "@/content/site";
+import {
+  coral,
+  cursorProfile,
+  footerLinkOrder,
+  footerLinks,
+  homePortrait,
+} from "@/content/site";
 import type { FooterSocialLinkId } from "@/content/types";
 
 describe("content/site", () => {
@@ -27,6 +33,11 @@ describe("content/site", () => {
 
   it("keeps the brand coral mark at a single shared path", () => {
     expect(coral.src).toBe("/img/coral.svg");
+  });
+
+  it("points the Cursor heatmap at the public profile", () => {
+    expect(cursorProfile.href).toBe("https://cursor.com/@rashdriving");
+    expect(cursorProfile.handle).toBe("@rashdriving");
   });
 
   it("keeps the homepage portrait as a local rambo photo", () => {

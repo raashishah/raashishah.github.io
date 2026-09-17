@@ -82,6 +82,12 @@ export const footerLinks = footerLinkOrder.map(
 export const emailLink = linksById.email;
 export const calendlyLink = linksById.calendly;
 
+export const cursorProfile = {
+  href: "https://cursor.com/@rashdriving",
+  handle: "@rashdriving",
+  label: "Cursor profile @rashdriving",
+} as const;
+
 export const coral = {
   src: "/img/coral.svg",
 } as const;
