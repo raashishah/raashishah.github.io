@@ -172,12 +172,12 @@ export async function assertTypographyHierarchy(page: Page) {
     ".home__intro .home__line--subline",
   );
 
-  expect(nameWeight).toBe(400);
+  expect(nameWeight).toBe(500);
   expect(taglineWeight).toBe(400);
   expect(sublineWeight).toBe(400);
-  expect(taglineSize).toBeGreaterThan(nameSize);
+  expect(nameSize).toBeCloseTo(taglineSize, 1);
+  expect(nameSize).toBeGreaterThan(sublineSize);
   expect(taglineSize).toBeGreaterThan(sublineSize);
-  expect(nameSize).toBeCloseTo(sublineSize, 1);
 }
 
 export async function assertListSectionHeadingHierarchy(page: Page) {
@@ -220,9 +220,9 @@ export async function assertListSectionHeadingHierarchy(page: Page) {
   expect(metrics.headingColor).toBe(ink);
   expect(metrics.headingColor).not.toBe(muted);
   expect(metrics.headingSize).toBeGreaterThan(metrics.rowSize);
-  expect(metrics.headingSize).toBeCloseTo(metrics.taglineSize, 1);
-  expect(metrics.lemmaSize).toBeGreaterThan(metrics.headingSize);
-  expect(metrics.identitySize).toBeLessThan(metrics.headingSize);
+  expect(metrics.taglineSize).toBeGreaterThan(metrics.headingSize);
+  expect(metrics.identitySize).toBeGreaterThan(metrics.headingSize);
+  expect(metrics.lemmaSize).toBeGreaterThan(metrics.identitySize);
 }
 
 export async function assertDictionaryTypeMix(page: Page) {
