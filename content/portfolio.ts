@@ -230,6 +230,8 @@ export const workExperience = [
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
 
+export const education = "BSc in Product, from Aston, UK";
+
 export const workGroupSpecs = [
   {
     id: "agents",

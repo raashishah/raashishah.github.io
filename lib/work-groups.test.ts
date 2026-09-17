@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  education,
   projects,
   resolveWorkGroups,
   workExperience,
@@ -43,5 +44,9 @@ describe("homepage work groups", () => {
       "Working with Artists",
       "EdTech",
     ]);
+  });
+
+  it("keeps education as a static line after the work groups", () => {
+    expect(education).toBe("BSc in Product, from Aston, UK");
   });
 });

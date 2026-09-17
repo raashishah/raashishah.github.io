@@ -15,6 +15,7 @@ export function SimpleHome({
   introSubline,
   introTagline,
   workGroups,
+  education,
 }: HomeContent) {
   return (
     <HomepageMarker>
@@ -52,6 +53,7 @@ export function SimpleHome({
                     </section>
                   );
                 })}
+                <p className="home__line home__line--role">{education}</p>
               </div>
             </DetailsAccordion>
           </section>

@@ -1,4 +1,4 @@
-import { resolveWorkGroups } from "@/content/portfolio";
+import { education, resolveWorkGroups } from "@/content/portfolio";
 import { nameEasterEggHref } from "@/content/site";
 import type { WorkGroup } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
@@ -10,6 +10,7 @@ export type HomeContent = {
   introSubline: string;
   introTagline: string;
   workGroups: readonly WorkGroup[];
+  education: string;
 };
 
 export function getHomeContent(): HomeContent {
@@ -20,5 +21,6 @@ export function getHomeContent(): HomeContent {
     introSubline: siteConfig.introSubline,
     introTagline: siteConfig.introTagline,
     workGroups: resolveWorkGroups(),
+    education,
   };
 }

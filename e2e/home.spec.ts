@@ -39,6 +39,9 @@ test("homepage shows intro and project list", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Machine Learning" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Web apps" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Product Management" })).toBeVisible();
+  await expect(page.locator(".home__work .home__line--role")).toHaveText(
+    "BSc in Product, from Aston, UK",
+  );
   await expect(page.getByRole("heading", { name: "Projects" })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Experience" })).toHaveCount(0);
 });
