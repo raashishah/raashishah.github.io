@@ -249,7 +249,8 @@
   line-height: 1.47;
 }
 
-.home__line--name {
+.home__line--name,
+.home__line--tagline {
   font-family: var(--font-regular);
   font-size: var(--type-body-size);
   font-weight: 400;
@@ -284,15 +285,6 @@
   line-height: var(--type-body-leading);
   letter-spacing: var(--type-body-tracking);
   color: var(--color-body);
-}
-
-.home__line--tagline {
-  font-family: var(--font-medium);
-  font-size: var(--type-headline-size);
-  font-weight: 500;
-  line-height: var(--type-headline-leading);
-  letter-spacing: var(--type-headline-tracking);
-  color: var(--text);
 }
 
 .home__line--cta {

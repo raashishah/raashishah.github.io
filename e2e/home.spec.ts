@@ -293,7 +293,7 @@ test("expanded body copy uses the secondary ink color", async ({ page }) => {
 
 test.describe("typography hierarchy", () => {
   for (const width of [390, 1280] as const) {
-    test(`name and tagline have distinct emphasis at ${width}px`, async ({
+    test(`name and tagline share body type at ${width}px`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 800 });

@@ -19,7 +19,7 @@ typography:
     letterSpacing: "-0.022em"
   headline:
     fontFamily: "Satoshi, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "clamp(1.125rem, 1.7vw, 1.25rem)"
+    fontSize: "clamp(1.0625rem, 1.6vw, 1.1875rem)"
     fontWeight: 500
     lineHeight: 1.3
     letterSpacing: "-0.015em"
@@ -120,9 +120,9 @@ Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: 
 |------|-----------|--------|-------|---------|
 | `type-title` | `--text-title` | 500 | `--text` | Header name (`h1`) |
 | `type-identity` | `--text-identity` | 600 | `--text` | Dictionary lemma (`decavalent`) |
-| `type-headline` | `--text-headline` | 500 | `--text` | Intro tagline; homepage list-section headings |
+| `type-headline` | `--text-headline` | 500 | `--text` | Homepage list-section headings |
 | `type-headline-inline` | `--text-body` | 500 | `--text` | Accordion summaries, inline links |
-| `type-body` | `--text-body` | 400 | `--color-body` | Homepage byline (`h2`); intro subline; dropdown paragraphs |
+| `type-body` | `--text-body` | 400 | `--text` / `--color-body` | Intro name and tagline; intro subline; dropdown paragraphs |
 | `type-subhead` | `--text-subhead` | 400 | `--text-muted` | Role, education, updating note, footer links |
 | `type-caption` | `--text-caption` | 400 | `--text-muted` | Footer meta |
 

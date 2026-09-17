@@ -173,10 +173,9 @@ export async function assertTypographyHierarchy(page: Page) {
   );
 
   expect(nameWeight).toBe(400);
-  expect(taglineWeight).toBe(500);
+  expect(taglineWeight).toBe(400);
   expect(sublineWeight).toBe(400);
-  expect(nameSize).toBeLessThan(taglineSize);
-  expect(sublineSize).toBeLessThan(taglineSize);
+  expect(Math.abs(nameSize - taglineSize)).toBeLessThan(0.5);
   expect(Math.abs(nameSize - sublineSize)).toBeLessThan(0.5);
 }
 
