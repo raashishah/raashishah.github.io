@@ -138,19 +138,23 @@
   flex: 1;
 }
 
-.home__intro-profile .home__line--name {
+.home__intro .home__intro-profile .home__line--name {
   font-family: var(--font-regular);
   font-size: 1.0625rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.294;
   letter-spacing: -0.015em;
 }
 
-.home__intro-profile .home__intro-role {
+.home__intro .home__intro-profile .home__intro-name {
   font-weight: 500;
 }
 
-.home__intro-profile .home__line--tagline {
+.home__intro .home__intro-profile .home__intro-role {
+  font-weight: 400;
+}
+
+.home__intro .home__intro-profile .home__line--tagline {
   font-family: var(--font-regular);
   font-size: 1.0625rem;
   font-weight: 400;
