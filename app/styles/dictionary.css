@@ -137,3 +137,7 @@
   font-weight: var(--dictionary-weight-regular);
   color: var(--text);
 }
+
+.dictionary-entry__origin-term {
+  font-weight: var(--dictionary-weight-medium);
+}

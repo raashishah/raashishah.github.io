@@ -13,6 +13,9 @@ describe("decavalent dictionary copy", () => {
     expect(decavalentDictionary.gloss).toContain("valence of ten");
     expect(decavalentDictionary.citations[0]?.example).toBe("a decavalent atom");
     expect(decavalentDictionary.citations[1]?.label).toBe("figurative");
-    expect(decavalentDictionary.origin).toContain("Greek deka");
+    const origin = decavalentDictionary.originSegments
+      .map((segment) => (typeof segment === "string" ? segment : segment.text))
+      .join("");
+    expect(origin).toContain("Greek deka");
   });
 });

@@ -17,7 +17,7 @@ export function DecavalentDictionary() {
     grammarLabel,
     gloss,
     citations,
-    origin,
+    originSegments,
   } = decavalentDictionary;
 
   return (
@@ -69,7 +69,24 @@ export function DecavalentDictionary() {
       <footer className="dictionary-entry__etymology">
         <p className="dictionary-entry__origin-label">Origin</p>
         <div className="dictionary-entry__rule" aria-hidden="true" />
-        <p className="dictionary-entry__origin">{origin}</p>
+        <p className="dictionary-entry__origin">
+          {originSegments.map((segment, index) =>
+            typeof segment === "string" ? (
+              segment
+            ) : (
+              <span
+                key={`${segment.text}-${index}`}
+                className={
+                  segment.emphasis
+                    ? "dictionary-entry__origin-term"
+                    : undefined
+                }
+              >
+                {segment.text}
+              </span>
+            ),
+          )}
+        </p>
       </footer>
     </article>
   );

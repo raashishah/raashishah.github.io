@@ -3,6 +3,13 @@ export type DictionaryCitation = {
   example: string;
 };
 
+export type DictionaryOriginSegment =
+  | string
+  | {
+      text: string;
+      emphasis?: true;
+    };
+
 export const decavalentDictionary = {
   lemma: "decavalent",
   pronunciation: "dɪˈkeɪ.və.lənt",
@@ -18,6 +25,11 @@ export const decavalentDictionary = {
         "combining different ideas, technologies and people into something more valuable.",
     },
   ] as const satisfies readonly DictionaryCitation[],
-  origin:
-    "From Greek deka ‘ten’ + valent, from Latin valentia ‘capacity’.",
+  originSegments: [
+    "From Greek deka ",
+    { text: "‘ten’", emphasis: true },
+    " + valent, from Latin valentia ",
+    { text: "‘capacity’", emphasis: true },
+    ".",
+  ] as const satisfies readonly DictionaryOriginSegment[],
 } as const;

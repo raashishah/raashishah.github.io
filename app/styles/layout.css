@@ -365,7 +365,7 @@
   font-weight: 500;
   line-height: var(--type-caption-leading);
   letter-spacing: var(--type-caption-tracking);
-  color: var(--color-body);
+  color: var(--accent);
 }
 
 .home__list-section .home__project-list {
