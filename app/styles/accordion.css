@@ -30,9 +30,9 @@
 .home__project-title {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-medium);
+  font-family: var(--font-regular);
   font-size: var(--type-headline-inline-size);
-  font-weight: 500;
+  font-weight: 400;
   line-height: var(--type-headline-inline-leading);
   letter-spacing: var(--type-headline-inline-tracking);
 }
