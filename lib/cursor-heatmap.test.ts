@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   cursorHeatmapRows,
   cursorHeatmapSize,
-  opacityForHeatmapCell,
+  fillForHeatmapCell,
 } from "@/content/cursor-heatmap";
 
 describe("cursor heatmap", () => {
@@ -14,11 +14,11 @@ describe("cursor heatmap", () => {
     }
   });
 
-  it("maps pad cells to no dot and levels to old-rose opacities", () => {
-    expect(opacityForHeatmapCell(".")).toBeNull();
-    expect(opacityForHeatmapCell("0")).toBe(0.1);
-    expect(opacityForHeatmapCell("4")).toBe(1);
-    expect(opacityForHeatmapCell("x")).toBeNull();
+  it("maps pad cells to no dot and levels to old-rose fills", () => {
+    expect(fillForHeatmapCell(".")).toBeNull();
+    expect(fillForHeatmapCell("0")).toBe("#C080811A");
+    expect(fillForHeatmapCell("4")).toBe("#C08081");
+    expect(fillForHeatmapCell("x")).toBeNull();
   });
 
   it("sizes the svg from the grid gap", () => {

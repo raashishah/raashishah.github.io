@@ -82,10 +82,19 @@ export const footerLinks = footerLinkOrder.map(
 export const emailLink = linksById.email;
 export const calendlyLink = linksById.calendly;
 
+export const cursorProfileAvatar = {
+  src: "/img/raashi.jpg",
+  alt: "Raashi Shah",
+  width: 460,
+  height: 460,
+} as const;
+
 export const cursorProfile = {
   href: "https://cursor.com/@rashdriving",
   handle: "@rashdriving",
+  name: "Raashi Shah",
   label: "Cursor profile @rashdriving",
+  avatar: cursorProfileAvatar,
 } as const;
 
 export const coral = {

@@ -38,6 +38,8 @@ describe("content/site", () => {
   it("points the Cursor heatmap at the public profile", () => {
     expect(cursorProfile.href).toBe("https://cursor.com/@rashdriving");
     expect(cursorProfile.handle).toBe("@rashdriving");
+    expect(cursorProfile.name).toBe("Raashi Shah");
+    expect(cursorProfile.avatar.src).toBe("/img/raashi.jpg");
   });
 
   it("keeps the homepage portrait as a local rambo photo", () => {

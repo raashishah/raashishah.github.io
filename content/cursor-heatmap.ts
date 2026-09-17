@@ -2,15 +2,15 @@ export const CURSOR_HEATMAP_GAP = 10;
 export const CURSOR_HEATMAP_ORIGIN = 6;
 export const CURSOR_HEATMAP_RADIUS = 3.2;
 
-const HEATMAP_OPACITY = {
-  "0": 0.1,
-  "1": 0.28,
-  "2": 0.45,
-  "3": 0.68,
-  "4": 1,
+const HEATMAP_FILL = {
+  "0": "#C080811A",
+  "1": "#C0808129",
+  "2": "#C0808147",
+  "3": "#C0808173",
+  "4": "#C08081",
 } as const;
 
-export type HeatmapLevel = keyof typeof HEATMAP_OPACITY;
+export type HeatmapLevel = keyof typeof HEATMAP_FILL;
 
 /**
  * Sunday–Saturday rows, 53 weeks. `.` is a pad day outside the year.
@@ -42,13 +42,13 @@ export function cursorHeatmapSize() {
   };
 }
 
-export function opacityForHeatmapCell(cell: string): number | null {
+export function fillForHeatmapCell(cell: string): string | null {
   if (cell === ".") {
     return null;
   }
 
-  if (cell in HEATMAP_OPACITY) {
-    return HEATMAP_OPACITY[cell as HeatmapLevel];
+  if (cell in HEATMAP_FILL) {
+    return HEATMAP_FILL[cell as HeatmapLevel];
   }
 
   return null;

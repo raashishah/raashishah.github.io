@@ -576,9 +576,24 @@ test.describe("footer layout", () => {
     });
     await expect(profile).toBeVisible();
     await expect(profile).toHaveAttribute("href", "https://cursor.com/@rashdriving");
+    await expect(profile.getByText("Raashi Shah")).toBeVisible();
+    await expect(profile.getByText("@rashdriving")).toBeVisible();
+    await expect(profile.locator(".home__cursor-avatar")).toBeVisible();
     await expect(profile.locator(".home__cursor-heatmap")).toBeVisible();
+    await expect(page.locator(".home__footer .home__cursor-profile")).toHaveCount(0);
     await expect(page.getByText("1.4B")).toHaveCount(0);
     await expect(page.getByText("546")).toHaveCount(0);
+  });
+
+  test("keeps the Cursor colophon in the work column on desktop", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/");
+    const work = page.locator(".home__work");
+    const profile = work.getByRole("link", {
+      name: "Cursor profile @rashdriving (opens in new tab)",
+    });
+    await expect(profile).toBeVisible();
+    await expect(page.locator(".home__footer .home__cursor-profile")).toHaveCount(0);
   });
 
   test("keeps the Cursor heatmap off project pages", async ({ page }) => {

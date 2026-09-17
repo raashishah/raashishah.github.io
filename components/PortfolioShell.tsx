@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { CursorHeatmap } from "@/components/CursorHeatmap";
 import { DetailPanelContent } from "@/components/DetailPanel";
 import { useDetail } from "@/components/DetailProvider";
 import { SiteShell } from "@/components/SiteShell";
@@ -33,7 +34,6 @@ export function PortfolioShell({
       nameHref={nameHref}
       nameExternal={nameExternal}
       nameAsHeading={nameAsHeading}
-      showCursorHeatmap={showCursorHeatmap}
     >
       <div className="home__content">
         <div className="home__primary">
@@ -41,7 +41,10 @@ export function PortfolioShell({
           {route ? <DetailPanelContent route={route} /> : null}
           {portraitInPrimary ? portraitNode : null}
         </div>
-        <div className="home__work">{work}</div>
+        <div className="home__work">
+          {work}
+          {showCursorHeatmap ? <CursorHeatmap /> : null}
+        </div>
         {!portraitInPrimary ? portraitNode : null}
       </div>
     </SiteShell>

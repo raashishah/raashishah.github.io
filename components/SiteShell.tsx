@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CursorHeatmap } from "@/components/CursorHeatmap";
 import { SocialIcon } from "@/components/SocialIcon";
 import {
   calendlyLink,
@@ -48,7 +47,6 @@ type SiteShellProps = {
   emailLink?: SocialLink;
   calendlyLink?: SocialLink;
   footerLinks?: readonly FooterSocialLink[];
-  showCursorHeatmap?: boolean;
 };
 
 export function SiteShell({
@@ -59,7 +57,6 @@ export function SiteShell({
   emailLink: email = emailLink,
   calendlyLink: calendly = calendlyLink,
   footerLinks: footer = footerLinks,
-  showCursorHeatmap = false,
 }: SiteShellProps) {
   const brand = (
     <>
@@ -113,30 +110,31 @@ export function SiteShell({
         {children}
 
         <footer className="home__footer">
-          {showCursorHeatmap ? <CursorHeatmap /> : null}
-          <nav className="home__footer-nav" aria-label="Social links">
-            {footer.map((link) => (
-              <SocialAnchor
-                key={link.id}
-                href={link.href}
-                label={link.label}
-                iconId={link.id}
-                className="home__link home__link--footer"
-              />
-            ))}
-          </nav>
-          <p className="home__footer-meta">
-            <span className="home__footer-meta-hint">
-              {footerDiscoveryHintBefore}{" "}
-              <img
-                src={coral.src}
-                alt=""
-                aria-hidden="true"
-                className="home__footer-mark"
-              />{" "}
-              {footerDiscoveryHintAfter}
-            </span>
-          </p>
+          <div className="home__footer-row">
+            <nav className="home__footer-nav" aria-label="Social links">
+              {footer.map((link) => (
+                <SocialAnchor
+                  key={link.id}
+                  href={link.href}
+                  label={link.label}
+                  iconId={link.id}
+                  className="home__link home__link--footer"
+                />
+              ))}
+            </nav>
+            <p className="home__footer-meta">
+              <span className="home__footer-meta-hint">
+                {footerDiscoveryHintBefore}{" "}
+                <img
+                  src={coral.src}
+                  alt=""
+                  aria-hidden="true"
+                  className="home__footer-mark"
+                />{" "}
+                {footerDiscoveryHintAfter}
+              </span>
+            </p>
+          </div>
         </footer>
       </main>
     </>
