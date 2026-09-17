@@ -71,7 +71,15 @@
     grid-row: 1 / 3;
   }
 
+  .home__portrait-wrap {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+    max-width: var(--home-measure-narrow);
+  }
+
   .home__content--masthead {
+    grid-template-rows: auto auto 1fr;
     row-gap: var(--space-7);
   }
 
@@ -84,16 +92,23 @@
 
   .home__content--masthead .home__primary {
     grid-row: 2;
-    gap: var(--space-6);
   }
 
   .home__content--masthead .home__work {
     grid-row: 2 / 4;
   }
 
-  .home__content--detail .home__primary > .home__intro,
-  .home__content--detail .home__primary > .home__portrait-wrap {
+  .home__content--masthead .home__portrait-wrap {
+    grid-row: 3;
+  }
+
+  .home__content--detail .home__intro,
+  .home__content--detail .home__portrait-wrap {
     display: none;
+  }
+
+  .home__content--detail.home__content--masthead .home__work {
+    grid-row: 2;
   }
 }
 

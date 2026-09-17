@@ -23,7 +23,6 @@ export function PortfolioShell({
   portrait,
 }: PortfolioShellProps) {
   const { route, isDesktop, isMediaReady, isOpen, isClosing } = useDetail();
-  const portraitInPrimary = isMediaReady ? isDesktop : false;
   const portraitNode = portrait ? <div className="home__portrait-wrap">{portrait}</div> : null;
   const splitOpen = Boolean(route) && isMediaReady && isDesktop && (isOpen || isClosing);
   const contentClassName = [
@@ -43,10 +42,9 @@ export function PortfolioShell({
         <div className="home__primary">
           {intro}
           {route ? <DetailPanelContent route={route} /> : null}
-          {portraitInPrimary ? portraitNode : null}
         </div>
         <div className="home__work">{work}</div>
-        {!portraitInPrimary ? portraitNode : null}
+        {portraitNode}
       </div>
     </SiteShell>
   );

@@ -460,20 +460,30 @@ test.describe("detail panel", () => {
 
     const portrait = page.locator(".home__portrait");
     const work = page.locator(".home__work");
+    const mentoring = page.locator(".home__mentoring");
     await expect(portrait).toBeVisible();
+    await expect(mentoring).toBeVisible();
 
     const portraitBox = await portrait.boundingBox();
     const workBox = await work.boundingBox();
+    const introBox = await page.locator(".home__intro").boundingBox();
+    const mentoringBox = await mentoring.boundingBox();
+    const contentBox = await page.locator(".home__content").boundingBox();
+    const heatmapBox = await page
+      .locator(".home__intro-profile-heatmap-link")
+      .boundingBox();
     expect(portraitBox).not.toBeNull();
     expect(workBox).not.toBeNull();
+    expect(introBox).not.toBeNull();
+    expect(mentoringBox).not.toBeNull();
+    expect(contentBox).not.toBeNull();
+    expect(heatmapBox).not.toBeNull();
     expect(portraitBox!.x + portraitBox!.width).toBeLessThanOrEqual(workBox!.x + 1);
     expect(workBox!.x).toBeGreaterThan(portraitBox!.x);
-    const introBox = await page.locator(".home__intro").boundingBox();
-    const primaryGap = await page.locator(".home__primary").evaluate(
-      (element) => parseFloat(getComputedStyle(element).gap),
-    );
-    expect(introBox).not.toBeNull();
-    expect(portraitBox!.y - (introBox!.y + introBox!.height)).toBeCloseTo(primaryGap, 0);
+    expect(portraitBox!.y).toBeGreaterThan(heatmapBox!.y + heatmapBox!.height + 8);
+    expect(
+      Math.abs(contentBox!.y + contentBox!.height - (mentoringBox!.y + mentoringBox!.height)),
+    ).toBeLessThan(2);
   });
 
   test("mobile portrait sits below the work list", async ({ page }) => {

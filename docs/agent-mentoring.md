@@ -1,6 +1,6 @@
 # Agent mentoring
 
-Homepage offer sits directly beneath Rambo, in the left column on desktop and after the work list and portrait on phones.
+Homepage offer sits directly beneath Rambo. On desktop the pair is pinned to the bottom of the left column, just above the footer. On phones it follows the work list, still last before the footer.
 
 ₹2,500 buys one 60-minute, one-to-one session. Checkout uses the same Dodo hosted-session pattern as Astrothunder, with a separate mentoring product. After checkout, customers return to the existing Cal.com booking link.
 
