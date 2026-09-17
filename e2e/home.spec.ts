@@ -399,32 +399,35 @@ test.describe("detail panel", () => {
     );
   });
 
-  test("desktop work list starts beside the intro identity, not the dictionary", async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 1024, height: 800 });
-    await page.goto("/");
+  for (const width of [768, 1024]) {
+    test(`work list starts beside the intro identity at ${width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await page.goto("/");
 
-    const dictionary = page.locator(".home__masthead");
-    const intro = page.locator(".home__intro");
-    const work = page.locator(".home__work");
-    await expect(dictionary).toBeVisible();
-    await expect(intro).toBeVisible();
-    await expect(work).toBeVisible();
+      const dictionary = page.locator(".home__masthead");
+      const intro = page.locator(".home__intro");
+      const work = page.locator(".home__work");
+      await expect(dictionary).toBeVisible();
+      await expect(intro).toBeVisible();
+      await expect(work).toBeVisible();
 
-    const dictionaryBox = await dictionary.boundingBox();
-    const introBox = await intro.boundingBox();
-    const workBox = await work.boundingBox();
-    expect(dictionaryBox).not.toBeNull();
-    expect(introBox).not.toBeNull();
-    expect(workBox).not.toBeNull();
-    expect(workBox!.y).toBeGreaterThan(dictionaryBox!.y + dictionaryBox!.height - 1);
-    expect(Math.abs(workBox!.y - introBox!.y)).toBeLessThan(2);
-    const contentBox = await page.locator(".home__content").boundingBox();
-    expect(contentBox).not.toBeNull();
-    expect(dictionaryBox!.width).toBeGreaterThan(contentBox!.width * 0.4);
-    expect(dictionaryBox!.width).toBeLessThan(contentBox!.width * 0.6);
-  });
+      const dictionaryBox = await dictionary.boundingBox();
+      const introBox = await intro.boundingBox();
+      const workBox = await work.boundingBox();
+      expect(dictionaryBox).not.toBeNull();
+      expect(introBox).not.toBeNull();
+      expect(workBox).not.toBeNull();
+      expect(workBox!.y).toBeGreaterThan(dictionaryBox!.y + dictionaryBox!.height - 1);
+      expect(introBox!.y - (dictionaryBox!.y + dictionaryBox!.height)).toBeCloseTo(48, 0);
+      expect(Math.abs(workBox!.y - introBox!.y)).toBeLessThan(2);
+      const contentBox = await page.locator(".home__content").boundingBox();
+      expect(contentBox).not.toBeNull();
+      expect(dictionaryBox!.width).toBeGreaterThan(contentBox!.width * 0.4);
+      expect(dictionaryBox!.width).toBeLessThan(contentBox!.width * 0.6);
+    });
+  }
 
   test("desktop portrait stays in the left column without shifting work", async ({
     page,
