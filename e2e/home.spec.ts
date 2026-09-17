@@ -26,9 +26,9 @@ test("homepage shows intro and project list", async ({ page }) => {
     siteConfig.introIdentity,
   );
   await expect(page.locator(".home__intro .home__line--role")).toHaveCount(0);
-  await expect(page.locator(".home__intro .home__line--subline")).toHaveText(
-    siteConfig.introSubline,
-  );
+  await expect(page.locator(".home__intro .home__line--subline")).toHaveText([
+    ...siteConfig.introSublineParts,
+  ]);
   await expect(page.locator(".home__line--tagline")).toHaveText(
     siteConfig.introTagline,
   );

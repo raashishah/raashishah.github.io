@@ -52,6 +52,7 @@ describe("metadata helpers", () => {
     expect(siteConfig.description).toContain(siteConfig.introIdentity);
     expect(siteConfig.description).toContain(siteConfig.introName);
     expect(siteConfig.description).toContain(siteConfig.introRole);
+    expect(siteConfig.introSubline).toBe(siteConfig.introSublineParts.join(" "));
     expect(siteConfig.description).toContain(siteConfig.introSubline);
     expect(siteConfig.description).toContain(siteConfig.introTagline);
     expect(siteConfig.socialDescription).toContain(siteConfig.introRole);

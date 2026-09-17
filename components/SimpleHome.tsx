@@ -11,7 +11,7 @@ export function SimpleHome({
   nameEasterEggHref,
   introName,
   introRole,
-  introSubline,
+  introSublineParts,
   introTagline,
   workGroups,
 }: HomeContent) {
@@ -33,7 +33,13 @@ export function SimpleHome({
               </div>
               <div className="home__intro-lede">
                 <p className="home__line home__line--tagline">{introTagline}</p>
-                <p className="home__line home__line--subline">{introSubline}</p>
+                <div className="home__intro-subline">
+                  {introSublineParts.map((line) => (
+                    <p key={line} className="home__line home__line--subline">
+                      {line}
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           </section>

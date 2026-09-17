@@ -4,8 +4,11 @@ const introName = "Raashi Shah";
 const introRole = "AI Engineer";
 const introIdentity = `${introName}, ${introRole}`;
 const introTagline = "Developing apps and agents";
-const introSubline =
-  "Seven years as a Product Manager working with human engineers. Now, over a year with agent engineers";
+const introSublineParts = [
+  "Seven years as a Product Manager working with human engineers.",
+  "Now, over a year with agent engineers",
+] as const;
+const introSubline = introSublineParts.join(" ");
 const introDescription = `${introIdentity}. ${introTagline}. ${introSubline}.`;
 const socialDescription = `${introRole}. ${introTagline}.`;
 
@@ -16,6 +19,7 @@ export const siteConfig = {
   introRole,
   introIdentity,
   introSubline,
+  introSublineParts,
   introTagline,
   description: introDescription,
   socialDescription,

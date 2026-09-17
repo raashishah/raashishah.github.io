@@ -117,6 +117,12 @@
   max-width: var(--home-measure-body);
 }
 
+.home__intro-subline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
 .home__name {
   margin: 0;
   font-family: var(--font-medium);
