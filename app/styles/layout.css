@@ -165,26 +165,15 @@
 
 .home__intro-profile .home__line--name,
 .home__intro-profile .home__line--tagline {
-  font-family: var(--font-regular);
-  font-weight: 400;
-  line-height: 1.294;
-  letter-spacing: -0.015em;
-}
-
-.home__intro-profile .home__line--name {
-  font-size: 1rem;
+  line-height: var(--type-headline-inline-leading);
 }
 
 .home__intro-profile .home__line--tagline {
-  font-size: 1.0625rem;
   text-wrap: balance;
 }
 
 .home__intro-profile .home__line--subline {
   max-width: var(--home-measure-body);
-  font-size: 0.875rem;
-  line-height: 1.286;
-  letter-spacing: normal;
 }
 
 .home__intro-profile-heatmap-link .home__cursor-heatmap {
@@ -261,11 +250,11 @@
 }
 
 .home__line--name {
-  font-family: var(--font-medium);
-  font-size: var(--type-title-size);
-  font-weight: 500;
-  line-height: var(--type-title-leading);
-  letter-spacing: var(--type-title-tracking);
+  font-family: var(--font-regular);
+  font-size: var(--type-body-size);
+  font-weight: 400;
+  line-height: var(--type-headline-inline-leading);
+  letter-spacing: var(--type-headline-inline-tracking);
   color: var(--text);
 }
 

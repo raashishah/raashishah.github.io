@@ -19,7 +19,7 @@ typography:
     letterSpacing: "-0.022em"
   headline:
     fontFamily: "Satoshi, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "clamp(1.0625rem, 1.6vw, 1.1875rem)"
+    fontSize: "clamp(1.125rem, 1.7vw, 1.25rem)"
     fontWeight: 500
     lineHeight: 1.3
     letterSpacing: "-0.015em"
