@@ -29,7 +29,8 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("## Why hire");
     expect(llmsTxt).toContain("## What she builds");
     expect(llmsTxt).toContain("consulting, contract work, and full-time");
-    expect(llmsTxt).toContain("Google Calendar");
+    expect(llmsTxt).toContain("Cal.com");
+    expect(llmsTxt).toContain("https://cal.com/raashishah");
     expect(llmsTxt).not.toContain("Calendly");
     expect(llmsTxt).toContain("## Key pages");
     expect(llmsTxt).toContain("## Projects");

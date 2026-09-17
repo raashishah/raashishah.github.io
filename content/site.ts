@@ -56,7 +56,7 @@ export const socialLinks = [
   {
     id: "calendly",
     label: "let's meet sometime",
-    href: "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
+    href: "https://cal.com/raashishah",
   },
 ] as const satisfies readonly SocialLink[];
 

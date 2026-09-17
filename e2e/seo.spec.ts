@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { calendlyLink } from "../content/site";
 import { absoluteUrl, siteConfig } from "../lib/metadata";
 import { buildLlmsTxt, seoConfig } from "../lib/site-seo";
 
@@ -66,7 +67,7 @@ test.describe("SEO and LLM discovery", () => {
     expect(body).toContain("## Open to");
     expect(body).toContain("## About");
     expect(body).toContain("## Key pages");
-    expect(body).toContain("calendar.app.google");
+    expect(body).toContain(calendlyLink.href);
   });
 
   test("llms-full.txt is served as plain text", async ({ request }) => {
@@ -114,7 +115,7 @@ test.describe("SEO and LLM discovery", () => {
     ).toBeVisible();
     await expect(page.getByRole("link", { name: "Book demo" })).toHaveAttribute(
       "href",
-      "https://calendar.app.google/CQiAZnhWLZs1HF8X6",
+      calendlyLink.href,
     );
     await expect(page.getByText("Still updating this page")).toBeVisible();
     await expect(page.getByRole("link", { name: siteConfig.name })).toHaveAttribute("href", "/");
