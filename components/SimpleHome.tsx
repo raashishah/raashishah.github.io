@@ -2,6 +2,7 @@ import { DetailsAccordion } from "@/components/DetailsAccordion";
 import { DecavalentDictionary } from "@/components/DecavalentDictionary";
 import { HomepageMarker } from "@/components/HomepageMarker";
 import { HomePortrait } from "@/components/HomePortrait";
+import { HomeIntroProfile } from "@/components/HomeIntroProfile";
 import { AgentMentoring } from "@/components/AgentMentoring";
 import { PortfolioList } from "@/components/PortfolioList";
 import { PortfolioShell } from "@/components/PortfolioShell";
@@ -20,22 +21,15 @@ export function SimpleHome({
       <PortfolioShell
         nameHref={nameEasterEggHref}
         nameExternal
-        showCursorHeatmap
         intro={
           <section className="home__intro home__intro--masthead" aria-label="About">
             <DecavalentDictionary />
-            <div className="home__intro-person">
-              <div className="home__intro-identity">
-                <h2 className="home__line home__line--name">
-                  <span className="home__intro-name">{`${introName},`}</span>
-                  <span className="home__intro-role">{` ${introRole}`}</span>
-                </h2>
-              </div>
-              <div className="home__intro-lede">
-                <p className="home__line home__line--tagline">{introTagline}</p>
-                <p className="home__line home__line--subline">{introSubline}</p>
-              </div>
-            </div>
+            <HomeIntroProfile
+              introName={introName}
+              introRole={introRole}
+              introTagline={introTagline}
+              introSubline={introSubline}
+            />
           </section>
         }
         portrait={<><HomePortrait /><AgentMentoring /></>}

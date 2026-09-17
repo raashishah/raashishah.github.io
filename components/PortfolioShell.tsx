@@ -1,7 +1,6 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { CursorHeatmap } from "@/components/CursorHeatmap";
 import { DetailPanelContent } from "@/components/DetailPanel";
 import { useDetail } from "@/components/DetailProvider";
 import { SiteShell } from "@/components/SiteShell";
@@ -13,7 +12,6 @@ type PortfolioShellProps = {
   intro: ReactNode;
   work: ReactNode;
   portrait?: ReactNode;
-  showCursorHeatmap?: boolean;
 };
 
 export function PortfolioShell({
@@ -23,7 +21,6 @@ export function PortfolioShell({
   intro,
   work,
   portrait,
-  showCursorHeatmap = false,
 }: PortfolioShellProps) {
   const { route, isDesktop, isMediaReady } = useDetail();
   const portraitInPrimary = isMediaReady ? isDesktop : false;
@@ -41,10 +38,7 @@ export function PortfolioShell({
           {route ? <DetailPanelContent route={route} /> : null}
           {portraitInPrimary ? portraitNode : null}
         </div>
-        <div className="home__work">
-          {work}
-          {showCursorHeatmap ? <CursorHeatmap /> : null}
-        </div>
+        <div className="home__work">{work}</div>
         {!portraitInPrimary ? portraitNode : null}
       </div>
     </SiteShell>
