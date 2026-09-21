@@ -20,7 +20,12 @@ import {
   type DetailRouteConfig,
   type DetailSlug,
 } from "@/lib/detail-routes";
-import { PANEL_CLOSE_MS, SHEET_BREAKPOINT, TRANSITION_FALLBACK_BUFFER_MS } from "@/lib/motion";
+import {
+  PANEL_CLOSE_MS,
+  SHEET_BREAKPOINT,
+  SHEET_CLOSE_MS,
+  TRANSITION_FALLBACK_BUFFER_MS,
+} from "@/lib/motion";
 
 type DetailContextValue = {
   isOpen: boolean;
@@ -118,14 +123,17 @@ function DetailProviderInner({ children }: { children: ReactNode }) {
     }
 
     setIsClosing(true);
+    const closeDurationMs = isDesktop
+      ? PANEL_CLOSE_MS
+      : SHEET_CLOSE_MS;
 
     return new Promise<void>((resolve) => {
       closeResolveRef.current = resolve;
       closeTimerRef.current = window.setTimeout(() => {
         finishDetailClose();
-      }, PANEL_CLOSE_MS + TRANSITION_FALLBACK_BUFFER_MS);
+      }, closeDurationMs + TRANSITION_FALLBACK_BUFFER_MS);
     });
-  }, [finishDetailClose, isClosing, isOpen]);
+  }, [finishDetailClose, isClosing, isDesktop, isOpen]);
 
   const value = useMemo(
     () => ({

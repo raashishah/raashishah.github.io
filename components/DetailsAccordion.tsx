@@ -20,7 +20,7 @@ type AccordionEntry = {
 };
 
 type DetailsAccordionContextValue = {
-  prepareOpen: (id: string) => Promise<void>;
+  prepareOpen: (id: string) => void;
   notifyClosed: (id: string) => void;
   register: (id: string, entry: AccordionEntry) => void;
   unregister: (id: string) => void;
@@ -58,20 +58,21 @@ export function DetailsAccordion({ children }: { children: ReactNode }) {
     closersRef.current.delete(id);
   }, []);
 
-  const prepareOpen = useCallback(async (id: string) => {
-    const currentOpenId = openIdRef.current;
-    openIdRef.current = id;
-    const closingDetail =
-      isOpen && slug && !isDetailPanelAccordion(slug, id)
-        ? requestCloseDetail()
-        : Promise.resolve();
-    const closingAccordion =
-      currentOpenId && currentOpenId !== id
-        ? (closersRef.current.get(currentOpenId)?.close() ?? Promise.resolve())
-        : Promise.resolve();
+  const prepareOpen = useCallback(
+    (id: string) => {
+      const currentOpenId = openIdRef.current;
+      openIdRef.current = id;
 
-    await Promise.all([closingDetail, closingAccordion]);
-  }, [isOpen, slug, requestCloseDetail]);
+      if (isOpen && slug && !isDetailPanelAccordion(slug, id)) {
+        void requestCloseDetail();
+      }
+
+      if (currentOpenId && currentOpenId !== id) {
+        void closersRef.current.get(currentOpenId)?.close();
+      }
+    },
+    [isOpen, slug, requestCloseDetail],
+  );
 
   const notifyClosed = useCallback((id: string) => {
     if (openIdRef.current === id) {

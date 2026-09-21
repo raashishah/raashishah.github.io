@@ -11,7 +11,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import {
-  PANEL_CLOSE_MS,
+  SHEET_CLOSE_MS,
   SHEET_DISMISS_THRESHOLD_PX,
   SHEET_HEIGHT_LARGE,
   SHEET_HEIGHT_MEDIUM,
@@ -75,7 +75,7 @@ export function BottomSheet({
 
     const sheet = sheetRef.current;
 
-    return watchTransition(sheet, "transform", PANEL_CLOSE_MS, onExitComplete);
+    return watchTransition(sheet, "transform", SHEET_CLOSE_MS, onExitComplete);
   }, [closing, onExitComplete]);
 
   const cycleDetent = useCallback(() => {

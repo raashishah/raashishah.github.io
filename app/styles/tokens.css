@@ -41,11 +41,18 @@
   /* Split-view / sheet breakpoint — keep in sync with SHEET_BREAKPOINT in lib/motion.ts */
   --home-detail-viewport-offset: 12rem;
 
-  /* Motion — Apple HIG: 0.35s default, ease-in-out; ease-out enter, ease-in exit */
+  /* Motion — Decavalent timing (revised 2026-09-21); ease-out enter, ease-in exit */
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --duration-short: 250ms;
-  --duration-standard: 350ms;
+  --duration-accordion-open: 220ms;
+  --duration-accordion-close: 160ms;
+  --duration-panel-open: 220ms;
+  --duration-panel-close: 160ms;
+  --duration-sheet-open: 280ms;
+  --duration-sheet-close: 220ms;
+  /* Legacy aliases — prefer semantic tokens above */
+  --duration-short: var(--duration-accordion-close);
+  --duration-standard: var(--duration-accordion-open);
 
   /* Type scale — fluid size tokens */
   --text-title: clamp(1.375rem, 2vw, 1.5rem);

@@ -26,6 +26,7 @@ export function AnimatedDetails({
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
+  const transitionIdRef = useRef(0);
   const accordion = useDetailsAccordion();
   const targetOpenRef = useRef(false);
 
@@ -40,6 +41,10 @@ export function AnimatedDetails({
     details.classList.remove("home__details--opening", "home__details--closing");
   };
 
+  const setArmed = (details: HTMLDetailsElement, armed: boolean) => {
+    details.classList.toggle("home__details--armed", armed);
+  };
+
   const runTransition = useCallback((mode: TransitionMode): Promise<void> => {
     const details = detailsRef.current;
     const shell = shellRef.current;
@@ -48,23 +53,34 @@ export function AnimatedDetails({
     }
 
     if (mode === "close" && !details.open) {
+      setArmed(details, false);
       return Promise.resolve();
     }
 
     const durationMs = mode === "open" ? ACCORDION_OPEN_MS : ACCORDION_CLOSE_MS;
+    const transitionId = ++transitionIdRef.current;
 
     return new Promise((resolve) => {
       cancelAnimation();
       targetOpenRef.current = mode === "open";
 
-      if (mode === "open" && !details.open) {
-        clearMotionClasses(details);
-        details.classList.add("home__details--closing");
-        details.open = true;
-        void shell.offsetHeight;
-        details.classList.replace("home__details--closing", "home__details--opening");
-      } else if (mode === "open") {
-        details.classList.replace("home__details--closing", "home__details--opening");
+      if (mode === "open") {
+        setArmed(details, true);
+        if (!details.open) {
+          clearMotionClasses(details);
+          details.classList.add("home__details--closing");
+          details.open = true;
+          void shell.offsetHeight;
+          details.classList.replace(
+            "home__details--closing",
+            "home__details--opening",
+          );
+        } else {
+          details.classList.replace(
+            "home__details--closing",
+            "home__details--opening",
+          );
+        }
       } else {
         details.classList.remove("home__details--opening");
         details.classList.add("home__details--closing");
@@ -75,9 +91,14 @@ export function AnimatedDetails({
         "grid-template-rows",
         durationMs,
         () => {
+          if (transitionId !== transitionIdRef.current) {
+            return;
+          }
+
           if (mode === "close") {
             details.open = false;
             clearMotionClasses(details);
+            setArmed(details, false);
           } else {
             details.classList.remove("home__details--opening");
           }
@@ -86,10 +107,7 @@ export function AnimatedDetails({
         },
       );
 
-      cleanupRef.current = () => {
-        cleanup();
-        resolve();
-      };
+      cleanupRef.current = cleanup;
     });
   }, []);
 
@@ -125,7 +143,7 @@ export function AnimatedDetails({
     }
 
     if (accordionId && accordion) {
-      await accordion.prepareOpen(accordionId);
+      accordion.prepareOpen(accordionId);
     }
 
     await runTransition("open");

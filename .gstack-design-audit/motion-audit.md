@@ -1,25 +1,45 @@
-# Motion audit — homepage dropdowns
+# Motion audit — homepage dropdowns and detail panels
 
-**Date:** 2026-07-01  
-**Scope:** `AnimatedDetails` open/close on all 7 homepage dropdowns (3 projects + 4 jobs)  
-**Engine:** CSS grid `0fr` → `1fr` with `--opening` / `--closing` classes
+**Date:** 2026-09-21  
+**Scope:** Accordion open/close, desktop split detail, phone bottom sheet  
+**Reference:** [Type & motion](https://app.notion.com/p/3d6296985c79811e8ae0e5f99425a59c) · [Components & interaction](https://app.notion.com/p/3db296985c7981d78b37f3fe89a1128f)
 
-## Apple HIG alignment (current)
+## Decavalent timing (implemented)
 
-| Property | Open | Close |
-|----------|------|-------|
-| Height | 350ms ease-out (grid `0fr` → `1fr`) | 250ms ease-in (grid `1fr` → `0fr`) |
-| Body opacity | 350ms ease-out | 250ms ease-in |
-| Disclosure `+`/`×` | 350ms ease-out | 250ms ease-in |
-| Engine | Pure CSS transitions on `grid-template-rows` and opacity | Same |
+| Interaction | Open / enter | Close / exit | Behaviour |
+|-------------|--------------|--------------|-----------|
+| Accordion | 220ms ease-out | 160ms ease-in | Grid `0fr` ↔ `1fr` with body opacity |
+| Desktop detail | 220ms ease-out | 160ms ease-in | Grid, opacity and `translateX(-12px)` coordinated |
+| Phone sheet | 280ms ease-out | 220ms ease-in | Transform travel; drag tracks finger directly |
+| Press feedback | Immediate | — | `.home__details--armed` on next frame |
 
-## Implementation notes
+Tokens live in `app/styles/tokens.css` (`--duration-*`) and `lib/motion.ts`.
 
-- `AnimatedDetails.tsx` toggles `--opening` and `--closing` classes; no JS height measurement.
-- Steady open state (`[open]:not(.home__details--closing)`) sets `grid-template-rows: 1fr` and `opacity: 1` without animation classes.
-- Timing tokens live in `lib/motion.ts` (`ACCORDION_OPEN_MS` = 350, `ACCORDION_CLOSE_MS` = 250) and match `globals.css` (`--duration-standard`, `--duration-short`).
-- `DetailsAccordion` ensures only one dropdown is open at a time.
+## Coordination
 
-## Deferred
+- **Simultaneous switching:** `DetailsAccordion.prepareOpen` fires the previous close without awaiting it; the requested accordion opens immediately.
+- **Interruptible transitions:** `AnimatedDetails` cancels superseded `watchTransition` callbacks and ignores stale completion IDs.
+- **Parallel detail close:** Closing contextual detail and opening another accordion run concurrently.
+- **Sheet drag:** Pointer transform overrides timed transition during drag; release settles from the current position.
 
-- `prefers-reduced-motion` not wired (intentional — animations always on per product preference)
+## Accessibility gap (documented deviation)
+
+The HIG target calls for minimising spatial travel under `prefers-reduced-motion`. This site intentionally retains full motion when Reduce Motion is enabled. That deviation is recorded here and in `lib/motion-spec.ts`; it is not certified as accessible motion behaviour.
+
+## Acceptance checks
+
+- [x] First activation produces immediate visible feedback
+- [x] Switching begins opening the requested item without waiting for the previous close
+- [x] Rapid A → B → C activation leaves only C open, with no delayed reopening
+- [x] Repeated activation reverses smoothly from the current position
+- [x] Close, Escape and sheet dragging work during entry
+- [x] Geometry, opacity and related content visibility settle without a second beat
+- [x] Focus, reading position and the desktop work column remain stable
+- [ ] Long-content browser recordings at 375px, 768px and desktop width
+- [ ] Reduced-motion behaviour validated beyond the documented deviation
+
+## Validation
+
+- Unit tests: `lib/motion.test.ts`
+- Jev API check: `node scripts/validate-motion.mjs` (requires `TYPESAFE_API_KEY`)
+- Playwright regression: `e2e/motion.spec.ts`

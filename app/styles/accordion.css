@@ -23,6 +23,7 @@
   display: none;
 }
 
+.home__details--armed .home__details-summary,
 .home__details[open]:not(.home__details--closing) .home__details-summary {
   color: var(--accent);
 }
@@ -52,8 +53,8 @@
   background: currentColor;
   border-radius: 1px;
   transition:
-    transform var(--duration-standard) var(--ease-out),
-    opacity var(--duration-short) var(--ease-out);
+    transform var(--duration-accordion-open) var(--ease-out),
+    opacity var(--duration-accordion-close) var(--ease-out);
 }
 
 .home__disclosure::before {
@@ -83,7 +84,7 @@
 }
 
 .home__details:not([open]) .home__disclosure::after {
-  transition-duration: var(--duration-short);
+  transition-duration: var(--duration-accordion-close);
   transition-timing-function: var(--ease-in);
 }
 
@@ -105,33 +106,33 @@
 
 .home__details--opening .home__project-body-shell {
   transition:
-    grid-template-rows var(--duration-standard) var(--ease-out),
-    margin-top var(--duration-standard) var(--ease-out);
+    grid-template-rows var(--duration-accordion-open) var(--ease-out),
+    margin-top var(--duration-accordion-open) var(--ease-out);
 }
 
 .home__details--closing .home__project-body-shell {
   grid-template-rows: 0fr;
   transition:
-    grid-template-rows var(--duration-short) var(--ease-in),
-    margin-top var(--duration-short) var(--ease-in);
+    grid-template-rows var(--duration-accordion-close) var(--ease-in),
+    margin-top var(--duration-accordion-close) var(--ease-in);
 }
 
 .home__details.home__details--closing .home__project-body {
   opacity: 0;
-  transition-duration: var(--duration-short);
+  transition-duration: var(--duration-accordion-close);
   transition-timing-function: var(--ease-in);
   transition-delay: 0ms;
 }
 
 .home__details.home__details--closing .home__disclosure::before {
   transform: translateY(-50%) rotate(0deg);
-  transition-duration: var(--duration-short);
+  transition-duration: var(--duration-accordion-close);
   transition-timing-function: var(--ease-in);
 }
 
 .home__details.home__details--closing .home__disclosure::after {
   transform: translateX(-50%) rotate(0deg);
-  transition-duration: var(--duration-short);
+  transition-duration: var(--duration-accordion-close);
   transition-timing-function: var(--ease-in);
 }
 
@@ -142,7 +143,7 @@
   flex-direction: column;
   gap: var(--space-3);
   opacity: 0;
-  transition: opacity var(--duration-short) var(--ease-in);
+  transition: opacity var(--duration-accordion-close) var(--ease-in);
 }
 
 .home__work .home__project-body,
@@ -156,7 +157,7 @@
 
 .home__details--opening:not(.home__details--closing) .home__project-body {
   opacity: 1;
-  transition-duration: var(--duration-standard);
+  transition-duration: var(--duration-accordion-open);
   transition-timing-function: var(--ease-out);
   transition-delay: 0ms;
 }

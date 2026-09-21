@@ -73,7 +73,7 @@ components:
 
 ## Overview
 
-Light, top-aligned personal homepage. Near-white eggshell surface (`#faf9f6`), Apple-tinted neutrals, Satoshi type, no cards or hero chrome. Layout: horizontal header (name left, contact nav right), two-column body on wide screens (intro left, expandable lists right), footer socials. Motion is restrained and HIG-aligned: 350ms standard UI, ease-out on enter, ease-in on exit.
+Light, top-aligned personal homepage. Near-white eggshell surface (`#faf9f6`), Apple-tinted neutrals, Satoshi type, no cards or hero chrome. Layout: horizontal header (name left, contact nav right), two-column body on wide screens (intro left, expandable lists right), footer socials. Motion is restrained and HIG-aligned: 220ms accordion/detail enter, 160ms exit, 280ms/220ms phone sheet, ease-out on enter, ease-in on exit.
 
 Root `html` font-size is **112.5%** (18px base instead of 16px), so all `rem`-based type tokens render ~12.5% larger than their nominal values. Canonical intro strings live in `lib/metadata.ts` (`siteConfig`) and must match homepage, metadata, and OG image. System dark mode follows `prefers-color-scheme` via semantic token overrides in `globals.css`.
 
@@ -143,8 +143,10 @@ Homepage left column opens with the Decavalent dictionary entry, then a person c
 ### Project / job lists
 Four HIG grouped-list sections separated by `--space-5` (24px): Agents, Machine Learning, Web apps, Product Management (`home__project-groups` / `.home__list-section`). Rows stay on `--space-1`; category gaps are `--space-5` so groups read apart from projects, without returning to the `--space-7` dictionary break. Section headings use `type-headline` (500, `--text`) via `.home__list-section-heading` — larger than accordion row titles (`type-headline-inline`); no Projects/Experience headings. Rows mix projects and jobs. Each row is a native `<details>` with:
 - Summary row: role-focused title at body scale + medium weight + CSS plus icon (44px min height)
-- Expand: grid `0fr → 1fr` height (350ms ease-out), body opacity fade
-- Collapse: 250ms ease-in; no transition delay on close
+- Expand: grid `0fr → 1fr` height (220ms ease-out), body opacity fade
+- Collapse: 160ms ease-in; no transition delay on close
+- Switching: requested item opens immediately; previous item closes in parallel
+- Press feedback: summary colour on next frame via `.home__details--armed`
 - Inline body links with `ExternalLinkArrow` ↗ (old rose icon, grey default text); grouped multi-link rows use `·` separators
 - Company/product names in body links via `seoName` (e.g. Pluto, OnDevice, Kawa Space, Aula Education)
 
@@ -157,17 +159,23 @@ Soft navigation from the homepage opens project detail in-context: **bottom shee
 
 **Phone sheet:** dimmed scrim, medium detent (~50dvh) on open, grabber to resize, swipe-down dismiss, Close on leading edge, 44px touch targets, safe-area padding.
 
-**Desktop split:** balanced two-pane grid (`1fr / 1fr`); lists stay interactive on the right; detail enters with `translateX(-16px)` + opacity (350ms ease-out). Active inline link uses `aria-current="page"` (old rose).
+**Desktop split:** balanced two-pane grid (`1fr / 1fr`); lists stay interactive on the right; detail enters with `translateX(-12px)` + opacity (220ms ease-out). Active inline link uses `aria-current="page"` (old rose).
 
-**Motion:** transform + opacity only; 350ms open / 250ms close; no glass or card chrome. Intercepting routes (`@detail` parallel slot) keep the homepage mounted on soft nav; `router.back()` and Close all dismiss.
+**Motion:** transform + opacity only; 220ms open / 160ms close on desktop; phone sheet 280ms enter / 220ms exit; no glass or card chrome. Intercepting routes (`@detail` parallel slot) keep the homepage mounted on soft nav; `router.back()` and Close all dismiss.
+
+**Accessibility gap:** `prefers-reduced-motion` is intentionally not wired; full motion remains on. Documented deviation from the HIG target in `.gstack-design-audit/motion-audit.md`.
 
 Full-page fallback uses `ProjectPage` → `ProjectDetail` inside `SiteShell` — same tokens and typography.
 
 ### Motion tokens (in `globals.css`)
 - `--ease-out`: cubic-bezier(0, 0, 0.2, 1)
 - `--ease-in`: cubic-bezier(0.4, 0, 1, 1)
-- `--duration-short`: 250ms
-- `--duration-standard`: 350ms
+- `--duration-accordion-open`: 220ms
+- `--duration-accordion-close`: 160ms
+- `--duration-panel-open`: 220ms
+- `--duration-panel-close`: 160ms
+- `--duration-sheet-open`: 280ms
+- `--duration-sheet-close`: 220ms
 
 ## Do's and Don'ts
 

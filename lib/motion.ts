@@ -1,11 +1,15 @@
-/** Accordion motion — keep in sync with `app/globals.css` duration/ease tokens. */
-export const ACCORDION_OPEN_MS = 350;
-export const ACCORDION_CLOSE_MS = 250;
+/** Accordion motion — keep in sync with `app/styles/tokens.css` duration tokens. */
+export const ACCORDION_OPEN_MS = 220;
+export const ACCORDION_CLOSE_MS = 160;
 export const TRANSITION_FALLBACK_BUFFER_MS = 50;
 
-/** Detail panel motion — reuse accordion timing for enter/exit. */
-export const PANEL_OPEN_MS = ACCORDION_OPEN_MS;
-export const PANEL_CLOSE_MS = ACCORDION_CLOSE_MS;
+/** Desktop detail panel motion. */
+export const PANEL_OPEN_MS = 220;
+export const PANEL_CLOSE_MS = 160;
+
+/** Phone bottom sheet motion. */
+export const SHEET_OPEN_MS = 280;
+export const SHEET_CLOSE_MS = 220;
 
 /** Bottom sheet interaction. */
 export const SHEET_DISMISS_THRESHOLD_PX = 80;
