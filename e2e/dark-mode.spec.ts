@@ -66,6 +66,9 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.name).toBe(await getSemanticColor(page, "--accent"));
     expect(colors.tagline).toBe(await getSemanticColor(page, "--ink"));
     expect(colors.subline).toBe(await getSemanticColor(page, "--ink-secondary"));
+    expect(colors.background).toBe("rgb(32, 28, 25)");
+    expect(colors.text).toBe("rgb(246, 243, 238)");
+    expect(colors.name).toBe("rgb(212, 163, 164)");
 
     await expect(page.getByRole("heading", { name: siteConfig.name })).toBeVisible();
     await expect(page.locator(".home__intro .home__line--name")).toHaveText(
@@ -113,6 +116,33 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.background).toBe(await getSemanticColor(page, "--surface"));
     expect(colors.text).toBe(await getSemanticColor(page, "--ink"));
     await expect(page.locator(".home__detail")).toBeVisible();
+  });
+
+  test("phone sheet dims with a dark scrim and a lighter surface", async ({ page }) => {
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/?detail=expression");
+
+    const sheet = page.locator(".home__sheet");
+    const scrim = page.locator(".home__scrim");
+    await expect(sheet).toBeVisible();
+    await expect(scrim).toBeVisible();
+
+    const colors = await page.evaluate(() => {
+      const sheetNode = document.querySelector(".home__sheet");
+      const scrimNode = document.querySelector(".home__scrim");
+      const quiet = document.querySelector('.home__cursor-heatmap circle[data-level="0"]');
+      return {
+        sheet: sheetNode ? getComputedStyle(sheetNode).backgroundColor : "",
+        scrim: scrimNode ? getComputedStyle(scrimNode).backgroundColor : "",
+        quiet: quiet ? getComputedStyle(quiet).fill : "",
+      };
+    });
+
+    expect(colors.sheet).toBe("rgb(44, 40, 36)");
+    expect(colors.scrim).toMatch(/0\.64/);
+    expect(colors.scrim).not.toMatch(/245|0\.96/);
+    expect(colors.quiet).toMatch(/0\.25/);
   });
 
   test("switching from dark to light updates tokens", async ({ page }) => {

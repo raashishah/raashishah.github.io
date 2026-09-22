@@ -1,0 +1,17 @@
+# Screen list for /hig implement + review
+version: 1
+screens:
+  - id: home
+    route: /
+    title: Home
+    priority: 1
+    status: designed
+    appearances: [light, dark]
+    viewports: [768, 375]
+  - id: expression
+    route: /?detail=expression
+    title: Expression detail
+    priority: 2
+    status: designed
+    appearances: [light, dark]
+    viewports: [768, 375]

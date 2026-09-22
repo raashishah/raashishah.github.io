@@ -29,6 +29,7 @@ export function CursorHeatmapSvg() {
               cx={CURSOR_HEATMAP_ORIGIN + week * CURSOR_HEATMAP_GAP}
               cy={CURSOR_HEATMAP_ORIGIN + day * CURSOR_HEATMAP_GAP}
               r={CURSOR_HEATMAP_RADIUS}
+              data-level={cell}
               fill={fill}
             />
           );

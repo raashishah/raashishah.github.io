@@ -1,0 +1,51 @@
+round: 1
+stack: next
+register: brand
+leases:
+  - surface: color
+    files:
+      - app/styles/tokens.css
+    note: Warm dark palette, elevated surface, scrim, sheet shadow, separator, focus ring, increase-contrast overrides. Accessibility contrast bumps live here.
+  - surface: sheets
+    files:
+      - app/styles/panel.css
+    note: Scrim, sheet fill, and shadow consume tokens. Light scrim stays 32% ink.
+  - surface: images
+    files:
+      - components/CursorHeatmapSvg.tsx
+      - app/styles/layout.css
+    note: Dark fills use authored coral #c08081 at higher opacity. Photos and coral.svg unchanged.
+  - surface: branding
+    files:
+      - app/layout.tsx
+    note: theme-color matches surface per scheme. Favicon artwork unchanged.
+drops:
+  - surface: materials
+    reason: Same scrim and sheet tokens as sheets and color. Light scrim stays the current 32% ink mix so daytime does not get a heavier veil.
+  - surface: layout
+    reason: No hardcoded colors.
+  - surface: spacing
+    reason: Brand veto locks spacing and touch targets.
+  - surface: typography
+    reason: Weights and scale stay. Colors are tokens.
+  - surface: motion
+    reason: Durations stay.
+  - surface: controls
+    reason: Controls already use semantic tokens.
+  - surface: navigation
+    reason: No new chrome on a brand landing.
+  - surface: lists-split
+    reason: Split and list inherit tokens. No cards.
+  - surface: forms
+    reason: Mentoring has no light-only fields.
+  - surface: icons
+    reason: Footer icons use currentColor.
+  - surface: inclusion
+    reason: Contrast passes. Token edits leased to color.
+  - surface: accessibility
+    reason: Contrast and increase-contrast edits leased to color. Heatmap leased to images, using coral rather than the lifted text accent.
+gates: []
+ive:
+  - keep: warm night of the eggshell page
+  - remove: cool system-gray dark palette
+  - remove: pale scrim caused by mixing the label color

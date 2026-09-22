@@ -1,4 +1,18 @@
-version: 1
+version: 2
+objective: warm system dark mode
+register: brand
+brand_mutation_veto: spacing_and_touch_targets_locked
+round: 1
+screens:
+  - id: home
+    status: designed
+  - id: expression
+    status: designed
+swarm:
+  status: applied
+  round: 1
+  cap: 3
+  plan: .hig/swarm/plan.yaml
 sections:
   foundations-materials:
     status: verified

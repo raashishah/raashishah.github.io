@@ -1,0 +1,3 @@
+DROP
+
+Brand typography already maps body copy to weight 400, UI labels to 500, and intro identity to `var(--accent)` via semantic tokens; every `color` in `app/styles/{layout,dictionary,accordion,panel,footer,mentoring}.css` references `--ink`, `--text`, `--color-body`, `--text-muted`, or `--accent` (plus `color-mix` on those tokens), and a repo scan shows literal hex/rgb/hsl only in `app/styles/tokens.css`, including `@media (prefers-color-scheme: dark)` overrides for Apple tinted neutrals. Dark-mode optical heaviness on light ink is expected and not fixable on this surface without weight/size changes or new token work—both out of scope—so no typography-surface patch applies.

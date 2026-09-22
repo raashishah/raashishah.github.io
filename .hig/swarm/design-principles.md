@@ -1,0 +1,3 @@
+DROP
+
+The `DESIGN.md` dark palette already satisfies **aesthetic integrity** and **deference to content** for the brand landing without adding chrome. Warm `#201c19` / ivory `#f6f3ee` / lifted rose `#d4a3a4` read as the night of light eggshell `#faf9f6` and coral `#c08081`, not a cool system-gray second product. Hierarchy stays type- and spacing-led; the only extra fill role is `--surface-elevated` for the phone sheet, with `--scrim` fixed to dark `#0c0b0a` so dimming does not track label ink. OG, photographs, and the coral mark stay authored; no new bar fills, cards, gradients, or toggle palette. `.hig/app-design.md` matches this scope. No palette-level conflicts to resolve on this surface.

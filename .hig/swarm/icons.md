@@ -1,0 +1,3 @@
+DROP
+
+Footer social icons already follow semantic colour: `SocialIcon.tsx` renders legacy SVG paths with `fill="currentColor"` and Font Awesome brand `<i>` elements that inherit colour from the anchor. `.home__link--footer` in `app/styles/footer.css` sets `color: var(--text-muted)`; shared `.home__link` hover, active, and focus-visible rules in `app/styles/layout.css` move interactive state to `var(--accent)`. `.home__footer-icon` only sizes and aligns—no hard-coded fills or hex. The coral discovery mark is a fixed `#C08081` raster/SVG `img` (`.home__footer-mark`), intentionally not recoloured via tokens. No icon artwork or product changes warranted on this surface.

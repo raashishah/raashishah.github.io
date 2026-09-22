@@ -1,6 +1,7 @@
 ---
 name: Raashi Shah
 description: Calm, Apple-minimal personal portfolio for hire and consulting
+brand_mutation_veto: spacing_and_touch_targets_locked
 colors:
   ink: "#1d1d1f"
   ink-secondary: "#515154"
@@ -10,6 +11,15 @@ colors:
   separator: "12% ink mix"
   focus-ring: "42% ink mix"
   accent-focus-ring: "40% accent mix"
+dark:
+  ink: "#f6f3ee"
+  ink-secondary: "#b7afa6"
+  ink-tertiary: "#a39890"
+  surface: "#201c19"
+  surface-elevated: "#2c2824"
+  accent: "#d4a3a4"
+  separator: "16% ink mix"
+  scrim: "64% #0c0b0a"
 typography:
   title:
     fontFamily: "Satoshi, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
@@ -75,7 +85,7 @@ components:
 
 Light, top-aligned personal homepage. Near-white eggshell surface (`#faf9f6`), Apple-tinted neutrals, Satoshi type, no cards or hero chrome. Layout: horizontal header (name left, contact nav right), two-column body on wide screens (intro left, expandable lists right), footer socials. Motion is restrained and HIG-aligned: 220ms accordion/detail enter, 160ms exit, 280ms/220ms phone sheet, ease-out on enter, ease-in on exit.
 
-Root `html` font-size is **112.5%** (18px base instead of 16px), so all `rem`-based type tokens render ~12.5% larger than their nominal values. Canonical intro strings live in `lib/metadata.ts` (`siteConfig`) and must match homepage, metadata, and OG image. System dark mode follows `prefers-color-scheme` via semantic token overrides in `globals.css`.
+Root `html` font-size is **112.5%** (18px base instead of 16px), so all `rem`-based type tokens render ~12.5% larger than their nominal values. Canonical intro strings live in `lib/metadata.ts` (`siteConfig`) and must match homepage, metadata, and OG image. System dark mode follows `prefers-color-scheme` via semantic token overrides in `app/styles/tokens.css`. Light mode stays eggshell. There is no manual theme toggle.
 
 ## Colors (light)
 
@@ -93,17 +103,23 @@ Do not use pure `#000` or `#fff` for UI text/background. `--focus-ring` (42% ink
 
 ## Colors (dark)
 
-Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: light dark` so form controls and scrollbars follow the OS. OG image stays light.
+Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: light dark` so form controls and scrollbars follow the OS. OG image, photographs, and the coral mark stay as authored. Do not invert them.
+
+Light mode is warm eggshell. Dark mode uses the same warmth at night: ivory text on a brown-black canvas, with the rose lifted so it stays luminous. It is not an invert of the light hex values, and it is not untinted system gray (`#f5f5f7` on `#1a1a1c`).
 
 | Role | Token | Value | Use |
 |------|-------|-------|-----|
-| Primary text | `ink` | `#f5f5f7` | Name, tagline, accordion titles |
-| Body text | `ink-secondary` | `#aeaeb2` | Dropdown paragraphs, page body copy |
-| Muted | `ink-tertiary` | `#8e8e93` | Role line, footer social links, inline link default |
-| Background | `surface` | `#1a1a1c` | Page background (tinted dark) |
-| Accent | `accent` | `#c08081` | Unchanged — old rose coral |
-| Separator | `separator` | 12% ink mix | Auto-adjusts via `color-mix` |
-| Focus | `accent-focus-ring` | 40% accent mix | Unchanged |
+| Primary text | `ink` | `#f6f3ee` | Ivory. Tagline, accordion titles |
+| Body text | `ink-secondary` | `#b7afa6` | Dropdown paragraphs, page body copy |
+| Muted | `ink-tertiary` | `#a39890` | Role line, footer, inline link default |
+| Background | `surface` | `#201c19` | Warm charcoal page |
+| Elevated | `surface-elevated` | `#2c2824` | Phone sheet only. Light mode aliases this to `surface` |
+| Accent | `accent` | `#d4a3a4` | Intro name, section headings, hover, icons. Same rose hue as `#c08081`, lifted |
+| Separator | `separator` | 16% ink mix | Hairlines. Light mode stays 12% |
+| Scrim | `scrim` | 64% `#0c0b0a` | Dims the page behind the sheet. Must not follow `--ink` |
+| Focus | `accent-focus-ring` | 40% accent mix | Same formula, new accent |
+
+Contrast on `surface` (and on the elevated sheet): primary about 15:1, body about 7.8:1 (6.8:1 on the sheet), muted about 6:1 (5.2:1 on the sheet), accent about 7.7:1 (6.7:1 on the sheet). `prefers-contrast: more` lightens secondary, tertiary, and the separator further. Browser `theme-color` matches `surface` per scheme.
 
 ## Typography
 
@@ -130,7 +146,7 @@ Sub-pages use `h1` for site name (linked home) and `h2` for page tagline. Homepa
 
 ## Elevation
 
-No shadows on the homepage. Depth comes from typography hierarchy and spacing, not cards or layers. Separators are 1px rules at 12% ink opacity.
+No shadows on the homepage canvas. Depth comes from typography hierarchy and spacing, not cards or layers. Separators are 1px rules (12% ink in light, 16% in dark). The phone sheet is the only elevated surface: in dark mode it steps lighter than the page (`surface-elevated`) over a dark scrim. The sheet shadow stays a dark cast in both appearances, not a mix of the label color.
 
 ## Components
 

@@ -1,0 +1,3 @@
+DROP
+
+For dark-mode brand colour, `app/styles/layout.css` is not a productive surface: it defines grid, flex, spacing, and typography layout only, sets no page or shell `background`, and every colour property already references semantic tokens (`--ink`, `--text`, `--text-muted`, `--color-body`, `--accent`, `--separator`, `--accent-focus-ring`, plus `color-mix` on `--accent`/`--separator` for pullquote borders). A repo scan finds no literal hex, `rgb()`, or `hsl()` in this file. Dark-mode brand shifts belong in the token layer (e.g. `app/styles/tokens.css` or equivalent theme overrides), not layout structure; touching layout.css would risk unrelated spacing/grid/chrome churn with zero off-token colour fixes.

@@ -15,6 +15,9 @@
   --ink-on-accent: #1d1d1f;
   --text-on-accent: #faf9f6;
   --accent-focus-ring: color-mix(in srgb, var(--accent) 40%, transparent);
+  --surface-elevated: var(--surface);
+  --scrim: color-mix(in srgb, var(--ink) 32%, transparent);
+  --sheet-shadow: 0 -4px 24px color-mix(in srgb, #0c0b0a 8%, transparent);
 
   --text: var(--ink);
   --color-body: var(--ink-secondary);
@@ -95,10 +98,25 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --ink: #f5f5f7;
-    --ink-secondary: #aeaeb2;
-    --ink-tertiary: #8e8e93;
-    --surface: #1a1a1c;
+    --ink: #f6f3ee;
+    --ink-secondary: #b7afa6;
+    --ink-tertiary: #a39890;
+    --surface: #201c19;
+    --surface-elevated: #2c2824;
+    --accent: #d4a3a4;
+    --separator: color-mix(in srgb, var(--ink) 16%, transparent);
+    --scrim: color-mix(in srgb, #0c0b0a 64%, transparent);
+    --sheet-shadow: 0 -4px 24px color-mix(in srgb, #0c0b0a 28%, transparent);
+    --accent-focus-ring: color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+}
+
+@media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+  :root {
+    --ink-secondary: #ddd6ce;
+    --ink-tertiary: #d4cdc4;
+    --separator: color-mix(in srgb, var(--ink) 32%, transparent);
+    --accent-focus-ring: color-mix(in srgb, var(--accent) 80%, transparent);
   }
 }
 
