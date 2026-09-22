@@ -15,11 +15,11 @@ dark:
   ink: "#f6f3ee"
   ink-secondary: "#b7afa6"
   ink-tertiary: "#a39890"
-  surface: "#201c19"
-  surface-elevated: "#2c2824"
-  accent: "#d4a3a4"
+  surface: "#000000"
+  surface-elevated: "#1c1c1e"
+  accent: "#c08081"
   separator: "16% ink mix"
-  scrim: "64% #0c0b0a"
+  scrim: "64% #000000"
 typography:
   title:
     fontFamily: "Satoshi, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
@@ -99,27 +99,27 @@ Root `html` font-size is **112.5%** (18px base instead of 16px), so all `rem`-ba
 | Separator | `separator` | 12% ink mix | Header and footer rules |
 | Focus | `accent-focus-ring` | 40% accent mix | Keyboard focus outlines on interactive elements |
 
-Do not use pure `#000` or `#fff` for UI text/background. `--focus-ring` (42% ink mix) exists but interactive focus uses `--accent-focus-ring`.
+Light mode does not use pure `#000` or `#fff` for UI text or background. `--focus-ring` (42% ink mix) exists but interactive focus uses `--accent-focus-ring`.
 
 ## Colors (dark)
 
 Activated by `@media (prefers-color-scheme: dark)`. `:root` sets `color-scheme: light dark` so form controls and scrollbars follow the OS. OG image, photographs, and the coral mark stay as authored. Do not invert them.
 
-Light mode is warm eggshell. Dark mode uses the same warmth at night: ivory text on a brown-black canvas, with the rose lifted so it stays luminous. It is not an invert of the light hex values, and it is not untinted system gray (`#f5f5f7` on `#1a1a1c`).
+Light mode is warm eggshell. Dark mode keeps that warm type and the original rose on a neutral black base: ivory text on `#000000`, with the phone sheet one step lighter at `#1c1c1e`. It is not an invert of the light hex values, and it is not a brown-tinted charcoal.
 
 | Role | Token | Value | Use |
 |------|-------|-------|-----|
 | Primary text | `ink` | `#f6f3ee` | Ivory. Tagline, accordion titles |
 | Body text | `ink-secondary` | `#b7afa6` | Dropdown paragraphs, page body copy |
 | Muted | `ink-tertiary` | `#a39890` | Role line, footer, inline link default |
-| Background | `surface` | `#201c19` | Warm charcoal page |
-| Elevated | `surface-elevated` | `#2c2824` | Phone sheet only. Light mode aliases this to `surface` |
-| Accent | `accent` | `#d4a3a4` | Intro name, section headings, hover, icons. Same rose hue as `#c08081`, lifted |
+| Background | `surface` | `#000000` | Page. Dark mode only |
+| Elevated | `surface-elevated` | `#1c1c1e` | Phone sheet only. Light mode aliases this to `surface` |
+| Accent | `accent` | `#c08081` | Same rose as light mode. Intro name, section headings, hover, icons |
 | Separator | `separator` | 16% ink mix | Hairlines. Light mode stays 12% |
-| Scrim | `scrim` | 64% `#0c0b0a` | Dims the page behind the sheet. Must not follow `--ink` |
-| Focus | `accent-focus-ring` | 40% accent mix | Same formula, new accent |
+| Scrim | `scrim` | 64% `#000000` | Dims the page behind the sheet. Must not follow `--ink` |
+| Focus | `accent-focus-ring` | 55% accent mix | Dark mode only. Light mode stays 40% |
 
-Contrast on `surface` (and on the elevated sheet): primary about 15:1, body about 7.8:1 (6.8:1 on the sheet), muted about 6:1 (5.2:1 on the sheet), accent about 7.7:1 (6.7:1 on the sheet). `prefers-contrast: more` lightens secondary, tertiary, and the separator further. Browser `theme-color` matches `surface` per scheme.
+Rose `#c08081` is about 6.65:1 on the page and 5.38:1 on the sheet, so it stays AA for text in both places. `prefers-contrast: more` lightens secondary, tertiary, and the separator further. Browser `theme-color` matches `surface` per scheme.
 
 ## Typography
 
@@ -146,7 +146,7 @@ Sub-pages use `h1` for site name (linked home) and `h2` for page tagline. Homepa
 
 ## Elevation
 
-No shadows on the homepage canvas. Depth comes from typography hierarchy and spacing, not cards or layers. Separators are 1px rules (12% ink in light, 16% in dark). The phone sheet is the only elevated surface: in dark mode it steps lighter than the page (`surface-elevated`) over a dark scrim. The sheet shadow stays a dark cast in both appearances, not a mix of the label color.
+No shadows on the homepage canvas. Depth comes from typography hierarchy and spacing, not cards or layers. Separators are 1px rules (12% ink in light, 16% in dark). The phone sheet is the only elevated surface: in dark mode it steps from `#000000` to `#1c1c1e` over a black scrim. The sheet shadow stays a dark cast in both appearances, not a mix of the label color.
 
 ## Components
 

@@ -17,24 +17,24 @@
 
 ## Dark appearance
 
-Light eggshell `#faf9f6` and coral `#c08081` stay. Dark mode is the night of that same palette.
+Light eggshell `#faf9f6` and coral `#c08081` stay. Dark mode keeps that warm type and the same rose on a neutral black base.
 
 | Token | Dark value | Why |
 |-------|------------|-----|
-| `--surface` | `#201c19` | Warm charcoal. Replaces cool `#1a1a1c` |
-| `--surface-elevated` | `#2c2824` | Sheet only. Light mode equals `--surface` |
+| `--surface` | `#000000` | Page. Darker base, no brown cast |
+| `--surface-elevated` | `#1c1c1e` | Sheet only. One step lighter than the page. Light mode equals `--surface` |
 | `--ink` | `#f6f3ee` | Ivory, not system gray `#f5f5f7` |
 | `--ink-secondary` | `#b7afa6` | Body |
 | `--ink-tertiary` | `#a39890` | Muted labels, still AA on the sheet |
-| `--accent` | `#d4a3a4` | Lifted rose. Light mode stays `#c08081` |
-| `--separator` | 16% ink | Hairline still visible on the darker canvas |
-| `--scrim` | 64% `#0c0b0a` | Dims. Today's scrim mixes `--ink`, which is pale in dark mode |
+| `--accent` | `#c08081` | Original rose. Same value as light mode. AA on page (6.65:1) and sheet (5.38:1) |
+| `--separator` | 16% ink | Hairline still visible on black |
+| `--scrim` | 64% `#000000` | Dims. Must not mix `--ink` |
 
 `@media (prefers-contrast: more)` in dark mode lightens `--ink-secondary` to `#ddd6ce`, `--ink-tertiary` to `#d4cdc4`, and `--separator` to 32% ink.
 
 Activity heatmap dots stay coral. In dark mode their opacity steps up so the quiet cells do not disappear. Photographs and `coral.svg` are not recolored.
 
-`viewport.themeColor` follows the surface: `#faf9f6` light, `#201c19` dark.
+`viewport.themeColor` follows the surface: `#faf9f6` light, `#000000` dark.
 
 ## Interaction states
 

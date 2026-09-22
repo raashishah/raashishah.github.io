@@ -101,12 +101,12 @@
     --ink: #f6f3ee;
     --ink-secondary: #b7afa6;
     --ink-tertiary: #a39890;
-    --surface: #201c19;
-    --surface-elevated: #2c2824;
-    --accent: #d4a3a4;
+    --surface: #000000;
+    --surface-elevated: #1c1c1e;
+    --accent: #c08081;
     --separator: color-mix(in srgb, var(--ink) 16%, transparent);
-    --scrim: color-mix(in srgb, #0c0b0a 64%, transparent);
-    --sheet-shadow: 0 -4px 24px color-mix(in srgb, #0c0b0a 28%, transparent);
+    --scrim: color-mix(in srgb, #000000 64%, transparent);
+    --sheet-shadow: 0 -4px 24px color-mix(in srgb, #000000 28%, transparent);
     --accent-focus-ring: color-mix(in srgb, var(--accent) 55%, transparent);
   }
 }
