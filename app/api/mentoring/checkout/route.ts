@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { calendlyLink } from "@/content/site";
+import { mentoringReturnUrl } from "@/lib/mentoring-return";
 
 export async function POST(request: NextRequest) {
   const origin = request.headers.get("origin");
@@ -26,9 +26,9 @@ export async function POST(request: NextRequest) {
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         product_cart: [{ product_id: product, quantity }],
-        return_url: calendlyLink.href,
+        return_url: mentoringReturnUrl(request.nextUrl.origin),
         customization: { theme: "light" },
-        feature_flags: { allow_discount_code: false },
+        feature_flags: { allow_discount_code: false, redirect_immediately: true },
       }),
       signal: AbortSignal.timeout(15000),
       cache: "no-store",

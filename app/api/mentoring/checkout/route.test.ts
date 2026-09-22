@@ -1,7 +1,7 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
 import { POST } from "./route";
-import { calendlyLink } from "@/content/site";
+import { mentoringReturnUrl } from "@/lib/mentoring-return";
 
 afterEach(() => { vi.unstubAllEnvs(); vi.unstubAllGlobals(); });
 const request = (origin = "https://example.com") => new NextRequest("https://example.com/api/mentoring/checkout", {
@@ -28,7 +28,9 @@ it("uses the server product and calendar return URL", async () => {
   expect((await POST(request())).status).toBe(200);
   expect(fetch.mock.calls[0][0]).toBe("https://test.dodopayments.com/checkouts");
   expect(JSON.parse(fetch.mock.calls[0][1].body)).toMatchObject({
-    product_cart: [{ product_id: "pdt_mentoring", quantity: 1 }], return_url: calendlyLink.href,
+    product_cart: [{ product_id: "pdt_mentoring", quantity: 1 }],
+    return_url: mentoringReturnUrl("https://example.com"),
+    feature_flags: { allow_discount_code: false, redirect_immediately: true },
   });
 });
 

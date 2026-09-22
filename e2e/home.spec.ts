@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { homePortrait } from "../content/site";
+import { calendlyLink, homePortrait } from "../content/site";
+import { mentoringBookingLabel } from "../lib/mentoring-return";
 import { getDetailHref } from "../lib/detail-routes";
 import { siteConfig } from "../lib/metadata";
 import {
@@ -680,6 +681,19 @@ test.describe("detail panel", () => {
     await assertFooterMetaWithinHomePadding(page);
     await assertNoHorizontalScroll(page);
   });
+});
+
+test("paid mentoring return shows the Cal.com link", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/?mentoring=paid&status=succeeded&payment_id=pay_test");
+
+  const mentoring = page.locator(".home__mentoring");
+  await expect(mentoring.getByRole("heading", { name: "Choose a time" })).toBeVisible();
+  await expect(mentoring.getByRole("link", { name: mentoringBookingLabel() })).toHaveAttribute(
+    "href",
+    calendlyLink.href,
+  );
+  await expect(mentoring.getByRole("button", { name: /Book a session/ })).toHaveCount(0);
 });
 
 test.describe("footer layout", () => {
