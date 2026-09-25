@@ -5,7 +5,7 @@ const introRole = "AI Engineer";
 const introIdentity = `${introName}, ${introRole}`;
 const introTagline = "Developing apps and agents";
 const introSubline =
-  "Seven years as a Technical Product Manager working with human engineers, over a year with agent engineers";
+  "Seven years as a Technical Product Manager working with human engineers, over a year with engineering agents";
 const introDescription = `${introIdentity}. ${introTagline}. ${introSubline}.`;
 const socialDescription = `${introRole}. ${introTagline}.`;
 
