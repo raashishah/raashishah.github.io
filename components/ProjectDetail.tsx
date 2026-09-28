@@ -32,9 +32,6 @@ export function ProjectDetail({
           </a>
         </p>
       ) : null}
-      <p className="home__line home__line--role home__updating-note">
-        Still updating this page
-      </p>
     </section>
   );
 }

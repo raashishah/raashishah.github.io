@@ -116,7 +116,7 @@ test.describe("SEO and LLM discovery", () => {
     await expect(
       page.getByRole("link", { name: expressionContent.cta.label }),
     ).toHaveAttribute("href", expressionContent.cta.href);
-    await expect(page.getByText("Still updating this page")).toBeVisible();
+    await expect(page.getByText("Still updating this page")).toHaveCount(0);
     await expect(page.getByRole("link", { name: siteConfig.name })).toHaveAttribute("href", "/");
   });
 
