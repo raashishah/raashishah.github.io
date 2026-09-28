@@ -11,15 +11,17 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { DetailPanel } from "@/components/DetailPanel";
 import {
   DETAIL_SEARCH_PARAM,
   getDetailRoute,
   getDetailSlugFromSearchParam,
+  getHrefWithoutDetail,
   type DetailRouteConfig,
   type DetailSlug,
 } from "@/lib/detail-routes";
+import { getSheetScrollAnchor, holdSheetScroll } from "@/lib/sheet-scroll";
 import {
   PANEL_CLOSE_MS,
   SHEET_BREAKPOINT,
@@ -76,7 +78,6 @@ function useMediaQuery(query: string) {
 }
 
 function DetailProviderInner({ children }: { children: ReactNode }) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [isClosing, setIsClosing] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
@@ -113,9 +114,13 @@ function DetailProviderInner({ children }: { children: ReactNode }) {
     }
     const resolve = closeResolveRef.current;
     closeResolveRef.current = null;
-    router.replace("/");
+    const scrollY = getSheetScrollAnchor();
+    // Sync the URL through Next's history patch. router.replace navigates, which
+    // reloads the page and scrolls back to the top.
+    window.history.replaceState(null, "", getHrefWithoutDetail(window.location.href));
+    holdSheetScroll(scrollY);
     resolve?.();
-  }, [router]);
+  }, []);
 
   const requestCloseDetail = useCallback(() => {
     if (!isOpen || isClosing) {

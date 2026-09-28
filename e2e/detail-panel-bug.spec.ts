@@ -4,6 +4,7 @@ import { siteConfig } from "../lib/metadata";
 import {
   ACCORDION_CLOSE_MS,
   PANEL_CLOSE_MS,
+  SHEET_CLOSE_MS,
   TRANSITION_FALLBACK_BUFFER_MS,
 } from "../lib/motion";
 
@@ -92,6 +93,44 @@ test.describe("detail panel accordion interaction", () => {
     await expect(page.locator(".home__intro .home__line--tagline")).toHaveText(
       siteConfig.introTagline,
     );
+  });
+});
+
+test.describe("expression sheet scroll", () => {
+  test("closing the sheet on a phone keeps the page where it was", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Animation" })
+      .click();
+
+    await page.evaluate(() => {
+      window.scrollTo(0, document.documentElement.scrollHeight);
+      (window as Window & { __pageMarker?: number }).__pageMarker = 1;
+    });
+    const before = await page.evaluate(() => window.scrollY);
+    expect(before).toBeGreaterThan(200);
+
+    await page
+      .getByRole("link", { name: "Colouring for hand-drawn animation" })
+      .click();
+    await expect(page.locator(".home__sheet")).toBeVisible();
+
+    await page.getByRole("button", { name: "Close", exact: true }).click();
+    await expect(page).toHaveURL("/", {
+      timeout: SHEET_CLOSE_MS + TRANSITION_FALLBACK_BUFFER_MS + 1000,
+    });
+    await expect(page.locator(".home__sheet")).toHaveCount(0);
+
+    const after = await page.evaluate(() => ({
+      y: window.scrollY,
+      marker: (window as Window & { __pageMarker?: number }).__pageMarker ?? 0,
+    }));
+    expect(after.marker).toBe(1);
+    expect(Math.abs(after.y - before)).toBeLessThanOrEqual(2);
   });
 });
 

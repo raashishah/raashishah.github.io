@@ -17,6 +17,7 @@ import {
   SHEET_HEIGHT_MEDIUM,
   watchTransition,
 } from "@/lib/motion";
+import { lockPageForSheet, unlockPageForSheet } from "@/lib/sheet-scroll";
 
 type SheetDetent = "medium" | "large";
 
@@ -127,21 +128,26 @@ export function BottomSheet({
     };
   }, [expandDetent, mounted]);
 
+  useLayoutEffect(() => {
+    lockPageForSheet();
+    return () => {
+      unlockPageForSheet();
+    };
+  }, []);
+
   useEffect(() => {
     setMounted(true);
     previousFocusRef.current = document.activeElement as HTMLElement | null;
 
     const home = document.querySelector(".home");
     home?.setAttribute("inert", "");
-    document.documentElement.classList.add("home--sheet-scroll-lock");
 
     const closeButton = sheetRef.current?.querySelector<HTMLElement>(".home__sheet-close");
     closeButton?.focus();
 
     return () => {
       home?.removeAttribute("inert");
-      document.documentElement.classList.remove("home--sheet-scroll-lock");
-      previousFocusRef.current?.focus();
+      previousFocusRef.current?.focus({ preventScroll: true });
     };
   }, []);
 
