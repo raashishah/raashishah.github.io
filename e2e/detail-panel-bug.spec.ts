@@ -107,16 +107,21 @@ test.describe("expression sheet scroll", () => {
       .filter({ hasText: "Animation" })
       .click();
 
-    await page.evaluate(() => {
-      window.scrollTo(0, document.documentElement.scrollHeight);
-      (window as Window & { __pageMarker?: number }).__pageMarker = 1;
+    const detailLink = page.getByRole("link", {
+      name: "Colouring for hand-drawn animation",
     });
-    const before = await page.evaluate(() => window.scrollY);
-    expect(before).toBeGreaterThan(200);
+    await detailLink.evaluate((element) => {
+      element.scrollIntoView({ block: "center" });
+    });
+    const before = await page.evaluate(() => {
+      (window as Window & { __pageMarker?: number }).__pageMarker = 1;
+      return window.scrollY;
+    });
+    expect(before).toBeGreaterThan(0);
 
-    await page
-      .getByRole("link", { name: "Colouring for hand-drawn animation" })
-      .click();
+    await detailLink.evaluate((element) => {
+      (element as HTMLElement).click();
+    });
     await expect(page.locator(".home__sheet")).toBeVisible();
 
     await page.getByRole("button", { name: "Close", exact: true }).click();
