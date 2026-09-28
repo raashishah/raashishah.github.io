@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, type MouseEvent } from "react";
 import { AnimatedDetails } from "@/components/AnimatedDetails";
 import { useDetail } from "@/components/DetailProvider";
-import { getDetailHref } from "@/lib/detail-routes";
+import { openDetailInPlace } from "@/lib/detail-navigation";
+import { getDetailHref, getDetailSlugFromHref } from "@/lib/detail-routes";
 import { InlineLinkArrow } from "@/components/ExternalLinkArrow";
 import {
   INLINE_LINK_SEPARATOR,
@@ -31,6 +32,7 @@ function isExternalHref(href: string) {
 function InlineBodyLink({ href, text }: { href: string; text: string }) {
   const { slug } = useDetail();
   const external = isExternalHref(href);
+  const detailSlug = !external ? getDetailSlugFromHref(href) : null;
   const isCurrent = !external && slug !== null && getDetailHref(slug) === href;
   const label = (
     <>
@@ -54,12 +56,28 @@ function InlineBodyLink({ href, text }: { href: string; text: string }) {
     );
   }
 
+  const openDetailFromClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      !detailSlug ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return;
+    }
+    event.preventDefault();
+    openDetailInPlace(detailSlug);
+  };
+
   return (
     <Link
       href={href}
       scroll={false}
       className="home__inline-link"
       aria-current={isCurrent ? "page" : undefined}
+      onClick={detailSlug ? openDetailFromClick : undefined}
     >
       {label}
     </Link>

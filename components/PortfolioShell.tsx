@@ -1,8 +1,9 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { DetailPanelContent } from "@/components/DetailPanel";
 import { useDetail } from "@/components/DetailProvider";
+import { restoreScrollAfterDetailOpen } from "@/lib/sheet-scroll";
 import { SiteShell } from "@/components/SiteShell";
 
 type PortfolioShellProps = {
@@ -25,6 +26,13 @@ export function PortfolioShell({
   const { route, isDesktop, isMediaReady, isOpen, isClosing } = useDetail();
   const portraitNode = portrait ? <div className="home__portrait-wrap">{portrait}</div> : null;
   const splitOpen = Boolean(route) && isMediaReady && isDesktop && (isOpen || isClosing);
+
+  useEffect(() => {
+    if (splitOpen) {
+      restoreScrollAfterDetailOpen();
+    }
+  }, [splitOpen]);
+
   const contentClassName = [
     masthead ? "home__content home__content--masthead" : "home__content",
     splitOpen ? "home__content--detail" : "",

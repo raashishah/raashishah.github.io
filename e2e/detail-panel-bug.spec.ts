@@ -49,6 +49,9 @@ test.describe("detail panel accordion interaction", () => {
       .locator("summary.home__details-summary")
       .filter({ hasText: "Animation" })
       .click();
+    await page.evaluate(() => {
+      (window as Window & { __pageMarker?: number }).__pageMarker = 42;
+    });
     await page
       .getByRole("link", { name: "Colouring for hand-drawn animation" })
       .click();
@@ -57,6 +60,7 @@ test.describe("detail panel accordion interaction", () => {
     await expect(page.locator("[data-homepage]")).toHaveCount(1);
     await expect(page.getByText("Entreprise-grade")).toBeVisible();
     await expect(page.locator(".home__detail")).toBeVisible();
+    await expect(page.evaluate(() => (window as Window & { __pageMarker?: number }).__pageMarker)).resolves.toBe(42);
   });
 
   test("soft navigation keeps homepage mounted on mobile", async ({ page }) => {
@@ -97,6 +101,38 @@ test.describe("detail panel accordion interaction", () => {
 });
 
 test.describe("expression sheet scroll", () => {
+  test("opening expression on desktop keeps scroll and client state", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/");
+    await page.evaluate(() => window.scrollTo(0, 480));
+    await page
+      .locator("summary.home__details-summary")
+      .filter({ hasText: "Animation" })
+      .click();
+
+    const detailLink = page.getByRole("link", {
+      name: "Colouring for hand-drawn animation",
+    });
+    const before = await page.evaluate(() => {
+      (window as Window & { __pageMarker?: number }).__pageMarker = 7;
+      return window.scrollY;
+    });
+    expect(before).toBeGreaterThan(0);
+
+    await detailLink.click();
+    await expect(page).toHaveURL(getDetailHref("expression"));
+    await expect(page.locator(".home__detail")).toBeVisible();
+
+    const after = await page.evaluate(() => ({
+      y: window.scrollY,
+      marker: (window as Window & { __pageMarker?: number }).__pageMarker ?? 0,
+    }));
+    expect(after.marker).toBe(7);
+    expect(Math.abs(after.y - before)).toBeLessThanOrEqual(2);
+  });
+
   test("closing the sheet on a phone keeps the page where it was", async ({
     page,
   }) => {

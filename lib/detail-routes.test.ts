@@ -4,6 +4,7 @@ import {
   getDetailSlugFromHref,
   getDetailSlugFromSearchParam,
   getHrefWithoutDetail,
+  getHrefWithDetail,
   isDetailHref,
 } from "@/lib/detail-routes";
 
@@ -25,5 +26,13 @@ describe("detail routes", () => {
     expect(getHrefWithoutDetail("https://decavalent.com/?detail=expression")).toBe("/");
     expect(getHrefWithoutDetail("/?detail=expression&status=paid")).toBe("/?status=paid");
     expect(getHrefWithoutDetail("/?detail=expression#work")).toBe("/#work");
+  });
+
+  it("sets the detail param while preserving other query params and hash", () => {
+    expect(getHrefWithDetail("/", "expression")).toBe("/?detail=expression");
+    expect(getHrefWithDetail("/?status=paid", "expression")).toBe(
+      "/?status=paid&detail=expression",
+    );
+    expect(getHrefWithDetail("/#work", "expression")).toBe("/?detail=expression#work");
   });
 });

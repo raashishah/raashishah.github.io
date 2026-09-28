@@ -1,4 +1,19 @@
 let lockedScrollY: number | null = null;
+let pendingDetailOpenScrollY: number | null = null;
+
+export function rememberScrollForDetailOpen() {
+  pendingDetailOpenScrollY = window.scrollY;
+}
+
+export function restoreScrollAfterDetailOpen() {
+  if (pendingDetailOpenScrollY === null) {
+    return;
+  }
+
+  const y = pendingDetailOpenScrollY;
+  pendingDetailOpenScrollY = null;
+  holdSheetScroll(y);
+}
 
 export function lockPageForSheet() {
   if (lockedScrollY !== null) {

@@ -36,6 +36,14 @@ export function getHrefWithoutDetail(href: string): string {
   return `${url.pathname}${query ? `?${query}` : ""}${url.hash}`;
 }
 
+/** Homepage href with the detail search param set. Other params and the hash stay. */
+export function getHrefWithDetail(href: string, slug: DetailSlug): string {
+  const url = new URL(href, "http://localhost");
+  url.searchParams.set(DETAIL_SEARCH_PARAM, slug);
+  const query = url.searchParams.toString();
+  return `${url.pathname}${query ? `?${query}` : ""}${url.hash}`;
+}
+
 export function isDetailSlug(value: string): value is DetailSlug {
   return DETAIL_SLUG_SET.has(value);
 }
