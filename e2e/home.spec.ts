@@ -235,7 +235,7 @@ test("Pocket Analyst heading is not duplicated in the body", async ({ page }) =>
   await expect(page.getByRole("link", { name: "Pocket Analytics" })).toHaveCount(0);
 });
 
-test("On-device links to Twitter with a Research pullquote", async ({ page }) => {
+test("On-device links to Twitter", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
@@ -249,7 +249,8 @@ test("On-device links to Twitter with a Research pullquote", async ({ page }) =>
   await expect(twitterLink).toHaveAttribute("href", "https://x.com/useOnDevice");
   await expect(
     page.locator(".home__details[open] .home__project-body-pullquote"),
-  ).toHaveText("Research");
+  ).toHaveCount(0);
+  await expect(page.getByText("Research")).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Health App" })).toHaveCount(0);
 });
 

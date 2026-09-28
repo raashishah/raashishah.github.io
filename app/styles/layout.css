@@ -352,10 +352,6 @@
   color: var(--ink);
 }
 
-.home__updating-note {
-  margin-top: var(--space-6);
-}
-
 .home__link {
   color: inherit;
   text-decoration: none;

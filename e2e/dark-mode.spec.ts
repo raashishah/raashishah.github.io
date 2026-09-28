@@ -99,7 +99,7 @@ test.describe("dark mode (system preference)", () => {
     await expect(page.locator(".home__detail .home__line--role")).toHaveText(
       "Agentic Tools for Artists",
     );
-    await expect(page.getByText("Still updating this page")).toBeVisible();
+    await expect(page.getByText("Still updating this page")).toHaveCount(0);
   });
 
   test("soft nav expression panel uses dark semantic tokens", async ({ page }) => {

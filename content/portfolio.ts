@@ -182,13 +182,7 @@ export const workExperience = [
       "Co-founder and product lead for a privacy-first type II diabetes health app with on-device inference; 42% faster task completion and 200+ personalized actions.",
     seoLongDetail:
       "Co-founded and led product for a privacy-first type II diabetes health app using on-device inference. Led 30 interviews and 10 surveys to define privacy-by-default UX, reducing cognitive load and accelerating task completion by 42%. Defined agentic on-device flows enabling 200+ personalized user actions. Early GTM via applied AI content on Twitter and YouTube with 4,000+ pre-launch views.",
-    paragraphs: [
-      [{ text: "Twitter", href: "https://x.com/useOnDevice" }],
-      {
-        text: "Research",
-        pullquote: true,
-      },
-    ],
+    paragraphs: [[{ text: "Twitter", href: "https://x.com/useOnDevice" }]],
   },
   {
     id: "kawa-space",
