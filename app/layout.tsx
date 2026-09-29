@@ -1,6 +1,9 @@
 import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { PersonJsonLd } from "@/components/metadata/PersonJsonLd";
+import { getGaMeasurementId } from "@/lib/google-analytics";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/brands.min.css";
 import "./globals.css";
@@ -82,9 +85,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const measurementId = getGaMeasurementId();
+
   return (
     <html lang="en">
       <body className={`${satoshi.className} ${satoshi.variable}`}>
+        {measurementId ? (
+          <Suspense fallback={null}>
+            <GoogleAnalytics measurementId={measurementId} />
+          </Suspense>
+        ) : null}
         <PersonJsonLd />
         {children}
       </body>
