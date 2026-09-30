@@ -11,7 +11,7 @@ import {
 
 describe("site SEO copy", () => {
   it("uses professional crawler copy separate from homepage intro fields", () => {
-    expect(seoConfig.title).toContain(siteConfig.creator);
+    expect(seoConfig.title).toBe(`${siteConfig.creator} | AI Engineering`);
     expect(seoConfig.title).not.toBe("apps and ai tools designer and engineer");
     expect(seoConfig.description.length).toBeLessThanOrEqual(170);
     expect(seoConfig.longDescription.length).toBeGreaterThan(120);

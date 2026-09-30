@@ -5,7 +5,7 @@ import { getDetailHref } from "@/lib/detail-routes";
 import { absoluteUrl, siteConfig } from "@/lib/metadata";
 
 export const seoConfig = {
-  title: `${siteConfig.creator} | ${siteConfig.introRole}`,
+  title: `${siteConfig.creator} | AI Engineering`,
   ogTitle: siteConfig.name,
   description: siteConfig.description,
   longDescription:
