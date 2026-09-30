@@ -64,6 +64,14 @@ test.describe("SEO and LLM discovery", () => {
       "data-nosnippet",
       "",
     );
+    await expect(page.locator(".home__intro-name")).toHaveAttribute(
+      "data-nosnippet",
+      "",
+    );
+    await expect(page.locator(".home__intro")).not.toHaveAttribute(
+      "data-nosnippet",
+    );
+    expect(seoConfig.description).not.toContain(siteConfig.introName);
   });
 
   test("llms.txt is served as plain text with spec structure", async ({

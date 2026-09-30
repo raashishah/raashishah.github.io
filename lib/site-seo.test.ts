@@ -14,8 +14,10 @@ describe("site SEO copy", () => {
     expect(seoConfig.title).toBe(`${siteConfig.creator} | AI Engineering`);
     expect(seoConfig.ogTitle).toBe(seoConfig.title);
     expect(seoConfig.title).not.toBe("apps and ai tools designer and engineer");
-    expect(seoConfig.description).toContain(siteConfig.introName);
+    expect(seoConfig.description).not.toContain(siteConfig.introName);
+    expect(seoConfig.description).not.toMatch(/Raashi/i);
     expect(seoConfig.description).toMatch(/AI engineering/);
+    expect(seoConfig.description).toMatch(/apps and agents/);
     expect(seoConfig.description.toLowerCase()).not.toContain("decavalent");
     expect(seoConfig.description.toLowerCase()).not.toContain("valence");
     expect(seoConfig.description.length).toBeLessThanOrEqual(170);
@@ -58,13 +60,23 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("## Optional");
   });
 
-  it("aligns JSON-LD person description with llms.txt blockquote", () => {
+  it("keeps the personal name out of snippet-facing JSON-LD descriptions", () => {
     const jsonLd = getStructuredDataJsonLd();
-    const person = jsonLd["@graph"].find(
-      (node) => node["@type"] === "Person",
-    ) as { description: string };
+    const descriptions = jsonLd["@graph"].map(
+      (node) => (node as { description: string }).description,
+    );
 
-    expect(person.description).toBe(llmsSummary);
+    expect(descriptions).toEqual([
+      seoConfig.description,
+      seoConfig.description,
+      seoConfig.description,
+    ]);
+    for (const description of descriptions) {
+      expect(description).not.toContain(siteConfig.introName);
+      expect(description).not.toMatch(/Raashi/i);
+    }
+    expect(buildLlmsTxt()).toContain(`> ${llmsSummary}`);
+    expect(llmsSummary).toContain(siteConfig.introName);
   });
 
   it("uses a unified @graph with website, profile page, and person nodes", () => {

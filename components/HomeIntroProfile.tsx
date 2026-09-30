@@ -30,7 +30,9 @@ export function HomeIntroProfile({
         />
         <div className="home__intro-profile-stack">
           <p className="home__line home__line--name">
-            <span className="home__intro-name">{`${introName},`}</span>
+            <span className="home__intro-name" data-nosnippet="">
+              {`${introName},`}
+            </span>
             <span className="home__intro-role">{` ${introRole}`}</span>
           </p>
           <p className="home__line home__line--tagline">{introTagline}</p>

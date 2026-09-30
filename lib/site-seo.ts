@@ -10,7 +10,7 @@ export const seoConfig = {
   title: pageTitle,
   ogTitle: pageTitle,
   description:
-    "Raashi Shah, AI engineering: apps and agents, admissions systems, animation tooling, and on-device products. Consulting, contract, and full-time.",
+    "AI engineering: apps and agents, admissions systems, animation tooling, and on-device products. Consulting, contract, and full-time.",
   longDescription:
     "Raashi Shah is an AI engineer and product manager available for consulting, contract work, and full-time roles. She designs and ships consumer apps and enterprise AI agent systems: admissions agents, pro animation tooling, offline exhibition apps, and on-device health AI. Previously led product and tech at Pluto, co-founded OnDevice, and built geospatial ML at Kawa Space and retention analytics at Aula Education. The site name is Decavalent.",
   keywords: [
@@ -82,7 +82,7 @@ export function getStructuredDataJsonLd() {
         url: siteUrl,
         name: siteConfig.creator,
         alternateName: siteConfig.introName,
-        description: seoConfig.longDescription,
+        description: seoConfig.description,
         inLanguage: "en-US",
         publisher: { "@id": personId },
       },
@@ -104,7 +104,7 @@ export function getStructuredDataJsonLd() {
         alternateName: siteConfig.creator,
         url: siteUrl,
         jobTitle: siteConfig.introRole,
-        description: llmsSummary,
+        description: seoConfig.description,
         sameAs,
         contactPoint: {
           "@type": "ContactPoint",
