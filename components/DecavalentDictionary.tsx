@@ -25,6 +25,7 @@ export function DecavalentDictionary() {
       className={`dictionary-entry ${dictionarySerif.className} ${dictionarySerif.variable}`}
       lang="en-GB"
       aria-label={`Dictionary entry for ${lemma}`}
+      data-nosnippet=""
     >
       <p className="dictionary-entry__headword">
         <span className="dictionary-entry__lemma">{lemma}</span>

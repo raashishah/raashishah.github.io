@@ -12,16 +12,27 @@ import {
 describe("site SEO copy", () => {
   it("uses professional crawler copy separate from homepage intro fields", () => {
     expect(seoConfig.title).toBe(`${siteConfig.creator} | AI Engineering`);
+    expect(seoConfig.ogTitle).toBe(seoConfig.title);
     expect(seoConfig.title).not.toBe("apps and ai tools designer and engineer");
+    expect(seoConfig.description).toContain(siteConfig.introName);
+    expect(seoConfig.description).toMatch(/AI engineering/);
+    expect(seoConfig.description.toLowerCase()).not.toContain("decavalent");
+    expect(seoConfig.description.toLowerCase()).not.toContain("valence");
     expect(seoConfig.description.length).toBeLessThanOrEqual(170);
     expect(seoConfig.longDescription.length).toBeGreaterThan(120);
+    expect(seoConfig.longDescription).toContain(siteConfig.introName);
+    expect(seoConfig.keywords).toContain("AI engineering");
     expect(seoConfig.keywords).toContain("AI agents");
   });
 
   it("builds llms.txt with required spec structure", () => {
     const llmsTxt = buildLlmsTxt();
 
-    expect(llmsTxt.startsWith(`# ${siteConfig.creator}\n`)).toBe(true);
+    expect(llmsTxt.startsWith(`# ${siteConfig.introName} (${siteConfig.creator})\n`)).toBe(true);
+    expect(llmsTxt).toContain("## Search intents");
+    expect(llmsTxt).toContain("never uses the name Decavalent");
+    expect(llmsTxt).toContain("brand etymology");
+    expect(llmsTxt).not.toContain("valence of ten");
     expect(llmsTxt).toMatch(/^> .+/m);
     expect(llmsTxt).toContain("## About");
     expect(llmsTxt).toContain("## Instructions");
@@ -56,15 +67,22 @@ describe("site SEO copy", () => {
     expect(person.description).toBe(llmsSummary);
   });
 
-  it("uses a unified @graph with website, webpage, and person nodes", () => {
+  it("uses a unified @graph with website, profile page, and person nodes", () => {
     const jsonLd = getStructuredDataJsonLd();
 
     expect(jsonLd["@graph"]).toHaveLength(3);
     expect(jsonLd["@graph"].map((node) => node["@type"])).toEqual([
       "WebSite",
-      "WebPage",
+      "ProfilePage",
       "Person",
     ]);
+
+    const person = jsonLd["@graph"].find((node) => node["@type"] === "Person") as {
+      name: string;
+      alternateName: string;
+    };
+    expect(person.name).toBe(siteConfig.introName);
+    expect(person.alternateName).toBe(siteConfig.creator);
   });
 
   it("escapes angle brackets in JSON-LD output", () => {
