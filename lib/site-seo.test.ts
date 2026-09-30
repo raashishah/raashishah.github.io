@@ -19,15 +19,18 @@ describe("site SEO copy", () => {
     expect(seoConfig.description).toMatch(/AI engineering/);
     expect(seoConfig.description).toMatch(/apps and agents/);
     expect(seoConfig.description).toContain("Bombay");
+    expect(seoConfig.description).toContain("Mumbai");
     expect(seoConfig.description.toLowerCase()).not.toContain("decavalent");
     expect(seoConfig.description.toLowerCase()).not.toContain("valence");
     expect(seoConfig.description.length).toBeLessThanOrEqual(170);
     expect(seoConfig.longDescription.length).toBeGreaterThan(120);
     expect(seoConfig.longDescription).toContain(siteConfig.introName);
     expect(seoConfig.longDescription).toContain("Bombay");
+    expect(seoConfig.longDescription).toContain("Mumbai");
     expect(seoConfig.keywords).toContain("AI engineering");
     expect(seoConfig.keywords).toContain("AI agents");
     expect(seoConfig.keywords).toContain("Bombay");
+    expect(seoConfig.keywords).toContain("Mumbai");
   });
 
   it("builds llms.txt with required spec structure", () => {
@@ -40,9 +43,9 @@ describe("site SEO copy", () => {
     expect(llmsTxt).not.toContain("valence of ten");
     expect(llmsTxt).toMatch(/^> .+/m);
     expect(llmsTxt).toContain("## About");
-    expect(llmsTxt).toContain("**Location**: Bombay");
-    expect(llmsTxt).toContain("based in Bombay");
-    expect(llmsTxt).toContain("AI engineer in Bombay");
+    expect(llmsTxt).toContain("**Location**: Bombay / Mumbai");
+    expect(llmsTxt).toContain("based in Bombay / Mumbai");
+    expect(llmsTxt).toContain("AI engineer in Bombay / Mumbai");
     expect(llmsTxt).toContain("## Instructions");
     expect(llmsTxt).toContain("## Open to");
     expect(llmsTxt).toContain("## Why hire");
@@ -84,6 +87,7 @@ describe("site SEO copy", () => {
     expect(buildLlmsTxt()).toContain(`> ${llmsSummary}`);
     expect(llmsSummary).toContain(siteConfig.introName);
     expect(llmsSummary).toContain("Bombay");
+    expect(llmsSummary).toContain("Mumbai");
   });
 
   it("uses a unified @graph with website, profile page, and person nodes", () => {
@@ -99,11 +103,15 @@ describe("site SEO copy", () => {
     const person = jsonLd["@graph"].find((node) => node["@type"] === "Person") as {
       name: string;
       alternateName: string;
-      homeLocation: { "@type": string; name: string };
+      homeLocation: { "@type": string; name: string; alternateName: string };
     };
     expect(person.name).toBe(siteConfig.introName);
     expect(person.alternateName).toBe(siteConfig.creator);
-    expect(person.homeLocation).toEqual({ "@type": "Place", name: "Bombay" });
+    expect(person.homeLocation).toEqual({
+      "@type": "Place",
+      name: "Bombay",
+      alternateName: "Mumbai",
+    });
   });
 
   it("escapes angle brackets in JSON-LD output", () => {
