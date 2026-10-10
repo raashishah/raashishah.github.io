@@ -7,7 +7,7 @@ import { absoluteUrl, siteConfig } from "@/lib/metadata";
 export const seoConfig = {
   title: `${siteConfig.creator} | ${siteConfig.introRole}`,
   ogTitle: `${siteConfig.creator} | ${siteConfig.introRole}`,
-  description: siteConfig.introLine,
+  description: siteConfig.introTagline,
   longDescription:
     "Raashi Shah is a product manager and AI engineer available for consulting, contract work, and full-time roles. She designs and ships consumer apps and enterprise AI agent systems — admissions agents, pro animation tooling, offline exhibition apps, and on-device health AI. Previously led product and tech at Pluto, co-founded OnDevice, and built geospatial ML at Kawa Space and retention analytics at Aula Education.",
   keywords: [

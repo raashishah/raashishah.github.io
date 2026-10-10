@@ -56,9 +56,6 @@ describe("metadata helpers", () => {
     expect(siteConfig.description).toContain(siteConfig.introTagline);
     expect(siteConfig.socialDescription).toContain(siteConfig.introRole);
     expect(siteConfig.socialDescription).toContain(siteConfig.introTagline);
-    expect(siteConfig.introLine).toBe(
-      `${siteConfig.introIdentity}. ${siteConfig.introTagline}.`,
-    );
     expect(siteConfig.socialDescription).not.toContain("Scoping");
     expect(siteConfig.creator).toBe(siteConfig.name);
   });

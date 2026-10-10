@@ -7,7 +7,6 @@ const introTagline = "Developing apps and agents";
 const introSubline =
   "Seven years as a Technical Product Manager working with human engineers, over a year with engineering agents";
 const introDescription = `${introIdentity}. ${introTagline}. ${introSubline}.`;
-const introLine = `${introIdentity}. ${introTagline}.`;
 const socialDescription = `${introRole}. ${introTagline}.`;
 
 export const siteConfig = {
@@ -19,7 +18,6 @@ export const siteConfig = {
   introSubline,
   introTagline,
   description: introDescription,
-  introLine,
   socialDescription,
   creator: "Decavalent",
   twitterHandle: "@rash_driving",

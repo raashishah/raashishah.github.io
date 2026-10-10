@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: siteConfig.creator,
     title: seoConfig.ogTitle,
-    description: siteConfig.introLine,
+    description: siteConfig.introTagline,
     locale: "en_US",
     images: [
       {
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: siteConfig.twitterHandle,
     title: seoConfig.ogTitle,
-    description: siteConfig.introLine,
+    description: siteConfig.introTagline,
     images: [absoluteUrl("/opengraph-image.png")],
   },
   robots: {
