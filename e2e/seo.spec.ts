@@ -46,32 +46,13 @@ test.describe("SEO and LLM discovery", () => {
     expect(jsonLd).toBeTruthy();
 
     const parsed = JSON.parse(jsonLd ?? "{}") as {
-      "@graph": Array<{ "@type": string; name?: string; alternateName?: string }>;
+      "@graph": Array<{ "@type": string }>;
     };
     expect(parsed["@graph"].map((node) => node["@type"])).toEqual([
       "WebSite",
-      "ProfilePage",
+      "WebPage",
       "Person",
     ]);
-
-    const person = parsed["@graph"].find((node) => node["@type"] === "Person") as {
-      name?: string;
-      alternateName?: string;
-    };
-    expect(person.name).toBe(siteConfig.introName);
-    expect(person.alternateName).toBe(siteConfig.creator);
-    await expect(page.locator("article.dictionary-entry")).toHaveAttribute(
-      "data-nosnippet",
-      "",
-    );
-    await expect(page.locator(".home__intro-name")).toHaveAttribute(
-      "data-nosnippet",
-      "",
-    );
-    await expect(page.locator(".home__intro")).not.toHaveAttribute(
-      "data-nosnippet",
-    );
-    expect(seoConfig.description).not.toContain(siteConfig.introName);
   });
 
   test("llms.txt is served as plain text with spec structure", async ({

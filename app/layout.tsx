@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   description: seoConfig.description,
   keywords: [...seoConfig.keywords],
   applicationName: siteConfig.creator,
-  authors: [{ name: siteConfig.introName, url: getSiteUrl().toString() }],
-  creator: siteConfig.introName,
+  authors: [{ name: siteConfig.creator, url: getSiteUrl().toString() }],
+  creator: siteConfig.creator,
   category: "technology",
   alternates: {
     canonical: "/",
@@ -50,14 +50,14 @@ export const metadata: Metadata = {
     url: "/",
     siteName: siteConfig.creator,
     title: seoConfig.ogTitle,
-    description: seoConfig.description,
+    description: siteConfig.introLine,
     locale: "en_US",
     images: [
       {
         url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
-        alt: `${siteConfig.introName}, AI engineering`,
+        alt: `${siteConfig.creator} — ${siteConfig.introRole}`,
       },
     ],
   },
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: siteConfig.twitterHandle,
     title: seoConfig.ogTitle,
-    description: seoConfig.description,
+    description: siteConfig.introLine,
     images: [absoluteUrl("/opengraph-image.png")],
   },
   robots: {
