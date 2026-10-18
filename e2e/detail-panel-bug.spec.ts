@@ -3,6 +3,7 @@ import { getDetailHref } from "../lib/detail-routes";
 import { siteConfig } from "../lib/metadata";
 import {
   ACCORDION_CLOSE_MS,
+  ACCORDION_OPEN_MS,
   PANEL_CLOSE_MS,
   SHEET_CLOSE_MS,
   TRANSITION_FALLBACK_BUFFER_MS,
@@ -111,6 +112,7 @@ test.describe("expression sheet scroll", () => {
       .locator("summary.home__details-summary")
       .filter({ hasText: "Animation" })
       .click();
+    await page.waitForTimeout(ACCORDION_OPEN_MS + TRANSITION_FALLBACK_BUFFER_MS);
 
     const detailLink = page.getByRole("link", {
       name: "Colouring for hand-drawn animation",

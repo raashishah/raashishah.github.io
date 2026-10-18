@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { expressionContent } from "../content/expression";
-import { calendlyLink } from "../content/site";
+import { calendlyLink, nameEasterEggHref } from "../content/site";
 import { getDetailHref } from "../lib/detail-routes";
 import { absoluteUrl, siteConfig } from "../lib/metadata";
 import { buildLlmsTxt, seoConfig } from "../lib/site-seo";
@@ -26,14 +26,14 @@ test.describe("SEO and LLM discovery", () => {
       absoluteUrl("/").replace(/\/$/, ""),
     );
 
-    await expect(page.locator(".home__intro .home__line--name")).toHaveText(
+    await expect(page.locator(".home__intro .home__line--name").filter({ visible: true })).toHaveText(
       siteConfig.introIdentity,
     );
-    await expect(page.locator(".home__intro .home__line--role")).toHaveCount(0);
-    await expect(page.locator(".home__intro .home__line--subline")).toHaveText(
+    await expect(page.locator(".home__intro .home__line--role").filter({ visible: true })).toHaveCount(0);
+    await expect(page.locator(".home__intro .home__line--subline").filter({ visible: true })).toHaveText(
       siteConfig.introSubline,
     );
-    await expect(page.locator(".home__line--tagline")).toHaveText(
+    await expect(page.locator(".home__line--tagline").filter({ visible: true })).toHaveText(
       siteConfig.introTagline,
     );
   });
@@ -117,7 +117,10 @@ test.describe("SEO and LLM discovery", () => {
       page.getByRole("link", { name: expressionContent.cta.label }),
     ).toHaveAttribute("href", expressionContent.cta.href);
     await expect(page.getByText("Still updating this page")).toHaveCount(0);
-    await expect(page.getByRole("link", { name: siteConfig.name })).toHaveAttribute("href", "/");
+    await expect(page.getByRole("link", { name: siteConfig.name })).toHaveAttribute(
+      "href",
+      nameEasterEggHref,
+    );
   });
 
   test("opengraph-image serves the Figma export", async ({ request }) => {

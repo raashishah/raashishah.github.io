@@ -37,7 +37,7 @@ describe("homepage work groups", () => {
       "Geospatial",
     ]);
     expect(groups[2]?.items.map((item) => item.title)).toEqual([
-      "Expo map",
+      "Offline expo map",
       "Inventory mgmt",
     ]);
     expect(groups[3]?.items.map((item) => item.title)).toEqual([

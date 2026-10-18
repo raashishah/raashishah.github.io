@@ -254,16 +254,16 @@ test("On-device links to Twitter", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Health App" })).toHaveCount(0);
 });
 
-test("Expo map pullquote links to the exhibition webapp", async ({ page }) => {
+test("Offline expo map pullquote links to the exhibition webapp", async ({ page }) => {
   await page.goto("/");
   await page
     .locator("summary.home__details-summary")
-    .filter({ hasText: "Expo map" })
+    .filter({ hasText: "Offline expo map" })
     .click();
 
   const webappLink = page
     .locator(".home__details[open] .home__project-body-pullquote")
-    .getByRole("link", { name: "After loading, stays available offline" });
+    .getByRole("link", { name: "After loading, works without internet" });
   await expect(webappLink).toBeVisible();
   await expect(webappLink).toHaveAttribute(
     "href",
@@ -297,7 +297,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Skills",
     "Animation",
     "Geospatial",
-    "Expo map",
+    "Offline expo map",
     "Inventory mgmt",
     "Working with Artists",
     "Doubled engineering speed",
@@ -523,11 +523,16 @@ test.describe("detail panel", () => {
     expect(
       Math.abs(contentBox!.y + contentBox!.height - (mentoringBox!.y + mentoringBox!.height)),
     ).toBeLessThan(2);
+    const bookBox = await page.locator(".home__mentoring-book").boundingBox();
     const bookLabelBox = await page.locator(".home__mentoring-book-label").boundingBox();
     const degreeBox = await page.locator(".home__work .home__line--role").boundingBox();
+    expect(bookBox).not.toBeNull();
     expect(bookLabelBox).not.toBeNull();
     expect(degreeBox).not.toBeNull();
-    expect(Math.abs(bookLabelBox!.y - degreeBox!.y)).toBeLessThan(2);
+    expect(Math.abs(bookBox!.y - degreeBox!.y)).toBeLessThan(2);
+    expect(
+      Math.abs(bookBox!.y + bookBox!.height - (degreeBox!.y + degreeBox!.height)),
+    ).toBeLessThan(4);
     expect(
       Math.abs(bookLabelBox!.y + bookLabelBox!.height - (degreeBox!.y + degreeBox!.height)),
     ).toBeLessThan(4);

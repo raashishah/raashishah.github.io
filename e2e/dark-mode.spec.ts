@@ -66,9 +66,9 @@ test.describe("dark mode (system preference)", () => {
     expect(colors.name).toBe(await getSemanticColor(page, "--accent"));
     expect(colors.tagline).toBe(await getSemanticColor(page, "--ink"));
     expect(colors.subline).toBe(await getSemanticColor(page, "--ink-secondary"));
-    expect(colors.background).toBe("rgb(32, 28, 25)");
+    expect(colors.background).toBe("rgb(0, 0, 0)");
     expect(colors.text).toBe("rgb(246, 243, 238)");
-    expect(colors.name).toBe("rgb(212, 163, 164)");
+    expect(colors.name).toBe("rgb(192, 128, 129)");
 
     await expect(page.getByRole("heading", { name: siteConfig.name })).toBeVisible();
     await expect(page.locator(".home__intro .home__line--name")).toHaveText(
@@ -139,7 +139,7 @@ test.describe("dark mode (system preference)", () => {
       };
     });
 
-    expect(colors.sheet).toBe("rgb(44, 40, 36)");
+    expect(colors.sheet).toBe("rgb(28, 28, 30)");
     expect(colors.scrim).toMatch(/0\.64/);
     expect(colors.scrim).not.toMatch(/245|0\.96/);
     expect(colors.quiet).toMatch(/0\.25/);

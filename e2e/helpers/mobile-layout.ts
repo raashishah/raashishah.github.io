@@ -213,12 +213,12 @@ export async function assertListSectionHeadingHierarchy(page: Page) {
     return;
   }
 
-  const ink = await getSemanticColor(page, "--text");
+  const accent = await getSemanticColor(page, "--accent");
   const muted = await getSemanticColor(page, "--text-muted");
-  expect(metrics.headingWeight).toBe(500);
-  expect(metrics.headingColor).toBe(ink);
+  expect(metrics.headingWeight).toBe(400);
+  expect(metrics.headingColor).toBe(accent);
   expect(metrics.headingColor).not.toBe(muted);
-  expect(metrics.headingSize).toBeGreaterThan(metrics.rowSize);
+  expect(metrics.headingSize).toBeLessThan(metrics.rowSize);
   expect(metrics.taglineSize).toBeGreaterThan(metrics.headingSize);
   expect(metrics.identitySize).toBeGreaterThan(metrics.headingSize);
   expect(metrics.lemmaSize).toBeGreaterThan(metrics.identitySize);
