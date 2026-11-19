@@ -272,6 +272,26 @@ test("Pink Depot shows body link when expanded", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("Pets Blood Bank shows body link when expanded", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Pet blood donors" })
+    .click();
+
+  const projectLink = page.getByRole("link", {
+    name: "Pets Blood Bank",
+  });
+  await expect(projectLink).toBeVisible();
+  await expect(projectLink).toHaveAttribute("href", "https://petsbloodbank.vercel.app");
+  await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(projectLink).toHaveAttribute("target", "_blank");
+  await expect(projectLink).toHaveAttribute("rel", "noopener noreferrer");
+  await expect(
+    page.getByText("Dog and cat blood donors by city and blood group"),
+  ).toBeVisible();
+});
+
 test("Skills shows skill links when expanded", async ({ page }) => {
   await page.goto("/");
   await page
@@ -416,6 +436,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Geospatial",
     "Offline expo map",
     "Inventory mgmt",
+    "Pet blood donors",
     "Working with Artists",
     "Doubled engineering speed",
   ]);

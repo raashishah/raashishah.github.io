@@ -121,6 +121,27 @@ export const projects = [
     },
   },
   {
+    id: "pets-blood-bank",
+    title: "Pet blood donors",
+    seoName: "Pets Blood Bank",
+    primaryUrl: "https://petsbloodbank.vercel.app",
+    seoDescription: "Dog and cat blood donors by city and blood group",
+    seoLongDetail:
+      "A dog and cat blood donor directory by city and blood group, built with Vite on Firebase.",
+    paragraphs: [
+      [
+        {
+          text: "Pets Blood Bank",
+          href: "https://petsbloodbank.vercel.app",
+        },
+      ],
+      {
+        text: "Dog and cat blood donors by city and blood group",
+        pullquote: true,
+      },
+    ],
+  },
+  {
     id: "agentic-workflows",
     title: "Skills",
     seoName: "Skills",
@@ -305,7 +326,7 @@ export const workGroupSpecs = [
   {
     id: "web-apps",
     label: "Web apps",
-    itemIds: ["offline-expo-nav", "pink-depot"],
+    itemIds: ["offline-expo-nav", "pink-depot", "pets-blood-bank"],
   },
   {
     id: "product-management",
