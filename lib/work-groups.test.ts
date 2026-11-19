@@ -29,6 +29,7 @@ describe("homepage work groups", () => {
       "Pocket Analyst",
       "Vedic Astrologer",
       "Entreprise-grade",
+      "Car comparison",
       "On-device",
       "Skills",
     ]);

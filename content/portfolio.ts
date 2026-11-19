@@ -60,6 +60,23 @@ export const projects = [
     ],
   },
   {
+    id: "car-comparison",
+    title: "Car comparison",
+    seoName: "Car comparison",
+    primaryUrl: "https://car-comparison-8-models-mumbai-5ooa.pages.grok.bot/",
+    seoDescription: "Specs, trims and owner feedback, side by side.",
+    seoLongDetail:
+      "Car comparison puts specs, trims and owner feedback side by side.",
+    paragraphs: [
+      [
+        {
+          text: "Specs, trims and owner feedback, side by side",
+          href: "https://car-comparison-8-models-mumbai-5ooa.pages.grok.bot/",
+        },
+      ],
+    ],
+  },
+  {
     id: "pink-depot",
     title: "Inventory mgmt",
     seoName: "Pink Depot",
@@ -230,6 +247,7 @@ export const workGroupSpecs = [
       "pocket-analyst",
       "astrothunder",
       "admissions-agent",
+      "car-comparison",
       "ondevice",
       "agentic-workflows",
     ],

@@ -149,6 +149,26 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
   ).toHaveCount(0);
 });
 
+test("Car comparison links to the comparison page when expanded", async ({ page }) => {
+  await page.goto("/");
+  await page
+    .locator("summary.home__details-summary")
+    .filter({ hasText: "Car comparison" })
+    .click();
+
+  const projectLink = page.getByRole("link", {
+    name: "Specs, trims and owner feedback, side by side",
+  });
+  await expect(projectLink).toBeVisible();
+  await expect(projectLink).toHaveAttribute(
+    "href",
+    "https://car-comparison-8-models-mumbai-5ooa.pages.grok.bot/",
+  );
+  await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(projectLink).toHaveAttribute("target", "_blank");
+  await expect(projectLink).toHaveAttribute("rel", "noopener noreferrer");
+});
+
 test("Astrothunder shows chart engine link when expanded", async ({ page }) => {
   await page.goto("/");
   await page
@@ -293,6 +313,7 @@ test("work groups mix projects and jobs without Projects or Experience headings"
     "Pocket Analyst",
     "Vedic Astrologer",
     "Entreprise-grade",
+    "Car comparison",
     "On-device",
     "Skills",
     "Animation",
