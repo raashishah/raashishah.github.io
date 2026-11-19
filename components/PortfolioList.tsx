@@ -7,6 +7,7 @@ import { useDetail } from "@/components/DetailProvider";
 import { openDetailInPlace } from "@/lib/detail-navigation";
 import { getDetailHref, getDetailSlugFromHref } from "@/lib/detail-routes";
 import { InlineLinkArrow } from "@/components/ExternalLinkArrow";
+import { ProjectMedia } from "@/components/ProjectMedia";
 import {
   INLINE_LINK_SEPARATOR,
   type BodyParagraph,
@@ -155,6 +156,9 @@ function ProjectListItem({
           {item.paragraphs.map((paragraph, index) => (
             <BodyParagraphBlock key={index} paragraph={paragraph} />
           ))}
+          {item.loop ? (
+            <ProjectMedia loop={item.loop} performance={item.performance} />
+          ) : null}
         </div>
       </AnimatedDetails>
     </li>

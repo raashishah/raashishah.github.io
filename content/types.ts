@@ -28,6 +28,24 @@ export type RichLine = string | readonly RichSegment[];
 export type PullquoteParagraph = { text: RichLine; pullquote: true };
 export type BodyParagraph = string | RichLine | PullquoteParagraph;
 
+export type ProjectLoopRatio = "3-4" | "16-10";
+
+export type ProjectLoopMedia = {
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  ratio: ProjectLoopRatio;
+  caption: string;
+};
+
+export type ProjectStill = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
 export type PortfolioEntry = {
   id: string;
   title: string;
@@ -37,6 +55,8 @@ export type PortfolioEntry = {
   seoLongDetail?: string;
   seoPeriod?: string;
   paragraphs: readonly BodyParagraph[];
+  loop?: ProjectLoopMedia;
+  performance?: ProjectStill;
 };
 
 export type WorkGroupId =

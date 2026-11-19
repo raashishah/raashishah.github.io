@@ -167,6 +167,26 @@ test("Car comparison links to the comparison page when expanded", async ({ page 
   await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
   await expect(projectLink).toHaveAttribute("target", "_blank");
   await expect(projectLink).toHaveAttribute("rel", "noopener noreferrer");
+
+  const loop = page.locator(".home__details[open] video");
+  await expect(loop).toBeVisible();
+  await expect(loop).toHaveAttribute("poster", "/projects/car-comparison/still.png");
+  await expect(loop).toHaveAttribute("autoplay", "");
+  await expect(loop).toHaveAttribute("loop", "");
+  await expect(loop).toHaveAttribute("muted", "");
+  await expect(loop).toHaveAttribute("playsinline", "");
+  await expect(loop).toHaveAttribute("preload", "metadata");
+  await expect(loop).toHaveAttribute("width", "1440");
+  await expect(loop).toHaveAttribute("height", "900");
+  await expect(loop.locator("source")).toHaveAttribute(
+    "src",
+    "/projects/car-comparison/loop.mp4",
+  );
+  await expect(
+    page.getByText(
+      "Car comparison: specs, trims and owner feedback for models in Mumbai, side by side",
+    ),
+  ).toBeVisible();
 });
 
 test("Astrothunder shows chart engine link when expanded", async ({ page }) => {
@@ -302,6 +322,29 @@ test("Offline expo map pullquote links to the exhibition webapp", async ({ page 
     "https://povindex.designpovindia.com/home",
   );
   await expect(page.getByRole("link", { name: "Exhibition site" })).toHaveCount(0);
+
+  const loop = page.locator(".home__details[open] video");
+  await expect(loop).toBeVisible();
+  await expect(loop).toHaveAttribute("poster", "/projects/offline-expo-map/still.png");
+  await expect(loop).toHaveAttribute("autoplay", "");
+  await expect(loop).toHaveAttribute("loop", "");
+  await expect(loop).toHaveAttribute("muted", "");
+  await expect(loop).toHaveAttribute("playsinline", "");
+  await expect(loop).toHaveAttribute("preload", "metadata");
+  await expect(loop).toHaveAttribute("width", "800");
+  await expect(loop).toHaveAttribute("height", "1040");
+  await expect(loop.locator("source")).toHaveAttribute(
+    "src",
+    "/projects/offline-expo-map/loop.mp4",
+  );
+  await expect(
+    page.getByText("Offline expo map: after loading, works without internet"),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("img", {
+      name: "Vercel Speed Insights: RES 100, LCP 1.2s, INP 112ms",
+    }),
+  ).toBeVisible();
 });
 
 test("Entreprise-grade shows ADK pullquote when expanded", async ({ page }) => {

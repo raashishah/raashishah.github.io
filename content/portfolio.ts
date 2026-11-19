@@ -75,6 +75,15 @@ export const projects = [
         },
       ],
     ],
+    loop: {
+      src: "/projects/car-comparison/loop.mp4",
+      poster: "/projects/car-comparison/still.png",
+      width: 1440,
+      height: 900,
+      ratio: "16-10",
+      caption:
+        "Car comparison: specs, trims and owner feedback for models in Mumbai, side by side",
+    },
   },
   {
     id: "pink-depot",
@@ -162,6 +171,20 @@ export const projects = [
         pullquote: true,
       },
     ],
+    loop: {
+      src: "/projects/offline-expo-map/loop.mp4",
+      poster: "/projects/offline-expo-map/still.png",
+      width: 800,
+      height: 1040,
+      ratio: "3-4",
+      caption: "Offline expo map: after loading, works without internet",
+    },
+    performance: {
+      src: "/projects/offline-expo-map/performance.png",
+      width: 1720,
+      height: 1010,
+      alt: "Vercel Speed Insights: RES 100, LCP 1.2s, INP 112ms",
+    },
   },
 ] as const satisfies ReadonlyArray<PortfolioEntry>;
 
