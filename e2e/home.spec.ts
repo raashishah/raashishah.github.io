@@ -147,6 +147,27 @@ test("linked projects show inline body link when expanded", async ({ page }) => 
   await expect(
     page.getByRole("link", { name: /View Entreprise-grade/ }),
   ).toHaveCount(0);
+
+  const loop = page.locator(".home__details[open] video");
+  await expect(loop).toBeVisible();
+  await expect(loop).toHaveAttribute("poster", "/projects/admission-scoring/still.png");
+  await expect(loop).toHaveAttribute("autoplay", "");
+  await expect(loop).toHaveAttribute("loop", "");
+  await expect(loop).toHaveAttribute("muted", "");
+  await expect(loop).toHaveAttribute("playsinline", "");
+  await expect(loop).toHaveAttribute("preload", "metadata");
+  await expect(loop).toHaveAttribute("width", "1600");
+  await expect(loop).toHaveAttribute("height", "1520");
+  await expect(loop.locator("source")).toHaveAttribute(
+    "src",
+    "/projects/admission-scoring/loop.mp4",
+  );
+  await expect(
+    page.getByText(
+      "Admissions scoring: every file scored on one rubric, ranked, with the decision left to people",
+    ),
+  ).toBeVisible();
+  await expect(page.getByText("Made with Google ADK")).toBeVisible();
 });
 
 test("Car comparison links to the comparison page when expanded", async ({ page }) => {
@@ -229,6 +250,26 @@ test("Pink Depot shows body link when expanded", async ({ page }) => {
   await expect(projectLink.locator(".home__inline-link-icon")).toBeVisible();
   await expect(projectLink).toHaveAttribute("target", "_blank");
   await expect(page.getByText("Materials products and profit")).toHaveCount(0);
+
+  const loop = page.locator(".home__details[open] video");
+  await expect(loop).toBeVisible();
+  await expect(loop).toHaveAttribute("poster", "/projects/pink-depot/still.png");
+  await expect(loop).toHaveAttribute("autoplay", "");
+  await expect(loop).toHaveAttribute("loop", "");
+  await expect(loop).toHaveAttribute("muted", "");
+  await expect(loop).toHaveAttribute("playsinline", "");
+  await expect(loop).toHaveAttribute("preload", "metadata");
+  await expect(loop).toHaveAttribute("width", "1600");
+  await expect(loop).toHaveAttribute("height", "1080");
+  await expect(loop.locator("source")).toHaveAttribute(
+    "src",
+    "/projects/pink-depot/loop.mp4",
+  );
+  await expect(
+    page.getByText(
+      "Pink Depot: order costing from ingredients, with stock held for open drafts",
+    ),
+  ).toBeVisible();
 });
 
 test("Skills shows skill links when expanded", async ({ page }) => {

@@ -563,6 +563,14 @@
   aspect-ratio: 16 / 10;
 }
 
+.home__project-loop-frame[data-ratio="1600-1080"] {
+  aspect-ratio: 1600 / 1080;
+}
+
+.home__project-loop-frame[data-ratio="1600-1520"] {
+  aspect-ratio: 1600 / 1520;
+}
+
 .home__project-loop {
   display: block;
   width: 100%;

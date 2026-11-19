@@ -58,6 +58,15 @@ export const projects = [
         pullquote: true,
       },
     ],
+    loop: {
+      src: "/projects/admission-scoring/loop.mp4",
+      poster: "/projects/admission-scoring/still.png",
+      width: 1600,
+      height: 1520,
+      ratio: "1600-1520",
+      caption:
+        "Admissions scoring: every file scored on one rubric, ranked, with the decision left to people",
+    },
   },
   {
     id: "car-comparison",
@@ -102,6 +111,14 @@ export const projects = [
         },
       ],
     ],
+    loop: {
+      src: "/projects/pink-depot/loop.mp4",
+      poster: "/projects/pink-depot/still.png",
+      width: 1600,
+      height: 1080,
+      ratio: "1600-1080",
+      caption: "Pink Depot: order costing from ingredients, with stock held for open drafts",
+    },
   },
   {
     id: "agentic-workflows",

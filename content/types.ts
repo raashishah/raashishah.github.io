@@ -28,7 +28,7 @@ export type RichLine = string | readonly RichSegment[];
 export type PullquoteParagraph = { text: RichLine; pullquote: true };
 export type BodyParagraph = string | RichLine | PullquoteParagraph;
 
-export type ProjectLoopRatio = "3-4" | "16-10";
+export type ProjectLoopRatio = "3-4" | "16-10" | "1600-1080" | "1600-1520";
 
 export type ProjectLoopMedia = {
   src: string;
