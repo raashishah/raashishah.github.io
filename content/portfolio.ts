@@ -113,6 +113,11 @@ export const projects = [
           text: "User Call",
           href: "https://github.com/raashishah/user-call",
         },
+        INLINE_LINK_SEPARATOR,
+        {
+          text: "Font Book",
+          href: "https://github.com/raashishah/font-book",
+        },
       ],
     ],
   },

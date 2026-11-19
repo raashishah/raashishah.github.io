@@ -47,7 +47,7 @@ function portfolioSeoName(entry: PortfolioEntry) {
 function portfolioLlmsLine(entry: PortfolioEntry) {
   const name = portfolioSeoName(entry);
   if (entry.id === "agentic-workflows") {
-    return `- ${name}: ${entry.seoDescription} — [Apple HIG](https://github.com/raashishah/apple-hig), [User Call](https://github.com/raashishah/user-call)`;
+    return `- ${name}: ${entry.seoDescription} — [Apple HIG](https://github.com/raashishah/apple-hig), [User Call](https://github.com/raashishah/user-call), [Font Book](https://github.com/raashishah/font-book)`;
   }
   if (entry.primaryUrl) {
     return `- [${name}](${entry.primaryUrl}): ${entry.seoDescription}`;

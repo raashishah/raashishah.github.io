@@ -239,6 +239,18 @@ test("Skills shows skill links when expanded", async ({ page }) => {
   );
   await expect(userCallLink.locator(".home__inline-link-icon")).toBeVisible();
   await expect(userCallLink).toHaveAttribute("target", "_blank");
+
+  const fontBookLink = page.getByRole("link", {
+    name: "Font Book",
+  });
+  await expect(fontBookLink).toBeVisible();
+  await expect(fontBookLink).toHaveAttribute(
+    "href",
+    "https://github.com/raashishah/font-book",
+  );
+  await expect(fontBookLink.locator(".home__inline-link-icon")).toBeVisible();
+  await expect(fontBookLink).toHaveAttribute("target", "_blank");
+  await expect(fontBookLink).toHaveAttribute("rel", "noopener noreferrer");
   await expect(page.getByText("Skills for cursor codex cc")).toHaveCount(0);
 });
 
