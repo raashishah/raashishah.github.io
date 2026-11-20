@@ -346,6 +346,7 @@ test("Pocket Analyst heading is not duplicated in the body", async ({ page }) =>
     page.getByText("Analytics for traditional business owners, inside GPT"),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Pocket Analytics" })).toHaveCount(0);
+  await expect(page.locator(".home__details[open] .home__project-body a")).toHaveCount(0);
 });
 
 test("On-device links to Twitter", async ({ page }) => {

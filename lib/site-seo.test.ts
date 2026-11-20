@@ -40,6 +40,10 @@ describe("site SEO copy", () => {
     expect(llmsTxt).toContain("https://pinkdepot.raashishah.com");
     expect(llmsTxt).toContain("https://astrothunder.life");
     expect(llmsTxt).toContain(
+      "- Pocket Analytics: Analytics for traditional business owners, inside GPT",
+    );
+    expect(llmsTxt).not.toContain("[Pocket Analytics]");
+    expect(llmsTxt).toContain(
       "https://car-comparison-8-models-mumbai-5ooa.pages.grok.bot/",
     );
     expect(llmsTxt).toContain("https://github.com/raashishah/apple-hig");

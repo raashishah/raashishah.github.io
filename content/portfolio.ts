@@ -7,11 +7,10 @@ export const projects = [
     id: "pocket-analyst",
     title: "Pocket Analyst",
     seoName: "Pocket Analytics",
-    primaryUrl: "https://sexypa.raashishah.com",
     seoDescription:
       "Analytics for traditional business owners, inside GPT — financial intelligence from Tally data via ChatGPT MCP.",
     seoLongDetail:
-      "Building Pocket Analytics for traditional business owners who run on Tally and spreadsheets. Lives inside GPT via MCP at sexypa.raashishah.com; warehouse trial-balance data in Supabase.",
+      "Building Pocket Analytics for traditional business owners who run on Tally and spreadsheets. Lives inside GPT via MCP; warehouse trial-balance data in Supabase.",
     paragraphs: [
       {
         text: "Analytics for traditional business owners, inside GPT",
