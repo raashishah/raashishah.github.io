@@ -1,13 +1,7 @@
 import Link from "next/link";
 import { SocialIcon } from "@/components/SocialIcon";
-import {
-  calendlyLink,
-  coral,
-  emailLink,
-  footerDiscoveryHintAfter,
-  footerDiscoveryHintBefore,
-  footerLinks,
-} from "@/content/site";
+import { FooterDiscoveryHint } from "@/components/FooterDiscoveryHint";
+import { calendlyLink, coral, emailLink, footerLinks } from "@/content/site";
 import type { FooterSocialLinkId } from "@/content/types";
 import { siteConfig } from "@/lib/metadata";
 
@@ -112,18 +106,9 @@ export function SiteShell({
                 />
               ))}
             </nav>
-            <p className="home__footer-meta">
-              <span className="home__footer-meta-hint">
-                {footerDiscoveryHintBefore}{" "}
-                <img
-                  src={coral.src}
-                  alt=""
-                  aria-hidden="true"
-                  className="home__footer-mark"
-                />{" "}
-                {footerDiscoveryHintAfter}
-              </span>
-            </p>
+            <div className="home__footer-meta">
+              <FooterDiscoveryHint />
+            </div>
           </div>
         </footer>
       </main>

@@ -97,7 +97,28 @@
 }
 
 .home__footer-meta-hint {
-  color: var(--text-muted);
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  appearance: none;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.home__footer-meta-hint:focus {
+  outline: none;
+}
+
+.home__footer-meta-hint:focus-visible {
+  outline: 2px solid var(--accent-focus-ring);
+  outline-offset: 2px;
 }
 
 .home__footer-mark {

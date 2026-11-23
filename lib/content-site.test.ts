@@ -2,6 +2,10 @@ import { describe, expect, it } from "vitest";
 import { footerSocialIconIds } from "@/lib/footer-social-icons";
 import {
   coral,
+  footerDiscoveryHint,
+  footerDiscoveryHintAfter,
+  footerDiscoveryHintBefore,
+  footerDiscoveryHoverText,
   cursorProfile,
   footerLinkOrder,
   footerLinks,
@@ -33,6 +37,13 @@ describe("content/site", () => {
 
   it("keeps the brand coral mark at a single shared path", () => {
     expect(coral.src).toBe("/img/coral.svg");
+  });
+
+  it("keeps the footer discovery hint and hover reveal copy", () => {
+    expect(footerDiscoveryHintBefore).toBe("something");
+    expect(footerDiscoveryHintAfter).toBe("hidden");
+    expect(footerDiscoveryHint).toBe("something hidden");
+    expect(footerDiscoveryHoverText).toBe("you're perfect, you're cool");
   });
 
   it("points the Cursor heatmap at the public profile", () => {
